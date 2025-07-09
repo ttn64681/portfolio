@@ -1,26 +1,155 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
+  /* primary things */
+  --blackground: #000e1d;
+  --white-title: #f1f8ff;
   --background: #ffffff;
   --foreground: #171717;
 }
 
 @theme inline {
+  /* secondary things */
+  --color-blackground: var(--blackground);
+  --color-white-title: var(--white-title);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Fonts - these are set by next/font/local in layout.tsx */
 }
 
 @media (prefers-color-scheme: dark) {
+  /* dark mode */
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
 
+/* Font utility classes */
+.font-pixelify {
+  font-family: var(--font-pixelify);
+}
+
+.font-pixel-mono {
+  font-family: var(--font-pixel-mono);
+}
+
+.font-pixel-retron {
+  font-family: var(--font-pixel-retron);
+}
+
+.font-pixel-terminal {
+  font-family: var(--font-pixel-terminal);
+}
+
+.font-pixel-headline {
+  font-family: var(--font-pixel-headline);
+}
+
+html,
 body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  /* body */
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-pixelify), var(--font-pixel-mono), var(--font-pixel-retron),
+    var(--font-pixel-terminal), var(--font-pixel-headline), Arial, Helvetica, sans-serif;
+}
+
+/* Initial black fade */
+@keyframes black-bg-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.black-bg-fade {
+  animation: black-bg-fade 3s ease-in-out forwards;
+}
+
+/*
+  Splash Background Sprite Animation: 25 frames, each 2200px wide (total 55000px)
+  - In total, we move sprite sheet left by 52800px [(25-1) * 2200px ]
+  - Animation uses steps(24) for 25 frames
+  - background-size is set to 55000px to fit the full sprite sheet
+  - image-rendering ensures pixel art stays crisp
+*/
+
+@keyframes sprite-anim {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -52800px;
+  } /* (25-1) * 2200px = 52800px */
+}
+
+.sprite-layer {
+  position: absolute;
+  left: 50%;
+  width: 2200px;
+  background-repeat: no-repeat;
+  background-size: 55000px 100%; /* full sprite sheet width */
+  animation: sprite-anim 2.5s steps(24) infinite;
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: optimizeSpeed;
+}
+
+#bg1 {
+  z-index: 6;
+  background-image: url('/pixel/1 black.png');
+  height: 613px;
+  bottom: -140px;
+  transform: translateX(-50%) translateY(0px) scale(0.88); /* Front layer scale */
+}
+#bg2 {
+  z-index: 4;
+  background-image: url('/pixel/2 water.png');
+  height: 630px;
+
+  bottom: -100px;
+  transform: translateX(-50%) translateY(0px) scale(0.89); /* Water layer scale */
+}
+#bg3 {
+  z-index: 3;
+  background-image: url('/pixel/3 midland.png');
+  height: 444px;
+
+  bottom: 460px; /* height of water layer */
+  transform: translateX(-50%) translateY(0px) scale(0.9); /* Midland layer scale */
+}
+#bg4 {
+  z-index: 2;
+  background-image: url('/pixel/4 buildings.png');
+  height: 306px;
+
+  bottom: 500px;
+  transform: translateX(-50%) translateY(0px) scale(0.91); /* Buildings layer scale */
+}
+#bg5 {
+  z-index: 1;
+  background-image: url('/pixel/5 sky.png');
+  height: 640px;
+
+  top: -43px;
+  transform: translateX(-50%) translateY(0px) scale(0.92); /* Sky layer scale */
+}
+
+.animated-bg-container {
+  height: 100vh;
+  position: relative;
 }
