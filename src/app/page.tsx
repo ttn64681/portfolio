@@ -1,14 +1,16 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Splash from '../../components/Splash';
 import Menu from '../../components/Menu';
+import BGFade from '../../components/BGFade';
 
 export default function Home() {
   return (
     <div className='relative w-100vw h-100vh bg-blackground'>
-      <Menu />
-      <div className='black-bg-fade fixed top-0 left-0 w-full h-full bg-blackground z-10'></div>
+      <BGFade />
       <Splash />
-      <div className='relative top-0 w-full h-full flex flex-col justify-center items-center bg-blackground p-60 z-50'>
+      <Menu />
+      <div className='relative top-0 w-full h-full flex flex-col justify-center items-center bg-blackground p-60 z-10'>
         <h1 className='text-white-title text-8xl font-bold font-pixelify text-shadow-pixel-large'>
           {' '}
           [ Press Enter ]

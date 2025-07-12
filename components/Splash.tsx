@@ -129,11 +129,46 @@ export default function Splash() {
 
   return (
     <div className='animated-bg-container flex-col justify-center items-center'>
-      <div id='bg5' className='sprite-layer' />
-      <div id='bg4' className='sprite-layer' />
-      <div id='bg3' className='sprite-layer' />
-      <div id='bg2' className='sprite-layer' />
-      <div id='bg1' className='sprite-layer' />
+      <div
+        id='bg5'
+        className='sprite-layer'
+        style={{
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
+      />
+      <div
+        id='bg4'
+        className='sprite-layer'
+        style={{
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
+      />
+      <div
+        id='bg3'
+        className='sprite-layer'
+        style={{
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
+      />
+      <div
+        id='bg2'
+        className='sprite-layer'
+        style={{
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
+      />
+      <div
+        id='bg1'
+        className='sprite-layer'
+        style={{
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
+      />
     </div>
   );
 }

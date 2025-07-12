@@ -65,16 +65,134 @@ body {
 
 /* Initial black fade */
 @keyframes black-bg-fade {
-  from {
+  0% {
     opacity: 1;
   }
-  to {
+  50% {
+    opacity: 1;
+  }
+  100% {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
 .black-bg-fade {
   animation: black-bg-fade 3s ease-in-out forwards;
+}
+
+@keyframes menu-button-white-bg {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 1;
+  }
+}
+
+.menu-button-white-bg {
+  opacity: 0;
+  animation: menu-button-white-bg 0.5s ease-in-out forwards;
+}
+
+@keyframes menu-button-white-bg-reverse {
+  0% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 1;
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+  }
+}
+
+.menu-button-white-bg-reverse {
+  opacity: 0;
+  animation: menu-button-white-bg-reverse 0.2s ease-out forwards;
+}
+
+@keyframes menu-button {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+.menu-button {
+  opacity: 0;
+  animation: menu-button 0.25s ease-in-out forwards;
+}
+
+@keyframes menu-button-reverse {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+  }
+}
+
+.menu-button-reverse {
+  opacity: 0;
+  animation: menu-button-reverse 0.25s ease-in-out forwards;
+}
+
+/* Echo effect animation for Press Start button */
+@keyframes echo {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.8;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+    filter: blur(4px);
+  }
+}
+
+.animate-echo {
+  animation: echo 0.5s ease-in-out forwards;
+}
+
+/* Delayed echo animation for second wave */
+@keyframes echo-delayed {
+  34% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.8;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+    filter: blur(4px);
+  }
+}
+
+.animate-echo-delayed {
+  animation: echo-delayed 0.6s ease-in-out forwards;
 }
 
 /*
@@ -115,6 +233,7 @@ body {
   height: 613px;
   bottom: -140px;
   transform: translateX(-50%) translateY(0px) scale(0.88); /* Front layer scale */
+  pointer-events: none; /* Allow clicks to pass through to Menu behind */
 }
 #bg2 {
   z-index: 4;
