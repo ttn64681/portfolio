@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Typewriter from 'typewriter-effect';
-import { motion } from 'framer-motion';
+import MenuOptions from './MenuOptions';
 
 export default function Menu() {
   const [echoActive, setEchoActive] = useState(false);
@@ -12,14 +12,16 @@ export default function Menu() {
       // Starting exit animation
       setIsExiting(true);
       setStartPressed(false);
-      // Wait for animation to complete before hiding buttons
-      setTimeout(() => {
-        setIsExiting(false);
-      }, 200); // Match the longest animation duration
+      // No more setTimeout here; will reset isExiting on animation complete
     } else if (!startPressed) {
       // Starting enter animation
       setStartPressed(true);
     }
+  };
+
+  // Handler for when exit animation completes
+  const handleExitComplete = () => {
+    setIsExiting(false);
   };
 
   useEffect(() => {
@@ -53,7 +55,6 @@ export default function Menu() {
   return (
     <div id='menu-container' className='fixed inset-0 z-5'>
       <div className='flex flex-col justify-center lg:-translate-x-[5vw] xl:translate-x-0 lg:flex-row lg:justify-start w-full h-full items-center'>
-        {/* Left side content */}
         <div className='flex flex-col text-center items-center justify-center lg:translate-y-[1.3rem] leading-snug'>
           <h1
             id='menu-title'
@@ -122,154 +123,11 @@ export default function Menu() {
           </h3>
         </div>
 
-        {/* Small devices */}
-        {(startPressed || isExiting) && (
-          <motion.div
-            initial={{ translateY: isExiting ? 0 : 300 }}
-            animate={{ translateY: isExiting ? 300 : 0 }}
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
-            style={{
-              willChange: 'translate', // For optimizing performance, GPU and such
-            }}
-          >
-            <div
-              id='menu-buttons'
-              className='lg:hidden static flex flex-col items-center gap-2 md:gap-3 lg:gap-4 mt-8'
-            >
-              <button
-                className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-              >
-                <span
-                  className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-                >
-                  About Me
-                </span>
-                <span
-                  className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-                >
-                  About Me
-                </span>
-              </button>
-              <button
-                className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-              >
-                <span
-                  className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-                >
-                  Projects
-                </span>
-                <span
-                  className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-                >
-                  Projects
-                </span>
-              </button>
-              <button
-                className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-              >
-                <span
-                  className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-                >
-                  Extra
-                </span>
-                <span
-                  className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-                >
-                  Extra
-                </span>
-              </button>
-              <button
-                className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-              >
-                <span
-                  className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-                >
-                  Quit
-                </span>
-                <span
-                  className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-                >
-                  Quit
-                </span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Buttons for large screens */}
-        {(startPressed || isExiting) && (
-          <motion.div
-            className='hidden lg:flex fixed top-1/2 lg:right-3.5 xl:right-[12vw] -translate-y-1/2 flex-col items-center gap-4'
-            initial={{ translateX: isExiting ? 0 : 300 }}
-            animate={{ translateX: isExiting ? 300 : 0 }}
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
-          >
-            <button
-              className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 
-            hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-            >
-              <span
-                className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-              >
-                About Me
-              </span>
-              <span
-                className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-              >
-                About Me
-              </span>
-            </button>
-            <button
-              className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-            >
-              <span
-                className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-              >
-                Projects
-              </span>
-              <span
-                className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-              >
-                Projects
-              </span>
-            </button>
-            <button
-              className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-            >
-              <span
-                className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-              >
-                Extra
-              </span>
-              <span
-                className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-              >
-                Extra
-              </span>
-            </button>
-            <button
-              className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
-            >
-              <span
-                className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
-              >
-                Quit
-              </span>
-              <span
-                className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-              >
-                Quit
-              </span>
-            </button>
-          </motion.div>
-        )}
+        <MenuOptions
+          startPressed={startPressed}
+          isExiting={isExiting}
+          onExitComplete={handleExitComplete}
+        />
       </div>
     </div>
   );
