@@ -13,8 +13,10 @@ export default function Home() {
       <Menu />
 
       {/* Main menu content: first viewport */}
-      <div className='relative top-0 w-full min-h-screen flex flex-col justify-center items-center bg-blackground p-60 z-10'>
-        <h1 className='text-white-title text-8xl font-bold font-pixelify text-shadow-pixel-large'>
+      <div className='relative -top-[105px] w-full min-h-screen flex flex-col justify-center items-center bg-blackground p-60 pt-25 z-10'>
+        {/* About Me: profile section (portrait + dialogue box) */}
+        <Profile/>
+        {/* <h1 className='text-white-title text-8xl font-bold font-pixelify text-shadow-pixel-large'>
           {' '}
           [ Press Enter ]
         </h1>
@@ -25,11 +27,10 @@ export default function Home() {
         <p className='text-white-title text-2xl font-pixel-retron text-shadow-pixel'>Subtext...</p>
         <p className='text-white-title text-2xl font-pixel-terminal text-shadow-pixel'>
           Subtext...
-        </p>
+        </p> */}
       </div>
 
-      {/* About Me: profile section (portrait + dialogue box) */}
-      <Profile />
+      
 
 
 

@@ -14,17 +14,17 @@ type DialogueOption = {
 const DIALOGUE_OPTIONS: DialogueOption[] = [
   {
     id: 'intro',
-    label: 'Who are you?',
+    label: '> Who are you?',
     text: "I'm Thai Nguyen, a developer who loves building playful, pixel-perfect web experiences.",
   },
   {
     id: 'education',
-    label: 'Education?',
+    label: '> Education?',
     text: "I studied computer science and have a passion for learning by doing — shipping projects, breaking things, and iterating fast.",
   },
   {
     id: 'experience',
-    label: 'Experience?',
+    label: '> Experience?',
     text: 'I’ve worked across the stack: from React frontends to Node/Next.js backends, UI/UX design, and a lot of creative coding experiments.',
   },
 ];
@@ -76,7 +76,7 @@ export default function DialoguePanel({ onOptionSelected }: DialoguePanelProps) 
                 <button
                   key={option.id}
                   type="button"
-                  className="text-left px-3 py-2 rounded-sm text-white-title text-sm md:text-base font-pixel-mono border border-[#466C8C] bg-black/40 hover:bg-[rgba(45,77,118,1)] hover:text-blackground transition-colors"
+                  className="hover:cursor-pointer text-left px-3 py-2 rounded-sm text-white-title text-sm md:text-base font-pixel-mono border border-[#466C8C] bg-black/40 hover:border-[#4dbdff] hover:text-[#4dbdff] transition-colors"
                   onClick={() => {
                     setActiveId(option.id);
                     onOptionSelected?.();
@@ -89,7 +89,7 @@ export default function DialoguePanel({ onOptionSelected }: DialoguePanelProps) 
           ) : (
             <button
               type="button"
-              className="mt-4 self-start px-3 py-1 text-sm md:text-base font-pixel-mono text-[#4dbdff] hover:text-white-title hover:underline transition-colors"
+              className="hover:cursor-pointer mt-4 self-start px-3 py-1 text-sm md:text-base font-pixel-mono text-[#4dbdff] hover:text-white-title hover:underline transition-colors"
               onClick={() => setActiveId(null)}
             >
               {'<- Back'}
