@@ -11,6 +11,15 @@ export default function Profile() {
   const [showGlasses, setShowGlasses] = useState(true);
   const [isTalking, setIsTalking] = useState(false);
 
+  //
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsTalking(true);
+    }, 1);
+
+    return () => clearTimeout(timeout);
+  }, []); // Run once on mount
+
   // When talking starts, keep the talking sprite active for one full cycle,
   // then flip back to the idle sprite automatically.
   useEffect(() => {
