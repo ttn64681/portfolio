@@ -1,0 +1,8 @@
+upscaled from original aseprite file by 4x
+
+then, in code, scaled by .88.
+
+FRAME COUNT:
+- portrait and portrait-glasses have 191 frames, the spritesheet has dimensions 54244x328
+- tiles, which layed directly underneath portraits, have 32 frames, the spritesheet has dimensions 9088x328
+- portrait-talking and portrait-talking-glasses have 48 frames, but only play when dialogue button is clicked, the spritesheet has dimensions 13632x328

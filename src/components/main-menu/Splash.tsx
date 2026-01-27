@@ -6,12 +6,12 @@ interface LayerConfig {
   maxX: number; // max pixels the layer should move horizontally
   maxY: number; // max pixels the layer should move vertically
   scale: number; // scale of the layer
-  scrollYMult: number; // y pixelmultiplier for scroll parallax
+  scrollYMult: number; // y pixel-multiplier for scroll parallax
 }
 
 export default function Splash() {
   useEffect(() => {
-    // This IIFE (Immediately Invoked Function Expression) creates a closure to manage all parallax states
+    // This IIFE creates a closure to manage all parallax states
     const handleScrollAndMouse = (() => {
       // Set initial mouse position to center of screen
       let mouseX: number = window.innerWidth / 2;
@@ -99,7 +99,6 @@ export default function Splash() {
         scrollY = window.scrollY;
         updateTransforms();
       }
-
       function onResize(): void {
         // For tablet/smaller devices
         updateTransforms();
@@ -127,8 +126,10 @@ export default function Splash() {
     return handleScrollAndMouse;
   }, []);
 
+
+
   return (
-    <div className='animated-bg-container flex-col justify-center items-center'>
+    <div className='animated-bg-container relative h-screen flex flex-col justify-center items-center'>
       <div
         id='bg5'
         className='sprite-layer'

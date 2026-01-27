@@ -81,6 +81,15 @@ body {
   animation: black-bg-fade 3s ease-in-out forwards;
 }
 
+/* ****************************** */
+/* MAIN-MENU
+/* ****************************** */
+
+/*
+  1. Start with the right side of the button hidden (clip-path: inset(0 100% 0 0))
+  2. Show the button from the right side (clip-path: inset(0 0 0 0))
+  3. Hide the button from the left side (clip-path: inset(0 0 0 100%))
+*/
 @keyframes menu-button-white-bg {
   0% {
     clip-path: inset(0 100% 0 0);
@@ -121,6 +130,11 @@ body {
   animation: menu-button-white-bg-reverse 0.2s ease-out forwards;
 }
 
+/*
+  Explanation (0 - 100%): (0 - 100% 0 - 0%)
+  (0 - 100% 0 - 0%) -> this
+  (0 - 100% 0 - 0%)
+*/
 @keyframes menu-button {
   0% {
     clip-path: inset(0 100% 0 0);
@@ -268,7 +282,119 @@ body {
   transform: translateX(-50%) translateY(0px) scale(0.92); /* Sky layer scale */
 }
 
-.animated-bg-container {
-  height: 100vh;
+
+/* ****************************** */
+/* ABOUT-ME
+/* ****************************** */
+
+/* Profile
+   - Portrait: 191 frames. Tiles: 32 frames. Looped separately.
+   - Box: border #466C8C, fill #021728, behind the portrait stack.
+   - Layout (centering, width/height of the section) is handled via Tailwind on the JSX.
+*/
+
+.profile-unit {
   position: relative;
+  /* Base frame size */
+  width: 284px;
+  height: 328px;
+  transform: scale(1);
+  transform-origin: center;
 }
+
+/* Shared sprite styling for profile layers; pixel-perfect rendering */
+.profile-sprite-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Tiles: 32 frames, spritesheet 9088x328 → 284px per frame. */
+@keyframes profile-tiles-anim {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    /* (32 - 1) * 284px = 8804px */
+    background-position-x: -8804px;
+  }
+}
+
+.profile-tiles-layer {
+  background-image: url('/pixel/tiles.png');
+  /* Use the full spritesheet dimensions so aspect ratio is correct. */
+  background-size: 9088px 328px;
+  /* 32 frames at ~10 FPS (same as main-menu bg: 25f / 2.5s). */
+  animation: profile-tiles-anim 3.2s steps(31) infinite;
+}
+
+/* Portrait: 191 frames, spritesheet 54244x328 → 284px per frame. */
+@keyframes profile-portrait-anim {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    /* (191 - 1) * 284px = 53960px */
+    background-position-x: -53960px;
+  }
+}
+
+/* Default idle: portrait WITH glasses */
+.profile-portrait-layer-glasses {
+  background-image: url('/pixel/portrait-glasses.png');
+  /* Full spritesheet dimensions; one frame is 284x328px. */
+  background-size: 54244px 328px;
+  /* 191 frames at ~10 FPS (same as main-menu bg). */
+  animation: profile-portrait-anim 19.1s steps(190) infinite;
+}
+
+/* Default idle: portrait WITHOUT glasses */
+.profile-portrait-layer-noglasses {
+  background-image: url('/pixel/portrait.png');
+  background-size: 54244px 328px;
+  animation: profile-portrait-anim 19.1s steps(190) infinite;
+}
+
+/* Talking: 48 frames, spritesheet 13632x328 → 284px per frame. */
+@keyframes profile-portrait-talking-anim {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    /* (48 - 1) * 284px = 13348px */
+    background-position-x: -13348px;
+  }
+}
+
+/* Talking: WITH glasses */
+.profile-portrait-talking-layer-glasses {
+  background-image: url('/pixel/portrait-talking-glasses.png');
+  background-size: 13632px 328px;
+  /* Play once; React state in Profile swaps back to idle when finished. */
+  animation: profile-portrait-talking-anim 4.8s steps(47);
+}
+
+/* Talking: WITHOUT glasses */
+.profile-portrait-talking-layer-noglasses {
+  background-image: url('/pixel/portrait-talking.png');
+  background-size: 13632px 328px;
+  animation: profile-portrait-talking-anim 4.8s steps(47);
+}
+
+
+/* ****************************** */
+/* PROJECTS
+/* ****************************** */
+
+
+
+
+
+/* ****************************** */
+/* EXTRA
+/* ****************************** */

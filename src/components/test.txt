@@ -1,0 +1,45 @@
+// scale the container down as you scroll down
+useEffect(() => {
+    const handleScroll = (() => {
+        const scaleMult: number = -.05
+        const scrollYMult: number = .1
+
+      let scrollY: number = window.scrollY;
+
+      function updateTransforms(): void {
+        const container: HTMLElement | null = document.getElementById(menu-container);
+
+        relScaleY = 
+
+        container.style.transform = `
+            translateY(${scrollY * scrollYMult}px)
+            scale(${scaleMult * scrollY}px)
+        `;
+        
+        });
+      }
+
+      function onScroll(): void {
+        // Updates layers' y pos for scroll parallax
+        scrollY = window.scrollY;
+        updateTransforms();
+      }
+
+      updateTransforms(); // Initialize layer positions
+
+      // Start smooth animation loop (60fps)
+      // Schedules animate() to run on next browser rendering frame
+      requestAnimationFrame(animate);
+
+      window.addEventListener('scroll', onScroll);
+
+
+      return () => {
+        // Cleanup
+        window.removeEventListener('scroll', onScroll);
+      };
+    })();
+
+    // Returns the cleanup
+    return handleScrollAndMouse;
+  }, []);

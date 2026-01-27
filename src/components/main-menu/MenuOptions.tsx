@@ -9,7 +9,7 @@ interface MenuOptionsProps {
 export default function MenuOptions({ startPressed, isExiting, onExitComplete }: MenuOptionsProps) {
   return (
     <>
-      {/* Small devices */}
+      {/* Small-Medium devices */}
       {(startPressed || isExiting) && (
         <motion.div
           initial={{ translateY: isExiting ? 0 : 300 }}
