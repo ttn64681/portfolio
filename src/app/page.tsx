@@ -4,6 +4,7 @@ import Splash from '../components/main-menu/Splash';
 import Menu from '../components/main-menu/Menu';
 import BGFade from '../components/main-menu/BGFade';
 import Profile from '../components/about-me/Profile';
+import Chat from '../components/chat/Chat';
 
 export default function Home() {
   return (
@@ -13,9 +14,11 @@ export default function Home() {
       <Menu />
 
       {/* Main menu content: first viewport */}
-      <div className='relative -top-[105px] w-full min-h-screen flex flex-col justify-center items-center bg-blackground p-60 pt-25 z-10'>
+      <div className='relative -top-[105px] w-full min-h-screen flex flex-col justify-center items-center bg-blackground px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 pt-20 pb-28 z-10'>
         {/* About Me: profile section (portrait + dialogue box) */}
-        <Profile/>
+        <Profile />
+        {/* Chat box: lives directly under the profile section */}
+        <Chat />
         {/* <h1 className='text-white-title text-8xl font-bold font-pixelify text-shadow-pixel-large'>
           {' '}
           [ Press Enter ]
@@ -29,13 +32,6 @@ export default function Home() {
           Subtext...
         </p> */}
       </div>
-
-      
-
-
-
-
     </div>
- 
   );
 }
