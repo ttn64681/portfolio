@@ -42,7 +42,7 @@ export default function Splash() {
         const screenCenterX: number = window.innerWidth / 2;
         const screenCenterY: number = window.innerHeight / 2;
 
-        // Layer parallax initialization
+        // Layer parallax initialization (backmost moves most, frontmost moves least)
         const layers: LayerConfig[] = [
           { id: 'bg5', maxX: 30, maxY: 20, scale: 0.93, scrollYMult: 0.5 }, // sky (backmost - moves most)
           { id: 'bg4', maxX: 24, maxY: 16, scale: 0.91, scrollYMult: 0.4 }, // buildings
@@ -126,10 +126,8 @@ export default function Splash() {
     return handleScrollAndMouse;
   }, []);
 
-
-
   return (
-    <div className='animated-bg-container relative h-screen flex flex-col justify-center items-center'>
+    <div className='animated-bg-container'>
       <div
         id='bg5'
         className='sprite-layer'

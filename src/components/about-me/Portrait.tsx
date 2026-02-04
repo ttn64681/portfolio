@@ -28,16 +28,16 @@ export default function Portrait({ isTalking, showGlasses, onToggleGlasses }: Po
 
   const portraitClassName = `profile-sprite-layer ${portraitSpriteClass}`;
 
-  const borderBoxClassName = `absolute left-1/2 -translate-x-1/2 top-[95px] w-[340px] h-[260px] p-[8px] group-hover:rounded-[1.5rem] transition-colors duration-300 ${
-    hovered ? 'bg-gradient-to-b from-[#4dbdff] to-[#466C8C]' : 'bg-[#466C8C]'
+  const borderBoxClassName = `absolute left-1/2 -translate-x-1/2 top-[95px] w-[340px] h-[260px] p-[8px] bg-[#466C8C] border-0 transition-all duration-300 ${
+    hovered ? 'border-[#4dbdff]' : 'border-[#466C8C]'
   }`;
 
   return (
-    <div className='w-full flex justify-center'>
-      <div className='profile-unit relative'>
-        {/* Border box*/}
+    <div className='w-full flex justify-center lg:mr-2'>
+      <div className='profile-unit border-0 relative'>
+        {/* Border box */}
         <div className={borderBoxClassName}>
-          <div className='w-9vh h-full bg-[#021728] group-hover:rounded-[1.5rem] transition-all duration-300' />
+          <div className='w-9vh h-full bg-[#021728] border-0 transition-all duration-300' />
         </div>
 
         {/* Sprite stack position rules */}

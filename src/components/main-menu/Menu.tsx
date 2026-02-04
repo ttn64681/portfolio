@@ -53,7 +53,7 @@ export default function Menu() {
   }, []);
 
   return (
-    <div id='menu-container' className='fixed inset-0 z-5'>
+    <div id='menu-container' className='fixed inset-0 z-40'>
       <div className='flex flex-col justify-center lg:-translate-x-[5vw] xl:translate-x-0 lg:flex-row lg:justify-start w-full h-full items-center'>
         <div className='flex flex-col text-center items-center justify-center lg:translate-y-[1.3rem] leading-snug'>
           <h1

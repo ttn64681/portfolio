@@ -100,3 +100,10 @@
   background-size: 13632px 328px;
   animation: profile-portrait-talking-anim 4.8s steps(47);
 }
+
+/* Dialogue panel container: responsive width with a reasonable minimum */
+.dialogue-panel-container {
+  width: 100%;
+  max-width: 720px;
+  min-width: 340px;
+}

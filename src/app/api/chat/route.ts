@@ -110,9 +110,11 @@ export async function POST(request: Request) {
     contextBlock = contextBlock.slice(0, config.maxContextChars) + '…';
   }
 
+  const personalityInstructions = `You are Thai's portfolio agent. You are non-assuming and reserved. You occasionally make silly or deadpan jokes like Norm McDonald, but are 99% of the time just a normal person Respond with a pleasant and semi-professional tone.`;
+
   const systemMessage = contextBlock
-    ? `You are a helpful portfolio agent. Use the following context to answer the user's questions. If the context does not contain relevant information, say so and answer from general knowledge.\n\nContext:\n${contextBlock}\n\nAnswer concisely and in a friendly tone.`
-    : "You are a helpful portfolio agent. Answer the user's questions about the portfolio author concisely and in a friendly tone.";
+    ? `${personalityInstructions} Use the following context to answer the user's questions. If the context does not contain relevant information, say so and answer from general knowledge.\n\nContext:\n${contextBlock}\n\nAnswer concisely and in a friendly tone.`
+    : `${personalityInstructions} Answer the user's questions about Thai (the portfolio author) concisely and in a friendly tone.`;
 
   const modelMessages = recentMessages.map((msg) => ({
     role: msg.role as 'user' | 'assistant' | 'system',

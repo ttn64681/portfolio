@@ -11,7 +11,7 @@ export default function Profile() {
   const [showGlasses, setShowGlasses] = useState(true);
   const [isTalking, setIsTalking] = useState(false);
 
-  //
+  // On initial load, trigger a brief talking animation
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsTalking(true);
@@ -33,9 +33,9 @@ export default function Profile() {
   }, [isTalking]);
 
   return (
-    <section className="w-[80%] mx-auto min-h-screen flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-center gap-8 md:gap-10 lg:gap-7 xl:gap-10 2xl:gap-12">
+    <section className='w-[80%] mx-auto min-h-[70vh] flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-center gap-4 md:gap-5 xl:gap-4 2xl:gap-5'>
       {/* Portrait: fixed sprite size, centered, with clickable glasses toggle */}
-      <div className="flex justify-center w-full lg:w-auto z-[1]">
+      <div className='flex justify-center w-full lg:w-auto z-[1] lg:mr-4'>
         <Portrait
           isTalking={isTalking}
           showGlasses={showGlasses}
@@ -44,7 +44,7 @@ export default function Profile() {
       </div>
 
       {/* Dialogue panel: typewriter text + options, triggers talking on selection */}
-      <div className="flex justify-center lg:w-auto lg:translate-y-[95px] z-[0]">
+      <div className='flex justify-center lg:w-auto lg:translate-y-[95px] z-[0]'>
         <DialoguePanel
           onOptionSelected={() => {
             setIsTalking(true);

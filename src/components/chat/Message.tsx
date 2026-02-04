@@ -12,7 +12,7 @@ type MessageProps = {
 };
 
 const ASSISTANT_LABEL = 'Thai Nguyen';
-const USER_LABEL = '(You)';
+const USER_LABEL = '(You) chill_dude_68';
 
 export default function Message({ role, content, isLoading }: MessageProps) {
   if (role === 'user') {
@@ -21,7 +21,11 @@ export default function Message({ role, content, isLoading }: MessageProps) {
         <PixelPFP variant='user' />
         <div className='chat-message__content'>
           <div className='chat-message__label'>{USER_LABEL}</div>
-          <PixelBubble variant='you'>{content}</PixelBubble>
+          {isLoading ? (
+            <PixelBubbleLoading variant='you' />
+          ) : (
+            <PixelBubble variant='you'>{content}</PixelBubble>
+          )}
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import type { ChatMessageDisplay, ChatRole } from '@/types/chat';
@@ -24,6 +24,10 @@ function getMessageRole(role: string): ChatRole {
 
 export function usePortfolioChat() {
   const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [isTypingFadeOut, setIsTypingFadeOut] = useState(false);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fadeOutTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { messages, sendMessage, status, error } = useChat({
     transport: new DefaultChatTransport({ api: '/api/chat' }),
@@ -39,6 +43,44 @@ export function usePortfolioChat() {
 
   const isLoading = status === 'streaming' || status === 'submitted';
 
+  // Track typing activity based on input changes.
+  useEffect(() => {
+    // Clear any existing timeouts
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+      typingTimeoutRef.current = null;
+    }
+    if (fadeOutTimeoutRef.current) {
+      clearTimeout(fadeOutTimeoutRef.current);
+      fadeOutTimeoutRef.current = null;
+    }
+
+    if (input.trim().length === 0) {
+      // Start fade out if currently typing
+      if (isTyping) {
+        setIsTypingFadeOut(true);
+        fadeOutTimeoutRef.current = setTimeout(() => {
+          setIsTyping(false);
+          setIsTypingFadeOut(false);
+        }, 300);
+      }
+      return;
+    }
+
+    // User is typing - clear fade out and show typing indicator
+    setIsTypingFadeOut(false);
+    setIsTyping(true);
+
+    // After 800ms of no typing, start fade out
+    typingTimeoutRef.current = setTimeout(() => {
+      setIsTypingFadeOut(true);
+      fadeOutTimeoutRef.current = setTimeout(() => {
+        setIsTyping(false);
+        setIsTypingFadeOut(false);
+      }, 300);
+    }, 800);
+  }, [input]);
+
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
@@ -46,6 +88,7 @@ export function usePortfolioChat() {
       if (!trimmed || isLoading) return;
       sendMessage({ text: trimmed });
       setInput('');
+      setIsTyping(false);
     },
     [input, isLoading, sendMessage],
   );
@@ -58,5 +101,7 @@ export function usePortfolioChat() {
     status,
     error,
     isLoading,
+    isTyping: isTyping || isTypingFadeOut,
+    isTypingFadeOut,
   };
 }
