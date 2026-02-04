@@ -1,0 +1,142 @@
+/* ****************************** */
+/* CHAT
+/* ****************************** */
+
+/* Container and layout */
+.chat-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chat-inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  padding-bottom: 6rem;
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.chat-message--user {
+  flex-direction: row;
+}
+
+.chat-message--assistant {
+  flex-direction: row-reverse;
+}
+
+.chat-message__label {
+  flex-shrink: 0;
+  font-family: var(--font-pixel-mono);
+  font-size: 0.7rem;
+  color: rgba(241, 248, 255, 0.8);
+}
+
+.chat-message__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* PFP: 92x92px per sizing_info.txt */
+.chat-pfp {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.chat-pfp--me {
+  background-image: url('/pixel/pfp-me.png');
+}
+
+.chat-pfp--you {
+  background-image: url('/pixel/pfp-you.png');
+}
+
+/* Bubble: 9-slice from 48x40 base; corners 12x12, edges 12 and 16 per sizing_info.txt */
+.chat-bubble {
+  display: inline-block;
+  max-width: 86%;
+  padding: 8px 12px;
+  font-family: var(--font-pixel-mono);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--white-title);
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: url('/pixel/bubble-me.png');
+  border-image-slice: 12 fill;
+  box-sizing: border-box;
+}
+
+.chat-bubble--you {
+  border-image-source: url('/pixel/bubble-you.png');
+}
+
+.chat-bubble--me {
+  border-image-source: url('/pixel/bubble-me.png');
+}
+
+.chat-bubble__inner {
+  margin: 0;
+}
+
+/* Loading bubble: same shell, different content */
+.chat-bubble--loading .chat-bubble__inner {
+  min-height: 1.25em;
+}
+
+.chat-bubble-loading-dots::after {
+  content: '';
+  animation: chat-dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes chat-dots {
+  0%,
+  20% {
+    content: '';
+  }
+  40% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  80%,
+  100% {
+    content: '...';
+  }
+}
+
+/* Input area: keep existing Tailwind for gradient/float; these are optional overrides */
+.chat-input-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.chat-input-inner {
+  pointer-events: auto;
+}

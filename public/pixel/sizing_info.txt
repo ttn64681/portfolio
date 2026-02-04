@@ -1,9 +1,13 @@
-upscaled from original aseprite file by 4x
-
-then, in code, scaled by .88.
-
-FRAME COUNT:
+ANIMATED FRAME COUNT (for profile):
 - portrait and portrait-glasses have 191 frames, the spritesheet has dimensions 54244x328
 - tiles, which layed directly underneath portraits, have 32 frames, the spritesheet has dimensions 9088x328
 - portrait-talking and portrait-talking-glasses have 48 frames, but only play when dialogue button is clicked, the spritesheet has dimensions 13632x328
 
+MESSAGE SIZING (for chat):
+pfps = 92x92px
+bubble-me (tail-facing left) = 48x40
+bubble-you (tail-facing right) = 48x40
+To split the bubble into 9-slices for dynamic text-sizing:
+- top-left, top-right, bottom-left, and bottom-right corner is 12x12
+- left-middle and right-middle portion is also 12x28
+- top-middle and bottom-middle portion is 16x28
