@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
-import MenuOptions from './MenuOptions';
+import MenuOptions, { type MenuAction } from './MenuOptions';
 
 export default function Menu() {
   const [echoActive, setEchoActive] = useState(false);
@@ -9,20 +9,26 @@ export default function Menu() {
 
   const handleStartPress = () => {
     if (startPressed) {
-      // Starting exit animation
       setIsExiting(true);
       setStartPressed(false);
-      // No more setTimeout here; will reset isExiting on animation complete
-    } else if (!startPressed) {
-      // Starting enter animation
+    } else {
       setStartPressed(true);
     }
   };
 
-  // Handler for when exit animation completes
   const handleExitComplete = () => {
     setIsExiting(false);
   };
+
+  const handleMenuAction = useCallback((action: MenuAction) => {
+    if (action === 'quit') {
+      setIsExiting(true);
+      setStartPressed(false);
+      return;
+    }
+    const sectionId = action === 'experience' ? 'about-me' : action;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
   useEffect(() => {
     // Y Parallax and Scale Effect (based on Splash.tsx component)
@@ -127,6 +133,7 @@ export default function Menu() {
           startPressed={startPressed}
           isExiting={isExiting}
           onExitComplete={handleExitComplete}
+          onAction={handleMenuAction}
         />
       </div>
     </div>

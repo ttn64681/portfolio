@@ -1,5 +1,7 @@
-/* Onload Animation: Initial black fade */
-@keyframes black-bg-fade {
+/* Main menu: splash, layers, menu buttons. In components layer so Tailwind utilities can override. */
+@layer components {
+  /* Onload Animation: Initial black fade */
+  @keyframes black-bg-fade {
   0% {
     opacity: 1;
   }
@@ -226,4 +228,5 @@
   top: -43px;
   transform: translateX(-50%) translateY(0px) scale(0.92); /* Sky layer scale */
   pointer-events: none; /* Allow clicks to pass through */
+}
 }

@@ -1,8 +1,6 @@
-/* ****************************** */
-/* PROJECTS */
-/* ****************************** */
-
-.projects-section {
+/* Projects: section, carousel, cards. In components layer so Tailwind utilities can override. */
+@layer components {
+  .projects-section {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -373,4 +371,5 @@
   width: 100%;
   height: 100%;
   min-height: 380px;
+}
 }

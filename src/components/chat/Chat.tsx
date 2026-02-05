@@ -32,18 +32,17 @@ export default function Chat() {
     return () => window.clearTimeout(timer);
   }, [introPhase]);
 
-  // Trigger a brief border "lightup" on each keypress while typing (single pulse only).
+  // Single border brighten pulse per keypress: brighten then return to normal.
   useEffect(() => {
     if (borderPulseKey === 0) return;
-    // Clear any existing timeout to prevent double flicker
     if (borderPulseTimeoutRef.current !== null) {
       window.clearTimeout(borderPulseTimeoutRef.current);
-      setIsBorderPulsing(false);
     }
     setIsBorderPulsing(true);
     borderPulseTimeoutRef.current = window.setTimeout(() => {
       setIsBorderPulsing(false);
-    }, 180);
+      borderPulseTimeoutRef.current = null;
+    }, 50);
   }, [borderPulseKey]);
 
   const hasScrolledRef = useRef(false);
@@ -76,10 +75,8 @@ export default function Chat() {
   const lastIsAssistant =
     displayMessages.length > 0 && displayMessages[displayMessages.length - 1].role === 'assistant';
 
-  const showIntroBubble = displayMessages.length === 0 && !isLoading;
-
   const introText =
-    "Hey, I'm Thai's portfolio bot. Ask me about his projects, tech stack, or what he does for fun!";
+    "Hey, I'm definitely the real Thai Nguyen. Let me prove it- Ask me about my portfolio, tech stack, or what I do for fun!";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -87,7 +84,7 @@ export default function Chat() {
   };
 
   return (
-    <section className='chat-section w-full flex justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 lg:-mt-[18rem] mb-20'>
+    <section id='chat' className='chat-section w-full flex justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'>
       <div className='chat-inner w-full max-w-[1200px]'>
         <div className='chat-outer relative rounded-3xl p-[8px]'>
           <div
@@ -121,9 +118,13 @@ export default function Chat() {
             <div className='relative min-h-[260px] h-[50vh] sm:h-[55vh] md:h-[60vh] max-h-[640px]'>
               <div className='chat-messages' ref={messagesContainerRef}>
                 {error && (
-                  <p className='text-sm text-red-400 font-pixel-mono'>
-                    {error.message || 'Something went wrong.'}
-                  </p>
+                  <div className='rounded-lg border border-red-500/40 bg-red-950/20 px-3 py-2 text-sm font-pixel-mono text-red-300'>
+                    <p className='mb-1'>{error.message || 'Something went wrong.'}</p>
+                    <p className='text-xs text-red-300/80'>
+                      Try rephrasing your question or use the contact link above to reach out
+                      directly.
+                    </p>
+                  </div>
                 )}
 
                 {/* Always show intro message */}

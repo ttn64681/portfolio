@@ -31,6 +31,18 @@ export const portfolioDocuments: Document[] = [
     `Thai holds a strong passion for good and meaningful design, believing that software functionality must be matched by an intuitive and aesthetic user experience. He often bridges the gap between engineering and design teams. Tools: He is proficient in Figma for high-fidelity prototyping and Aseprite for creating pixel art assets. Impact: He frequently takes ownership of UI revisions and UX implementations in his projects (CourseHub, Cinema E-Booking), ensuring accessibility, responsiveness, and visual consistency.`,
     { title: 'Design Philosophy & UI/UX Passion', category: 'philosophy' },
   ),
+  toDocument(
+    'bio-executive',
+    `Thai Nguyen is a Woodstock, Georgia native and versatile Software Engineer balancing backend complexity with creative UI/UX and digital art. He is a senior CS student at UGA graduating May 2026, with professional experience in contract web development and a leadership role as CSIP Co-Chair for UGA ACM. He specializes in full-stack architecture, AI infrastructure, and game development.`,
+    { title: 'Executive Summary', category: 'bio' },
+  ),
+
+  // --- CONTACT & LOCATION ---
+  toDocument(
+    'contact-info',
+    `Thai Nguyen. Phone: 404-309-4421. Email: thainguy271@gmail.com. Discord: @mogi. Hometown: Woodstock, GA. Current location: Athens, GA. Open to relocation; prefers Atlanta or major GA cities. LinkedIn: linkedin.com/in/thai-tam-minh-nguyen. GitHub: github.com/ttn64681.`,
+    { title: 'Contact Information', category: 'contact' },
+  ),
 
   // --- EDUCATION ---
   toDocument(
@@ -66,6 +78,15 @@ export const portfolioDocuments: Document[] = [
     {
       title: 'Cinema E-Booking System - UI/UX Design',
       techStack: ['Figma', 'Next.js 16', 'Tailwind CSS'],
+      category: 'project',
+    },
+  ),
+  toDocument(
+    'proj-cinema-detail',
+    `ACM Cinema (Actual Cinema Movies) is an end-to-end cinema management and booking platform: Aug 2025 – Present. Thai's role: Scrum Master and Full-Stack Developer. Features: real-time seat selection, user and admin dashboards, secure payment simulation. Security and auth: stateless sessions via JWT with custom JwtAuthenticationFilter and BCrypt password hashing. Database: PostgreSQL with Flyway migrations and automated Bash backup scripts. Team: Led a 5-person team using Agile/Scrum; improved sprint velocity by ~10% via structured Jira ticket management. The project was recognized as one of the top projects in the Software Engineering course for its UI/UX and architectural depth.`,
+    {
+      title: 'ACM Cinema E-Booking - Full Detail',
+      techStack: ['Spring Boot 3.5', 'JWT', 'BCrypt', 'Flyway', 'PostgreSQL', 'Jira'],
       category: 'project',
     },
   ),
@@ -109,6 +130,15 @@ export const portfolioDocuments: Document[] = [
       category: 'project',
     },
   ),
+  toDocument(
+    'proj-coursehub-detail',
+    `CourseHub (Mar 2025 – May 2025): full-stack educational resource hub for UGA students. Thai was Team Lead and Full-Stack Developer. It automates study planning and resource sharing. Tech: Google Gemini AI and YouTube Data API v3 for auto-generated course success plans and study links. Data: 4 MongoDB schemas using Mongoose for post-course associations and resource management. Auth: NextAuth.js v5 with middleware-based route protection and JWT session strategies. Award: "Best Class Project" for reducing manual content creation time by ~90%.`,
+    {
+      title: 'CourseHub - Full Detail',
+      techStack: ['Next.js 14', 'MongoDB', 'Mongoose', 'NextAuth.js v5', 'Gemini AI', 'YouTube API'],
+      category: 'project',
+    },
+  ),
 
   // --- PROJECT: TOWER ASCENT ---
   toDocument(
@@ -121,11 +151,27 @@ export const portfolioDocuments: Document[] = [
     },
   ),
 
+  // --- GAME DEV & JAMS ---
+  toDocument(
+    'game-jams',
+    `UGA Game Builders Club: Tower Ascent (Fall 2025 – Present): modular trading and inventory in Godot with Dependency Injection; hand-animated UI and cutscenes in Aseprite. Bunker Jumper (Spring 2025): responsive UI and animations in Godot. Laundry Day (Fall 2024): composed original music and SFX for a visual novel. To See (Spring 2024): composed the soundtrack for a 3D storytelling experience. Game jams: Boss Rush Jam 2025 – "Dragon of the East" in Godot, music in Garageband. Code for a Cause (charity jam) – "Job Description" in Unity with Blender and Photoshop; placed 41st out of 278. A Forlorn Soul: placed 10th in Georgia; level design in Unity, art and animation in Aseprite, music in Garageband.`,
+    {
+      title: 'Game Development & Game Jam History',
+      techStack: ['Godot', 'Unity', 'Aseprite', 'Garageband', 'Blender', 'Photoshop'],
+      category: 'project',
+    },
+  ),
+
   // --- SKILLS ---
   toDocument(
     'skills-technical',
     `Thai's technical stack includes: Core: Java, JavaScript, TypeScript, Python, GDScript. Full-Stack: Spring Boot 3.5, Next.js, React, Node.js. Data: PostgreSQL, MongoDB, Redis (Upstash), Vector Search. AI: RAG, Gemini API, Vercel AI SDK, Embeddings. Design & Art Tools: Figma (UI/UX), Aseprite (Pixel Art/Animation), VFX.js.`,
     { title: 'Technical Skills', category: 'skill' },
+  ),
+  toDocument(
+    'skills-expanded',
+    `Languages: Java, JavaScript, TypeScript, C, C++, Python, GDScript, SQL, Bash. Frameworks: Spring Boot 3.5, Next.js (App Router), React 19, Node.js. Data and AI: PostgreSQL, MongoDB, Redis (Upstash), RAG, Gemini AI, Vercel AI SDK. Creative tools: Aseprite (pixel art and animation), Figma (prototyping), Garageband (music), Photoshop, Blender. Engineering practices: Agile/Scrum, Jira, Docker, REST/GraphQL, Dependency Injection.`,
+    { title: 'Technical Skills Expanded', category: 'skill' },
   ),
   toDocument(
     'skills-soft',
@@ -158,5 +204,12 @@ export const portfolioDocuments: Document[] = [
     'hobbies-dev-play',
     `Thai loves making games and building UI outside of coursework—it's both a hobby and a way to level up his skills. He also enjoys playing games in his downtime.`,
     { category: 'hobbies' },
+  ),
+
+  // --- CAREER GOALS ---
+  toDocument(
+    'career-goals',
+    `Thai is actively seeking roles in Software Engineering, AI Infrastructure, Cloud Engineering, and Full-Stack Development. His interests are united by a "full-cycle" engineering philosophy: building high-performance backend systems (C/C++, Java, Spring Boot) while maintaining an uncompromising standard for UI/UX and creative asset production. He believes meaningful design is the key to software adoption and accessibility.`,
+    { title: 'Career Goals & Philosophy', category: 'career' },
   ),
 ];

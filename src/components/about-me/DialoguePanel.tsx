@@ -2,39 +2,7 @@
 
 import { useState } from 'react';
 import Typewriter from 'typewriter-effect';
-
-// A single selectable dialogue option.
-type DialogueOption = {
-  id: string;
-  label: string;
-  text: string;
-};
-
-// Pre-written responses for each dialogue option.
-const DIALOGUE_OPTIONS: DialogueOption[] = [
-  {
-    id: 'intro',
-    label: '> Who are you?',
-    text: "I'm Thai Nguyen, a developer who loves building playful, pixel-perfect web experiences.",
-  },
-  {
-    id: 'education',
-    label: '> Education?',
-    text: 'I studied computer science and have a passion for learning by doing — shipping projects, breaking things, and iterating fast.',
-  },
-  {
-    id: 'experience',
-    label: '> Experience?',
-    text: 'I’ve worked across the stack: from React frontends to Node/Next.js backends, UI/UX design, and a lot of creative coding experiments.',
-  },
-];
-
-// Idle / default messages shown when no option is selected.
-const IDLE_TEXTS: string[] = [
-  'Ask me something to learn more — or message me directly through my Portfolio Chatbot!',
-  'Curious about my projects, stack, or design style? Pick a prompt or scroll down to grill the chat agent.',
-  'You can always scroll down to the pixel chatbox if you want the full lore dump.',
-];
+import { DIALOGUE_OPTIONS, IDLE_TEXTS } from '@/data/dialogue';
 
 type DialoguePanelProps = {
   // Called when the user picks a dialogue option (used to trigger talking animation).

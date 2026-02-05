@@ -1,8 +1,6 @@
-/* ****************************** */
-/* ABOUT-ME
-/* ****************************** */
-
-/* Profile
+/* About-me: profile, dialogue. In components layer so Tailwind utilities can override. */
+@layer components {
+  /* Profile
    - Portrait: 191 frames. Tiles: 32 frames. Looped separately.
    - Box: border #466C8C, fill #021728, behind the portrait stack.
    - Layout (centering, width/height of the section) is handled via Tailwind on the JSX.
@@ -106,4 +104,5 @@
   width: 100%;
   max-width: 720px;
   min-width: 340px;
+}
 }

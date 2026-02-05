@@ -1,6 +1,7 @@
 import { streamText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { getConfig } from '@/lib/config';
+import { buildSystemPrompt } from '@/lib/chat-prompts';
 import {
   MAX_BODY_BYTES,
   MAX_MESSAGE_LENGTH,
@@ -10,6 +11,14 @@ import {
 import { checkRateLimit } from '@/lib/rate-limit';
 import { searchSimilarDocuments } from '@/lib/vector-store';
 import { portfolioDocuments } from '@/data/portfolio';
+
+/** User-facing error message and HTTP status for known failure modes. */
+function errorResponse(message: string, status: number) {
+  return new Response(JSON.stringify({ error: message }), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
 
 export const runtime = 'edge';
 
@@ -94,41 +103,58 @@ export async function POST(request: Request) {
   const config = getConfig();
   const recentMessages = messages.slice(-MAX_MESSAGES_FOR_LLM);
 
-  const similar = await searchSimilarDocuments(
-    queryText.trim(),
-    config.maxRagDocs,
-    portfolioDocuments,
-  );
-
-  const contentById = new Map(portfolioDocuments.map((d) => [d.id, d.content]));
-  let contextBlock = similar
-    .map((r) => contentById.get(r.id))
-    .filter(Boolean)
-    .join('\n\n---\n\n');
-
-  if (contextBlock.length > config.maxContextChars) {
-    contextBlock = contextBlock.slice(0, config.maxContextChars) + '…';
+  let contextBlock: string;
+  try {
+    const similar = await searchSimilarDocuments(
+      queryText.trim(),
+      config.maxRagDocs,
+      portfolioDocuments,
+    );
+    const contentById = new Map(portfolioDocuments.map((d) => [d.id, d.content]));
+    contextBlock = similar
+      .map((r) => contentById.get(r.id))
+      .filter(Boolean)
+      .join('\n\n---\n\n');
+    if (contextBlock.length > config.maxContextChars) {
+      contextBlock = contextBlock.slice(0, config.maxContextChars) + '…';
+    }
+  } catch {
+    return errorResponse(
+      "Search isn't available right now. Please try again in a moment, or use the contact link to reach out directly.",
+      503,
+    );
   }
 
-  const personalityInstructions = `You are Thai's portfolio agent. You are non-assuming and reserved. You occasionally make silly or deadpan jokes like Norm McDonald, but are 99% of the time just a normal person Respond with a pleasant and semi-professional tone.`;
-
-  const systemMessage = contextBlock
-    ? `${personalityInstructions} Use the following context to answer the user's questions. If the context does not contain relevant information, say so and answer from general knowledge.\n\nContext:\n${contextBlock}\n\nAnswer concisely and in a friendly tone.`
-    : `${personalityInstructions} Answer the user's questions about Thai (the portfolio author) concisely and in a friendly tone.`;
+  const systemMessage = buildSystemPrompt(contextBlock);
 
   const modelMessages = recentMessages.map((msg) => ({
     role: msg.role as 'user' | 'assistant' | 'system',
     content: extractContentFromParts(msg.parts),
   }));
 
-  const google = createGoogleGenerativeAI({ apiKey: config.geminiApiKey });
+  let google;
+  try {
+    google = createGoogleGenerativeAI({ apiKey: config.geminiApiKey });
+  } catch {
+    return errorResponse(
+      "Chat isn't configured right now. Please use the contact link to get in touch.",
+      503,
+    );
+  }
+
   const model = google(config.geminiModel);
 
-  const result = streamText({
-    model,
-    system: systemMessage,
-    messages: modelMessages,
-  });
-
-  return result.toUIMessageStreamResponse();
+  try {
+    const result = streamText({
+      model,
+      system: systemMessage,
+      messages: modelMessages,
+    });
+    return result.toUIMessageStreamResponse();
+  } catch {
+    return errorResponse(
+      "Something went wrong while answering. Try rephrasing your question or use the contact link if it keeps happening.",
+      502,
+    );
+  }
 }

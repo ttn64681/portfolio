@@ -9,7 +9,12 @@ interface LayerConfig {
   scrollYMult: number; // y pixel-multiplier for scroll parallax
 }
 
-export default function Splash() {
+type SplashProps = {
+  /** Rendered between water (bg2) and black (bg1) for correct z-ordering. */
+  children?: React.ReactNode;
+};
+
+export default function Splash({ children }: SplashProps) {
   useEffect(() => {
     // This IIFE creates a closure to manage all parallax states
     const handleScrollAndMouse = (() => {
@@ -160,6 +165,12 @@ export default function Splash() {
           contain: 'layout style paint',
         }}
       />
+      {/* Slot for content between water (bg2) and black (bg1) — e.g. Menu */}
+      {children != null ? (
+        <div className='absolute inset-0 z-[5] pointer-events-auto' aria-hidden={false}>
+          {children}
+        </div>
+      ) : null}
       <div
         id='bg1'
         className='sprite-layer'

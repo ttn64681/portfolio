@@ -31,7 +31,7 @@ export function getConfig() {
     redisUrl: requireEnv('UPSTASH_REDIS_REST_URL'),
     redisToken: requireEnv('UPSTASH_REDIS_REST_TOKEN'),
     geminiModel: getEnv('GEMINI_MODEL')?.trim() || 'gemini-2.5-flash',
-    embeddingModel: getEnv('GEMINI_EMBEDDING_MODEL')?.trim() || 'text-embedding-004',
+    embeddingModel: getEnv('GEMINI_EMBEDDING_MODEL')?.trim() || 'gemini-embedding-001',
     allowedDomain: getEnv('ALLOWED_DOMAIN')?.trim() || '',
     rateLimitMax: RATE_LIMIT_MAX_REQUESTS,
     rateLimitWindowSec: RATE_LIMIT_WINDOW_SEC,

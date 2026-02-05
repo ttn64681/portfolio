@@ -1,12 +1,21 @@
 import { motion } from 'framer-motion';
 
+export type MenuAction = 'about-me' | 'projects' | 'chat' | 'experience' | 'quit';
+
 interface MenuOptionsProps {
   startPressed: boolean;
   isExiting: boolean;
   onExitComplete?: () => void;
+  onAction?: (action: MenuAction) => void;
 }
 
-export default function MenuOptions({ startPressed, isExiting, onExitComplete }: MenuOptionsProps) {
+export default function MenuOptions({
+  startPressed,
+  isExiting,
+  onExitComplete,
+  onAction,
+}: MenuOptionsProps) {
+  const handleAction = (action: MenuAction) => onAction?.(action);
   return (
     <>
       {/* Small-Medium devices */}
@@ -27,8 +36,9 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
             className='lg:hidden static flex flex-col items-center gap-2 md:gap-3 lg:gap-4 mt-8'
           >
             <button
-              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              type='button'
+              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              onClick={() => handleAction('about-me')}
             >
               <span
                 className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
@@ -42,8 +52,9 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
               </span>
             </button>
             <button
-              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              type='button'
+              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              onClick={() => handleAction('projects')}
             >
               <span
                 className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
@@ -57,23 +68,41 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
               </span>
             </button>
             <button
-              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              type='button'
+              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              onClick={() => handleAction('experience')}
             >
               <span
                 className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
               >
-                Extra
+                Experience
               </span>
               <span
                 className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
               >
-                Extra
+                Experience
               </span>
             </button>
             <button
-              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105
-              active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              type='button'
+              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              onClick={() => handleAction('chat')}
+            >
+              <span
+                className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
+              >
+                Chat
+              </span>
+              <span
+                className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
+              >
+                Chat
+              </span>
+            </button>
+            <button
+              type='button'
+              className='text-white-title text-2xl px-2 md:text-3xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+              onClick={() => handleAction('quit')}
             >
               <span
                 className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
@@ -102,8 +131,9 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
           }}
         >
           <button
-            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 
-            hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            type='button'
+            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            onClick={() => handleAction('about-me')}
           >
             <span
               className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
@@ -117,8 +147,9 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
             </span>
           </button>
           <button
-            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            type='button'
+            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            onClick={() => handleAction('projects')}
           >
             <span
               className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
@@ -132,23 +163,41 @@ export default function MenuOptions({ startPressed, isExiting, onExitComplete }:
             </span>
           </button>
           <button
-            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            type='button'
+            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            onClick={() => handleAction('experience')}
           >
             <span
               className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
             >
-              Extra
+              Experience
             </span>
             <span
               className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
             >
-              Extra
+              Experience
             </span>
           </button>
           <button
-            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 
-          active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            type='button'
+            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            onClick={() => handleAction('chat')}
+          >
+            <span
+              className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}
+            >
+              Chat
+            </span>
+            <span
+              className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
+            >
+              Chat
+            </span>
+          </button>
+          <button
+            type='button'
+            className='text-white-title px-2 text-4xl font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-106 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer'
+            onClick={() => handleAction('quit')}
           >
             <span
               className={`menu-button-white-bg bg-white-title px-2 ${isExiting ? 'menu-button-white-bg-reverse' : ''}`}

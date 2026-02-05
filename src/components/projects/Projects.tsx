@@ -4,16 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { portfolioDocuments } from '@/data/portfolio';
 import { getProjectConfig } from '@/data/projects-config';
-
-type ProjectInfo = {
-  id: string;
-  baseId: string; // e.g., "cinema", "coursehub"
-  title: string;
-  summary: string;
-  techStack?: string[];
-  date?: string;
-  bullets: string[]; // from config, max 3
-};
+import type { ProjectInfo } from '@/types/projects';
 
 function extractProjects(): ProjectInfo[] {
   const projectDocs = portfolioDocuments.filter((doc) => doc.id.startsWith('proj-'));
@@ -78,7 +69,7 @@ function extractProjects(): ProjectInfo[] {
 
 const projects = extractProjects();
 
-export default function ProjectsSection() {
+export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -133,7 +124,7 @@ export default function ProjectsSection() {
   if (projects.length === 0) return null;
 
   return (
-    <section className='projects-section'>
+    <section id='projects' className='projects-section'>
       <div className='projects-section__inner'>
         <header className='projects-section__header'>
           <h2 className='projects-section__title'>Projects</h2>
