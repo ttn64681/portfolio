@@ -11,6 +11,8 @@ export type ProjectConfig = {
   id: string;
   /** Title */
   title?: string;
+  /** One-line summary of what the app is and what you did */
+  summary?: string;
   /** Role */
   role?: string;
   /** Optional colorful award or achievement badge */
@@ -26,9 +28,10 @@ export type ProjectConfig = {
 export const projectsConfig: ProjectConfig[] = [
   {
     id: 'cinema',
-    title: 'Absolute Cinema Movies - E-Booking Mockup',
+    title: 'Absolute Cinema Movies',
     role: 'Scrum Master & Full-Stack Developer',
     award: 'Top Class Projects',
+    summary: 'An e-booking system for a (fake) movie theater using Spring Boot 3.5 and PostgreSQL.',
     bullets: [
       'Architected robust backend with Spring Boot 3.5 and PostgreSQL, designing 80+ RESTful API endpoints and managing 15 JPA entities.',
       'Implemented Caffeine caching and applied Facade/Virtual Proxy patterns to reduce API payloads by ~30-45%.',
@@ -39,8 +42,9 @@ export const projectsConfig: ProjectConfig[] = [
   },
   {
     id: 'rag-portfolio',
-    title: 'RAG-Powered AI Portfolio',
+    title: 'This Website!',
     role: 'Full-Stack Developer & Artist',
+    summary: 'My passion project portfolio, featuring pixel art/animations and a RAG Chatbot.',
     bullets: [
       'Built a zero-dollar RAG architecture using Upstash Redis as vector store and Google Gemini embeddings for semantic search.',
       'Implemented SHA-256 version hashing and query embedding caching to optimize costs.',
@@ -51,9 +55,10 @@ export const projectsConfig: ProjectConfig[] = [
   },
   {
     id: 'coursehub',
-    title: 'CourseHub - Educational Platform',
+    title: 'CourseHub',
     role: 'Team Lead & Full-Stack Developer',
     award: 'Best Class Project',
+    summary: 'An educational platform for UGA students to chat, post, and generate study resources.',
     bullets: [
       'Led development of educational platform that integrated Gemini AI and YouTube APIs, reducing manual study plan creation time by ~90%.',
       'Engineered 15+ RESTful endpoints for resource sharing and authentication.',
@@ -64,8 +69,9 @@ export const projectsConfig: ProjectConfig[] = [
   },
   {
     id: 'tower-ascent',
-    title: 'Tower Ascent - 2D Rogue-like RPG',
+    title: 'Tower Ascent',
     role: 'Game Developer & Artist',
+    summary: 'A 2D rogue-like RPG with a modular trading and inventory system.',
     bullets: [
       'Designed componentized inventory UI using dependency injection to decouple display logic from game state.',
       'Creates pixel art assets and animations in Aseprite for the game.',

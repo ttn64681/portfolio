@@ -30,9 +30,9 @@ function extractProjects(): ProjectInfo[] {
       id: `proj-${config.id}`,
       baseId: config.id,
       title: config.title || `Project ${config.id}`,
-      summary: config.bullets[0] || '', // Use first bullet as summary
+      summary: config.summary || config.bullets[0] || '', // Use summary if provided, otherwise fallback to first bullet
       role: config.role,
-      award: config.award,
+      award: config.award, // Keep undefined if not provided (don't force empty string)
       techStack: config.techStack,
       date: config.date,
       bullets: config.bullets,

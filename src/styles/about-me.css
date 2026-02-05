@@ -106,15 +106,43 @@
   min-width: 340px;
 }
 
-/* Enable smooth scrolling on Mac trackpads for dialogue panel and hide scrollbar */
+/* Enable smooth scrolling on Mac trackpads for dialogue panel and show scrollbar */
 .dialogue-panel-container > div > div {
   -webkit-overflow-scrolling: touch;
-  /* Hide scrollbar while keeping scroll functionality */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  /* Cross-browser scrollbar styling */
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(77, 189, 255, 0.6) transparent;
+  /* Legacy Edge */
+  -ms-overflow-style: scrollbar;
 }
 
+/* Chrome, Safari, Edge (Chromium), Opera - WebKit/Blink */
 .dialogue-panel-container > div > div::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/WebKit */
+  width: 8px;
+}
+
+.dialogue-panel-container > div > div::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.dialogue-panel-container > div > div::-webkit-scrollbar-thumb {
+  background-color: rgba(77, 189, 255, 0.6);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.dialogue-panel-container > div > div::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(77, 189, 255, 0.8);
+}
+
+/* Firefox fallback - ensure scrollbar is visible */
+@-moz-document url-prefix() {
+  .dialogue-panel-container > div > div {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77, 189, 255, 0.6) transparent;
+  }
 }
 }
