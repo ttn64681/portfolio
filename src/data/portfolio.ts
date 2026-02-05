@@ -47,8 +47,15 @@ export const portfolioDocuments: Document[] = [
   // --- EDUCATION ---
   toDocument(
     'education-uga',
-    `Thai is pursuing a Bachelor of Computer Science at the University of Georgia (Athens, GA), expected to graduate in May 2026. Relevant coursework includes Data Structures, Algorithms, Software Engineering, Full-Stack Development, Computer Graphics, and Human-Computer Interaction concepts through his frontend work.`,
+    `Thai is pursuing a B.S. in Computer Science at the University of Georgia (Athens, GA), graduating in May 2026. He holds a 3.70 / 4.0 major GPA (3.27 / 4.0 cumulative). Relevant coursework includes Data Structures, Algorithms, Software Engineering, Full-Stack Development, OOP, Data Science/ML, GenAI, Deep Learning, Computer Architecture, Computer Graphics, and Systems Programming. He also completed UGA's Arch Ready career readiness certification.`,
     { title: 'University of Georgia - BS Computer Science', category: 'education' },
+  ),
+
+  // --- LEADERSHIP ---
+  toDocument(
+    'leadership-acm',
+    `Thai serves as an Executive Officer and CSIP Co-Chair for UGA ACM (May 2025 – Present). He leads weekly technical workshops on Data Structures, Algorithms, and behavioral interview prep for 10+ students, and directs UI/UX redesigns in Figma for club branding and digital presence. He also manages recruitment event logistics, helping increase student engagement across the organization.`,
+    { title: 'Leadership - UGA ACM Executive Officer & CSIP Co-Chair', category: 'leadership' },
   ),
 
   // --- EXPERIENCE: FREELANCE ---

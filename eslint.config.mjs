@@ -1,7 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import prettierConfig from "eslint-config-prettier/recommended";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,7 +12,8 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-  prettierConfig, // prettier config
+  // Keep eslint-config-prettier last so it can turn off conflicting rules
+  eslintConfigPrettier,
 ];
 
 export default eslintConfig;

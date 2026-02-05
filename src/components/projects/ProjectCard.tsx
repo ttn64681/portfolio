@@ -44,11 +44,11 @@ export default function ProjectCard({
         }}
         role='button'
         tabIndex={0}
-        aria-pressed={isActive}
       >
         <div className='project-card__inner'>
           {!isActive && date && <div className='project-card__date'>{date}</div>}
           <h3 className='project-card__title'>{title}</h3>
+          {/* Tech stack badges at top */}
           {!isActive && techStack && techStack.length > 0 && (
             <div className='project-card__tags'>
               {techStack.map((tech) => (
