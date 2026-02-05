@@ -108,7 +108,7 @@ export default function Menu() {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v1.0.0',
+                  'Portfolio v1.2.1',
                   'Programmer',
                   'Software Engineer',
                   'Web Developer',
