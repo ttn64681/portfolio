@@ -117,16 +117,6 @@ export default function Chat() {
             {/* Chat messages container */}
             <div className='relative min-h-[260px] h-[50vh] sm:h-[55vh] md:h-[60vh] max-h-[640px]'>
               <div className='chat-messages' ref={messagesContainerRef}>
-                {error && (
-                  <div className='rounded-lg border border-red-500/40 bg-red-950/20 px-3 py-2 text-sm font-pixel-mono text-red-300'>
-                    <p className='mb-1'>{error.message || 'Something went wrong.'}</p>
-                    <p className='text-xs text-red-300/80'>
-                      Try rephrasing your question or use the contact link above to reach out
-                      directly.
-                    </p>
-                  </div>
-                )}
-
                 {/* Always show intro message */}
                 {introPhase === 'loading' ? (
                   <Message role='assistant' content='' isLoading />
@@ -185,6 +175,15 @@ export default function Chat() {
                   <div className={isTypingFadeOut ? 'chat-message-fade-out' : ''}>
                     <Message role='user' content='' isLoading />
                   </div>
+                )}
+                {/* Friendly, in-character error message instead of a red banner */}
+                {error && (
+                  <Message
+                    role='assistant'
+                    content={
+                      "Hmm, something on my server side glitched out (could be an unauthorized domain or a temporary hiccup). I can't answer this one, but you can try again in a bit or use the contact links above to reach me directly."
+                    }
+                  />
                 )}
                 <div className='h-4' />
                 <div ref={endOfMessagesRef} />

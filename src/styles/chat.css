@@ -19,11 +19,15 @@
     overflow-y: auto;
     padding-right: 0.25rem;
     padding-bottom: 12rem;
-    scrollbar-width: none; /* Firefox hide scrollbar */
+    /* Enable smooth scrolling on Mac trackpads and touch devices */
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar while keeping scroll functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
   }
 
   .chat-messages::-webkit-scrollbar {
-    display: none; /* WebKit hide scrollbar */
+    display: none; /* Chrome/Safari/WebKit */
   }
 
   .chat-message {
@@ -104,9 +108,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
   }
 
   @media (max-width: 1024px) {

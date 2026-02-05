@@ -3,68 +3,42 @@
 import { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { portfolioDocuments } from '@/data/portfolio';
-import { getProjectConfig } from '@/data/projects-config';
+import { projectsConfig } from '@/data/projects-config';
 import type { ProjectInfo } from '@/types/projects';
 
+/**
+ * Extract projects for UI display. Uses projects-config.ts as the single source of truth
+ * for all display data (title, bullets, techStack, date, role, award).
+ * Only uses portfolio.ts to determine which projects exist (by checking for matching IDs).
+ */
 function extractProjects(): ProjectInfo[] {
+  // Get all project base IDs from portfolio.ts (to know which projects exist)
   const projectDocs = portfolioDocuments.filter((doc) => doc.id.startsWith('proj-'));
-
-  const projectGroups = new Map<string, typeof projectDocs>();
+  const existingProjectIds = new Set<string>();
 
   projectDocs.forEach((doc) => {
     const baseMatch = doc.id.match(/^proj-([^-]+)/);
     if (baseMatch) {
-      const baseName = baseMatch[1];
-      if (!projectGroups.has(baseName)) {
-        projectGroups.set(baseName, []);
-      }
-      projectGroups.get(baseName)!.push(doc);
+      existingProjectIds.add(baseMatch[1]);
     }
   });
 
-  const mergedProjects: ProjectInfo[] = [];
+  // Build projects array directly from projects-config.ts
+  const projects: ProjectInfo[] = projectsConfig
+    .filter((config) => existingProjectIds.has(config.id)) // Only include projects that exist in portfolio.ts
+    .map((config) => ({
+      id: `proj-${config.id}`,
+      baseId: config.id,
+      title: config.title || `Project ${config.id}`,
+      summary: config.bullets[0] || '', // Use first bullet as summary
+      role: config.role,
+      award: config.award,
+      techStack: config.techStack,
+      date: config.date,
+      bullets: config.bullets,
+    }));
 
-  projectGroups.forEach((docs, baseName) => {
-    const allTechStacks = new Set<string>();
-    const allContent: string[] = [];
-    let mainTitle = '';
-
-    docs.forEach((doc) => {
-      const [maybeTitle, ...rest] = doc.content.split('. ');
-      const title = maybeTitle || doc.id;
-      const content = rest.join('. ');
-
-      const baseTitle = title.replace(
-        / - (Backend Architecture|UI\/UX Design|Technical Implementation|Art & Design)$/i,
-        '',
-      );
-      if (!mainTitle) mainTitle = baseTitle;
-
-      allContent.push(content);
-
-      const techMatch = doc.content.match(/Tech:\s([^\.]+)/i);
-      if (techMatch && techMatch[1]) {
-        techMatch[1].split(',').forEach((t) => allTechStacks.add(t.trim()));
-      }
-    });
-
-    const summary = allContent[0]?.split('. ')[0] || allContent.join('. ');
-
-    // Get config for this project
-    const config = getProjectConfig(baseName);
-
-    mergedProjects.push({
-      id: `proj-${baseName}`,
-      baseId: baseName,
-      title: config?.title || mainTitle,
-      summary,
-      techStack: config?.techStack || Array.from(allTechStacks),
-      date: config?.date,
-      bullets: config?.bullets || [],
-    });
-  });
-
-  return mergedProjects;
+  return projects;
 }
 
 const projects = extractProjects();
@@ -154,6 +128,8 @@ export default function Projects() {
                 <ProjectCard
                   title={project.title}
                   summary={project.summary}
+                  role={project.role}
+                  award={project.award}
                   techStack={project.techStack}
                   date={project.date}
                   bullets={project.bullets}
@@ -184,6 +160,8 @@ export default function Projects() {
               key={project.id}
               title={project.title}
               summary={project.summary}
+              role={project.role}
+              award={project.award}
               techStack={project.techStack}
               date={project.date}
               bullets={project.bullets}

@@ -44,6 +44,10 @@ export function usePortfolioChat() {
   const isLoading = status === 'streaming' || status === 'submitted';
 
   // Track typing activity based on input changes.
+  // NOTE: This effect intentionally only depends on `input`. Including `isTyping`
+  // in the dependency array causes the typing bubble to re-trigger in a loop
+  // even when the user has stopped typing, which feels buggy.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Clear any existing timeouts
     if (typingTimeoutRef.current) {
@@ -79,7 +83,7 @@ export function usePortfolioChat() {
         setIsTypingFadeOut(false);
       }, 300);
     }, 800);
-  }, [input, isTyping]);
+  }, [input]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {

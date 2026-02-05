@@ -192,6 +192,32 @@
   color: #4dbdff;
 }
 
+.project-card__role {
+  font-family: var(--font-pixel-mono);
+  font-size: 0.75rem;
+  color: rgba(241, 248, 255, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.project-card__award {
+  display: inline-block;
+  font-family: var(--font-pixel-mono);
+  font-size: 0.7rem;
+  color: #ffe44d;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: rgba(255, 228, 77, 0.15);
+  border: 1px solid rgba(255, 228, 77, 0.4);
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 8px rgba(255, 228, 77, 0.3);
+}
+
 .project-card__summary {
   font-family:
     system-ui,

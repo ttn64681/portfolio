@@ -105,4 +105,16 @@
   max-width: 720px;
   min-width: 340px;
 }
+
+/* Enable smooth scrolling on Mac trackpads for dialogue panel and hide scrollbar */
+.dialogue-panel-container > div > div {
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar while keeping scroll functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.dialogue-panel-container > div > div::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/WebKit */
+}
 }

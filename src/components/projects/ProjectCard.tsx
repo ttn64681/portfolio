@@ -7,6 +7,8 @@ type ProjectCardMode = 'carousel' | 'flip';
 type ProjectCardProps = {
   title: string;
   summary: string;
+  role?: string;
+  award?: string;
   techStack?: string[];
   date?: string;
   bullets: string[]; // max 3 from config
@@ -18,6 +20,8 @@ type ProjectCardProps = {
 export default function ProjectCard({
   title,
   summary,
+  role,
+  award,
   techStack,
   date,
   bullets,
@@ -44,6 +48,10 @@ export default function ProjectCard({
         <div className='project-card__inner'>
           {!isActive && date && <div className='project-card__date'>{date}</div>}
           <h3 className='project-card__title'>{title}</h3>
+          {!isActive && role && <div className='project-card__role'>{role}</div>}
+          {!isActive && award && (
+            <div className='project-card__award'>{award}</div>
+          )}
           {/* Tech stack badges at top */}
           {!isActive && techStack && techStack.length > 0 && (
             <div className='project-card__tags'>
@@ -83,6 +91,8 @@ export default function ProjectCard({
           <div className='project-card__inner'>
             {date && <div className='project-card__date'>{date}</div>}
             <h3 className='project-card__title'>{title}</h3>
+            {role && <div className='project-card__role'>{role}</div>}
+            {award && <div className='project-card__award'>{award}</div>}
             {/* Tech stack badges at top */}
             {techStack && techStack.length > 0 && (
               <div className='project-card__tags'>

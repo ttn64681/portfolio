@@ -1,5 +1,5 @@
 /**
- * Types for projects: derived from portfolio documents and used by Projects list and cards.
+ * Types for projects: derived from projects-config.ts and used by Projects list and cards.
  */
 
 export type ProjectInfo = {
@@ -7,6 +7,8 @@ export type ProjectInfo = {
   baseId: string;
   title: string;
   summary: string;
+  role?: string;
+  award?: string;
   techStack?: string[];
   date?: string;
   bullets: string[];
