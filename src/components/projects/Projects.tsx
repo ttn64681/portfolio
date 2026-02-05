@@ -99,7 +99,6 @@ export default function Projects() {
     const carouselWidth = carouselRect.width;
     const cardLeftInScroll = cardEl.offsetLeft;
     const cardCenter = cardLeftInScroll + cardWidth / 2;
-    const scrollPadding = 80;
     const visibleCenter = carouselWidth / 2;
     const targetScroll = cardCenter - visibleCenter;
 
@@ -180,7 +179,7 @@ export default function Projects() {
 
         {/* Mobile / tablet: interactive cards grid - no scrolling, lay flat */}
         <div className='projects-grid lg:hidden'>
-          {projects.map((project, index) => (
+        {projects.map((project) => (
             <ProjectCard
               key={project.id}
               title={project.title}
@@ -190,8 +189,6 @@ export default function Projects() {
               bullets={project.bullets}
               mode='flip'
               isActive={false}
-              onHover={() => {}}
-              onHoverEnd={() => {}}
             />
           ))}
         </div>

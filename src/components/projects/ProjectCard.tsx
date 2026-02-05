@@ -13,8 +13,6 @@ type ProjectCardProps = {
   mode: ProjectCardMode;
   isActive?: boolean; // only used in carousel mode (click-to-focus)
   onSelect?: () => void; // carousel: click to focus
-  onHover?: () => void;
-  onHoverEnd?: () => void;
 };
 
 export default function ProjectCard({
@@ -26,8 +24,6 @@ export default function ProjectCard({
   mode,
   isActive = false,
   onSelect,
-  onHover,
-  onHoverEnd,
 }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 

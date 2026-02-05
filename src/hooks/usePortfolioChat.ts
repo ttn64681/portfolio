@@ -79,7 +79,7 @@ export function usePortfolioChat() {
         setIsTypingFadeOut(false);
       }, 300);
     }, 800);
-  }, [input]);
+  }, [input, isTyping]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
