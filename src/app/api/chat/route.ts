@@ -6,7 +6,6 @@ import {
   MAX_BODY_BYTES,
   MAX_MESSAGE_LENGTH,
   MAX_MESSAGES_FOR_LLM,
-  MAX_RAG_DOCS,
 } from '@/lib/constants';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { searchSimilarDocuments } from '@/lib/vector-store';

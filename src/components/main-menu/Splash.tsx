@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface LayerConfig {
   id: string;
@@ -19,8 +19,8 @@ export default function Splash({ children }: SplashProps) {
     // This IIFE creates a closure to manage all parallax states
     const handleScrollAndMouse = (() => {
       // Set initial mouse position to center of screen
-      let mouseX: number = window.innerWidth / 2;
-      let mouseY: number = window.innerHeight / 2;
+      const mouseX: number = window.innerWidth / 2;
+      const mouseY: number = window.innerHeight / 2;
 
       let scrollY: number = window.scrollY;
 
@@ -167,7 +167,7 @@ export default function Splash({ children }: SplashProps) {
       />
       {/* Slot for content between water (bg2) and black (bg1) — e.g. Menu */}
       {children != null ? (
-        <div className='absolute inset-0 z-[5] pointer-events-auto' aria-hidden={false}>
+        <div className='absolute inset-0 z-[5] pointer-events-auto'>
           {children}
         </div>
       ) : null}

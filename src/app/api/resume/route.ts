@@ -10,7 +10,7 @@ export async function GET() {
     const file = await readFile(filePath);
 
     // NextResponse expects a BodyInit; Buffer is fine at runtime, so cast for TypeScript.
-    return new NextResponse(file as any, {
+    return new NextResponse(file as unknown as BodyInit, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
