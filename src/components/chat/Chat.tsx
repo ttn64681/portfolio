@@ -84,7 +84,10 @@ export default function Chat() {
   };
 
   return (
-    <section id='chat' className='chat-section w-full flex justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'>
+    <section
+      id='chat'
+      className='chat-section w-full flex justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'
+    >
       <div className='chat-inner w-full max-w-[1200px]'>
         <div className='chat-outer relative rounded-3xl p-[8px]'>
           <div

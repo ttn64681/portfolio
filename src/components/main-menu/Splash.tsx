@@ -167,9 +167,7 @@ export default function Splash({ children }: SplashProps) {
       />
       {/* Slot for content between water (bg2) and black (bg1) — e.g. Menu */}
       {children != null ? (
-        <div className='absolute inset-0 z-[5] pointer-events-auto'>
-          {children}
-        </div>
+        <div className='absolute inset-0 z-[5] pointer-events-auto'>{children}</div>
       ) : null}
       <div
         id='bg1'

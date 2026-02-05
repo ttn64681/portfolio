@@ -2,46 +2,20 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
-import { portfolioDocuments } from '@/data/portfolio';
 import { projectsConfig } from '@/data/projects-config';
 import type { ProjectInfo } from '@/types/projects';
 
-/**
- * Extract projects for UI display. Uses projects-config.ts as the single source of truth
- * for all display data (title, bullets, techStack, date, role, award).
- * Only uses portfolio.ts to determine which projects exist (by checking for matching IDs).
- */
-function extractProjects(): ProjectInfo[] {
-  // Get all project base IDs from portfolio.ts (to know which projects exist)
-  const projectDocs = portfolioDocuments.filter((doc) => doc.id.startsWith('proj-'));
-  const existingProjectIds = new Set<string>();
-
-  projectDocs.forEach((doc) => {
-    const baseMatch = doc.id.match(/^proj-([^-]+)/);
-    if (baseMatch) {
-      existingProjectIds.add(baseMatch[1]);
-    }
-  });
-
-  // Build projects array directly from projects-config.ts
-  const projects: ProjectInfo[] = projectsConfig
-    .filter((config) => existingProjectIds.has(config.id)) // Only include projects that exist in portfolio.ts
-    .map((config) => ({
-      id: `proj-${config.id}`,
-      baseId: config.id,
-      title: config.title || `Project ${config.id}`,
-      summary: config.summary || config.bullets[0] || '', // Use summary if provided, otherwise fallback to first bullet
-      role: config.role,
-      award: config.award, // Keep undefined if not provided (don't force empty string)
-      techStack: config.techStack,
-      date: config.date,
-      bullets: config.bullets,
-    }));
-
-  return projects;
-}
-
-const projects = extractProjects();
+const projects: ProjectInfo[] = projectsConfig.map((config) => ({
+  id: `proj-${config.id}`,
+  baseId: config.id,
+  title: config.title || `Project ${config.id}`,
+  summary: config.summary || config.bullets[0] || '',
+  role: config.role,
+  award: config.award,
+  techStack: config.techStack,
+  date: config.date,
+  bullets: config.bullets,
+}));
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -155,7 +129,7 @@ export default function Projects() {
 
         {/* Mobile / tablet: interactive cards grid - no scrolling, lay flat */}
         <div className='projects-grid lg:hidden'>
-        {projects.map((project) => (
+          {projects.map((project) => (
             <ProjectCard
               key={project.id}
               title={project.title}
