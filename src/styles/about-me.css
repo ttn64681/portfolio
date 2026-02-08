@@ -128,8 +128,7 @@
   }
 
   .profile-container-btn:hover {
-    /* ;omear gradient top to bot */
-    background: linear-gradient(to bottom, #4dbdff, #366faf);
+    background-color: #4dbdff;
   }
 
   /* Dialogue panel: flat, menu-style border */

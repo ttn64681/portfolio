@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
+import { BREAKPOINTS } from '@/lib/breakpoints';
 import MenuOptions, { type MenuAction } from './MenuOptions';
 
 type MenuProps = {
@@ -40,30 +41,34 @@ export default function Menu({ onQuit }: MenuProps) {
   );
 
   useEffect(() => {
-    // Y Parallax and Scale Effect (based on Splash.tsx component)
+    const scaleMult = -0.0005;
+    const scrollYMult = 0.5;
+
     const handleScroll = () => {
-      const scaleMult: number = -0.0005;
-      const scrollYMult: number = 0.5;
+      const container = document.getElementById('menu-container');
+      if (!container) return;
 
-      const scrollY: number = window.scrollY;
-      const container: HTMLElement | null = document.getElementById('menu-container');
-
-      if (container) {
-        const scale = 1 + scrollY * scaleMult;
-        const translateY = scrollY * scrollYMult;
-
-        container.style.transform = `
-          translateY(-${translateY}px)
-          scale(${scale})
-        `;
+      const isMobile = window.innerWidth <= BREAKPOINTS.mobile;
+      if (isMobile) {
+        container.style.transform = 'translateY(0) scale(1)';
+        return;
       }
+
+      const scrollY = window.scrollY;
+      const scale = 1 + scrollY * scaleMult;
+      const translateY = scrollY * scrollYMult;
+      container.style.transform = `translateY(-${translateY}px) scale(${scale})`;
     };
 
+    const onResize = () => handleScroll();
+
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initialize position
+    window.addEventListener('resize', onResize);
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -117,7 +122,7 @@ export default function Menu({ onQuit }: MenuProps) {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v1.2.1',
+                  'Portfolio v1.3.1',
                   'Programmer',
                   'Software Engineer',
                   'Web Developer',

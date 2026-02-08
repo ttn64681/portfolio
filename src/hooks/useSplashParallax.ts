@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { BREAKPOINTS } from '@/lib/breakpoints';
 import type { LayerConfig } from '@/types/splash';
 
 const SMOOTHING_RATIO = 0.065;
@@ -35,7 +36,7 @@ export function useSplashParallax() {
       const screenCenterY = window.innerHeight / 2;
       const relX = (currentMouseX - screenCenterX) / screenCenterX;
       const relY = (currentMouseY - screenCenterY) / screenCenterY;
-      const isTabletOrSmaller = window.innerWidth <= 768;
+      const isTabletOrSmaller = window.innerWidth <= BREAKPOINTS.mobile;
 
       LAYERS.forEach(({ id, maxX, maxY, scale, scrollYMult }) => {
         const el = document.getElementById(id);
