@@ -3,6 +3,11 @@
 @import '../styles/about-me.css';
 @import '../styles/chat.css';
 @import '../styles/projects.css';
+@import '../styles/experience.css';
+@import '../styles/extras.css';
+@import '../styles/section-badges.css';
+@import '../styles/game-over.css';
+@import '../styles/footer.css';
 
 @theme inline {
   --color-blackground: var(--blackground);

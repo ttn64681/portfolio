@@ -1,0 +1,134 @@
+/* GAME OVER overlay: pixel / cyberpunk neon, animated */
+@layer components {
+  .game-over-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 5, 15, 0.97);
+    animation: game-over-fade-in 0.4s ease-out forwards;
+  }
+
+  @keyframes game-over-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .game-over-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 90vw;
+  }
+
+  .game-over-title {
+    font-family: var(--font-pixel-headline);
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow:
+      0 0 10px #4dbdff,
+      0 0 20px #4dbdff,
+      0 0 40px #4dbdff,
+      0 0 80px #0099ff;
+    animation: game-over-flicker 2s ease-in-out infinite;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  @keyframes game-over-flicker {
+    0%,
+    19%,
+    21%,
+    23%,
+    55%,
+    57%,
+    100% {
+      text-shadow:
+        0 0 10px #4dbdff,
+        0 0 20px #4dbdff,
+        0 0 40px #4dbdff,
+        0 0 80px #0099ff;
+      opacity: 1;
+    }
+    20%,
+    22%,
+    56% {
+      text-shadow: 0 0 2px #4dbdff;
+      opacity: 0.9;
+    }
+  }
+
+  .game-over-thanks {
+    font-family: var(--font-pixel-mono);
+    font-size: 1.1rem;
+    color: rgba(241, 248, 255, 0.9);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .game-over-try-label {
+    font-family: var(--font-pixel-retron);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(241, 248, 255, 0.8);
+    margin-bottom: 1rem;
+  }
+
+  .game-over-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .game-over-btn {
+    font-family: var(--font-pixel-headline);
+    font-size: 2.5rem;
+    font-weight: 800;
+    width: 4rem;
+    height: 4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #4dbdff;
+    background: transparent;
+    color: #4dbdff;
+    cursor: pointer;
+    transition:
+      background 0.2s ease-out,
+      color 0.2s ease-out,
+      box-shadow 0.2s ease-out,
+      transform 0.15s ease-out;
+    text-shadow: 0 0 12px rgba(77, 189, 255, 0.6);
+  }
+
+  .game-over-btn:hover {
+    background: rgba(77, 189, 255, 0.2);
+    box-shadow: 0 0 20px rgba(77, 189, 255, 0.5);
+    transform: scale(1.08);
+  }
+
+  .game-over-btn:active {
+    transform: scale(0.98);
+  }
+
+  .game-over-btn--y {
+    border-color: #3dd9a0;
+    color: #3dd9a0;
+    text-shadow: 0 0 12px rgba(61, 217, 160, 0.6);
+  }
+
+  .game-over-btn--y:hover {
+    background: rgba(61, 217, 160, 0.15);
+    box-shadow: 0 0 20px rgba(61, 217, 160, 0.4);
+  }
+}

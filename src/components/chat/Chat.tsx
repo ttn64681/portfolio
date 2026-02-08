@@ -1,93 +1,130 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePortfolioChat } from '@/hooks/usePortfolioChat';
-import Message from './Message';
-import ResumeViewer from './ResumeViewer';
+import { buildChatTimeline, type ErrorBlock } from '@/lib/chat-timeline';
+import { useBorderPulse } from '@/hooks/useBorderPulse';
+import { parseChatError } from '@/lib/chat-error';
+import { FUN_FACTS, pickRandom } from '@/data/chat-config';
+import type { ClientBlock } from '@/types/chat';
+import ResumePopup from './ResumePopup';
+import ChatTimeline from './ChatTimeline';
 
 /**
  * Chat box under the profile section. Uses RAG via /api/chat.
- * Renders only Message components; no inline message creation.
  */
 export default function Chat() {
   const { messages, input, setInput, handleSubmit, isLoading, isTyping, isTypingFadeOut, error } =
     usePortfolioChat();
+  const { isBorderPulsing, triggerPulse } = useBorderPulse();
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const hasScrolledRef = useRef(false);
 
-  // Simple intro: show assistant loading bubble briefly, then a static intro message.
   const [introPhase, setIntroPhase] = useState<'idle' | 'loading' | 'done'>('loading');
-  const [showResume, setShowResume] = useState(false);
-  const [resumeAfterMessageId, setResumeAfterMessageId] = useState<string | null>(null);
-  const [borderPulseKey, setBorderPulseKey] = useState(0);
-  const [isBorderPulsing, setIsBorderPulsing] = useState(false);
-  const borderPulseTimeoutRef = useRef<number | null>(null);
+  const [clientBlocks, setClientBlocks] = useState<ClientBlock[]>([]);
+  const [resumePopupOpen, setResumePopupOpen] = useState(false);
+  /** Error shown as a single block after an anchor (same rule as resume/fun_fact). Cleared on submit. */
+  const [errorBlock, setErrorBlock] = useState<ErrorBlock>(null);
+
+  useEffect(() => {
+    if (error) {
+      const afterMessageId = messages.length > 0 ? messages[messages.length - 1].id : 'intro';
+      setErrorBlock({
+        afterMessageId,
+        errorCode: parseChatError(error.message).errorCode,
+        message: error.message || '',
+      });
+    }
+  }, [error, messages]);
 
   useEffect(() => {
     if (introPhase !== 'loading') return;
-    const timer = window.setTimeout(() => {
-      setIntroPhase('done');
-    }, 400); // quick "thinking" moment before first message
+    const timer = window.setTimeout(() => setIntroPhase('done'), 400);
     return () => window.clearTimeout(timer);
   }, [introPhase]);
 
-  // Single border brighten pulse per keypress: brighten then return to normal.
-  useEffect(() => {
-    if (borderPulseKey === 0) return;
-    if (borderPulseTimeoutRef.current !== null) {
-      window.clearTimeout(borderPulseTimeoutRef.current);
-    }
-    setIsBorderPulsing(true);
-    borderPulseTimeoutRef.current = window.setTimeout(() => {
-      setIsBorderPulsing(false);
-      borderPulseTimeoutRef.current = null;
-    }, 50);
-  }, [borderPulseKey]);
-
-  const hasScrolledRef = useRef(false);
-
-  useEffect(() => {
-    // Avoid auto-scrolling the page on first load/refresh.
-    if (!hasScrolledRef.current) {
-      hasScrolledRef.current = true;
-      return;
-    }
-
-    const container = messagesContainerRef.current;
-    if (!container || messages.length === 0) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = container;
-    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
-
-    // Only auto-scroll when user is already near the bottom to avoid "jumping" the page.
-    if (distanceFromBottom < 80) {
-      container.scrollTop = scrollHeight;
-    }
-  }, [messages.length, isLoading]);
-
-  // Avoid auto-focusing the chat input on page load/refresh.
   useEffect(() => {
     inputRef.current?.blur();
   }, []);
 
-  const displayMessages = messages.filter((m) => m.role !== 'system');
-  const lastIsAssistant =
-    displayMessages.length > 0 && displayMessages[displayMessages.length - 1].role === 'assistant';
+  const lastMessageId = messages.length > 0 ? messages[messages.length - 1].id : 'intro';
 
-  const introText =
-    "Hey, I'm definitely the real Thai Nguyen. Let me prove it- Ask me about my portfolio, tech stack, or what I do for fun!";
+  const timeline = useMemo(
+    () =>
+      buildChatTimeline({
+        displayMessages: messages,
+        clientBlocks,
+        errorBlock,
+        isLoading,
+        isTyping,
+        isTypingFadeOut,
+      }),
+    [messages, clientBlocks, errorBlock, isLoading, isTyping, isTypingFadeOut],
+  );
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-    setBorderPulseKey((prev) => prev + 1);
-  };
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      setErrorBlock(null);
+      handleSubmit(e);
+    },
+    [handleSubmit],
+  );
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInput(e.target.value);
+      triggerPulse();
+    },
+    [setInput, triggerPulse],
+  );
+
+  const addResumeBlock = useCallback(() => {
+    setClientBlocks((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), type: 'resume_button', afterMessageId: lastMessageId },
+    ]);
+  }, [lastMessageId]);
+
+  const addFunFactBlock = useCallback(() => {
+    setClientBlocks((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        type: 'fun_fact',
+        afterMessageId: lastMessageId,
+        text: pickRandom(FUN_FACTS),
+      },
+    ]);
+  }, [lastMessageId]);
+
+  useEffect(() => {
+    if (!hasScrolledRef.current) {
+      hasScrolledRef.current = true;
+      return;
+    }
+    const container = messagesContainerRef.current;
+    if (!container || timeline.length === 0) return;
+    const { scrollTop, scrollHeight, clientHeight } = container;
+    if (scrollHeight - (scrollTop + clientHeight) < 80) {
+      container.scrollTop = scrollHeight;
+    }
+  }, [timeline.length, isLoading]);
 
   return (
     <section
       id='chat'
-      className='chat-section w-full flex justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'
+      className='chat-section w-full flex flex-col items-center justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'
     >
+      <header className='chat-section__header w-full max-w-[1200px] mb-4'>
+        <div className='section-badge-wrap'>
+          <h2 className='section-badge section-badge--chat'>Chat</h2>
+        </div>
+        <p className='chat-section__subtitle font-pixel-mono text-sm text-white-title/80 max-w-xl mt-1'>
+          RAG-powered Q&A about my work and experience.
+        </p>
+      </header>
       <div className='chat-inner w-full max-w-[1200px]'>
         <div className='chat-outer relative rounded-3xl p-[8px]'>
           <div
@@ -101,99 +138,32 @@ export default function Chat() {
               <div className='text-[10px] sm:text-xs tracking-[0.28em] uppercase text-white-title/70 font-pixel-mono'>
                 Portfolio Chatbox
               </div>
-              <div className='hidden sm:flex items-center gap-2 text-[10px] text-white-title/50 font-pixel-mono'>
-                {/* Status Indicator: Green for ready, Yellow for thinking, Red for error */}
+              <div className='hidden sm:flex items-center gap-2 text-[12px] text-white-title/50 font-pixel-mono'>
                 {isLoading ? (
-                  // yellow loading dot
-                  <span className='inline-block h-[6px] w-[6px] rounded-full bg-[#ffe44d] shadow-[0_0_12px_rgba(255,228,77,0.9)]' />
-                ) : error ? (
-                  // red error dot
-                  <span className='inline-block h-[6px] w-[6px] rounded-full bg-[#ff0000] shadow-[0_0_12px_rgba(255,0,0,0.9)]' />
+                  <span className='inline-block h-[7px] w-[7px] rounded-full -top-[1px] bg-[#ffe44d] shadow-[0_0_12px_rgba(255,228,77,0.9)]' />
+                ) : errorBlock ? (
+                  <span className='inline-block h-[7px] w-[7px] rounded-full -top-[1px] bg-[#ff0000] shadow-[0_0_12px_rgba(255,0,0,0.9)]' />
                 ) : (
-                  //  light-blue ready dot
-                  <span className='inline-block h-[6px] w-[6px] rounded-full bg-[#4dbdff] shadow-[0_0_12px_rgba(77,189,255,0.9)]' />
+                  <span className='inline-block h-[7px] w-[7px] rounded-full -mt-[.05rem] bg-[#4dbdff] shadow-[0_0_12px_rgba(77,189,255,0.9)]' />
                 )}
-                <span>{isLoading ? 'Thinking…' : error ? 'Error' : 'RAG'}</span>
+                <span>{isLoading ? 'Thinking…' : errorBlock ? 'Error' : 'RAG'}</span>
               </div>
             </div>
 
-            {/* Chat messages container */}
             <div className='relative min-h-[260px] h-[50vh] sm:h-[55vh] md:h-[60vh] max-h-[640px]'>
               <div className='chat-messages' ref={messagesContainerRef}>
-                {/* Always show intro message */}
-                {introPhase === 'loading' ? (
-                  <Message role='assistant' content='' isLoading />
-                ) : (
-                  <>
-                    <Message role='assistant' content={introText} />
-                    {/* Show resume after intro if requested before any messages */}
-                    {showResume && resumeAfterMessageId === 'intro' && (
-                      <>
-                        <Message
-                          role='assistant'
-                          content="Here's my current resume. You can scroll through it below."
-                        />
-                        <ResumeViewer />
-                      </>
-                    )}
-                  </>
-                )}
-
-                {/* User and assistant messages - render in order */}
-                {displayMessages.map((msg, index) => {
-                  const isLastMessage = index === displayMessages.length - 1;
-                  const shouldShowResumeAfterThis =
-                    showResume && resumeAfterMessageId === msg.id && msg.role === 'assistant';
-
-                  return (
-                    <div key={msg.id}>
-                      <Message
-                        role={msg.role as 'user' | 'assistant'}
-                        content={msg.content}
-                        isLoading={
-                          msg.role === 'assistant' && lastIsAssistant && isLoading && isLastMessage
-                        }
-                      />
-                      {/* Show resume right after the assistant message that triggered it */}
-                      {shouldShowResumeAfterThis && (
-                        <>
-                          <Message
-                            role='assistant'
-                            content="Here's my current resume. You can scroll through it below."
-                          />
-                          <ResumeViewer />
-                        </>
-                      )}
-                    </div>
-                  );
-                })}
-
-                {/* Assistant loading bubble (when responding to user) — above user typing bubble */}
-                {isLoading && displayMessages.length > 0 && lastIsAssistant === false && (
-                  <Message role='assistant' content='' isLoading />
-                )}
-
-                {/* User typing indicator: show as soon as user types (including on load); always after assistant content; fade out */}
-                {(isTyping || isTypingFadeOut) && (
-                  <div className={isTypingFadeOut ? 'chat-message-fade-out' : ''}>
-                    <Message role='user' content='' isLoading />
-                  </div>
-                )}
-                {/* Friendly, in-character error message instead of a red banner */}
-                {error && (
-                  <Message
-                    role='assistant'
-                    content={
-                      "Hmm, something on my server side glitched out (could be an unauthorized domain or a temporary hiccup). I can't answer this one, but you can try again in a bit or use the contact links above to reach me directly."
-                    }
-                  />
-                )}
+                <ChatTimeline
+                  timeline={timeline}
+                  introPhase={introPhase}
+                  isTypingFadeOut={isTypingFadeOut}
+                  onOpenResume={() => setResumePopupOpen(true)}
+                />
                 <div className='h-4' />
                 <div ref={endOfMessagesRef} />
               </div>
 
               <form
-                onSubmit={handleSubmit}
+                onSubmit={onSubmit}
                 className='chat-input-wrap absolute inset-x-0 bottom-0 px-1 pb-1'
               >
                 <div className='chat-input-inner relative flex items-center gap-3 rounded-2xl border border-[#4dbdff]/40 bg-[#031b31]/95 px-3 sm:px-4 py-2.5 sm:py-3 backdrop-blur-sm shadow-[0_20px_40px_rgba(0,0,0,0.9)] transition-all duration-200'>
@@ -208,21 +178,18 @@ export default function Chat() {
                   <div className='flex items-center gap-2'>
                     <button
                       type='button'
+                      className='inline-flex items-center justify-center rounded-full border border-[#4dbdff]/70 bg-[#021728] px-3 py-1.5 text-[11px] sm:text-xs font-pixel-mono text-[#4dbdff] shadow-[0_8px_20px_rgba(0,0,0,0.9)] hover:bg-[#032642] hover:border-[#7fd0ff] hover:scale-105 active:translate-y-px active:scale-100 transition-all'
+                      onClick={addFunFactBlock}
+                      aria-label='Fun fact'
+                    >
+                      Fun fact
+                    </button>
+                    <button
+                      type='button'
                       className='inline-flex items-center justify-center rounded-full border border-[#4dbdff]/70 bg-[#021728] px-3 py-1.5 text-[12px] sm:text-sm font-pixel-mono text-[#4dbdff] shadow-[0_8px_20px_rgba(0,0,0,0.9)] hover:bg-[#032642] hover:border-[#7fd0ff] hover:scale-105 active:translate-y-px active:scale-100 transition-all'
-                      onClick={() => {
-                        // Track the last assistant message ID so resume appears after it
-                        const lastMsg = displayMessages[displayMessages.length - 1];
-                        if (lastMsg && lastMsg.role === 'assistant') {
-                          setResumeAfterMessageId(lastMsg.id);
-                        } else {
-                          // If no messages yet, use a special marker
-                          setResumeAfterMessageId('intro');
-                        }
-                        setShowResume(true);
-                      }}
+                      onClick={addResumeBlock}
                       aria-label='View resume'
                     >
-                      {/* Document icon SVG */}
                       <svg
                         width='18'
                         height='18'
@@ -255,6 +222,7 @@ export default function Chat() {
           </div>
         </div>
       </div>
+      <ResumePopup isOpen={resumePopupOpen} onClose={() => setResumePopupOpen(false)} />
     </section>
   );
 }

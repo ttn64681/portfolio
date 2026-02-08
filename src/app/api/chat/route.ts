@@ -10,13 +10,18 @@ import {
 import { checkRateLimit } from '@/lib/rate-limit';
 import { searchSimilarDocuments } from '@/lib/vector-store';
 import { portfolioDocuments } from '@/data/portfolio';
+import type { ChatErrorCode } from '@/lib/chat-error';
 
-/** User-facing error message and HTTP status for known failure modes. */
-function errorResponse(message: string, status: number) {
-  return new Response(JSON.stringify({ error: message }), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  });
+/** Structured error body so the client can show code-specific, persona-themed copy. */
+function errorResponse(message: string, status: number, code?: ChatErrorCode, retryAfter?: number) {
+  const body: { error: string; code?: string; retryAfter?: number } = { error: message };
+  if (code) body.code = code;
+  if (retryAfter !== undefined) body.retryAfter = retryAfter;
+  const headers: HeadersInit = { 'Content-Type': 'application/json' };
+  if (retryAfter !== undefined && status === 429) {
+    headers['Retry-After'] = String(retryAfter);
+  }
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
 export const runtime = 'edge';
@@ -46,15 +51,25 @@ export async function POST(request: Request) {
 
   const contentLength = request.headers.get('content-length');
   if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
-    return new Response('Payload Too Large', { status: 413 });
+    return errorResponse('Payload too large', 413, 'payload_too_large');
+  }
+
+  let config: ReturnType<typeof getConfig>;
+  try {
+    config = getConfig();
+  } catch {
+    return errorResponse(
+      'Chat is not configured (missing env). Use the contact link.',
+      503,
+      'config_error',
+    );
   }
 
   if (process.env.NODE_ENV === 'production') {
-    const allowedDomain = getConfig().allowedDomain;
-    if (allowedDomain) {
+    if (config.allowedDomain) {
       const referer = request.headers.get('referer');
-      if (!referer || !referer.includes(allowedDomain)) {
-        return new Response('Unauthorized', { status: 401 });
+      if (!referer || !referer.includes(config.allowedDomain)) {
+        return errorResponse('Unauthorized', 401, 'unauthorized');
       }
     }
   }
@@ -62,15 +77,11 @@ export async function POST(request: Request) {
   const ip = getClientIp(request);
   const limitResult = await checkRateLimit(ip);
   if (!limitResult.success) {
-    return new Response(
-      JSON.stringify({ error: 'Too many requests', retryAfter: limitResult.retryAfter }),
-      {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(limitResult.retryAfter),
-        },
-      },
+    return errorResponse(
+      'Too many requests',
+      429,
+      'rate_limit',
+      limitResult.retryAfter,
     );
   }
 
@@ -83,23 +94,22 @@ export async function POST(request: Request) {
 
   const messages = body?.messages;
   if (!Array.isArray(messages) || messages.length > MAX_MESSAGES_FOR_LLM * 2 + 4) {
-    return new Response('Bad Request', { status: 400 });
+    return errorResponse('Bad request', 400, 'bad_request');
   }
 
   for (const msg of messages) {
     const content = extractContentFromParts(msg?.parts);
     if (content.length > MAX_MESSAGE_LENGTH) {
-      return new Response('Bad Request', { status: 400 });
+      return errorResponse('Message too long', 400, 'bad_request');
     }
   }
 
   const lastUser = [...messages].reverse().find((m) => m?.role === 'user');
   const queryText = lastUser ? extractContentFromParts(lastUser.parts) : '';
   if (!queryText.trim()) {
-    return new Response('Bad Request', { status: 400 });
+    return errorResponse('Bad request', 400, 'bad_request');
   }
 
-  const config = getConfig();
   const recentMessages = messages.slice(-MAX_MESSAGES_FOR_LLM);
 
   let contextBlock: string;
@@ -121,6 +131,7 @@ export async function POST(request: Request) {
     return errorResponse(
       "Search isn't available right now. Please try again in a moment, or use the contact link to reach out directly.",
       503,
+      'unavailable',
     );
   }
 
@@ -138,6 +149,7 @@ export async function POST(request: Request) {
     return errorResponse(
       "Chat isn't configured right now. Please use the contact link to get in touch.",
       503,
+      'unavailable',
     );
   }
 
@@ -154,6 +166,7 @@ export async function POST(request: Request) {
     return errorResponse(
       "Something went wrong while answering. Try rephrasing your question or use the contact link if it keeps happening.",
       502,
+      'server_error',
     );
   }
 }

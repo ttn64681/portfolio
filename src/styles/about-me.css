@@ -6,143 +6,192 @@
    - Layout (centering, width/height of the section) is handled via Tailwind on the JSX.
 */
 
-.profile-unit {
-  position: relative;
-  /* Base frame size */
-  width: 284px;
-  height: 328px;
-  transform: scale(1);
-  transform-origin: center;
-}
-
-/* Shared sprite styling for profile layers; pixel-perfect rendering */
-.profile-sprite-layer {
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  image-rendering: pixelated;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-}
-
-/* Tiles: 32 frames, spritesheet 9088x328 → 284px per frame. */
-@keyframes profile-tiles-anim {
-  from {
-    background-position-x: 0;
+  .profile-unit {
+    position: relative;
+    width: 284px;
+    height: 328px;
+    transform: scale(1);
+    transform-origin: center;
   }
-  to {
-    /* (32 - 1) * 284px = 8804px */
-    background-position-x: -8804px;
+
+  @media (min-width: 768px) {
+    .profile-unit {
+      transform: scale(1.1);
+    }
   }
-}
 
-.profile-tiles-layer {
-  background-image: url('/pixel/tiles.png');
-  /* Use the full spritesheet dimensions so aspect ratio is correct. */
-  background-size: 9088px 328px;
-  /* 32 frames at ~10 FPS (same as main-menu bg: 25f / 2.5s). */
-  animation: profile-tiles-anim 3.2s steps(31) infinite;
-}
-
-/* Portrait: 191 frames, spritesheet 54244x328 → 284px per frame. */
-@keyframes profile-portrait-anim {
-  from {
-    background-position-x: 0;
+  @media (min-width: 1024px) {
+    .profile-unit {
+      transform: scale(1.15);
+    }
   }
-  to {
-    /* (191 - 1) * 284px = 53960px */
-    background-position-x: -53960px;
+
+  /* Shared sprite styling for profile layers; pixel-perfect rendering */
+  .profile-sprite-layer {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
   }
-}
 
-/* Default idle: portrait WITH glasses */
-.profile-portrait-layer-glasses {
-  background-image: url('/pixel/portrait-glasses.png');
-  /* Full spritesheet dimensions; one frame is 284x328px. */
-  background-size: 54244px 328px;
-  /* 191 frames at ~10 FPS (same as main-menu bg). */
-  animation: profile-portrait-anim 19.1s steps(190) infinite;
-}
-
-/* Default idle: portrait WITHOUT glasses */
-.profile-portrait-layer-noglasses {
-  background-image: url('/pixel/portrait.png');
-  background-size: 54244px 328px;
-  animation: profile-portrait-anim 19.1s steps(190) infinite;
-}
-
-/* Talking: 48 frames, spritesheet 13632x328 → 284px per frame. */
-@keyframes profile-portrait-talking-anim {
-  from {
-    background-position-x: 0;
+  /* Tiles: 32 frames, WebP 2272x48; display 4x. */
+  @keyframes profile-tiles-anim {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: -8804px; /* (32 - 1) * 284 */
+    }
   }
-  to {
-    /* (48 - 1) * 284px = 13348px */
-    background-position-x: -13348px;
+
+  .profile-tiles-layer {
+    background-image: url('/pixel/webp/tiles.webp');
+    background-size: 9088px 192px;
+    animation: profile-tiles-anim 3.2s steps(31) infinite;
+    position: absolute;
+    height: 192px;
+    top: 130px;
   }
-}
 
-/* Talking: WITH glasses */
-.profile-portrait-talking-layer-glasses {
-  background-image: url('/pixel/portrait-talking-glasses.png');
-  background-size: 13632px 328px;
-  /* Play once; React state in Profile swaps back to idle when finished. */
-  animation: profile-portrait-talking-anim 4.8s steps(47);
-}
+  /* Portrait: 191 frames, 1x WebP 13561x73. Trim 1 bottom, 8 top. */
+  @keyframes profile-portrait-anim {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: -13490px; /* (191 - 1) * 71 */
+    }
+  }
 
-/* Talking: WITHOUT glasses */
-.profile-portrait-talking-layer-noglasses {
-  background-image: url('/pixel/portrait-talking.png');
-  background-size: 13632px 328px;
-  animation: profile-portrait-talking-anim 4.8s steps(47);
-}
+  /* Idle: base portrait (no glasses). Glasses added via overlay when showGlasses. */
+  .profile-portrait-layer-noglasses {
+    background-image: url('/pixel/webp/portrait.webp');
+    background-size: 13561px 73px;
+    animation: profile-portrait-anim 19.1s steps(190) infinite;
+    width: 71px;
+    height: 73px;
+    transform: translateX(-50%) scale(4);
+    transform-origin: top center;
+    left: 50%;
+    top: 30px;
+  }
 
-/* Dialogue panel container: responsive width with a reasonable minimum */
-.dialogue-panel-container {
-  width: 100%;
-  max-width: 720px;
-  min-width: 340px;
-}
+  /* Talking: 48 frames, 1x WebP 3408x73. */
+  @keyframes profile-portrait-talking-anim {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: -3337px; /* (48 - 1) * 71 */
+    }
+  }
 
-/* Enable smooth scrolling on Mac trackpads for dialogue panel and show scrollbar */
-.dialogue-panel-container > div > div {
-  -webkit-overflow-scrolling: touch;
-  /* Cross-browser scrollbar styling */
-  /* Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(77, 189, 255, 0.6) transparent;
-  /* Legacy Edge */
-  -ms-overflow-style: scrollbar;
-}
+  .profile-portrait-talking-layer-noglasses {
+    background-image: url('/pixel/webp/portrait-talking.webp');
+    background-size: 3408px 73px;
+    animation: profile-portrait-talking-anim 4.8s steps(47) infinite;
+    width: 71px;
+    height: 73px;
+    transform: translateX(-50%) scale(4);
+    transform-origin: top center;
+    left: 50%;
+    top: 30px;
+  }
 
-/* Chrome, Safari, Edge (Chromium), Opera - WebKit/Blink */
-.dialogue-panel-container > div > div::-webkit-scrollbar {
-  width: 8px;
-}
+  /* Glasses overlay: 11px strip, same animation as base. Positioned lower to align with eyes. */
+  .profile-portrait-glasses-overlay-idle {
+    background-image: url('/pixel/webp/portrait-glasses-only.webp');
+    background-size: 13561px 11px;
+    animation: profile-portrait-anim 19.1s steps(190) infinite;
+    position: absolute;
+    left: 50%;
+    top: 114px;
+    width: 71px;
+    height: 11px;
+    transform: translateX(-50%) scale(4);
+    transform-origin: top center;
+    pointer-events: none;
+  }
 
-.dialogue-panel-container > div > div::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 9999px;
-}
+  .profile-portrait-glasses-overlay-talking {
+    background-image: url('/pixel/webp/portrait-talking-glasses-only.webp');
+    background-size: 3408px 11px;
+    animation: profile-portrait-talking-anim 4.8s steps(47) infinite;
+    position: absolute;
+    left: 50%;
+    top: 114px;
+    width: 71px;
+    height: 11px;
+    transform: translateX(-50%) scale(4);
+    transform-origin: top center;
+    pointer-events: none;
+  }
 
-.dialogue-panel-container > div > div::-webkit-scrollbar-thumb {
-  background-color: rgba(77, 189, 255, 0.6);
-  border-radius: 9999px;
-  border: 1px solid transparent;
-  background-clip: padding-box;
-}
+  /* Dialogue panel: flat, menu-style border */
+  .dialogue-panel-box {
+    transition: border-color 0.2s ease-out;
+  }
 
-.dialogue-panel-container > div > div::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(77, 189, 255, 0.8);
-}
+  .dialogue-option-btn {
+    transition: background 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s ease-out;
+  }
 
-/* Firefox fallback - ensure scrollbar is visible */
-@-moz-document url-prefix() {
+  .dialogue-option-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .dialogue-option-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Dialogue panel container: responsive width. */
+  .dialogue-panel-container {
+    width: 100%;
+    max-width: 720px;
+    min-width: 340px;
+  }
+
+  /* Enable smooth scrolling on Mac trackpads for dialogue panel and show scrollbar */
   .dialogue-panel-container > div > div {
+    -webkit-overflow-scrolling: touch;
+    /* Cross-browser scrollbar styling */
+    /* Firefox */
     scrollbar-width: thin;
     scrollbar-color: rgba(77, 189, 255, 0.6) transparent;
+    /* Legacy Edge */
+    -ms-overflow-style: scrollbar;
   }
-}
+
+  /* Chrome, Safari, Edge (Chromium), Opera - WebKit/Blink */
+  .dialogue-panel-container > div > div::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dialogue-panel-container > div > div::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 9999px;
+  }
+
+  .dialogue-panel-container > div > div::-webkit-scrollbar-thumb {
+    background-color: rgba(77, 189, 255, 0.6);
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .dialogue-panel-container > div > div::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(77, 189, 255, 0.8);
+  }
+
+  /* Firefox fallback - ensure scrollbar is visible */
+  @-moz-document url-prefix() {
+    .dialogue-panel-container > div > div {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(77, 189, 255, 0.6) transparent;
+    }
+  }
 }

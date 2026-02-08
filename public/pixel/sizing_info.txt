@@ -1,13 +1,31 @@
-ANIMATED FRAME COUNT (for profile):
+SPLASH LAYERS (main menu, assets in pixel/webp/*.webp):
+- Layer 1 (black): 2 frames, 1100x153, slow rate (one frame every 6 frames of others).
+- Layers 2-5 (water, midland, buildings, sky): 25 frames each, 2200px per frame, 2.5s steps(24).
+
+==========================================
+
+OLD ANIMATED FRAME COUNT (for profile):
 - portrait and portrait-glasses have 191 frames, the spritesheet has dimensions 54244x328
 - tiles, which layed directly underneath portraits, have 32 frames, the spritesheet has dimensions 9088x328
 - portrait-talking and portrait-talking-glasses have 48 frames, but only play when dialogue button is clicked, the spritesheet has dimensions 13632x328
 
-MESSAGE SIZING (for chat):
-pfps = 92x92px
-bubble-me (tail-facing left) = 48x40
-bubble-you (tail-facing right) = 48x40
+==========================================
+
+NEW ANIMATED FRAME COUNT (for profile):
+- portrait and portrait-glasses have 191 frames, the spritesheet has dimensions 13561x73.
+- potrait-glasses-only also has 191 frames, but only plays when portrait is clicked and is overlayed over original. It is trimmed 21px off bottom, 41px off top, so spritesheet dimensions is 13561x11.
+
+- tiles, which layed directly underneath portraits, have 32 frames, but trimmed 1px off bottom, 33px off top, so the spritesheet has dimensions 2272x48
+
+- portrait-talking and portrait-talking-glasses have 48 frames, but only plays when dialogue button is clicked, the spritesheet has dimensions 3408x73.
+- portrait-talking-glasses-only also has 48 frames, but gets overlayed over portrait instead of replacing it with portrait-talking-glasses. It is trimmed 21px off bottom, 41px off top, so spritesheet dimensions is 3408x11.
+
+NEW MESSAGE SIZING (for chat):
+pfps = 23x23px
+bubble-me (tail-facing left) = 10x13
+bubble-you (tail-facing right) = 10x13
 To split the bubble into 9-slices for dynamic text-sizing:
-- top-left, top-right, bottom-left, and bottom-right corner is 12x12
-- left-middle and right-middle portion is also 12x28
-- top-middle and bottom-middle portion is 16x28
+- top-left, top-right, bottom-left, and bottom-right corner is 3x3
+- left-middle and right-middle portion is 3x7
+- top-middle and bottom-middle portion is 4x3
+

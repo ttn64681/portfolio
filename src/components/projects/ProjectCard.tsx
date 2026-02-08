@@ -34,7 +34,7 @@ export default function ProjectCard({
   if (mode === 'carousel') {
     return (
       <article
-        className={`project-card project-card--carousel ${isActive ? 'project-card--active' : ''}`}
+        className={`project-card project-card--carousel game-block ${isActive ? 'project-card--active' : ''}`}
         onClick={onSelect}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -81,7 +81,7 @@ export default function ProjectCard({
 
   // Flip mode (mobile / tablet)
   return (
-    <article className='project-card project-card--flip'>
+    <article className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}>
       <button
         type='button'
         className={`project-card__flip-inner ${isFlipped ? 'project-card__flip-inner--flipped' : ''}`}

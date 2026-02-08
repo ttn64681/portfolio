@@ -2,231 +2,246 @@
 @layer components {
   /* Onload Animation: Initial black fade */
   @keyframes black-bg-fade {
-  0% {
-    opacity: 1;
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
 
-.black-bg-fade {
-  animation: black-bg-fade 3s ease-in-out forwards;
-}
+  .black-bg-fade {
+    animation: black-bg-fade 3s ease-in-out forwards;
+  }
 
-/* ****************************** */
-/* MAIN-MENU
+  /* ****************************** */
+  /* MAIN-MENU
   /* ****************************** */
 
-/*
+  /*
     1. Start with the right side of the button hidden (clip-path: inset(0 100% 0 0))
     2. Show the button from the right side (clip-path: inset(0 0 0 0))
     3. Hide the button from the left side (clip-path: inset(0 0 0 100%))
   */
-@keyframes menu-button-white-bg {
-  0% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 1;
+  @keyframes menu-button-white-bg {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
+    50% {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(0 0 0 100%);
+      opacity: 1;
+    }
   }
-  50% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(0 0 0 100%);
-    opacity: 1;
-  }
-}
 
-.menu-button-white-bg {
-  opacity: 0;
-  animation: menu-button-white-bg 0.5s ease-in-out forwards;
-}
-
-@keyframes menu-button-white-bg-reverse {
-  0% {
-    clip-path: inset(0 0 0 100%);
-    opacity: 1;
+  .menu-button-white-bg {
+    opacity: 0;
+    animation: menu-button-white-bg 0.5s ease-in-out forwards;
   }
-  50% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 1;
-  }
-}
 
-.menu-button-white-bg-reverse {
-  opacity: 0;
-  animation: menu-button-white-bg-reverse 0.2s ease-out forwards;
-}
+  @keyframes menu-button-white-bg-reverse {
+    0% {
+      clip-path: inset(0 0 0 100%);
+      opacity: 1;
+    }
+    50% {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
+  }
 
-/*
+  .menu-button-white-bg-reverse {
+    opacity: 0;
+    animation: menu-button-white-bg-reverse 0.2s ease-out forwards;
+  }
+
+  /*
     Explanation (0 - 100%): (0 - 100% 0 - 0%)
     (0 - 100% 0 - 0%) -> this
     (0 - 100% 0 - 0%)
   */
-@keyframes menu-button {
-  0% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 1;
+  @keyframes menu-button {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
   }
-  100% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-}
 
-.menu-button {
-  opacity: 0;
-  animation: menu-button 0.25s ease-in-out forwards;
-}
-
-@keyframes menu-button-reverse {
-  0% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 1;
-  }
-}
-
-.menu-button-reverse {
-  opacity: 0;
-  animation: menu-button-reverse 0.25s ease-in-out forwards;
-}
-
-/* Echo effect animation for Press Start button */
-@keyframes echo {
-  0% {
+  .menu-button {
     opacity: 0;
+    animation: menu-button 0.25s ease-in-out forwards;
   }
-  5% {
-    opacity: 0.8;
-    transform: scale(1);
-    filter: blur(0px);
+
+  @keyframes menu-button-reverse {
+    0% {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
   }
-  100% {
+
+  .menu-button-reverse {
     opacity: 0;
-    transform: scale(1.5);
-    filter: blur(4px);
+    animation: menu-button-reverse 0.25s ease-in-out forwards;
   }
-}
 
-.animate-echo {
-  animation: echo 0.5s ease-in-out forwards;
-}
-
-/* Delayed echo animation for second wave */
-@keyframes echo-delayed {
-  34% {
-    opacity: 0;
+  /* Echo effect animation for Press Start button */
+  @keyframes echo {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.8;
+      transform: scale(1);
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+      filter: blur(4px);
+    }
   }
-  35% {
-    opacity: 0.8;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.5);
-    filter: blur(4px);
-  }
-}
 
-.animate-echo-delayed {
-  animation: echo-delayed 0.6s ease-in-out forwards;
-}
+  .animate-echo {
+    animation: echo 0.5s ease-in-out forwards;
+  }
 
-/*
-    Splash Background Sprite Animation: 25 frames, each 2200px wide (total 55000px)
-    - In total, we move sprite sheet left by 52800px [(25-1) * 2200px ]
-    - Animation uses steps(24) for 25 frames
-    - background-size is set to 55000px to fit the full sprite sheet
-    - image-rendering ensures pixel art stays crisp
+  /* Delayed echo animation for second wave */
+  @keyframes echo-delayed {
+    34% {
+      opacity: 0;
+    }
+    35% {
+      opacity: 0.8;
+      transform: scale(1);
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+      filter: blur(4px);
+    }
+  }
+
+  .animate-echo-delayed {
+    animation: echo-delayed 0.6s ease-in-out forwards;
+  }
+
+  /*
+    Splash Background Sprite Animation (WebP).
+    Layers 2-5: 25 frames, 2200px per frame (55000px total), 2.5s steps(24).
+    Layer 1 (black): 2 frames, 550px per frame (1100px total), plays once every 6 frames
+    of the others → 0.6s per frame, 1.2s full cycle, steps(1).
   */
 
-@keyframes sprite-anim {
-  from {
-    background-position-x: 0;
+  @keyframes sprite-anim {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: -52800px;
+    } /* (25-1) * 2200px = 52800px */
   }
-  to {
-    background-position-x: -52800px;
-  } /* (25-1) * 2200px = 52800px */
-}
 
-.animated-bg-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  overflow: visible;
-  pointer-events: none;
-  z-index: 0;
-}
+  /* bg1: 2 frames 1100x153 (one frame = 550px). background-size 4400px = 4x so one frame = 2200px. Step once per frame, ~1.2s each. */
+  @keyframes sprite-anim-bg1 {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: -4400px;
+    }
+  }
 
-.sprite-layer {
-  position: absolute;
-  left: 50%;
-  width: 2200px;
-  background-repeat: no-repeat;
-  background-size: 55000px 100%; /* full sprite sheet width */
-  animation: sprite-anim 2.5s steps(24) infinite;
-  image-rendering: pixelated;
+  .animated-bg-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-  image-rendering: optimizeSpeed;
-}
+  .sprite-layer {
+    position: absolute;
+    left: 50%;
+    width: 2200px;
+    background-repeat: no-repeat;
+    background-size: 55000px 100%;
+    animation: sprite-anim 2.5s steps(24) infinite;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    pointer-events: none;
+  }
 
-#bg1 {
-  z-index: 6;
-  background-image: url('/pixel/1 black.png');
-  height: 613px;
-  bottom: -140px;
-  transform: translateX(-50%) translateY(0px) scale(0.88); /* Front layer scale */
-  pointer-events: none;
-}
-#bg2 {
-  z-index: 4;
-  background-image: url('/pixel/2 water.png');
-  height: 630px;
-  bottom: -100px;
-  transform: translateX(-50%) translateY(0px) scale(0.89); /* Water layer scale */
-  pointer-events: none; /* Allow clicks to pass through */
-}
-#bg3 {
-  z-index: 3;
-  background-image: url('/pixel/3 midland.png');
-  height: 444px;
-  bottom: 460px; /* height of water layer */
-  transform: translateX(-50%) translateY(0px) scale(0.9); /* Midland layer scale */
-  pointer-events: none; /* Allow clicks to pass through */
-}
-#bg4 {
-  z-index: 2;
-  background-image: url('/pixel/4 buildings.png');
-  height: 306px;
-  bottom: 500px;
-  transform: translateX(-50%) translateY(0px) scale(0.91); /* Buildings layer scale */
-  pointer-events: none; /* Allow clicks to pass through */
-}
-#bg5 {
-  z-index: 1;
-  background-image: url('/pixel/5 sky.png');
-  height: 640px;
-  top: -43px;
-  transform: translateX(-50%) translateY(0px) scale(0.92); /* Sky layer scale */
-  pointer-events: none; /* Allow clicks to pass through */
-}
+  /* bg1: 2 frames 1100x153 (one frame 550px). background-size 4400x612 = 4x scale so one frame = 2200px. */
+  .sprite-layer-bg1 {
+    position: absolute;
+    left: 50%;
+    width: 2200px;
+    height: 612px;
+    bottom: -140px;
+    z-index: 6;
+    background-image: url('/pixel/webp/1-black.webp');
+    background-repeat: no-repeat;
+    background-size: 4400px 612px;
+    animation: sprite-anim-bg1 2.4s steps(2) infinite;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    pointer-events: none;
+  }
+
+  #bg2 {
+    z-index: 4;
+    background-image: url('/pixel/webp/2 water.webp');
+    height: 630px;
+    bottom: -100px;
+    transform: translateX(-50%) translateY(0px) scale(0.89);
+  }
+  #bg3 {
+    z-index: 3;
+    background-image: url('/pixel/webp/3 midland.webp');
+    height: 444px;
+    bottom: 460px;
+    transform: translateX(-50%) translateY(0px) scale(0.9);
+  }
+  #bg4 {
+    z-index: 2;
+    background-image: url('/pixel/webp/4 buildings.webp');
+    height: 306px;
+    bottom: 500px;
+    transform: translateX(-50%) translateY(0px) scale(0.91);
+  }
+  #bg5 {
+    z-index: 1;
+    background-image: url('/pixel/webp/5 sky.webp');
+    height: 640px;
+    top: -43px;
+    transform: translateX(-50%) translateY(0px) scale(0.92);
+  }
 }

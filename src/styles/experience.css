@@ -1,0 +1,171 @@
+/* Experience: full-width blocks, menu-inspired but distinct from project cards. */
+@layer components {
+  .experience-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .experience-section__inner {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .experience-section__header {
+    margin-bottom: 1.75rem;
+  }
+
+  .experience-section__title {
+    font-family: var(--font-pixel-headline);
+    font-size: 1.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white-title);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  }
+
+  .experience-section__subtitle {
+    margin-top: 0.4rem;
+    max-width: 40rem;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.9rem;
+    color: rgba(241, 248, 255, 0.8);
+  }
+
+  .experience-section__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* Full-width block: left accent + gradient, no card radius — band style */
+  .experience-block {
+    width: 100%;
+    position: relative;
+  }
+
+  .experience-block__inner {
+    width: 100%;
+    padding: 1.75rem 1.5rem;
+    background: #021728;
+    border: 1px solid rgba(77, 189, 255, 0.3);
+    border-left: 4px solid rgba(77, 189, 255, 0.4);
+    transition: border-color 0.2s ease-out, background 0.2s ease-out;
+  }
+
+  .experience-block:hover .experience-block__inner {
+    border-left-color: #4dbdff;
+    border-color: rgba(77, 189, 255, 0.5);
+    background: rgba(45, 77, 118, 0.4);
+  }
+
+  .experience-block__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .experience-block__title-wrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .experience-block__title {
+    font-family: var(--font-pixel-retron);
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--white-title);
+    line-height: 1.2;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .experience-block__role {
+    font-family: var(--font-pixel-retron);
+    font-size: 0.8rem;
+    color: rgba(241, 248, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+    font-weight: 600;
+  }
+
+  .experience-block__date {
+    font-family: var(--font-pixel-mono);
+    font-size: 0.7rem;
+    color: rgba(77, 189, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .experience-block__summary {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(241, 248, 255, 0.92);
+    margin-bottom: 1rem;
+    padding-left: 0.15rem;
+  }
+
+  .experience-block__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .experience-block__bullet {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(241, 248, 255, 0.9);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .experience-block__bullet::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 5px;
+    height: 5px;
+    background: #4dbdff;
+    opacity: 0.9;
+  }
+
+  .experience-block__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .experience-block__tag {
+    padding: 0.22rem 0.6rem;
+    border-radius: 0;
+    border: 2px solid rgba(77, 189, 255, 0.45);
+    background: rgba(3, 27, 49, 0.9);
+    font-family: var(--font-pixel-retron);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--white-title);
+    font-weight: 600;
+    transition: border-color 0.2s ease-out, background 0.2s ease-out;
+  }
+
+  .experience-block__inner:hover .experience-block__tag {
+    border-color: rgba(77, 189, 255, 0.7);
+    background: rgba(45, 77, 118, 0.5);
+  }
+}

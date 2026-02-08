@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import type { ChatMessageDisplay, ChatRole } from '@/types/chat';
+import { parseChatError } from '@/lib/chat-error';
 
 function getMessageContent(message: { parts?: unknown[] }): string {
   const parts = message.parts ?? [];
@@ -33,6 +34,11 @@ export function usePortfolioChat() {
     transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
 
+  const { errorCode, retryAfter } = useMemo(
+    () => parseChatError(error?.message),
+    [error?.message],
+  );
+
   const displayMessages: ChatMessageDisplay[] = useMemo(() => {
     return messages.map((m) => ({
       id: m.id,
@@ -43,11 +49,8 @@ export function usePortfolioChat() {
 
   const isLoading = status === 'streaming' || status === 'submitted';
 
-  // Track typing activity based on input changes.
-  // NOTE: This effect intentionally only depends on `input`. Including `isTyping`
-  // in the dependency array causes the typing bubble to re-trigger in a loop
-  // even when the user has stopped typing, which feels buggy.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Track typing activity based on input changes. Only depend on input so the
+  // typing indicator doesn't re-trigger in a loop when isTyping toggles.
   useEffect(() => {
     // Clear any existing timeouts
     if (typingTimeoutRef.current) {
@@ -83,6 +86,7 @@ export function usePortfolioChat() {
         setIsTypingFadeOut(false);
       }, 300);
     }, 800);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- omit isTyping to avoid typing bubble loop
   }, [input]);
 
   const handleSubmit = useCallback(
@@ -104,6 +108,8 @@ export function usePortfolioChat() {
     handleSubmit,
     status,
     error,
+    errorCode,
+    retryAfter,
     isLoading,
     isTyping: isTyping || isTypingFadeOut,
     isTypingFadeOut,

@@ -103,6 +103,18 @@
     margin-bottom: 0.25rem;
   }
 
+  @media (max-width: 768px) {
+    .chat-message__label {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .chat-message__label {
+      font-size: 0.7rem;
+    }
+  }
+
   .chat-message--user .chat-message__label {
     text-align: right;
   }
@@ -157,18 +169,18 @@
   }
 
   .chat-pfp--me {
-    background-image: url('/pixel/pfp-me.png');
+    background-image: url('/pixel/webp/pfp-me.webp');
   }
 
   .chat-pfp--you {
-    background-image: url('/pixel/pfp-you.png');
+    background-image: url('/pixel/webp/pfp-you.webp');
   }
 
-  /* Bubble: 9-slice from 48x40 base; corners 12x12, edges 12 and 16 per sizing_info.txt */
+  /* Bubble: 9-slice per sizing_info — corners 3x3, edges 3 and 4. Slice 3 so edges/fill show. */
   .chat-bubble {
     display: inline-block;
     max-width: 86%;
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-family:
       system-ui,
       -apple-system,
@@ -178,13 +190,27 @@
     font-size: 0.875rem;
     line-height: 1.4;
     color: var(--white-title);
-    border-width: 12px;
+    border-width: 10px 12px;
     border-style: solid;
     border-color: transparent;
-    border-image-source: url('/pixel/bubble-me.png');
-    border-image-slice: 12 fill;
+    border-image-source: url('/pixel/webp/bubble-me.webp');
+    border-image-slice: 3 fill;
+    border-image-width: 1;
+    border-image-repeat: stretch;
     box-sizing: border-box;
     word-wrap: break-word;
+  }
+
+  @media (max-width: 768px) {
+    .chat-bubble {
+      font-size: 0.8125rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .chat-bubble {
+      font-size: 0.75rem;
+    }
   }
 
   .chat-message--user .chat-bubble {
@@ -192,11 +218,11 @@
   }
 
   .chat-bubble--you {
-    border-image-source: url('/pixel/bubble-you.png');
+    border-image-source: url('/pixel/webp/bubble-you.webp');
   }
 
   .chat-bubble--me {
-    border-image-source: url('/pixel/bubble-me.png');
+    border-image-source: url('/pixel/webp/bubble-me.webp');
   }
 
   .chat-bubble__inner {

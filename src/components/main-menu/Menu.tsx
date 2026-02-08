@@ -2,7 +2,12 @@ import { useEffect, useState, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
 import MenuOptions, { type MenuAction } from './MenuOptions';
 
-export default function Menu() {
+type MenuProps = {
+  /** Called when user clicks Quit (so page can show Game Over overlay). */
+  onQuit?: () => void;
+};
+
+export default function Menu({ onQuit }: MenuProps) {
   const [echoActive, setEchoActive] = useState(false);
   const [startPressed, setStartPressed] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -20,15 +25,19 @@ export default function Menu() {
     setIsExiting(false);
   };
 
-  const handleMenuAction = useCallback((action: MenuAction) => {
-    if (action === 'quit') {
-      setIsExiting(true);
-      setStartPressed(false);
-      return;
-    }
-    const sectionId = action === 'experience' ? 'about-me' : action;
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+  const handleMenuAction = useCallback(
+    (action: MenuAction) => {
+      if (action === 'quit') {
+        setIsExiting(true);
+        setStartPressed(false);
+        onQuit?.();
+        return;
+      }
+      const sectionId = action === 'experience' ? 'about-me' : action;
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    },
+    [onQuit],
+  );
 
   useEffect(() => {
     // Y Parallax and Scale Effect (based on Splash.tsx component)
@@ -112,7 +121,6 @@ export default function Menu() {
                   'Programmer',
                   'Software Engineer',
                   'Web Developer',
-                  'Frontend Dev',
                   'Full Stack Dev',
                   'UI/UX Designer',
                   'Bad Artist',

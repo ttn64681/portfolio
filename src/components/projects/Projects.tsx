@@ -74,7 +74,9 @@ export default function Projects() {
     <section id='projects' className='projects-section'>
       <div className='projects-section__inner'>
         <header className='projects-section__header'>
-          <h2 className='projects-section__title'>Projects</h2>
+          <div className='section-badge-wrap'>
+            <h2 className='section-badge section-badge--projects'>Projects</h2>
+          </div>
           <p className='projects-section__subtitle'>
             A few of the worlds I&apos;ve been building lately — from RAG interfaces to game UIs and
             class projects gone too far.
