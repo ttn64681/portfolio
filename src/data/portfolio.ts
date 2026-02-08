@@ -142,7 +142,14 @@ export const portfolioDocuments: Document[] = [
     `CourseHub (Mar 2025 – May 2025): full-stack educational resource hub for UGA students. Thai was Team Lead and Full-Stack Developer. It automates study planning and resource sharing. Tech: Google Gemini AI and YouTube Data API v3 for auto-generated course success plans and study links. Data: 4 MongoDB schemas using Mongoose for post-course associations and resource management. Auth: NextAuth.js v5 with middleware-based route protection and JWT session strategies. Award: "Best Class Project" for reducing manual content creation time by ~90%.`,
     {
       title: 'CourseHub - Full Detail',
-      techStack: ['Next.js 14', 'MongoDB', 'Mongoose', 'NextAuth.js v5', 'Gemini AI', 'YouTube API'],
+      techStack: [
+        'Next.js 14',
+        'MongoDB',
+        'Mongoose',
+        'NextAuth.js v5',
+        'Gemini AI',
+        'YouTube API',
+      ],
       category: 'project',
     },
   ),
@@ -182,19 +189,19 @@ export const portfolioDocuments: Document[] = [
   ),
   toDocument(
     'skills-soft',
-    `Thai excels in leadership (Scrum Master, ACM Exec) and bridging the gap between technical and creative teams. He has a passion for meaningful design, strong client collaboration skills, and experience managing iterative feedback loops to refine UI/UX.`,
+    `Thai demonstrates strong leadership (Scrum Master, ACM Exec) and bridging the gap between technical and creative teams. He has a passion for meaningful design, strong client collaboration skills, a plan-based approach, and experience managing iterative feedback loops to refine UI/UX.`,
     { title: 'Soft Skills', category: 'skill' },
   ),
 
   // --- HOBBIES ---
   toDocument(
     'hobbies-creative',
-    `Thai enjoys creative outlets like drawing and sketching. He plays drums, guitar, and violin, and loves listening to music. These hobbies complement his work in pixel art and UI design, bringing an artistic sensibility to his technical projects.`,
+    `Thai enjoys creative outlets like drawing and sketching. He plays drums, guitar, and violin, and loves listening to music. These hobbies complement his work in game art and UI/UX design, bringing an artistic sensibility to his technical projects.`,
     { category: 'hobbies' },
   ),
   toDocument(
     'hobbies-media',
-    `Thai watches anime and reads manga, manhwa, and webtoons. He grew up on One Piece and still follows it. He's also known to doomscroll on YouTube, Discord, and Instagram—classic college student behavior.`,
+    `Thai watches anime and reads manga/manhwa/webtoons. He grew up on One Piece and still follows it. He's also known to doomscroll on YouTube, Discord, and Instagram.`,
     { category: 'hobbies' },
   ),
   toDocument(
@@ -204,12 +211,12 @@ export const portfolioDocuments: Document[] = [
   ),
   toDocument(
     'hobbies-sports',
-    `Thai plays volleyball and badminton when he can. Good for staying active and blowing off steam during busy semesters.`,
+    `Thai plays volleyball for PE and loves to throw some disc (ultimate frisbee). Good for staying active and blowing off steam during busy semesters.`,
     { category: 'hobbies' },
   ),
   toDocument(
     'hobbies-dev-play',
-    `Thai loves making games and building UI outside of coursework—it's both a hobby and a way to level up his skills. He also enjoys playing games in his downtime.`,
+    `Thai loves making games and building UI outside of coursework—it's both a hobby and a way to level up his skills. He also enjoys playing games and discovering new music friday in his free time.`,
     { category: 'hobbies' },
   ),
 

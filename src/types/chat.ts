@@ -42,9 +42,7 @@ export type ClientBlock =
 /**
  * Single row in the chat timeline (deterministic order).
  * - Order is fixed: intro → blocks (resume, fun_fact, error) per anchor → messages → loading → typing.
- * - Error rows include API errors and env/config errors: message is the raw string, errorCode comes
- *   from parseChatError (e.g. rate_limit, server_error, config_error). All are part of the same flow.
- * - To add new row types: add a new union variant with a `type` discriminant and handle it in
+ * - new row types: add a new union variant with a `type` discriminant and handle it in
  *   buildChatTimeline + ChatTimeline so the timeline stays deterministic.
  */
 export type ChatTimelineRow =

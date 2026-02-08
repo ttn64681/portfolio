@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePortfolioChat } from '@/hooks/usePortfolioChat';
 import { buildChatTimeline, type ErrorBlock } from '@/lib/chat-timeline';
 import { useBorderPulse } from '@/hooks/useBorderPulse';
+import { useMobile } from '@/hooks/useMobile';
 import { parseChatError } from '@/lib/chat-error';
 import { FUN_FACTS, pickRandom } from '@/data/chat-config';
 import type { ClientBlock } from '@/types/chat';
@@ -27,6 +28,8 @@ export default function Chat() {
   const [resumePopupOpen, setResumePopupOpen] = useState(false);
   /** Error shown as a single block after an anchor (same rule as resume/fun_fact). Cleared on submit. */
   const [errorBlock, setErrorBlock] = useState<ErrorBlock>(null);
+
+  const isMobile = useMobile();
 
   // On error, show error block
   useEffect(() => {
@@ -171,6 +174,7 @@ export default function Chat() {
                 onSubmit={onSubmit}
                 className='chat-input-wrap absolute inset-x-0 bottom-0 px-1 pb-1'
               >
+                {/* Chat input text field */}
                 <div className='chat-input-inner relative flex items-center gap-3 rounded-2xl border border-[#4dbdff]/40 hover:border-[#4dbdff]/60 bg-[#031b31]/95 px-3 sm:px-4 py-2.5 sm:py-3 backdrop-blur-sm shadow-[0_20px_40px_rgba(0,0,0,0.9)] transition-all duration-200'>
                   <input
                     type='text'
@@ -180,15 +184,21 @@ export default function Chat() {
                     className='flex-1 bg-transparent outline-none text-xs sm:text-sm text-white-title placeholder:text-white-title/40 font-pixel-mono'
                     ref={inputRef}
                   />
+                  {/* Chat input buttons */}
                   <div className='flex items-center gap-2'>
-                    <button
-                      type='button'
-                      className='inline-flex items-center justify-center rounded-full border border-[#4dbdff]/70 bg-[#021728] px-3 py-1.5 text-[11px] sm:text-xs font-pixel-mono text-[#4dbdff] shadow-[0_8px_20px_rgba(0,0,0,0.9)] hover:bg-[#032642] hover:border-[#7fd0ff] hover:scale-105 active:translate-y-px active:scale-100 transition-all'
-                      onClick={addFunFactBlock}
-                      aria-label='Fun fact'
-                    >
-                      Fun fact
-                    </button>
+                    {/* Fun fact button */}
+                    {!isMobile && (
+                      <button
+                        type='button'
+                        className='inline-flex items-center justify-center rounded-full border border-[#4dbdff]/70 bg-[#021728] px-3 py-1.5 text-[11px] sm:text-xs font-pixel-mono text-[#4dbdff] shadow-[0_8px_20px_rgba(0,0,0,0.9)] hover:bg-[#032642] hover:border-[#7fd0ff] hover:scale-105 active:translate-y-px active:scale-100 transition-all'
+                        onClick={addFunFactBlock}
+                        aria-label='Fun fact'
+                      >
+                        Fun fact
+                      </button>
+                    )}
+
+                    {/* Resume button */}
                     <button
                       type='button'
                       className='inline-flex items-center justify-center rounded-full border border-[#4dbdff]/70 bg-[#021728] px-3 py-1.5 text-[12px] sm:text-sm font-pixel-mono text-[#4dbdff] shadow-[0_8px_20px_rgba(0,0,0,0.9)] hover:bg-[#032642] hover:border-[#7fd0ff] hover:scale-105 active:translate-y-px active:scale-100 transition-all'

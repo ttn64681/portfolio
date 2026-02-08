@@ -10,8 +10,8 @@ Email: thainguy271@gmail.com
 Discord: @mogi
 Hometown: Woodstock, Georgia
 Location: Athens, Georgia
-LinkedIn: [linkedin.com/in/thai-tam-minh-nguyen](https://www.google.com/search?q=https://linkedin.com/in/thai-tam-minh-nguyen)
-GitHub: [github.com/ttn64681](https://github.com/ttn64681)
+LinkedIn: linkedin.com/in/thai-tam-minh-nguyen
+GitHub: github.com/ttn64681
 Open to relocation (Prefers Atlanta or major Georgia cities)
 
 === EDUCATION & ACADEMICS
@@ -26,12 +26,12 @@ Certifications: Arch Ready Certification (UGA)
 === TECHNICAL SKILLS — LANGUAGES & TOOLS
 
 Languages: Java, JavaScript, TypeScript, C, C++, Python, GDScript, SQL (PostgreSQL), Bash
-Frontend: React, Next.js (App Router), Tailwind CSS, Framer Motion, HTML5/CSS3
+Frontend: React 19, Next.js (App Router), Tailwind CSS, Framer Motion, HTML5/CSS3
 Backend: Spring Boot 3.5, Node.js, Next.js API Routes, Server Actions
 Database & Caching: PostgreSQL, MongoDB (Mongoose), Redis (Upstash), Caffeine Cache
 AI/ML: RAG (Retrieval-Augmented Generation), Google Gemini API, Vercel AI SDK, Vector Search, LLMs
-Design & Graphics: Aseprite (Animation/Pixel Art), Figma (Prototyping), VFX.js (GLSL Shaders), Blender, Photoshop, Garageband
-Tools: Git/GitHub, Docker, Postman, Unix/Linux, Jira, Miro
+Design & Graphics: Aseprite (Working Knowledge - Animation/Pixel Art), Figma (Working Knowledge - Prototyping), VFX.js (GLSL Shaders), Blender, Photoshop, Garageband
+Engineering Practices: Agile/Scrum, Jira, Docker, Postman, Unix/Linux, REST/GraphQL, Dependency Injection
 
 === PROFESSIONAL EXPERIENCE — FREELANCE (Fall 2025 – Present)
 
@@ -39,108 +39,96 @@ Role: Full-Stack Developer (Contract)
 Client: Holywatr (Rock Band Brand Platform)
 Project Value: $2,000
 Key Achievements:
-
-* Engineered a multi-page brand platform using vanilla JS/CSS, integrating Shopify Storefront API and customized GraphQL queries for merchandise management.
-* Navigated VFX.js shader constraints to implement a "digital-horror" aesthetic featuring chromatic aberration and CRT distortion.
-* Developed creative UI workarounds, including custom ASCII art and Aseprite assets, to fill visual space and maintain theme consistency.
-* Optimized performance using requestAnimationFrame and CSS clamp() for mobile-responsive interactivity at 60fps.
-* Dev Site: [https://playgroundlol.cfd](https://playgroundlol.cfd)
+- Engineered a multi-page brand platform using vanilla JS/CSS, integrating Shopify Storefront API and customized GraphQL queries for merchandise management.
+- Navigated VFX.js shader constraints to implement a "digital-horror" aesthetic featuring chromatic aberration and CRT distortion.
+- Developed creative UI workarounds, including custom ASCII art and Aseprite assets, to fill visual space and maintain theme consistency.
+- Optimized performance using requestAnimationFrame and CSS clamp() for mobile-responsive interactivity at 60fps.
+- Dev Site: https://playgroundlol.cfd
 
 === LEADERSHIP — UGA ACM (May 2025 – Present)
 
 Role: Executive Officer & CSIP Co-Chair (Computer Science Interview Prep)
 Impact:
-
-* Lead weekly technical workshops on Data Structures, Algorithms, and behavioral skills for 10+ students.
-* Direct UI/UX redesigns in Figma for club branding, mascot assets, and digital presence to modernize the organization.
-* Manage recruitment event logistics, resulting in increased student engagement.
+- Lead weekly technical workshops on Data Structures, Algorithms, and behavioral skills for 10+ students to improve career readiness.
+- Direct UI/UX redesigns in Figma for club branding, mascot assets, and digital presence to modernize the organization.
+- Manage recruitment event logistics, resulting in increased student engagement at university recruitment fairs.
 
 === MAJOR PROJECT — ACM CINEMA (E-BOOKING SYSTEM)
 
 Role: Scrum Master & Full-Stack Developer (Aug 2025 – Present)
-Architecture: Spring Boot 3.5 backend (PostgreSQL) with 80+ REST endpoints and 15 JPA entities.
+Architecture: Spring Boot 3.5 backend (PostgreSQL/JPA) with 80+ REST endpoints and 15 JPA entities.
 Technical Highlights:
-
-* Implemented stateless JWT authentication with Role-Based Access Control (RBAC) and BCrypt/AES encryption.
-* Applied Facade and Virtual Proxy design patterns to aggregate responses and lazy-load resources, reducing API payload by ~30-45%.
-* Integrated Caffeine caching and pagination to reduce database load and improve response times.
-* Led 5-person Scrum team via Jira, improving sprint velocity by ~10% through structured ticket management.
-* GitHub: [https://github.com/ttn64681/Absolute-Cinema-Movies](https://github.com/ttn64681/Absolute-Cinema-Movies)
-* Demo: [https://youtu.be/92fEVh5wNyI](https://youtu.be/92fEVh5wNyI)
+- Implemented stateless JWT authentication with Role-Based Access Control (RBAC) and BCrypt/AES encryption.
+- Applied Facade and Virtual Proxy design patterns to aggregate responses and lazy-load resources, reducing API payload by ~30-45%.
+- Integrated Caffeine caching (10-min TTL) and pagination to reduce database load and improve response times.
+- Led 5-person Scrum team via Jira, improving sprint velocity by ~10% through structured ticket management.
+- GitHub: https://github.com/ttn64681/Absolute-Cinema-Movies
+- Demo: https://youtu.be/92fEVh5wNyI
 
 === MAJOR PROJECT — RAG-POWERED AI PORTFOLIO
 
 Role: Full-Stack Developer & Artist (June 2025 – Present)
-Architecture: Next.js 15, Gemini API, Upstash Redis, Vercel AI SDK.
+Architecture: Next.js 15, Gemini 2.5 Flash, Upstash Redis, Vercel AI SDK.
 Technical Highlights:
-
-* Built a RAG chatbot grounded in portfolio-specific data using semantic vector search.
-* Managed infrastructure costs/latency via SHA-256 version hashing for re-embeddings and query embedding caching (24h TTL).
-* Implemented IP-based rate limiting and streaming responses via Vercel Edge Runtime.
-* Created hand-drawn pixel art assets in Aseprite and implemented smooth parallax motion using linear interpolation (lerp).
+- Built a RAG chatbot grounded in portfolio-specific data using semantic vector search over vector embeddings.
+- Managed infrastructure costs/latency via SHA-256 version hashing for re-embeddings and query embedding caching (24h TTL).
+- Implemented IP-based rate limiting and streaming responses via Vercel Edge Runtime.
+- Designed hand-drawn pixel art assets in Aseprite and implemented smooth parallax motion using linear interpolation (lerp).
 
 === MAJOR PROJECT — COURSEHUB (Awarded “Best Class Project”)
 
 Role: Team Lead & Full-Stack Developer (Mar – May 2025)
 Achievements:
-
-* Integrated Gemini AI and YouTube Data API to automate study plan generation, reducing manual creation time by ~90%.
-* Engineered 15+ RESTful endpoints and MongoDB schemas for secure resource sharing.
-* Implemented NextAuth.js v5 for secure user authentication and route protection.
-* Live App: [https://course-hub-git-finalpresentation-ttn64681s-projects.vercel.app/](https://course-hub-git-finalpresentation-ttn64681s-projects.vercel.app/)
-* GitHub: [https://github.com/ttn64681/Web-Dev-Group-Project](https://github.com/ttn64681/Web-Dev-Group-Project)
-* Demo: [https://www.loom.com/share/04e8e8049bb446f3b017975b1e82d01e?sid=6928a038-d539-422c-9f3f-5fc7bf634940](https://www.loom.com/share/04e8e8049bb446f3b017975b1e82d01e?sid=6928a038-d539-422c-9f3f-5fc7bf634940)
+- Integrated Gemini AI and YouTube Data API to automate study plan generation, reducing manual creation time by ~90%.
+- Engineered 15+ RESTful endpoints and MongoDB schemas using Mongoose for complex post-course associations.
+- Implemented NextAuth.js v5 for secure user authentication and middleware-based route protection.
+- Live App: https://course-hub-git-finalpresentation-ttn64681s-projects.vercel.app/
+- GitHub: https://github.com/ttn64681/Web-Dev-Group-Project
+- Demo: https://www.loom.com/share/04e8e8049bb446f3b017975b1e82d01e?sid=6928a038-d539-422c-9f3f-5fc7bf634940
 
 === ADDITIONAL EXPERIENCE — GAME DEVELOPMENT & CLUBS
 
 Tower Ascent (UGA Game Builders, Fall 2025 – Present):
-
-* Programmer & Artist (Godot 4, Aseprite).
-* Engineered modular trading, inventory (Dependency Injection), and keyframe-driven UI systems.
-* Play: [https://kuuoi.itch.io/tower-ascent](https://www.google.com/search?q=https://kuuoi.itch.io/tower-ascent)
+- Programmer & Artist (Godot 4, Aseprite).
+- Engineered modular trading, inventory (Dependency Injection), and keyframe-driven UI systems.
+- Play: https://kuuoi.itch.io/tower-ascent
 
 Bulldog Planner (UGA DevDogs/GDG, Aug 2024 – May 2025):
-
-* Frontend Developer (React, TypeScript, Tailwind CSS).
-* Developed responsive UI and filter logic for student schedule optimization.
+- Frontend Developer (React, TypeScript, Tailwind CSS).
+- Developed responsive UI and filter logic for student schedule optimization.
 
 Bunker Jumper (Spring 2025):
-
-* UI Programmer (Godot). Programmed UI elements and animations.
-* GitHub: [https://github.com/Saidan816/bunker-jumper](https://github.com/Saidan816/bunker-jumper)
-* Play: [https://saidan-games.itch.io/bunker-jumper](https://saidan-games.itch.io/bunker-jumper)
+- UI Programmer (Godot). Programmed UI elements and animations.
+- GitHub: https://github.com/Saidan816/bunker-jumper
+- Play: https://saidan-games.itch.io/bunker-jumper
 
 Dragon of the East (Boss Rush Jam 2025):
-
-* Music Composer (Garageband). Game developed in Godot.
-* Play: [https://origin-nori.itch.io/dragon-of-the-east](https://origin-nori.itch.io/dragon-of-the-east)
+- Music Composer (Garageband). Game developed in Godot.
+- Play: https://origin-nori.itch.io/dragon-of-the-east
 
 Code for a Cause Charity Jam — Job Description (Feb – Mar 2025):
-
-* 3D Modeler & UI Designer (Unity, Blender, Photoshop). Placed 41st/278.
-* Play: [https://kuuoi.itch.io/jobdescription](https://kuuoi.itch.io/jobdescription)
-* Trailer: [https://youtu.be/ccdSNrpOq_0?si=yLnxwGjgz2RLktqS](https://youtu.be/ccdSNrpOq_0?si=yLnxwGjgz2RLktqS)
+- 3D Modeler & UI Designer (Unity, Blender, Photoshop). Placed 41st/278.
+- Play: https://kuuoi.itch.io/jobdescription
+- Trailer: https://youtu.be/ccdSNrpOq_0?si=yLnxwGjgz2RLktqS
 
 A Forlorn Soul (Feb – Mar 2025):
+- Art/Animation (Aseprite), Music/SFX (Garageband), and Level Design (Unity). Placed 10th in Georgia.
 
-* Art/Animation (Aseprite), Music/SFX (Garageband), and Level Design (Unity). Placed 10th in Georgia.
+Laundry Day (UGA Game Builders, Fall 2024): 
+- Music and SFX composition for a visual novel game.
 
-Additional Gamebuilders Work:
-
-* Laundry Day (Fall 2024): Music/SFX composition.
-* To See (Spring 2024): Music composition for 3D storytelling game.
+To See (UGA Game Builders, Spring 2024): 
+- Music composition for a 3D storytelling game.
 
 === MISCELLANEOUS PROJECTS
 
 Anime Info Translator (Personal Project):
-
-* JavaFX GUI-based application using Jikan API and Google Translate API to fetch and translate anime data.
+- GUI-based application using Jikan API and Google Translate API to fetch and translate anime data.
 
 Multithreaded Diagonal-Sum Calculator (Nov – Dec 2024):
-
-* High-performance C application using POSIX threads to compute matrix sums.
-* Achieved 3.2x speedup on 12.7M elements through thread synchronization and dynamic memory management.
+- High-performance C application using POSIX threads to compute matrix sums.
+- Achieved 3.2x speedup on 12.7M elements through thread synchronization and dynamic memory management.
 
 === DESIGN PHILOSOPHY & CAREER GOALS
 
-Thai is seeking roles in Software Engineering, AI Infrastructure, Cloud Engineering, and Full-Stack Development. He follows a "full-cycle" engineering philosophy, believing that high-performance backend systems must be paired with intuitive, high-fidelity UI/UX. He leverages his background in digital art (Aseprite, Blender) to create unique, polish-focused user experiences that distinguish his software from standard enterprise solutions.
+Thai is seeking roles in Software Engineering, AI Infrastructure, Cloud Engineering, and Full-Stack Development. He follows a "full-cycle" engineering philosophy, believing that high-performance backend systems must be paired with intuitive, high-fidelity UI/UX. He leverages his background in digital art (Aseprite, Blender, Garageband) to create unique, polish-focused user experiences.

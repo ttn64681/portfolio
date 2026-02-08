@@ -34,7 +34,7 @@ export default function Menu({ onQuit }: MenuProps) {
         onQuit?.();
         return;
       }
-      const sectionId = action === 'experience' ? 'about-me' : action;
+      const sectionId = action;
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     },
     [onQuit],
@@ -122,7 +122,7 @@ export default function Menu({ onQuit }: MenuProps) {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v1.3.1',
+                  'Portfolio v1.3.2',
                   'Programmer',
                   'Software Engineer',
                   'Web Developer',

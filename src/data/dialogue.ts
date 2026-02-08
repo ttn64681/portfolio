@@ -13,7 +13,7 @@ export const DIALOGUE_OPTIONS: DialogueOption[] = [
   {
     id: 'intro',
     label: '> Who are you?',
-    text: "I'm Thai Nguyen — a Woodstock, GA native and senior CS student at UGA (graduating May 2026). I'm a full-cycle engineer who bridges complex backend systems with intentional UI/UX and digital art. I also serve as an Executive Officer and CSIP Co-Chair for UGA ACM.",
+    text: "I'm Thai Nguyen — a Woodstock, GA native and senior CS student at UGA (graduating May 2026). I'm a Software Developer who bridges complex backend systems with intentional UI/UX and digital art. I also serve as an Executive Officer and CSIP Co-Chair for UGA ACM.",
   },
   {
     id: 'education',
@@ -23,7 +23,7 @@ export const DIALOGUE_OPTIONS: DialogueOption[] = [
   {
     id: 'experience',
     label: '> Experience?',
-    text: "I've done freelance full-stack work (for Holywatr), led ACM Cinema as Scrum Master, and built CourseHub, which won Best Class Project. I also build game jam titles, help run UGA ACM workshops, and built this RAG-powered AI portfolio. Ask the chatbot below for the full rundown!",
+    text: "I've done freelance full-stack work (for Holywatr), led ACM Cinema as Scrum Master, and built CourseHub, which won Best Class Project. I also build games, help run UGA ACM workshops, and built this RAG-powered AI portfolio. Ask my twin below for the full rundown!",
   },
 ];
 

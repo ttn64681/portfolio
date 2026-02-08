@@ -1,7 +1,7 @@
 /**
- * Build the ordered chat timeline (intro → messages + client blocks → loading → typing).
+ * Ordered chat timeline list (intro → messages + client blocks → loading → typing).
  * All blocks (resume, fun_fact, error) follow the same rule: they are appended after a given
- * anchor (intro or a message id). One sequential pass; no special "sticky" error state.
+ * anchor (intro or a message id).
  */
 
 import type { ChatMessageDisplay, ChatTimelineRow, ClientBlock } from '@/types/chat';
@@ -52,8 +52,7 @@ export function buildChatTimeline({
       id: msg.id,
       role: msg.role,
       content: msg.content,
-      isLoading:
-        msg.role === 'assistant' && lastIsAssistant && isLoading && isLast,
+      isLoading: msg.role === 'assistant' && lastIsAssistant && isLoading && isLast,
     });
     if (errorBlock?.afterMessageId === msg.id) {
       rows.push({ type: 'error', errorCode: errorBlock.errorCode, message: errorBlock.message });
@@ -68,7 +67,8 @@ export function buildChatTimeline({
 
   if (
     isLoading &&
-    (displayMessages.length === 0 || displayMessages[displayMessages.length - 1].role !== 'assistant')
+    (displayMessages.length === 0 ||
+      displayMessages[displayMessages.length - 1].role !== 'assistant')
   ) {
     rows.push({ type: 'loading' });
   }

@@ -1,8 +1,3 @@
-/**
- * Layout breakpoints (px). Use for inline checks (e.g. window.innerWidth <= BREAKPOINTS.mobile)
- * or in CSS @media (max-width: 768px). Single source of truth for mobile/tablet cutoffs.
- */
-
 export const BREAKPOINTS = {
   /** max-width for mobile (phones) */
   mobile: 768,
