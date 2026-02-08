@@ -5,11 +5,11 @@ import PixelBubble from './PixelBubble';
 
 const ASSISTANT_LABEL = 'Thai Nguyen';
 
-type ResumeButtonMessageProps = {
+type ResumeButtonProps = {
   onOpenResume: () => void;
 };
 
-export default function ResumeButtonMessage({ onOpenResume }: ResumeButtonMessageProps) {
+export default function ResumeButton({ onOpenResume }: ResumeButtonProps) {
   return (
     <div className='chat-message chat-message--assistant'>
       <PixelPFP variant='me' />

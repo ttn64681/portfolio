@@ -162,8 +162,8 @@
 
   @media (max-width: 768px) {
     .chat-pfp {
-      width: 64px;
-      height: 64px;
+      width: 56px;
+      height: 56px;
       flex: 0 0 64px;
     }
   }
@@ -176,7 +176,7 @@
     background-image: url('/pixel/webp/pfp-you.webp');
   }
 
-  /* Bubble: 9-slice per sizing_info — corners 3x3, edges 3 and 4. Slice 3 so edges/fill show. */
+  /* Bubble: 9-slice per sizing_info — corners 3x3. Crisp pixel corners. */
   .chat-bubble {
     display: inline-block;
     max-width: 86%;
@@ -199,17 +199,25 @@
     border-image-repeat: stretch;
     box-sizing: border-box;
     word-wrap: break-word;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   @media (max-width: 768px) {
     .chat-bubble {
       font-size: 0.8125rem;
+      padding: 8px 10px;
     }
   }
 
   @media (max-width: 640px) {
     .chat-bubble {
       font-size: 0.75rem;
+      padding: 6px 8px;
     }
   }
 
@@ -247,6 +255,7 @@
     justify-content: center;
   }
 
+  /* Loading dots: inline-flex, center-aligned, gap between dots */
   .chat-loading-dots {
     display: inline-flex;
     align-items: center;
@@ -254,6 +263,7 @@
     gap: 0.35rem;
   }
 
+  /* Loading dot: 10px diameter, rounded, no animation */
   .chat-loading-dot {
     width: 10px;
     height: 10px;
@@ -310,7 +320,7 @@
   }
 
   .chat-input-inner:hover {
-    border-color: rgba(77, 189, 255, 0.7);
+    border-color: rgba(146, 215, 255, 0.7);
   }
 
   .chat-input-inner input:focus {
@@ -354,10 +364,12 @@
 
   @keyframes chat-fade-out {
     from {
+      transform: translateY(0);
       opacity: 1;
     }
     to {
       opacity: 0;
+      transform: translateX(10px);
     }
   }
 }

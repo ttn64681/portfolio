@@ -31,9 +31,9 @@ export default function DialoguePanel({
   const typewriterKey = activeOption ? activeOption.id : `idle-${idleIndex}`;
 
   return (
-    <div className='w-full max-w-[720px] min-w-[340px] mt-1 md:mt-8 lg:mt-0 dialogue-panel-container'>
+    <div className='w-full mt-8 lg:mt-0 dialogue-panel-container'>
       {/* Text + options container with fixed width and controlled height */}
-      <div className='dialogue-panel-box w-full h-[220px] lg:ml-2 md:h-[260px] bg-[#021728] border-[8px] border-[#466C8C] transition-all duration-300 hover:border-[#4dbdff]'>
+      <div className='dialogue-panel-box w-full lg:ml-2 h-[260px] bg-[#021728] border-1 p-[.25rem] md:p-[.35rem] lg:p-[.5rem] border-[#466C8C] transition-all duration-300 hover:border-[#4dbdff]'>
         <div className='h-full overflow-y-auto px-4 py-2 flex flex-col'>
           {/* Dialogue text area; fixed min-height so the box doesn't jump during typewriter */}
           <div className='font-pixelify text-white-title lg:text-lg text-md leading-snug min-h-auto pb-3 flex-1'>
@@ -62,7 +62,7 @@ export default function DialoguePanel({
                 <button
                   key={option.id}
                   type='button'
-                  className='dialogue-option-btn hover:cursor-pointer text-left px-3 py-1.5 rounded-sm text-white-title text-sm md:text-base font-pixel-mono border-2 border-[#466C8C] bg-black/40 hover:border-[#4dbdff] hover:text-[#4dbdff] hover:bg-[#032642]/50 transition-all duration-200 active:scale-[0.98]'
+                  className='dialogue-option-btn hover:cursor-pointer text-left px-3 py-1.5 text-white-title text-sm md:text-base font-pixel-mono border-1 border-[#466C8C] bg-black/40 hover:border-[#4dbdff] hover:text-[#4dbdff] hover:bg-[#032642]/50 transition-all duration-100 active:scale-[0.98]'
                   onClick={() => {
                     onInterrupt?.();
                     setActiveId(option.id);
@@ -76,7 +76,7 @@ export default function DialoguePanel({
           ) : (
             <button
               type='button'
-              className='dialogue-back-btn hover:cursor-pointer mt-1 self-start px-3 py-1 text-sm md:text-base font-pixel-mono text-[#4dbdff] hover:text-white-title hover:underline transition-all duration-200 active:scale-[0.98]'
+              className='dialogue-back-btn hover:cursor-pointer mt-1 self-start px-3 py-1 text-sm md:text-base font-pixel-mono text-[#4dbdff] hover:text-white-title hover:underline transition-all duration-100 active:scale-[0.98]'
               onClick={() => {
                 onInterrupt?.();
                 setActiveId(null);

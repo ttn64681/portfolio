@@ -22,80 +22,84 @@
 
   /* Meet Me: smaller, lighter — left-aligned label feel */
   .section-badge--profile {
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     padding-bottom: 0.2rem;
-    border-bottom: 2px solid rgba(77, 189, 255, 0.4);
-    transition: border-bottom-color 0.3 ease-in-out;
+    border-bottom: 2px solid rgba(77, 189, 255, 0.7);
+    transition: all 0.3 ease-in-out;
   }
 
   .section-badge--profile:hover {
-    border-bottom-color: #4dbdff;
+    border-bottom: 2px solid #4dbdff;
   }
 
-  /* Projects: standard weight, slightly larger */
   .section-badge--projects {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 0.16em;
+    transition:
+      color 0.2s ease-out,
+      text-shadow 0.2s ease-out,
+      padding 0.2s ease-out,
+      border 0.3s ease-in-out;
   }
 
-  /* Experience: medium size, normal weight — different rhythm */
   .section-badge--experience {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    margin-left: 0.15rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    transition:
+      color 0.2s ease-out,
+      text-shadow 0.2s ease-out,
+      padding 0.2s ease-out,
+      border 0.3s ease-in-out;
   }
 
-  /* Extras: smaller, tight spacing */
   .section-badge--extras {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
+    transition:
+      color 0.2s ease-out,
+      text-shadow 0.2s ease-out,
+      padding 0.2s ease-out,
+      border 0.3s ease-in-out;
   }
 
-  /* Chat: terminal/console vibe — monospace hint */
   .section-badge--chat {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
-  }
-
-  .section-badge--chat::after {
-    content: '>';
-    margin-left: 0.15em;
-    opacity: 0.7;
-  }
-
-  /* Subtle fun differences: profile gets a pixel dot, projects a double-underline on hover, experience a slight glow */
-  .section-badge--profile::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: #4dbdff;
-    margin-right: 0.4em;
-    vertical-align: 0.25em;
+    letter-spacing: 0.16em;
+    transition:
+      color 0.2s ease-out,
+      text-shadow 0.2s ease-out,
+      padding 0.2s ease-out,
+      border 0.3s ease-in-out;
   }
 
   .section-badge--projects:hover {
     text-shadow: 0 0 12px rgba(77, 189, 255, 0.5);
-  }
-
-  .section-badge--experience {
-    border-left: 2px solid transparent;
-    padding-left: 0.5rem;
-    transition: border-left-color 0.2s ease-out;
+    border-left: 3px solid rgba(77, 189, 255, 0.6);
+    padding-left: 1rem;
   }
 
   .section-badge--experience:hover {
-    border-left-color: rgba(77, 189, 255, 0.6);
+    text-shadow: 0 0 12px rgba(77, 189, 255, 0.5);
+    border-left: 3px solid rgba(77, 189, 255, 0.6);
+    padding-left: 1rem;
+  }
+
+  .section-badge--chat:hover {
+    text-shadow: 0 0 12px rgba(77, 189, 255, 0.5);
+    border-left: 3px solid rgba(77, 189, 255, 0.6);
+    padding-left: 1rem;
   }
 
   .section-badge--extras:hover {
-    letter-spacing: 0.14em;
+    text-shadow: 0 0 12px rgba(77, 189, 255, 0.5);
+    border-left: 3px solid rgba(77, 189, 255, 0.6);
+    padding-left: 1rem;
   }
 
   /* Subtle interactive lift for cards/blocks — match menu hover, not chunky 3D */

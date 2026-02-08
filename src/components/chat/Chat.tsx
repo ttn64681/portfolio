@@ -28,6 +28,7 @@ export default function Chat() {
   /** Error shown as a single block after an anchor (same rule as resume/fun_fact). Cleared on submit. */
   const [errorBlock, setErrorBlock] = useState<ErrorBlock>(null);
 
+  // On error, show error block
   useEffect(() => {
     if (error) {
       const afterMessageId = messages.length > 0 ? messages[messages.length - 1].id : 'intro';
@@ -39,9 +40,10 @@ export default function Chat() {
     }
   }, [error, messages]);
 
+  // Intro bubble loading
   useEffect(() => {
     if (introPhase !== 'loading') return;
-    const timer = window.setTimeout(() => setIntroPhase('done'), 400);
+    const timer = window.setTimeout(() => setIntroPhase('done'), 600);
     return () => window.clearTimeout(timer);
   }, [introPhase]);
 
@@ -72,6 +74,7 @@ export default function Chat() {
     [handleSubmit],
   );
 
+  // On type, trigger border color pulse
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setInput(e.target.value);
@@ -99,6 +102,7 @@ export default function Chat() {
     ]);
   }, [lastMessageId]);
 
+  // Scroll to bottom of chat when new messages are added
   useEffect(() => {
     if (!hasScrolledRef.current) {
       hasScrolledRef.current = true;
@@ -115,9 +119,9 @@ export default function Chat() {
   return (
     <section
       id='chat'
-      className='chat-section w-full flex flex-col items-center justify-center px-1 sm:px-3 md:px-6 md:mt-4 lg:px-10 mb-20'
+      className='chat-section w-full flex flex-col items-center justify-center md:mt-4 mb-20'
     >
-      <header className='chat-section__header w-full max-w-[1200px] mb-4'>
+      <header className='chat-section__header w-full max-w-[1200px] mb-6'>
         <div className='section-badge-wrap'>
           <h2 className='section-badge section-badge--chat'>Chat</h2>
         </div>
@@ -125,10 +129,11 @@ export default function Chat() {
           RAG-powered Q&A about my work and experience.
         </p>
       </header>
+
       <div className='chat-inner w-full max-w-[1200px]'>
-        <div className='chat-outer relative rounded-3xl p-[8px]'>
+        <div className='chat-outer relative p-[.25rem] md:p-[.35rem] lg:p-[.5rem]'>
           <div
-            className={`chat-outer__border absolute inset-0 rounded-3xl bg-gradient-to-b from-[#4dbdff] to-[#466C8C] transition-all duration-300 pointer-events-none ${
+            className={`chat-outer__border absolute inset-0 rounded-3xl bg-gradient-to-b from-[#4dbdff] to-[#2a5da0] transition-all duration-300 pointer-events-none ${
               isBorderPulsing ? 'chat-border-pulse' : ''
             }`}
             aria-hidden
@@ -166,13 +171,13 @@ export default function Chat() {
                 onSubmit={onSubmit}
                 className='chat-input-wrap absolute inset-x-0 bottom-0 px-1 pb-1'
               >
-                <div className='chat-input-inner relative flex items-center gap-3 rounded-2xl border border-[#4dbdff]/40 bg-[#031b31]/95 px-3 sm:px-4 py-2.5 sm:py-3 backdrop-blur-sm shadow-[0_20px_40px_rgba(0,0,0,0.9)] transition-all duration-200'>
+                <div className='chat-input-inner relative flex items-center gap-3 rounded-2xl border border-[#4dbdff]/40 hover:border-[#4dbdff]/60 bg-[#031b31]/95 px-3 sm:px-4 py-2.5 sm:py-3 backdrop-blur-sm shadow-[0_20px_40px_rgba(0,0,0,0.9)] transition-all duration-200'>
                   <input
                     type='text'
                     value={input}
                     onChange={handleInputChange}
-                    placeholder='Ask me anything about my work, stack, or experience...'
-                    className='flex-1 bg-transparent border-none outline-none text-xs sm:text-sm text-white-title placeholder:text-white-title/40 font-pixel-mono'
+                    placeholder='Ask me anything...'
+                    className='flex-1 bg-transparent outline-none text-xs sm:text-sm text-white-title placeholder:text-white-title/40 font-pixel-mono'
                     ref={inputRef}
                   />
                   <div className='flex items-center gap-2'>

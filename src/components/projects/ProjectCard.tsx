@@ -49,9 +49,7 @@ export default function ProjectCard({
           {!isActive && date && <div className='project-card__date'>{date}</div>}
           <h3 className='project-card__title'>{title}</h3>
           {!isActive && role && <div className='project-card__role'>{role}</div>}
-          {!isActive && award && (
-            <div className='project-card__award'>{award}</div>
-          )}
+          {!isActive && award && <div className='project-card__award'>{award}</div>}
           {/* Tech stack badges at top */}
           {!isActive && techStack && techStack.length > 0 && (
             <div className='project-card__tags'>
@@ -81,7 +79,9 @@ export default function ProjectCard({
 
   // Flip mode (mobile / tablet)
   return (
-    <article className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}>
+    <article
+      className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}
+    >
       <button
         type='button'
         className={`project-card__flip-inner ${isFlipped ? 'project-card__flip-inner--flipped' : ''}`}
@@ -104,27 +104,7 @@ export default function ProjectCard({
               </div>
             )}
             <p className='project-card__summary'>{summary}</p>
-            <div className='project-card__expand-hint'>
-              {/* Big pointer-finger icon to indicate tap/flip */}
-              <svg
-                width='40'
-                height='40'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='inline-block'
-              >
-                {/* Simple hand-pointer icon */}
-                <path d='M11 2v10' />
-                <path d='M8 7.5V12' />
-                <path d='M14 8v6' />
-                <path d='M17 9v5' />
-                <path d='M5 12.5V14a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5v-2.5a2.5 2.5 0 0 0-5 0' />
-              </svg>
-            </div>
+            <div className='project-card__expand-hint'></div>
           </div>
         </div>
         <div className='project-card__face project-card__face--back'>

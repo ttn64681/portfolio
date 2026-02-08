@@ -36,16 +36,18 @@ export default function Profile() {
       id='about-me'
       className='profile-section w-full mx-auto min-h-[85vh] flex flex-col items-center justify-center pt-6 pb-10'
     >
-      <header className='profile-section__header w-full max-w-[1200px] px-4 sm:px-6 md:px-10 lg:px-16 mb-6'>
+      <header className='profile-section__header text-center w-full max-w-[1200px] mb-6'>
         <div className='section-badge-wrap'>
-          <h2 className='section-badge section-badge--profile'>Meet Me</h2>
+          <h2 className='section-badge section-badge--profile'>YO.</h2>
         </div>
-        <p className='profile-section__subtitle font-pixel-mono text-sm text-white-title/80 max-w-xl mt-1'>
-          Portrait and dialogue — click glasses to toggle, pick an option to chat.
-        </p>
+        <p className='profile-section__subtitle font-pixel-mono text-sm text-white-title/80 max-w-xl mt-1'></p>
       </header>
-      <div className='w-[80%] flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-center gap-4 md:gap-5 xl:gap-4 2xl:gap-5'>
-        <div ref={portraitContainerRef} className='flex justify-center w-full lg:w-auto z-[1] lg:mr-4'>
+      {/* Portrait and Dialogue Panel */}
+      <div className='w-full flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-center gap-4 md:gap-5 xl:gap-4 2xl:gap-5'>
+        <div
+          ref={portraitContainerRef}
+          className='flex justify-center w-full lg:w-auto z-[1] lg:mr-4'
+        >
           <Portrait
             key={isTalking ? `talking-${phraseId}` : 'idle'}
             isTalking={isTalking}
@@ -53,7 +55,7 @@ export default function Profile() {
             onToggleGlasses={() => setShowGlasses((prev) => !prev)}
           />
         </div>
-        <div className='flex justify-center lg:w-auto lg:translate-y-[95px] z-[0]'>
+        <div className='flex justify-center lg:w-auto lg:translate-y-[95px]'>
           <DialoguePanel
             onTypingStart={handleTypingStart}
             onTypingComplete={handleTypingComplete}

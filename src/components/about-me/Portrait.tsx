@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 // Renders the portrait sprite + border box.
 // - Chooses the correct sprite sheet based on talking state + glasses.
 // - Only handles visual concerns; state is owned by Profile.
@@ -12,8 +10,6 @@ type PortraitProps = {
 };
 
 export default function Portrait({ isTalking, showGlasses, onToggleGlasses }: PortraitProps) {
-  const [hovered, setHovered] = useState(false);
-
   // Base layer: always portrait or portrait-talking without glasses.
   const basePortraitClass = isTalking
     ? 'profile-portrait-talking-layer-noglasses'
@@ -21,52 +17,31 @@ export default function Portrait({ isTalking, showGlasses, onToggleGlasses }: Po
   const glassesOverlayClass = isTalking
     ? 'profile-portrait-glasses-overlay-talking'
     : 'profile-portrait-glasses-overlay-idle';
-  const portraitClassName = `profile-sprite-layer ${basePortraitClass}`;
 
-  const borderBoxClassName = `absolute left-1/2 -translate-x-1/2 top-[95px] w-[340px] h-[260px] p-[8px] bg-[#466C8C] border-0 transition-all duration-300 ${
-    hovered ? 'border-[#4dbdff]' : 'border-[#466C8C]'
-  }`;
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (showGlasses && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      onToggleGlasses();
-    }
-  };
+  const borderBoxClassName =
+    'profile-container-btn absolute left-1/2 -translate-x-1/2 top-[95px] w-[340px] h-[260px] p-[8px] cursor-pointer active:scale-[0.97]';
 
   return (
-    <div className='w-full flex justify-center'>
-      <div className='profile-unit border-0 relative'>
-        {/* Border box */}
-        <div className={borderBoxClassName}>
-          <div className='w-9vh h-full bg-[#021728] border-0 transition-all duration-300' />
-        </div>
+    <div className='flex justify-center'>
+      <div className='profile-unit relative'>
+        {/* Whole profile container is the glasses-toggle button; same hover border as dialogue panel */}
+        <button
+          type='button'
+          className={borderBoxClassName}
+          onClick={onToggleGlasses}
+          aria-label={showGlasses ? 'Remove glasses' : 'Add glasses'}
+        >
+          <span className='sr-only'>{showGlasses ? 'Remove glasses' : 'Add glasses'}</span>
+          <div className='w-full h-full bg-[#021728]' />
+        </button>
 
-        {/* Sprite stack position rules */}
-        <div className='absolute inset-0 overflow-hidden z-[1]'>
+        {/* Sprite stack: pointer-events none so clicks hit the button */}
+        <div className='absolute inset-0 overflow-hidden z-[1] pointer-events-none'>
           <div className='profile-sprite-layer profile-tiles-layer' />
-          {/* Base portrait (no glasses); glasses overlay when showGlasses */}
-          <button
-            type='button'
-            className={portraitClassName}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            onClick={onToggleGlasses}
-            style={{ cursor: 'pointer' }}
-          />
-          {/* Glasses overlay always in DOM so animation stays in sync. */}
+          <div className={`profile-sprite-layer ${basePortraitClass}`} aria-hidden />
           <div
             className={`profile-sprite-layer ${glassesOverlayClass}`}
-            role='button'
-            tabIndex={showGlasses ? 0 : -1}
-            aria-label={showGlasses ? 'Remove glasses' : 'Add glasses'}
-            style={{
-              opacity: showGlasses ? 1 : 0,
-              pointerEvents: showGlasses ? 'auto' : 'none',
-              cursor: showGlasses ? 'pointer' : 'default',
-            }}
-            onClick={showGlasses ? onToggleGlasses : undefined}
-            onKeyDown={(e) => handleKeyDown(e)}
+            style={{ opacity: showGlasses ? 1 : 0 }}
           />
         </div>
       </div>

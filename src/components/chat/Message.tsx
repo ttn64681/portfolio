@@ -11,7 +11,7 @@ type MessageProps = {
   isLoading?: boolean;
 };
 
-const ASSISTANT_LABEL = 'Thai Nguyen';
+const ASSISTANT_LABEL = 'Thai Nguyen (Impostor)';
 const USER_LABEL = '(You) chill_dude_68';
 
 export default function Message({ role, content, isLoading }: MessageProps) {

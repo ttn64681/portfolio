@@ -14,18 +14,6 @@
     transform-origin: center;
   }
 
-  @media (min-width: 768px) {
-    .profile-unit {
-      transform: scale(1.1);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .profile-unit {
-      transform: scale(1.15);
-    }
-  }
-
   /* Shared sprite styling for profile layers; pixel-perfect rendering */
   .profile-sprite-layer {
     position: absolute;
@@ -131,13 +119,29 @@
     pointer-events: none;
   }
 
+  /* Profile container = glasses toggle. The “border” is the button’s background (padding shows it). */
+  .profile-container-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #466c8c;
+    transition: background-color 0.2s ease-out;
+  }
+
+  .profile-container-btn:hover {
+    /* ;omear gradient top to bot */
+    background: linear-gradient(to bottom, #4dbdff, #366faf);
+  }
+
   /* Dialogue panel: flat, menu-style border */
   .dialogue-panel-box {
     transition: border-color 0.2s ease-out;
   }
 
   .dialogue-option-btn {
-    transition: background 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s ease-out;
+    transition:
+      background 0.2s ease-out,
+      border-color 0.2s ease-out,
+      transform 0.15s ease-out;
   }
 
   .dialogue-option-btn:hover {

@@ -149,7 +149,6 @@
   .project-card__inner {
     height: 100%;
     padding: 1.5rem 1.25rem;
-    border-radius: 0;
     background: #021728;
     border: 1px solid rgba(77, 189, 255, 0.3);
     border-left: 4px solid rgba(77, 189, 255, 0.35);
@@ -229,7 +228,6 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
     padding: 0.25rem 0.6rem;
-    border-radius: 0;
     background: rgba(255, 121, 98, 0.95);
     border: none;
     margin-bottom: 0.6rem;
@@ -249,9 +247,8 @@
   /* Tech tags: boxy like menu buttons, no pill */
   .project-card__tag {
     padding: 0.2rem 0.55rem;
-    border-radius: 0;
     border: 2px solid rgba(77, 189, 255, 0.5);
-    background: rgba(3, 27, 49, 0.95);
+    background: rgba(77, 189, 255, 0.5);
     font-family: var(--font-pixel-retron);
     font-size: 0.65rem;
     text-transform: uppercase;
@@ -325,6 +322,7 @@
     margin: 0;
     position: relative;
     font-weight: 400;
+    transition: all 0.1s ease-in-out;
   }
 
   /* Bullet boxes: boxy, menu-like highlight */
@@ -333,7 +331,6 @@
     padding: 0.5rem 0.65rem;
     border-radius: 0;
     background: rgba(45, 77, 118, 0.4);
-    border: 2px solid rgba(77, 189, 255, 0.35);
     color: rgba(241, 248, 255, 0.98);
     transition: all 0.2s ease-out;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -375,6 +372,11 @@
     width: 320px;
     height: 420px;
     cursor: pointer;
+    transition: all 0.2s ease-out;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+    }
   }
 
   .project-card--carousel .project-card__inner {
@@ -387,9 +389,6 @@
     transform: translateY(-12px) scale(1.05);
     border-color: #4dbdff;
     background: rgba(45, 77, 118, 0.9);
-    box-shadow:
-      0 0 0 2px rgba(241, 248, 255, 0.4),
-      0 30px 80px rgba(0, 0, 0, 0.95);
   }
 
   /* Flip-card behavior for mobile/tablet - fixed height/width, interactive */

@@ -3,8 +3,6 @@
 import { experienceConfig } from '@/data/experience-config';
 import ExperienceBlock from './ExperienceBlock';
 
-
-
 export default function Experience() {
   if (experienceConfig.length === 0) return null;
 
@@ -19,7 +17,7 @@ export default function Experience() {
             Roles, leadership, and contract work — where I&apos;ve been building and leading.
           </p>
         </header>
-        <div className='experience-section__list'>
+        <div className='experience-section__list mb-9'>
           {experienceConfig.map((exp) => (
             <ExperienceBlock key={exp.id} exp={exp} />
           ))}

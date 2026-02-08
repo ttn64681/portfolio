@@ -3,7 +3,7 @@
 import type { ChatTimelineRow } from '@/types/chat';
 import { INTRO_TEXT, getFriendlyErrorMessage } from '@/data/chat-config';
 import Message from './Message';
-import ResumeButtonMessage from './ResumeButtonMessage';
+import ResumeButton from './ResumeButton';
 
 type ChatTimelineProps = {
   timeline: ChatTimelineRow[];
@@ -34,27 +34,15 @@ export default function ChatTimeline({
         }
         if (row.type === 'message') {
           return (
-            <Message
-              key={row.id}
-              role={row.role}
-              content={row.content}
-              isLoading={row.isLoading}
-            />
+            <Message key={row.id} role={row.role} content={row.content} isLoading={row.isLoading} />
           );
         }
         if (row.type === 'error') {
           const friendlyMessage = getFriendlyErrorMessage(row.errorCode);
-          return (
-            <Message key='error' role='assistant' content={friendlyMessage} />
-          );
+          return <Message key='error' role='assistant' content={friendlyMessage} />;
         }
         if (row.type === 'resume_button') {
-          return (
-            <ResumeButtonMessage
-              key={row.id}
-              onOpenResume={onOpenResume}
-            />
-          );
+          return <ResumeButton key={row.id} onOpenResume={onOpenResume} />;
         }
         if (row.type === 'fun_fact') {
           return <Message key={row.id} role='assistant' content={row.text} />;
@@ -64,10 +52,7 @@ export default function ChatTimeline({
         }
         if (row.type === 'typing') {
           return (
-            <div
-              key='typing'
-              className={isTypingFadeOut ? 'chat-message-fade-out' : ''}
-            >
+            <div key='typing' className={isTypingFadeOut ? 'chat-message-fade-out' : ''}>
               <Message role='user' content='' isLoading />
             </div>
           );

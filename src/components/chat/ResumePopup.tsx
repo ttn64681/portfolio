@@ -24,8 +24,6 @@ export default function ResumePopup({ isOpen, onClose }: ResumePopupProps) {
   if (!isOpen) return null;
 
   return (
-    // TODO: background color should be dimmed black, but still, opaque
-
     <div
       className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(0,0,0,0.3)] backdrop-blur-sm'
       onClick={onClose}

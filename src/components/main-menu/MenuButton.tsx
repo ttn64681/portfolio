@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 type MenuButtonProps = {
   label: string;
   isExiting: boolean;
@@ -9,19 +7,14 @@ type MenuButtonProps = {
 };
 
 const BASE_CLASS =
-  'text-white-title font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,77,118,1)] transition-all duration-200 active:transition-none cursor-pointer';
+  'text-white-title font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,84,140,1)] transition-all duration-200 active:transition-none cursor-pointer';
 
 const SIZE_CLASS = {
   sm: 'text-xl sm:text-2xl px-2 md:text-3xl hover:scale-105',
   lg: 'px-2 text-3xl xl:text-4xl hover:scale-106',
 };
 
-export default function MenuButton({
-  label,
-  isExiting,
-  onClick,
-  size = 'sm',
-}: MenuButtonProps) {
+export default function MenuButton({ label, isExiting, onClick, size = 'sm' }: MenuButtonProps) {
   return (
     <button
       type='button'
@@ -33,9 +26,7 @@ export default function MenuButton({
       >
         {label}
       </span>
-      <span
-        className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}
-      >
+      <span className={`absolute inset-0 menu-button ${isExiting ? 'menu-button-reverse' : ''}`}>
         {label}
       </span>
     </button>
