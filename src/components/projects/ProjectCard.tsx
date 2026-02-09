@@ -64,7 +64,7 @@ export default function ProjectCard({
           {isActive && bullets.length > 0 && (
             <div className='project-card__expanded'>
               <ul className='project-card__bullets'>
-                {bullets.slice(0, 3).map((bullet, idx) => (
+                {bullets.slice(0, 2).map((bullet, idx) => (
                   <li key={idx} className='project-card__bullet'>
                     <span className='project-card__bullet-box'>{bullet}</span>
                   </li>
@@ -113,7 +113,7 @@ export default function ProjectCard({
             {bullets.length > 0 && (
               <div className='project-card__expanded'>
                 <ul className='project-card__bullets'>
-                  {bullets.slice(0, 3).map((bullet, idx) => (
+                  {bullets.slice(0, 2).map((bullet, idx) => (
                     <li key={idx} className='project-card__bullet'>
                       <span className='project-card__bullet-box'>{bullet}</span>
                     </li>

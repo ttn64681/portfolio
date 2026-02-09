@@ -2,17 +2,13 @@ import { streamText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { getConfig } from '@/lib/config';
 import { buildSystemPrompt } from '@/lib/chat-prompts';
-import {
-  MAX_BODY_BYTES,
-  MAX_MESSAGE_LENGTH,
-  MAX_MESSAGES_FOR_LLM,
-} from '@/lib/constants';
+import { MAX_BODY_BYTES, MAX_MESSAGE_LENGTH, MAX_MESSAGES_FOR_LLM } from '@/lib/constants';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { searchSimilarDocuments } from '@/lib/vector-store';
 import { portfolioDocuments } from '@/data/portfolio';
 import type { ChatErrorCode } from '@/lib/chat-error';
 
-/** Structured error body so the client can show code-specific, persona-themed copy. */
+/** Structured error body */
 function errorResponse(message: string, status: number, code?: ChatErrorCode, retryAfter?: number) {
   const body: { error: string; code?: string; retryAfter?: number } = { error: message };
   if (code) body.code = code;
@@ -77,12 +73,7 @@ export async function POST(request: Request) {
   const ip = getClientIp(request);
   const limitResult = await checkRateLimit(ip);
   if (!limitResult.success) {
-    return errorResponse(
-      'Too many requests',
-      429,
-      'rate_limit',
-      limitResult.retryAfter,
-    );
+    return errorResponse('Too many requests', 429, 'rate_limit', limitResult.retryAfter);
   }
 
   let body: { messages?: Array<{ role: string; parts?: unknown[] }> };
@@ -164,7 +155,7 @@ export async function POST(request: Request) {
     return result.toUIMessageStreamResponse();
   } catch {
     return errorResponse(
-      "Something went wrong while answering. Try rephrasing your question or use the contact link if it keeps happening.",
+      'Something went wrong while answering. Try rephrasing your question or use the contact link if it keeps happening.',
       502,
       'server_error',
     );
