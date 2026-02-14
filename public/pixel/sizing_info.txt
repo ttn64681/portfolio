@@ -3,17 +3,17 @@ SPLASH LAYERS:
 - Layers 2-5 (water, midland, buildings, sky): 25 frames each, 2200px per frame, 2.5s steps(24).
 
 PROFILE SPRITES:
-- portrait and portrait-glasses have 191 frames, the spritesheet has dimensions 13561x73.
-- potrait-glasses-only also has 191 frames, but only plays when portrait is clicked and is overlayed over original. 
-It is trimmed 21px off bottom, 41px off top, so spritesheet dimensions is 13561x11.
+- portrait + portrait-glasses have 191 frames, spritesheet = 13561x73.
+- potrait-glasses-only also has 191 frames. Plays when portrait is clicked (overlayed over original). 
+Trimmed 21px off bottom, 41px off top, so spritesheet is 13561x11.
 
-- tiles, which layed directly underneath portraits, have 32 frames, but trimmed 1px off bottom, 33px off top, 
-so the spritesheet has dimensions 2272x48
+- tiles (underneath portraits) have 32 frames, but trimmed 1px off bottom, 33px off top, 
+so spritesheet is 2272x48
 
-- portrait-talking and portrait-talking-glasses have 48 frames, but only plays when dialogue button is clicked, 
-the spritesheet has dimensions 3408x73.
+- portrait-talking + portrait-talking-glasses have 48 frames, but only plays when dialogue button is clicked, 
+the spritesheet is 3408x73.
 - portrait-talking-glasses-only also has 48 frames, but gets overlayed over portrait instead of replacing it with 
-portrait-talking-glasses. It is trimmed 21px off bottom, 41px off top, so spritesheet dimensions is 3408x11.
+portrait-talking-glasses. Trimmed 21px off bottom, 41px off top, so spritesheet is 3408x11.
 
 CHAT SPRITES:
 pfps = 23x23px
@@ -24,8 +24,15 @@ To split the bubble into 9-slices for dynamic text-sizing:
 - left-middle and right-middle portion is 3x7
 - top-middle and bottom-middle portion is 4x3
 
-PROJECT BUTTON SPRITES (4 frames):
-- link-walk (back of project cards) = 18x25
-- link-walk-shadow (shown when hovering link-walk, overlayed underneath link at bottom) = 16x4
-- octocat-float (back of project cards) = 17x23
-- octocat-float-shadow (shown when hovering link-walk, overlayed underneath link at bottom) = 15x5
+PROJECT CARD BUTTON SPRITES (shown when hovering link-walk, overlayed underneath link at bottom) (4 frames):
+- link-walk (back of project cards, at bottom left under bullet points) = 18x25/frame, sprite sheet 72x25
+- octocat-float (back of project cards, right next to link-walk) = 17x23/frame, sprite sheet 68x23
+
+CSS steps() for N-frame sprite animation (avoid wrong/uneven animation or "loops too early"):
+- Keyframe range must be the FULL sheet width (0 to -(N × frameWidth)), not (N-1) frame widths.
+- Use steps(N, end) so each step lands on a frame boundary (0, -frameW, -2×frameW, ...).
+- If you use range 0 to -(N-1)×frameW with steps(N), the browser interpolates between frames → uneven. With steps(N-1) the last frame only flashes at 100% → loops too early.
+
+PROJECT PAGE SPRITES:
+- link-walk-shadow = 16x4/frame, sprite sheet 64x4
+- octocat-float-shadow = 15x5/frame, sprite sheet 60x5

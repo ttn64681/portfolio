@@ -23,6 +23,10 @@ export type ProjectConfig = {
   techStack?: string[];
   /** Project date range or completion date */
   date?: string;
+  /** Optional project / demo URL for Link sprite button */
+  link?: string;
+  /** Optional GitHub repo URL for Octocat sprite button */
+  github?: string;
 };
 
 export const projectsConfig: ProjectConfig[] = [
@@ -39,6 +43,8 @@ export const projectsConfig: ProjectConfig[] = [
     ],
     techStack: ['Spring Boot', 'PostgreSQL', 'Spring Security', 'Docker', '✚'],
     date: 'Aug 2025 - Present',
+    link: 'https://acm-cinema.vercel.app',
+    github: 'https://github.com/ttn64681/Absolute-Cinema-Movies',
   },
   {
     id: 'rag-portfolio',
@@ -74,6 +80,8 @@ export const projectsConfig: ProjectConfig[] = [
     ],
     techStack: ['Next.js', 'MongoDB', 'NextAuth.js', 'Gemini API', 'YouTube API', '✚'],
     date: 'Spring 2025',
+    link: 'https://course-hub-uga.vercel.app',
+    github: 'https://github.com/ttn64681/Web-Dev-Group-Project',
   },
   {
     id: 'tower-ascent',

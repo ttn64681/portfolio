@@ -12,4 +12,6 @@ export type ProjectInfo = {
   techStack?: string[];
   date?: string;
   bullets: string[];
+  link?: string;
+  github?: string;
 };

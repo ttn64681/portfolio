@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import Link from './Link';
+import Octocat from './Octocat';
+import ExploreButton from './ExploreButton';
 
 type ProjectCardMode = 'carousel' | 'flip';
 
@@ -15,6 +18,8 @@ type ProjectCardProps = {
   mode: ProjectCardMode;
   isActive?: boolean; // only used in carousel mode (click-to-focus)
   onSelect?: () => void; // carousel: click to focus
+  link?: string;
+  github?: string;
 };
 
 export default function ProjectCard({
@@ -28,6 +33,8 @@ export default function ProjectCard({
   mode,
   isActive = false,
   onSelect,
+  link,
+  github,
 }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -72,20 +79,36 @@ export default function ProjectCard({
               </ul>
             </div>
           )}
+          {isActive && (
+            <div className='project-card__actions' onClick={(e) => e.stopPropagation()}>
+              <div className='project-card__actions-sprites'>
+                {link && <Link href={link} />}
+                {github && <Octocat href={github} />}
+              </div>
+              <ExploreButton />
+            </div>
+          )}
         </div>
       </article>
     );
   }
 
-  // Flip mode (mobile / tablet)
+  // Flip mode (mobile / tablet): actions (Link, Octocat, Explore) only on back
   return (
     <article
       className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}
     >
-      <button
-        type='button'
+      <div
+        role='button'
+        tabIndex={0}
         className={`project-card__flip-inner ${isFlipped ? 'project-card__flip-inner--flipped' : ''}`}
         onClick={() => setIsFlipped((prev) => !prev)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsFlipped((prev) => !prev);
+          }
+        }}
       >
         <div className='project-card__face project-card__face--front'>
           <div className='project-card__inner'>
@@ -121,9 +144,16 @@ export default function ProjectCard({
                 </ul>
               </div>
             )}
+            <div className='project-card__actions' onClick={(e) => e.stopPropagation()}>
+              <div className='project-card__actions-sprites'>
+                {link && <Link href={link} />}
+                {github && <Octocat href={github} />}
+              </div>
+              <ExploreButton />
+            </div>
           </div>
         </div>
-      </button>
+      </div>
     </article>
   );
 }

@@ -15,6 +15,8 @@ const projects: ProjectInfo[] = projectsConfig.map((config) => ({
   techStack: config.techStack,
   date: config.date,
   bullets: config.bullets,
+  link: config.link,
+  github: config.github,
 }));
 
 export default function Projects() {
@@ -115,6 +117,8 @@ export default function Projects() {
                     setIsPaused(true);
                     setActiveIndex(index);
                   }}
+                  link={project.link}
+                  github={project.github}
                 />
               </div>
             ))}
@@ -143,6 +147,8 @@ export default function Projects() {
               bullets={project.bullets}
               mode='flip'
               isActive={false}
+              link={project.link}
+              github={project.github}
             />
           ))}
         </div>

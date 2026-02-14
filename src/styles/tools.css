@@ -1,0 +1,59 @@
+@layer components {
+  /* Wrap: must be positioning context so tooltip is placed above the trigger */
+  .sprite-tooltip-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Sprite tooltip: rectangle with triangle tail pointing down to sprite */
+  .sprite-tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    background: #021728;
+    border: 2px solid #3ea6e2;
+    color: var(--white-title);
+    font-family: var(--font-pixel-retron);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.15s ease-out,
+      visibility 0.15s ease-out;
+    z-index: 50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .sprite-tooltip-wrap:hover .sprite-tooltip {
+    opacity: 0.85;
+    visibility: visible;
+  }
+
+  .sprite-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+  }
+
+  .sprite-tooltip::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #3ea6e2;
+    margin-top: 1px;
+    z-index: 1;
+  }
+}
