@@ -24,7 +24,7 @@ export default function Portrait({ isTalking, showGlasses, onToggleGlasses }: Po
   return (
     <div className='flex justify-center'>
       <div className='profile-unit relative'>
-        {/* Whole profile container is the glasses-toggle button; same hover border as dialogue panel */}
+        {/* Profile container button */}
         <button
           type='button'
           className={borderBoxClassName}
@@ -35,13 +35,12 @@ export default function Portrait({ isTalking, showGlasses, onToggleGlasses }: Po
           <div className='w-full h-full bg-[#021728]' />
         </button>
 
-        {/* Sprite stack: pointer-events none so clicks hit the button */}
+        {/* Portrait + Conditional Glasses Overlay */}
         <div className='absolute inset-0 overflow-hidden z-[1] pointer-events-none'>
           <div className='profile-sprite-layer profile-tiles-layer' />
           <div className={`profile-sprite-layer ${basePortraitClass}`} aria-hidden />
           <div
-            className={`profile-sprite-layer ${glassesOverlayClass}`}
-            style={{ opacity: showGlasses ? 1 : 0 }}
+            className={`profile-sprite-layer ${glassesOverlayClass} ${showGlasses ? 'opacity-100' : 'opacity-0'} transition-none`}
           />
         </div>
       </div>
