@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'src', 'data', 'Thai_Nguyen_Resume_2026_v1.pdf');
+    const filePath = path.join(process.cwd(), 'src', 'data', 'Thai_Nguyen_Resume_2026.pdf');
     const file = await readFile(filePath);
 
     // NextResponse expects a BodyInit; Buffer is fine at runtime, so cast for TypeScript.
@@ -14,7 +14,7 @@ export async function GET() {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'inline; filename="Thai_Nguyen_Resume_2026_v1.pdf"',
+        'Content-Disposition': 'inline; filename="Thai_Nguyen_Resume_2026.pdf"',
       },
     });
   } catch (error) {
