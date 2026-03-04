@@ -34,7 +34,7 @@ export function useSplashParallax() {
     function updateTransforms() {
       const screenCenterX = window.innerWidth / 2;
       const screenCenterY = window.innerHeight / 2;
-      const relX = (currentMouseX - screenCenterX) / screenCenterX;
+      const relX = (currentMouseX - screenCenterX) / screenCenterX; // if mouse at center (500,500), then relX = 0 (center)
       const relY = (currentMouseY - screenCenterY) / screenCenterY;
       const isTabletOrSmaller = window.innerWidth <= BREAKPOINTS.mobile;
 
