@@ -65,6 +65,7 @@ export const projectsConfig: ProjectConfig[] = [
       'Aseprite',
     ],
     date: 'June 2025 - Present',
+    github: 'https://github.com/ttn64681/portfolio'
   },
   {
     id: 'coursehub',
@@ -95,6 +96,7 @@ export const projectsConfig: ProjectConfig[] = [
     ],
     techStack: ['Godot 4', 'GDScript', 'Keyframes', 'Aseprite'],
     date: 'Sep 2025 - Present',
+    link: 'https://opuhlos.itch.io/tower-ascent'
   },
 ];
 

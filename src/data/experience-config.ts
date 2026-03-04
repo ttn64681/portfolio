@@ -14,7 +14,7 @@ export const experienceConfig: ExperienceConfig[] = [
     bullets: [
       'Lead weekly technical workshops on Data Structures, Algorithms, and behavioral interview prep for 10+ students.',
       'Direct UI/UX redesigns in Figma for club branding and digital presence.',
-      "Created a DOPE new mascot! He's a little robot boy.",
+      'Created a new mascot for merch and digital presence.',
     ],
     techStack: ['Figma', 'Workshop Leadership', 'Recruitment'],
   },

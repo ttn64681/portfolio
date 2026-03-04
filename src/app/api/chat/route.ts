@@ -22,12 +22,14 @@ function errorResponse(message: string, status: number, code?: ChatErrorCode, re
 
 export const runtime = 'edge';
 
+// Get IP from request headers for rate limiting
 function getClientIp(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for');
   if (forwarded) return forwarded.split(',')[0].trim();
   return request.headers.get('x-real-ip') ?? 'unknown';
 }
 
+// Get only text contemt from ai message parts
 function extractContentFromParts(parts: unknown): string {
   if (!Array.isArray(parts)) return '';
   return parts
@@ -40,6 +42,22 @@ function extractContentFromParts(parts: unknown): string {
     .join('');
 }
 
+/**
+ * On chat message request:
+ * - Check payload size (too large?)
+ * - Get config (env vars)
+ * - Check allowed domain ('production' if set)
+ * - Get client IP
+ * - Check rate limit
+ * - Get body
+ * - Validate messages
+ * - Extract last user message
+ * - Search similar documents
+ * - Build system prompt
+ * - Build model messages
+ * - Create Google Generative AI client
+ * - Stream text
+ */
 export async function POST(request: Request) {
   if (request.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
@@ -61,6 +79,7 @@ export async function POST(request: Request) {
     );
   }
 
+  // (Leave empty in env to disable)
   if (process.env.NODE_ENV === 'production') {
     if (config.allowedDomain) {
       const referer = request.headers.get('referer');
@@ -70,12 +89,14 @@ export async function POST(request: Request) {
     }
   }
 
+  // Check rate limit
   const ip = getClientIp(request);
   const limitResult = await checkRateLimit(ip);
   if (!limitResult.success) {
     return errorResponse('Too many requests', 429, 'rate_limit', limitResult.retryAfter);
   }
 
+  // Get message body (messages in SDK format)
   let body: { messages?: Array<{ role: string; parts?: unknown[] }> };
   try {
     body = await request.json();
@@ -84,10 +105,12 @@ export async function POST(request: Request) {
   }
 
   const messages = body?.messages;
+  // Validate messages (too many?)
   if (!Array.isArray(messages) || messages.length > MAX_MESSAGES_FOR_LLM * 2 + 4) {
     return errorResponse('Bad request', 400, 'bad_request');
   }
 
+  // Validate message content (too long?)
   for (const msg of messages) {
     const content = extractContentFromParts(msg?.parts);
     if (content.length > MAX_MESSAGE_LENGTH) {
@@ -95,22 +118,26 @@ export async function POST(request: Request) {
     }
   }
 
+  // Extract last user message
   const lastUser = [...messages].reverse().find((m) => m?.role === 'user');
   const queryText = lastUser ? extractContentFromParts(lastUser.parts) : '';
   if (!queryText.trim()) {
     return errorResponse('Bad request', 400, 'bad_request');
   }
 
+  // Get recent messages
   const recentMessages = messages.slice(-MAX_MESSAGES_FOR_LLM);
 
   let contextBlock: string;
   try {
+    // Search similar documents
     const similar = await searchSimilarDocuments(
       queryText.trim(),
       config.maxRagDocs,
       portfolioDocuments,
     );
     const contentById = new Map(portfolioDocuments.map((d) => [d.id, d.content]));
+    // Build context block
     contextBlock = similar
       .map((r) => contentById.get(r.id))
       .filter(Boolean)
@@ -126,13 +153,16 @@ export async function POST(request: Request) {
     );
   }
 
+  // Build system prompt
   const systemMessage = buildSystemPrompt(contextBlock);
 
+  // Build model messages
   const modelMessages = recentMessages.map((msg) => ({
     role: msg.role as 'user' | 'assistant' | 'system',
     content: extractContentFromParts(msg.parts),
   }));
 
+  // Create Google Generative AI client
   let google;
   try {
     google = createGoogleGenerativeAI({ apiKey: config.geminiApiKey });
@@ -144,9 +174,11 @@ export async function POST(request: Request) {
     );
   }
 
+  // Create model
   const model = google(config.geminiModel);
 
   try {
+    // Stream text
     const result = streamText({
       model,
       system: systemMessage,

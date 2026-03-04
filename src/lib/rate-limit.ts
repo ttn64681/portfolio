@@ -29,7 +29,7 @@ export type RateLimitResult = {
  * Returns success: false if over limit; fail-open on Redis errors (success: true).
  */
 export async function checkRateLimit(identifier: string): Promise<RateLimitResult> {
-  const key = RAG_KEYS.RATE_LIMIT(identifier);
+  const key = RAG_KEYS.RATE_LIMIT(identifier); // Redis key for rate limit
   const now = Math.floor(Date.now() / 1000);
   const windowEnd = now + RATE_LIMIT_WINDOW_SEC;
 
@@ -40,6 +40,7 @@ export async function checkRateLimit(identifier: string): Promise<RateLimitResul
     const parsed: Stored | null =
       raw == null ? null : typeof raw === 'string' ? JSON.parse(raw) : (raw as Stored);
 
+    // If no stored data, set initial count and reset time
     if (parsed == null) {
       await redis.set(key, JSON.stringify({ count: 1, resetAt: windowEnd }), {
         ex: RATE_LIMIT_WINDOW_SEC,
@@ -53,6 +54,7 @@ export async function checkRateLimit(identifier: string): Promise<RateLimitResul
     }
 
     const { count, resetAt } = parsed;
+    // If over limit, return failure with retry time
     if (count >= RATE_LIMIT_MAX_REQUESTS) {
       const retryAfter = Math.max(0, resetAt - now);
       return {
@@ -63,6 +65,7 @@ export async function checkRateLimit(identifier: string): Promise<RateLimitResul
       };
     }
 
+    // If under limit, increment count and set new reset time
     await redis.set(key, JSON.stringify({ count: count + 1, resetAt }), {
       ex: RATE_LIMIT_WINDOW_SEC,
     });
