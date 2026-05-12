@@ -62,8 +62,10 @@ export async function POST(request: Request) {
   if (request.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
+  // console.log('request', request);
 
   const contentLength = request.headers.get('content-length');
+  // console.log('contentLength', contentLength);
   if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
     return errorResponse('Payload too large', 413, 'payload_too_large');
   }
