@@ -168,4 +168,10 @@
     border-color: rgba(77, 189, 255, 0.7);
     background: rgba(45, 77, 118, 0.5);
   }
+
+  .experience-block__footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 }

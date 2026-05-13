@@ -158,8 +158,12 @@ export default function Chat() {
               </div>
             </div>
 
-            <div className='relative min-h-[260px] h-[50vh] sm:h-[55vh] md:h-[60vh] max-h-[640px]'>
-              <div className='chat-messages' ref={messagesContainerRef}>
+            <div className='relative flex h-[50vh] min-h-[260px] max-h-[640px] flex-col sm:h-[55vh] md:h-[60vh]'>
+              <div
+                className='chat-messages chat-messages--scroll-area'
+                ref={messagesContainerRef}
+                data-lenis-prevent
+              >
                 <ChatTimeline
                   timeline={timeline}
                   introPhase={introPhase}

@@ -35,6 +35,7 @@ yarn-error.log*
 set_env.ps1
 ./set_env.ps1
 ./set_env*
+scripts/env.sh
 
 # vercel
 .vercel

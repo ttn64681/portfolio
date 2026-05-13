@@ -22,7 +22,7 @@ export default function Splash({ children }: SplashProps) {
       <div id='bg3' className='sprite-layer' style={LAYER_STYLE} />
       <div id='bg2' className='sprite-layer' style={LAYER_STYLE} />
       {children != null ? (
-        <div className='absolute inset-0 z-[5] pointer-events-auto'>{children}</div>
+        <div className='absolute inset-0 z-[5] pointer-events-none'>{children}</div>
       ) : null}
       <div id='bg1' className='sprite-layer-bg1' style={LAYER_STYLE} />
     </div>

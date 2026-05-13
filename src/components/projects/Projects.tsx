@@ -119,6 +119,7 @@ export default function Projects() {
                   }}
                   link={project.link}
                   github={project.github}
+                  exploreSlug={project.baseId}
                 />
               </div>
             ))}
@@ -149,6 +150,7 @@ export default function Projects() {
               isActive={false}
               link={project.link}
               github={project.github}
+              exploreSlug={project.baseId}
             />
           ))}
         </div>

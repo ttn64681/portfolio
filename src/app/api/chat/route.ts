@@ -29,17 +29,23 @@ function getClientIp(request: Request): string {
   return request.headers.get('x-real-ip') ?? 'unknown';
 }
 
-// Get only text contemt from ai message parts
-function extractContentFromParts(parts: unknown): string {
-  if (!Array.isArray(parts)) return '';
-  return parts
-    .filter(
-      (p): p is { type: string; text?: string } =>
-        p != null && typeof p === 'object' && 'type' in p,
-    )
-    .filter((p) => p.type === 'text' && typeof p.text === 'string')
-    .map((p) => p.text!)
-    .join('');
+/** Text from UI message `parts`, or string `content` if present. */
+function getMessageText(msg: { parts?: unknown[]; content?: unknown } | undefined): string {
+  if (!msg) return '';
+  const parts = msg.parts;
+  if (Array.isArray(parts)) {
+    const text = parts
+      .filter(
+        (p): p is { type: string; text?: string } =>
+          p != null && typeof p === 'object' && 'type' in p,
+      )
+      .filter((p) => p.type === 'text' && typeof p.text === 'string')
+      .map((p) => p.text!)
+      .join('');
+    if (text) return text;
+  }
+  const c = msg.content;
+  return typeof c === 'string' ? c : '';
 }
 
 /**
@@ -99,7 +105,7 @@ export async function POST(request: Request) {
   }
 
   // Get message body (messages in SDK format)
-  let body: { messages?: Array<{ role: string; parts?: unknown[] }> };
+  let body: { messages?: Array<{ role: string; parts?: unknown[]; content?: unknown }> };
   try {
     body = await request.json();
   } catch {
@@ -114,15 +120,14 @@ export async function POST(request: Request) {
 
   // Validate message content (too long?)
   for (const msg of messages) {
-    const content = extractContentFromParts(msg?.parts);
-    if (content.length > MAX_MESSAGE_LENGTH) {
+    if (getMessageText(msg).length > MAX_MESSAGE_LENGTH) {
       return errorResponse('Message too long', 400, 'bad_request');
     }
   }
 
   // Extract last user message
   const lastUser = [...messages].reverse().find((m) => m?.role === 'user');
-  const queryText = lastUser ? extractContentFromParts(lastUser.parts) : '';
+  const queryText = getMessageText(lastUser);
   if (!queryText.trim()) {
     return errorResponse('Bad request', 400, 'bad_request');
   }
@@ -161,7 +166,7 @@ export async function POST(request: Request) {
   // Build model messages
   const modelMessages = recentMessages.map((msg) => ({
     role: msg.role as 'user' | 'assistant' | 'system',
-    content: extractContentFromParts(msg.parts),
+    content: getMessageText(msg),
   }));
 
   // Create Google Generative AI client

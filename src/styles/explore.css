@@ -1,0 +1,2 @@
+/* Explore routes only (/explore hub + /explore/[slug]). Pulls hub, hero/nav, dossier poster. */
+@import './explore/index.css';

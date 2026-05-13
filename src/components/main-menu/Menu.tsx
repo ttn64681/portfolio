@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
 import { BREAKPOINTS } from '@/lib/breakpoints';
+import { useHeroMenuVisible } from '@/hooks/useHeroMenuVisible';
 import MenuOptions, { type MenuAction } from './MenuOptions';
 
 type MenuProps = {
@@ -9,6 +10,7 @@ type MenuProps = {
 };
 
 export default function Menu({ onQuit }: MenuProps) {
+  const heroMenuVisible = useHeroMenuVisible();
   const [echoActive, setEchoActive] = useState(false);
   const [startPressed, setStartPressed] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -73,9 +75,9 @@ export default function Menu({ onQuit }: MenuProps) {
   }, []);
 
   return (
-    <div id='menu-container' className='fixed inset-0 z-40'>
-      <div className='flex flex-col justify-center lg:-translate-x-[5vw] xl:translate-x-0 lg:flex-row lg:justify-start w-full h-full items-center'>
-        <div className='flex flex-col text-center items-center justify-center lg:translate-y-[1.3rem] leading-snug'>
+    <div id='menu-container' className='fixed inset-0 z-40 pointer-events-none'>
+      <div className='flex flex-col justify-center lg:-translate-x-[5vw] xl:translate-x-0 lg:flex-row lg:justify-start w-full h-full items-center pointer-events-none'>
+        <div className='flex flex-col text-center items-center justify-center lg:translate-y-[1.3rem] leading-snug pointer-events-auto'>
           <h1
             id='menu-title'
             className='mx-6 text-white-title font-bold font-pixel-headline md:text-nowrap md:text-[4rem] text-[3rem] lg:text-[3.5rem] xl:text-[4.5vw] lg:translate-x-[10vw] leading-tight [word-spacing:0.2rem] [text-shadow:0_0_10px_rgba(100,170,3600,.3)] p-3'
@@ -145,6 +147,7 @@ export default function Menu({ onQuit }: MenuProps) {
         <MenuOptions
           startPressed={startPressed}
           isExiting={isExiting}
+          interactive={heroMenuVisible}
           onExitComplete={handleExitComplete}
           onAction={handleMenuAction}
         />

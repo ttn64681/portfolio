@@ -15,7 +15,7 @@
     padding: 6px 10px;
     background: #021728;
     border: 2px solid #3ea6e2;
-    color: var(--white-title);
+    color: var(--white-title); /* defined in globals.css */
     font-family: var(--font-pixel-retron);
     font-size: 0.7rem;
     text-transform: uppercase;

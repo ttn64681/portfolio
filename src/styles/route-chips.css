@@ -1,0 +1,70 @@
+/* Shared pill rows: Explore showcase strip + any route-level chip toolbar — wrap, no horizontal scroll */
+@layer components {
+  .route-chip-toolbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.1rem 1rem 0;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .route-chip-toolbar {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: 1.35rem;
+    }
+  }
+
+  .route-chip-toolbar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem 0.55rem;
+    min-width: 0;
+  }
+
+  .route-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.35rem 0.85rem;
+    font-family: var(--font-pixel-retron);
+    font-size: clamp(0.62rem, 1.45vw, 0.74rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(241, 248, 255, 0.72);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(6, 18, 40, 0.65);
+    transition:
+      border-color 0.15s ease-out,
+      color 0.15s ease-out,
+      background 0.15s ease-out;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.25;
+  }
+
+  .route-chip:hover {
+    border-color: rgba(0, 255, 200, 0.42);
+    color: #e8fffb;
+  }
+
+  .route-chip:focus-visible {
+    outline: 2px solid rgba(0, 255, 200, 0.75);
+    outline-offset: 2px;
+  }
+
+  .route-chip--active {
+    border-color: rgba(0, 255, 200, 0.62);
+    color: #021728;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(224, 252, 246, 0.88));
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+}

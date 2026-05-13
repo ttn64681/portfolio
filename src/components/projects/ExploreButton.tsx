@@ -9,12 +9,11 @@ type ExploreButtonProps = {
 export default function ExploreButton({
   onClick,
   href,
-  ariaLabel = 'Explore full projects page',
+  ariaLabel = 'Open project showcase',
 }: ExploreButtonProps) {
   const content = (
     <>
-      Explore
-      <span aria-hidden>→</span>
+      Explore <span aria-hidden className='project-card__explore-btn__arrow'>→</span>
     </>
   );
 

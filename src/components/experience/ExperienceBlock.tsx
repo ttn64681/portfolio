@@ -1,4 +1,5 @@
 import type { ExperienceConfig as ExpConfig } from '@/types/experience';
+import ExploreButton from '@/components/projects/ExploreButton';
 
 // If holywatr, orange title, if acm, red title
 
@@ -36,6 +37,12 @@ export default function ExperienceBlock({ exp }: { exp: ExpConfig }) {
             ))}
           </div>
         )}
+        <div className='experience-block__footer'>
+          <ExploreButton
+            href={`/explore/${exp.id}`}
+            ariaLabel={`Explore ${exp.title} showcase`}
+          />
+        </div>
       </div>
     </article>
   );

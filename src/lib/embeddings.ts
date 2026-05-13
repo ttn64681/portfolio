@@ -31,7 +31,7 @@ export async function generatePortfolioHash(documents: Document[]): Promise<stri
   return sha256(payload);
 }
 
-/** Single embedding via Gemini embedContent (exact working snippet from RAG demo). */
+/** Single embedding via Gemini embedContent (snippet from my RAG demo). */
 async function embedContent(
   text: string,
   apiKey: string,
@@ -73,7 +73,7 @@ export async function getOrCreateQueryEmbedding(query: string): Promise<number[]
   const cached = await redis.get(key);
   if (cached != null) {
     const arr = typeof cached === 'string' ? JSON.parse(cached) : cached;
-    if (Array.isArray(arr)) return arr;
+    if (Array.isArray(arr)) return arr as number[];
   }
 
   const config = getConfig();

@@ -4,7 +4,11 @@
 @import '../styles/chat.css';
 @import '../styles/projects.css';
 @import '../styles/experience.css';
+@import '../styles/explore.css';
 @import '../styles/extras.css';
+@import '../styles/extras-platform.css';
+@import '../styles/hierarchy-nav.css';
+@import '../styles/route-chips.css';
 @import '../styles/tools.css';
 @import '../styles/section-badges.css';
 @import '../styles/game-over.css';
@@ -49,7 +53,7 @@
   }
 }
 
-/* Custom component classes: use app- prefix where sensible so they don't clash with Tailwind. */
+/* Custom component classes: use app- prefix where sensible so they don't clash w/ Tailwind. */
 @layer components {
   .font-pixelify {
     font-family: var(--font-pixelify);

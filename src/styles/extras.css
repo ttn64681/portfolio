@@ -1,5 +1,9 @@
-/* Extras: unique colorful sneak peek tiles (games, music, drawings, photos). */
+/*
+ * Homepage “Extras” strip only (`Extras.tsx` on `/`). Not the full `/extras/*` platform — see extras-platform.css.
+ * Tiles link into themed rooms; colors mirror hub portal gradients (games green, music violet, etc.).
+ */
 @layer components {
+  /* Full-width band centered under max-width */
   .extras-section {
     width: 100%;
     display: flex;
@@ -13,6 +17,7 @@
     max-width: 1200px;
   }
 
+  /* Badge row + subtitle */
   .extras-section__header {
     margin-bottom: 1.5rem;
   }
@@ -25,6 +30,7 @@
     color: rgba(241, 248, 255, 0.8);
   }
 
+  /* 2×2 mobile → one row of four from `640px` */
   .extras-section__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -52,6 +58,14 @@
     min-height: 110px;
     background: #021728;
     border: 1px solid rgba(77, 189, 255, 0.3);
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+  }
+
+  .extras-tile:focus-visible {
+    outline: 2px solid #4dbdff;
+    outline-offset: 3px;
   }
 
   .extras-tile:hover {
@@ -64,7 +78,7 @@
     transform: translateY(0);
   }
 
-  /* Colored left accent only — flat, modern pixel */
+  /* Room-specific left accent (matches `extras-tile--${id}` from extras-config) */
   .extras-tile--games {
     border-left: 4px solid rgba(45, 217, 160, 0.7);
     color: var(--white-title);
@@ -91,35 +105,30 @@
     border-left-color: #7c4dff;
   }
 
-  .extras-tile--drawings {
+  .extras-tile--gallery {
     border-left: 4px solid rgba(255, 159, 67, 0.8);
     color: var(--white-title);
   }
 
-  .extras-tile--drawings .extras-tile__tagline {
+  .extras-tile--gallery .extras-tile__tagline {
     color: rgba(241, 248, 255, 0.75);
   }
 
-  .extras-tile--drawings:hover {
+  .extras-tile--gallery:hover {
     border-left-color: #ff9f43;
   }
 
-  .extras-tile--photos {
-    border-left: 4px solid rgba(0, 180, 216, 0.7);
+  .extras-tile--animanga {
+    border-left: 4px solid rgba(255, 107, 157, 0.85);
     color: var(--white-title);
   }
 
-  .extras-tile--photos .extras-tile__tagline {
+  .extras-tile--animanga .extras-tile__tagline {
     color: rgba(241, 248, 255, 0.75);
   }
 
-  .extras-tile--photos:hover {
-    border-left-color: #00b4d8;
-  }
-
-  .extras-tile--active {
-    border-color: rgba(77, 189, 255, 0.6);
-    background: rgba(45, 77, 118, 0.4);
+  .extras-tile--animanga:hover {
+    border-left-color: #ff6b9d;
   }
 
   .extras-tile__label {

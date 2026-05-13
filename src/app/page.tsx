@@ -29,7 +29,7 @@ export default function Home() {
         <Projects />
         <Experience />
         <Chat />
-        <Extras onSelect={() => null} />
+        <Extras />
       </div>
 
       {showGameOver && (

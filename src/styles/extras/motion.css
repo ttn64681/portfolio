@@ -1,0 +1,10 @@
+@layer components {
+  /* Strip hover lifts on lobby tiles when OS requests reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .extras-hub-tile:hover,
+    .extras-lobby-card:hover,
+    .extras-hub-quad:hover {
+      transform: none;
+    }
+  }
+}

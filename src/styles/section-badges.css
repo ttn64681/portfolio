@@ -110,11 +110,12 @@
       border-color 0.2s ease-out;
   }
 
-  .game-block:hover {
+  /* Flip cards use preserve-3d; ancestor transform flattens them & breaks back faces */
+  .game-block:not(.project-card--flip):hover {
     transform: translateY(-2px);
   }
 
-  .game-block:active {
+  .game-block:not(.project-card--flip):active {
     transform: translateY(0);
   }
 }

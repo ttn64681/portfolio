@@ -1,6 +1,6 @@
 /**
  * Vector store: Redis-backed document embeddings, similarity search, init.
- * Content lives in code (portfolio.ts); only embeddings and metadata in Redis.
+ * Content lives in code (portfolio.ts); embeddings + metadata in Redis.
  */
 
 import type { Document } from '@/types/chat';
@@ -28,6 +28,26 @@ function cosineSimilarity(a: number[], b: number[]): number {
   return denom === 0 ? 0 : dot / denom;
 }
 
+function parseStoredEmbedding(raw: unknown): number[] | null {
+  if (raw == null) return null;
+  let parsed: { embedding?: unknown };
+  try {
+    if (typeof raw === 'string') {
+      parsed = JSON.parse(raw) as { embedding?: unknown };
+    } else if (typeof raw === 'object') {
+      parsed = raw as { embedding?: unknown };
+    } else {
+      return null;
+    }
+  } catch {
+    return null;
+  }
+  const emb = parsed.embedding;
+  if (!Array.isArray(emb)) return null;
+  const nums = emb.filter((x): x is number => typeof x === 'number');
+  return nums.length === emb.length && nums.length > 0 ? nums : null;
+}
+
 /** Whether stored portfolio hash differs from current (needs re-embed). */
 export async function needsReembedding(documents: Document[]): Promise<boolean> {
   const redis = getRedis();
@@ -37,7 +57,7 @@ export async function needsReembedding(documents: Document[]): Promise<boolean> 
   return storedHash !== currentHash;
 }
 
-/** Initialize Redis with embeddings and hash; only run when missing or needsReembedding. */
+/** Initialize Redis with embeddings and hash. */
 export async function initializePortfolioData(documents: Document[]): Promise<void> {
   if (documents.length === 0) return;
 
@@ -63,7 +83,9 @@ export async function initializePortfolioData(documents: Document[]): Promise<vo
 }
 
 /**
- * Search for similar documents: auto-init if missing or hash changed; cache query embedding; pipeline GET; cosine similarity.
+ * Similarity search over Redis-stored embeddings.
+ * Re-initializes if the id set is missing/stale, or if ids exist but no `rag:embedding:*`
+ * values load (partial migration: hash matched, vectors missing).
  */
 export async function searchSimilarDocuments(
   query: string,
@@ -73,44 +95,60 @@ export async function searchSimilarDocuments(
   const config = getConfig();
   const redis = getRedis();
 
-  const missingOrStale =
-    (await redis.smembers(RAG_KEYS.DOCUMENT_IDS)).length === 0 ||
-    (await needsReembedding(documents));
+  // Try twice to get document IDs
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
 
-  if (missingOrStale && documents.length > 0) {
-    await initializePortfolioData(documents);
-  }
+    const missingOrStale =
+      docIds.length === 0 || (await needsReembedding(documents));
 
-  const docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
-  if (docIds.length === 0) return [];
+    if (missingOrStale && documents.length > 0) {
+      await initializePortfolioData(documents);
+    }
 
-  const queryEmbedding = await getOrCreateQueryEmbedding(query);
+    docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
+    if (docIds.length === 0) return [];
 
-  const pipeline = redis.pipeline();
-  for (const id of docIds) {
-    pipeline.get(RAG_KEYS.EMBEDDING(id));
-  }
-  const rawList = await pipeline.exec();
+    const pipeline = redis.pipeline();
+    for (const id of docIds) {
+      pipeline.get(RAG_KEYS.EMBEDDING(id));
+    }
+    const rawList = (await pipeline.exec()) as unknown[];
 
-  const results: SearchResult[] = [];
-  for (let i = 0; i < docIds.length; i++) {
-    const raw = rawList[i];
-    let parsed: { embedding?: number[] };
-    if (typeof raw === 'string') {
-      parsed = JSON.parse(raw);
-    } else if (raw != null && typeof raw === 'object') {
-      parsed = raw as { embedding?: number[] };
-    } else {
+    let loadable = 0;
+    for (let i = 0; i < docIds.length; i++) {
+      if (parseStoredEmbedding(rawList[i])) loadable++;
+    }
+
+    if (loadable === 0 && documents.length > 0 && attempt === 0) {
+      await initializePortfolioData(documents);
       continue;
     }
-    const embedding = parsed.embedding;
-    if (!Array.isArray(embedding)) continue;
-    const score = cosineSimilarity(queryEmbedding, embedding);
-    if (score > config.similarityThreshold) {
-      results.push({ id: docIds[i], score });
+    if (loadable === 0) return [];
+
+    const queryEmbedding = await getOrCreateQueryEmbedding(query);
+
+    const aboveThreshold: SearchResult[] = [];
+    const allScored: SearchResult[] = [];
+
+    for (let i = 0; i < docIds.length; i++) {
+      const embedding = parseStoredEmbedding(rawList[i]);
+      if (!embedding) continue;
+      const score = cosineSimilarity(queryEmbedding, embedding);
+      allScored.push({ id: docIds[i], score });
+      if (score > config.similarityThreshold) {
+        aboveThreshold.push({ id: docIds[i], score });
+      }
     }
+
+    aboveThreshold.sort((a, b) => b.score - a.score);
+    if (aboveThreshold.length > 0) {
+      return aboveThreshold.slice(0, limit);
+    }
+
+    allScored.sort((a, b) => b.score - a.score);
+    return allScored.slice(0, limit);
   }
 
-  results.sort((a, b) => b.score - a.score);
-  return results.slice(0, limit);
+  return [];
 }

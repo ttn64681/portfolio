@@ -20,6 +20,7 @@ type ProjectCardProps = {
   onSelect?: () => void; // carousel: click to focus
   link?: string;
   github?: string;
+  exploreSlug?: string;
 };
 
 export default function ProjectCard({
@@ -35,6 +36,7 @@ export default function ProjectCard({
   onSelect,
   link,
   github,
+  exploreSlug,
 }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -57,7 +59,6 @@ export default function ProjectCard({
           <h3 className='project-card__title'>{title}</h3>
           {!isActive && role && <div className='project-card__role'>{role}</div>}
           {!isActive && award && <div className='project-card__award'>{award}</div>}
-          {/* Tech stack badges at top */}
           {!isActive && techStack && techStack.length > 0 && (
             <div className='project-card__tags'>
               {techStack.map((tech) => (
@@ -85,7 +86,10 @@ export default function ProjectCard({
                 {link && <Link href={link} />}
                 {github && <Octocat href={github} />}
               </div>
-              <ExploreButton />
+              <ExploreButton
+                href={exploreSlug ? `/explore/${exploreSlug}` : undefined}
+                ariaLabel={exploreSlug ? `Explore ${title} showcase` : undefined}
+              />
             </div>
           )}
         </div>
@@ -93,14 +97,14 @@ export default function ProjectCard({
     );
   }
 
-  // Flip mode (mobile / tablet): actions (Link, Octocat, Explore) only on back
+  // Flip (mobile / tablet): preserve-3d faces + visibility:hidden on obscured face when flipped
   return (
-    <article
-      className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}
-    >
+    <article className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}>
       <div
         role='button'
         tabIndex={0}
+        aria-pressed={isFlipped}
+        aria-label={isFlipped ? `Show summary for ${title}` : `Show details for ${title}`}
         className={`project-card__flip-inner ${isFlipped ? 'project-card__flip-inner--flipped' : ''}`}
         onClick={() => setIsFlipped((prev) => !prev)}
         onKeyDown={(e) => {
@@ -127,7 +131,7 @@ export default function ProjectCard({
               </div>
             )}
             <p className='project-card__summary'>{summary}</p>
-            <div className='project-card__expand-hint'></div>
+            <div className='project-card__expand-hint' aria-hidden />
           </div>
         </div>
         <div className='project-card__face project-card__face--back'>
@@ -149,7 +153,10 @@ export default function ProjectCard({
                 {link && <Link href={link} />}
                 {github && <Octocat href={github} />}
               </div>
-              <ExploreButton />
+              <ExploreButton
+                href={exploreSlug ? `/explore/${exploreSlug}` : undefined}
+                ariaLabel={exploreSlug ? `Explore ${title} showcase` : undefined}
+              />
             </div>
           </div>
         </div>

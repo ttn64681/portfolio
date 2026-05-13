@@ -1,0 +1,2 @@
+/* Full extras subdomain shell (/extras/*): applies after layout wraps children in `extras-platform`. */
+@import './extras/index.css';

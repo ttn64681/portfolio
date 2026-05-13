@@ -34,7 +34,7 @@ export default function DialoguePanel({
     <div className='w-full mt-8 lg:mt-0 dialogue-panel-container'>
       {/* Text + options container with fixed width and controlled height */}
       <div className='dialogue-panel-box w-full lg:ml-2 h-[260px] bg-[#021728] border-1 p-[.25rem] md:p-[.35rem] lg:p-[.5rem] border-[#466C8C] transition-all duration-300 hover:border-[#4dbdff]'>
-        <div className='h-full overflow-y-auto px-4 py-2 flex flex-col'>
+        <div className='h-full overflow-y-auto px-4 py-2 flex flex-col' data-lenis-prevent>
           {/* Dialogue text area; fixed min-height so the box doesn't jump during typewriter */}
           <div className='font-pixelify text-white-title lg:text-lg text-md leading-snug min-h-auto pb-3 flex-1'>
             <Typewriter

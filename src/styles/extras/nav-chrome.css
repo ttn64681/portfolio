@@ -1,0 +1,349 @@
+@layer components {
+  /* In-page hub strip: grid icon home + chip links (`ExtrasHero` sits above this on some flows) */
+  .extras-hub-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    box-sizing: border-box;
+  }
+
+  .extras-hub-nav__home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    color: var(--neon-cool);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(77, 238, 234, 0.35);
+    transition:
+      border-color 0.15s ease-out,
+      color 0.15s ease-out,
+      box-shadow 0.15s ease-out;
+  }
+
+  .extras-hub-nav__home svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .extras-hub-nav__home:hover {
+    border-color: var(--stroke-vivid);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(77, 238, 234, 0.25);
+  }
+
+  .extras-hub-nav__home:focus-visible {
+    outline: 2px solid var(--neon-cool);
+    outline-offset: 2px;
+  }
+
+  .extras-hub-nav__crumbs {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .extras-hub-nav__crumb {
+    font-family: var(--font-pixel-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    font-variant: small-caps;
+    text-transform: none;
+    line-height: 1.2;
+  }
+
+  .extras-hub-nav__crumb--link {
+    color: rgba(241, 248, 255, 0.55);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.15s ease-out,
+      border-color 0.15s ease-out;
+  }
+
+  .extras-hub-nav__crumb--link:hover {
+    color: var(--neon-cool);
+    border-bottom-color: rgba(77, 238, 234, 0.45);
+  }
+
+  .extras-hub-nav__crumb--here {
+    color: rgba(248, 252, 255, 0.92);
+    font-weight: 600;
+  }
+
+  .extras-hub-nav__sep {
+    font-size: 0.55rem;
+    color: rgba(241, 248, 255, 0.35);
+    letter-spacing: 0;
+  }
+
+  .extras-hub-nav__exit {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    font-variant: small-caps;
+    text-transform: none;
+    text-decoration: none;
+    color: rgba(241, 248, 255, 0.65);
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition:
+      border-color 0.15s ease-out,
+      color 0.15s ease-out;
+  }
+
+  .extras-hub-nav__exit:hover {
+    color: var(--neon-hot);
+    border-color: rgba(255, 78, 205, 0.4);
+  }
+
+  .extras-hub-nav__exit:focus-visible {
+    outline: 2px solid var(--neon-hot);
+    outline-offset: 2px;
+  }
+
+  /* Explore-like listing chrome (Extras subpages) */
+  .extras-chrome-hero {
+    position: relative;
+    margin: 0 0 1.35rem;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .extras-chrome-hero--compact {
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .extras-chrome-hero__wash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 90% at 50% -30%, rgba(255, 121, 98, 0.12), transparent 55%);
+    pointer-events: none;
+  }
+
+  .extras-chrome-hero__stack {
+    position: relative;
+    padding: 1.15rem 0 1.1rem;
+    z-index: 1;
+  }
+
+  .extras-chrome-hero__eyebrow {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(241, 248, 255, 0.5);
+  }
+
+  .extras-chrome-hero__title {
+    margin: 0;
+    font-family: var(--font-pixel-headline);
+    font-size: clamp(1.15rem, 4vw, 1.65rem);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--white-title);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+    padding-left: 0.65rem;
+    border-left: 3px solid rgba(255, 121, 98, 0.88);
+    line-height: 1.35;
+  }
+
+  .extras-chrome-hero__deck {
+    margin: 0.55rem 0 0;
+    max-width: 44rem;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: rgba(241, 248, 255, 0.82);
+  }
+
+  .extras-chrome-hero__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .extras-chrome-hero__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    padding: 0.4rem 0.85rem;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white-title);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    transition:
+      border-color 0.15s ease-out,
+      color 0.15s ease-out;
+  }
+
+  .extras-chrome-hero__pill-pre {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex-shrink: 0;
+    opacity: 0.92;
+  }
+
+  .extras-chrome-hero__pill--ghost {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.25);
+    color: rgba(241, 248, 255, 0.78);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    text-transform: none;
+  }
+
+  .extras-chrome-hero__pill--grow {
+    flex: 1 1 120px;
+    min-width: 0;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .extras-chrome-hero__pill:hover {
+    border-color: rgba(255, 121, 98, 0.55);
+    color: rgba(255, 200, 180, 0.98);
+  }
+
+  .extras-chrome-hero__pill:focus-visible {
+    outline: 2px solid rgba(255, 121, 98, 0.85);
+    outline-offset: 2px;
+  }
+
+  /* Generic bordered panel */
+  .extras-panel {
+    margin-bottom: 1rem;
+    padding: 1rem 1rem 1.1rem;
+    background: rgba(0, 16, 32, 0.55);
+    border: 1px solid rgba(77, 189, 255, 0.28);
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .extras-panel__h {
+    margin: 0 0 0.55rem;
+    font-family: var(--font-pixel-retron);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4dbdff;
+  }
+
+  .extras-panel__p {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(241, 248, 255, 0.9);
+  }
+
+  .extras-panel__list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(241, 248, 255, 0.9);
+  }
+
+  /* Games lobby cards */
+  .extras-lobby {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .extras-lobby {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .extras-lobby-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.1rem 1.15rem;
+    background: #021728;
+    border: 1px solid rgba(77, 189, 255, 0.35);
+    border-left: 4px solid #3dd9a0;
+    transition:
+      transform 0.2s ease-out,
+      border-color 0.2s ease-out;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .extras-lobby-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(77, 189, 255, 0.55);
+  }
+
+  .extras-lobby-card:focus-visible {
+    outline: 2px solid #4dbdff;
+    outline-offset: 2px;
+  }
+
+  .extras-lobby-card__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-pixel-headline);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .extras-lobby-card__deck {
+    margin: 0;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.78rem;
+    color: rgba(241, 248, 255, 0.75);
+    line-height: 1.45;
+  }
+
+  .extras-lobby-card__cta {
+    margin-top: 0.75rem;
+    font-family: var(--font-pixel-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #4dbdff;
+    text-transform: uppercase;
+  }
+}
