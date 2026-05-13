@@ -1,9 +1,9 @@
-import type { GalleryTab } from '@/types/extras-gallery';
+import type { GalleryTab } from '@/types/extras/gallery';
 
-/**
- * Tabs for `/extras/gallery`: flat `items` or grouped `subcategories`. Each item picks a `layout` preset for grid span.
- */
-export const extrasGalleryTabs: GalleryTab[] = [
+// /extras/gallery — tabs (e.g. Art vs Photos), optional subcategories, then items. Put files in /public.
+// layout: portrait | square | landscape | wide; featured: true widens one cell.
+
+export const galleryTabs: GalleryTab[] = [
   {
     id: 'drawings',
     label: 'Art',
@@ -61,7 +61,7 @@ export const extrasGalleryTabs: GalleryTab[] = [
           },
         ],
       },
-    ],
+    ], // 
   },
   {
     id: 'photography',

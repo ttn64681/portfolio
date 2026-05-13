@@ -6,7 +6,7 @@
 @import '../styles/experience.css';
 @import '../styles/explore.css';
 @import '../styles/extras.css';
-@import '../styles/extras-platform.css';
+@import '../styles/extras/index.css';
 @import '../styles/hierarchy-nav.css';
 @import '../styles/route-chips.css';
 @import '../styles/tools.css';

@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import type { MenuAction } from '@/types/menu';
 import MenuButton from './MenuButton';
 
-export type { MenuAction } from '@/types/menu';
-
 interface MenuOptionsProps {
   startPressed: boolean;
   isExiting: boolean;

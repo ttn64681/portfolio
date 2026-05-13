@@ -1,7 +1,7 @@
 @layer components {
   /*
    * Explore page shell + hub grid (`ExploreHubClient`).
-   * `.explore-page` / `__inner`: max-width column + horizontal padding (figures bleed uses same rem values in poster.css).
+   * `.explore-page` / `__inner`: max-width column + horizontal padding (dossier content stays inside this column).
    * `.explore-hub--unified`: six tiles — flip panels for projects/experiences/games, direct links for music/gallery/animanga.
    */
   .explore-page {
@@ -376,6 +376,9 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-family: var(--font-pixel-mono);
     font-size: 0.72rem;
     letter-spacing: 0.12em;
@@ -391,6 +394,16 @@
   .explore-hub__home:hover {
     color: #00ffc8;
     border-color: rgba(0, 255, 200, 0.5);
+  }
+
+  .explore-hub__home-icon {
+    flex-shrink: 0;
+    opacity: 0.88;
+  }
+
+  .explore-hub__home:hover .explore-hub__home-icon {
+    opacity: 1;
+    color: inherit;
   }
 
   /* —— Index lists —— */

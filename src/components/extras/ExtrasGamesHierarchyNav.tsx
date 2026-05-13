@@ -5,16 +5,16 @@ import HierarchyNav from '@/components/nav/HierarchyNav';
 import {
   GAME_HUB_LABELS,
   GAME_HUB_ORDER,
-  extrasGames,
+  gameEntries,
   gamesByHubCategory,
-} from '@/data/extras-games';
-import type { GameHubCategory } from '@/types/extras-games';
+} from '@/data/extras/games';
+import type { GameHubCategory } from '@/types/extras/games';
 
 /** Parent rows = hub buckets (`clubs`/`jams`/`misc`); child chips link to `/extras/games/[slug]`. */
 
 export default function ExtrasGamesHierarchyNav({ currentSlug }: { currentSlug: string }) {
   const derivedCat = useMemo(() => {
-    const g = extrasGames.find((x) => x.slug === currentSlug);
+    const g = gameEntries.find((x) => x.slug === currentSlug);
     return (g?.hubCategory ?? 'misc') as GameHubCategory;
   }, [currentSlug]);
 

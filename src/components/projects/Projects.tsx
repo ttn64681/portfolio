@@ -2,21 +2,20 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
-import { projectsConfig } from '@/data/projects-config';
-import type { ProjectInfo } from '@/types/projects';
+import { projectsConfig } from '@/data/config/projects';
+import type { ProjectConfig } from '@/types/projects';
 
-const projects: ProjectInfo[] = projectsConfig.map((config) => ({
-  id: `proj-${config.id}`,
-  baseId: config.id,
+type ProjectHomeRow = ProjectConfig & {
+  title: string;
+  summary: string;
+  carouselId: string;
+};
+
+const projects: ProjectHomeRow[] = projectsConfig.map((config) => ({
+  ...config,
   title: config.title || `Project ${config.id}`,
   summary: config.summary || config.bullets[0] || '',
-  role: config.role,
-  award: config.award,
-  techStack: config.techStack,
-  date: config.date,
-  bullets: config.bullets,
-  link: config.link,
-  github: config.github,
+  carouselId: `proj-${config.id}`,
 }));
 
 export default function Projects() {
@@ -98,7 +97,7 @@ export default function Projects() {
           <div className='projects-carousel' ref={carouselRef}>
             {projects.map((project, index) => (
               <div
-                key={project.id}
+                key={project.carouselId ?? project.id}
                 ref={(el) => {
                   cardRefs.current[index] = el;
                 }}
@@ -119,7 +118,7 @@ export default function Projects() {
                   }}
                   link={project.link}
                   github={project.github}
-                  exploreSlug={project.baseId}
+                  exploreSlug={project.id}
                 />
               </div>
             ))}
@@ -138,7 +137,7 @@ export default function Projects() {
         <div className='projects-grid lg:hidden'>
           {projects.map((project) => (
             <ProjectCard
-              key={project.id}
+              key={project.carouselId ?? project.id}
               title={project.title}
               summary={project.summary}
               role={project.role}
@@ -150,7 +149,7 @@ export default function Projects() {
               isActive={false}
               link={project.link}
               github={project.github}
-              exploreSlug={project.baseId}
+              exploreSlug={project.id}
             />
           ))}
         </div>

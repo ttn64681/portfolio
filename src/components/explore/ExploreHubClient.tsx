@@ -8,9 +8,17 @@ import {
   getHubGameLinks,
   getHubProjectLinks,
   isHubFocus,
-  type HubFocusParam,
-} from '@/data/explore-hub-data';
-import { MdCollections, MdGraphicEq, MdGroups, MdRocketLaunch, MdSportsEsports, MdTheaters } from 'react-icons/md';
+} from '@/data/explore/hub';
+import type { HubFocusParam } from '@/types/explore/hub';
+import {
+  MdCollections,
+  MdGraphicEq,
+  MdGroups,
+  MdHome,
+  MdRocketLaunch,
+  MdSportsEsports,
+  MdTheaters,
+} from 'react-icons/md';
 
 /**
  * `/explore` landing grid: flip tiles open lists for projects / experiences / games; music/gallery/animanga link straight out.
@@ -219,7 +227,8 @@ export default function ExploreHubClient() {
       />
 
       <Link href='/' className='explore-hub__home'>
-        Back to site
+        <MdHome className='explore-hub__home-icon' size={18} aria-hidden />
+        Home
       </Link>
     </div>
   );

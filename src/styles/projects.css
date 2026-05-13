@@ -78,7 +78,13 @@
     -ms-overflow-style: none;
     padding: 3rem 80px; /* extra horizontal room so focused card isn't in fade zone */
     position: relative;
-    mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%); /* mask-image to create fade edges */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    ); /* mask-image to create fade edges */
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
@@ -416,7 +422,9 @@
   .project-card--flip:not(.project-card--flipped):hover
     .project-card__face--front
     .project-card__inner,
-  .project-card--flip:not(.project-card--flipped):focus-within .project-card__face--front .project-card__inner {
+  .project-card--flip:not(.project-card--flipped):focus-within
+    .project-card__face--front
+    .project-card__inner {
     transform: translateY(-4px);
     border-left-color: #4dbdff;
     background: rgba(45, 77, 118, 0.9);
@@ -424,7 +432,9 @@
   }
 
   .project-card--flip.project-card--flipped:hover .project-card__face--back .project-card__inner,
-  .project-card--flip.project-card--flipped:focus-within .project-card__face--back .project-card__inner {
+  .project-card--flip.project-card--flipped:focus-within
+    .project-card__face--back
+    .project-card__inner {
     transform: translateY(-4px);
     border-left-color: #4dbdff;
     background: rgba(45, 77, 118, 0.9);
@@ -500,8 +510,8 @@
   }
 
   /* Project sprite buttons: 3x scale per sizing_info
-   - link-walk: 18x25/frame, 4 frames, sheet 72x25 → display 54x75, sheet 216x75
-   - octocat-float: 17x23/frame, 4 frames, sheet 68x23 → display 51x69, sheet 204x69
+   - link-walk: 18x25/frame, 4 frames, sheet 72x25 --> display 54x75, sheet 216x75
+   - octocat-float: 17x23/frame, 4 frames, sheet 68x23 --> display 51x69, sheet 204x69
    */
   .link-btn,
   .octocat-btn {
@@ -587,33 +597,6 @@
     align-items: flex-end;
     gap: 0.5rem;
     overflow: visible;
-  }
-
-  .sprite-action-with-icon {
-    display: inline-flex;
-    align-items: flex-end;
-    gap: 0.35rem;
-    vertical-align: bottom;
-  }
-
-  .sprite-action-with-icon__glyph {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(241, 248, 255, 0.88);
-    flex-shrink: 0;
-    margin-bottom: 2px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
-  }
-
-  .sprite-action-with-icon__glyph svg {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .sprite-action-with-icon__sprite {
-    display: inline-flex;
-    align-items: flex-end;
   }
 
   .project-card__explore-btn {

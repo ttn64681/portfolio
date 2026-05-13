@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
-import AnimangaOutboundSprites from '@/components/extras/AnimangaOutboundSprites';
+import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
 import { AnimangaStars } from '@/components/extras/AnimangaFeedSection';
-import type { AnimangaCurrent } from '@/types/extras-animanga';
+import type { AnimangaCurrent } from '@/types/extras/animanga';
 
 /** Single labeled stack inside a medium column (“Currently watching”, “Want to play”, …). */
 
@@ -38,14 +38,14 @@ export default function AnimangaNowColumn({
               {item.subtitle && <p className='extras-animanga-now__sub'>{item.subtitle}</p>}
               {item.href && (
                 <div className='extras-animanga-now__outbound'>
-                  <AnimangaOutboundSprites href={item.href} ariaLabel={`Open link: ${item.title}`} />
+                  <OutboundSpriteLink href={item.href} ariaLabel={`Open link: ${item.title}`} />
                 </div>
               )}
             </div>
           ))}
         </div>
       ) : (
-        <p className='extras-animanga-now__empty'>Nothing listed yet — add picks in extras-animanga.ts.</p>
+        <p className='extras-animanga-now__empty'>Nothing listed yet — add picks in data/extras/animanga.ts.</p>
       )}
     </div>
   );

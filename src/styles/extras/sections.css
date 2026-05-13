@@ -284,7 +284,7 @@
 
   /*
    * Gallery page (`ExtrasGalleryClient`): toolbar, CSS grid of framed cells, intrinsic images (`extras-gallery-frame__img`).
-   * Layout presets: portrait / square / wide → column span via `extras-gallery-cell--*`.
+   * Layout presets: portrait / square / wide --> column span via `extras-gallery-cell--*`.
    */
   .extras-gallery-page-body {
     padding-bottom: 2rem;
@@ -633,7 +633,12 @@
 
   .extras-music-about__body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 0.88rem;
     line-height: 1.55;
     color: rgba(224, 216, 246, 0.88);

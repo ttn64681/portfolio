@@ -2,7 +2,7 @@
 
 export type MusicTrack = {
   name: string;
-  /** Shown in the “About this track” panel when this row is selected — editable in extras-music.ts. */
+  /** Shown in the “About this track” panel when this row is selected — editable in data/data/extras/music.ts. */
   description?: string;
   /** Path under `public/` (e.g. `/audio/theme.mp3`). Preferred over embed when present. */
   src?: string;

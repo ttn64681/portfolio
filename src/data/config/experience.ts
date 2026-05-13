@@ -1,6 +1,5 @@
-/**
- * Experience section config: full-width blocks (e.g. roles, freelance, leadership).
- */
+// Homepage strip + `/explore/<id>`. Listed after every project on Explore. Same poster rules as projects —
+// optional `exploreDossier`, defaults in `src/data/explore/dossier-defaults.ts`.
 
 import type { ExperienceConfig } from '@/types/experience';
 

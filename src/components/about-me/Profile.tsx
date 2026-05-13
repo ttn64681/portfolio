@@ -10,7 +10,7 @@ export default function Profile() {
   const [isTalking, setIsTalking] = useState(false);
   const [phraseId, setPhraseId] = useState(0);
   const portraitContainerRef = useRef<HTMLDivElement>(null);
-  /** So we only set isTalking false when the typewriter that finished is the current one (avoids Back → quick option cutting animation). */
+  /** So we only set isTalking false when the typewriter that finished is the current one (avoids Back --> quick option cutting animation). */
   const currentRunIdRef = useRef<string | null>(null);
 
   useVisibilityRepaint(portraitContainerRef);

@@ -5,7 +5,7 @@ import { buildSystemPrompt } from '@/lib/chat-prompts';
 import { MAX_BODY_BYTES, MAX_MESSAGE_LENGTH, MAX_MESSAGES_FOR_LLM } from '@/lib/constants';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { searchSimilarDocuments } from '@/lib/vector-store';
-import { portfolioDocuments } from '@/data/portfolio';
+import { portfolioDocuments } from '@/data/config/portfolio';
 import type { ChatErrorCode } from '@/lib/chat-error';
 
 /** Structured error body */

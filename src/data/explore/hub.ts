@@ -1,11 +1,10 @@
-import { experienceConfig } from '@/data/experience-config';
-import { extrasGames } from '@/data/extras-games';
-import { projectsConfig } from '@/data/projects-config';
+import { experienceConfig } from '@/data/config/experience';
+import { gameEntries } from '@/data/extras/games';
+import { projectsConfig } from '@/data/config/projects';
+import type { HubFocusParam } from '@/types/explore/hub';
 
-/**
- * Link lists for `ExploreHubClient` flip panels (`?focus=projects|experiences|games`).
- * Games items → `/extras/games/[slug]`; projects/experiences → `/explore/[slug]`.
- */
+// Flip-panel link lists: projects + experiences --> /explore/<slug>, games --> /extras/games/<slug>.
+
 export function getHubProjectLinks(): { slug: string; label: string }[] {
   return projectsConfig.map((p) => ({
     slug: p.id,
@@ -23,10 +22,8 @@ export function getHubExperienceLinks(): { slug: string; label: string }[] {
 
 /** Hub flip panel: games — links to dossier routes (no lobby page). */
 export function getHubGameLinks(): { slug: string; label: string }[] {
-  return extrasGames.map((g) => ({ slug: g.slug, label: g.title }));
+  return gameEntries.map((g) => ({ slug: g.slug, label: g.title }));
 }
-
-export type HubFocusParam = 'projects' | 'experiences' | 'games';
 
 export function isHubFocus(v: string | null): v is HubFocusParam {
   return v === 'projects' || v === 'experiences' || v === 'games';

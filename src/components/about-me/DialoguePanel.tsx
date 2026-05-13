@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Typewriter from 'typewriter-effect';
-import { DIALOGUE_OPTIONS, IDLE_TEXTS } from '@/data/dialogue';
+import { DIALOGUE_OPTIONS, IDLE_TEXTS } from '@/data/config/dialogue';
 
 type DialoguePanelProps = {
   onOptionSelected?: () => void;

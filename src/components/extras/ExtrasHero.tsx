@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import FloatingRouteNav from '@/components/nav/FloatingRouteNav';
-import { getGameOrderIndex, getGameOrderTotal } from '@/data/extras-games';
+import { getGameOrderIndex, getGameOrderTotal } from '@/data/extras/games';
 import { getExtrasNavNeighbors } from '@/lib/extras-nav-ring';
 
 /**

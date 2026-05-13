@@ -31,7 +31,7 @@ PROJECT CARD BUTTON SPRITES (shown when hovering link-walk, overlayed underneath
 CSS steps() for N-frame sprite animation (avoid wrong/uneven animation or "loops too early"):
 - Keyframe range must be the FULL sheet width (0 to -(N × frameWidth)), not (N-1) frame widths.
 - Use steps(N, end) so each step lands on a frame boundary (0, -frameW, -2×frameW, ...).
-- If you use range 0 to -(N-1)×frameW with steps(N), the browser interpolates between frames → uneven. With steps(N-1) the last frame only flashes at 100% → loops too early.
+- If you use range 0 to -(N-1)×frameW with steps(N), the browser interpolates between frames --> uneven. With steps(N-1) the last frame only flashes at 100% --> loops too early.
 
 PROJECT PAGE SPRITES:
 - link-walk-shadow = 16x4/frame, sprite sheet 64x4

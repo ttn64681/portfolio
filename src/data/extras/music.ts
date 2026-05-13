@@ -1,10 +1,8 @@
-import type { MusicRootCategory } from '@/types/extras-music';
+import type { MusicRootCategory } from '@/types/extras/music';
 
-/**
- * Music library tree: roots → playlists → tracks (`ExtrasMusicClient`).
- * Local files: put audio under `public/` and set `src`; streaming: use `embedHtml` on the track.
- */
-export const extrasMusicRoots: MusicRootCategory[] = [
+// /extras/music — roots --> playlists --> tracks. Local file: public/... path on track.src. Embed: track.embedHtml.
+
+export const musicRoots: MusicRootCategory[] = [
   {
     id: 'vgm',
     title: 'VGM',
@@ -16,12 +14,14 @@ export const extrasMusicRoots: MusicRootCategory[] = [
         tracks: [
           {
             name: 'Theme — add /audio/theme.mp3',
-            description: 'Lead motif and loop structure for exploration beats — swap copy when you ship real stems.',
+            description:
+              'Lead motif and loop structure for exploration beats — swap copy when you ship real stems.',
             embedHtml: undefined,
           },
           {
             name: 'Combat layer — add file',
-            description: 'Percussion-forward layer meant to sit under the main theme without muddying the melody.',
+            description:
+              'Percussion-forward layer meant to sit under the main theme without muddying the melody.',
             embedHtml: undefined,
           },
         ],
@@ -51,7 +51,8 @@ export const extrasMusicRoots: MusicRootCategory[] = [
         tracks: [
           {
             name: 'Beat sketch — add /audio/*.mp3',
-            description: 'Draft harmonic bed — describe vibe and arrangement intent for Future You.',
+            description:
+              'Draft harmonic bed — describe vibe and arrangement intent for Future You.',
             embedHtml: undefined,
           },
         ],

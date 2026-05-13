@@ -2,17 +2,21 @@
 
 import Image from 'next/image';
 import type { ReactNode } from 'react';
-import type { ExploreDetail, ExploreFigureSection, ExploreGalleryItem, ExploreKind } from '@/types/explore';
+import type {
+  ExploreDetail,
+  ExploreFigureSection,
+  ExploreGalleryItem,
+  ExploreKind,
+} from '@/types/explore';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
-import Link from '@/components/projects/Link';
-import Octocat from '@/components/projects/Octocat';
+import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
 import RouteFooterPager from '@/components/nav/RouteFooterPager';
 import LazyYouTube from './LazyYouTube';
 
 /**
  * `/explore/[slug]` body below `ExploreHero`.
  *
- * Flow: overview band → floated widgets (`explore-float-grid`) → mosaic gallery → optional videos.
+ * Flow: overview band --> floated widgets (`explore-float-grid`) --> mosaic gallery --> optional videos.
  * Root applies slug accent via `explore-float-root--accent-*` (see poster.css).
  */
 
@@ -36,7 +40,10 @@ function PosterBullets({ lines }: { lines: string[] }) {
 }
 
 /** Widget `<h2>` color modifiers: project vs experience tone + per-section hue in poster.css. */
-function widgetTitleClass(kind: ExploreKind, section: 'features' | 'implementation' | 'challenges' | 'reflection'): string {
+function widgetTitleClass(
+  kind: ExploreKind,
+  section: 'features' | 'implementation' | 'challenges' | 'reflection',
+): string {
   const base = 'explore-widget-title';
   const tone = kind === 'experience' ? 'explore-widget-title--exp' : 'explore-widget-title--proj';
   return `${base} ${tone} ${base}--${section}`;
@@ -53,7 +60,11 @@ function FigureMat({ item }: { item: ExploreGalleryItem }) {
       {item.src ? (
         item.mediaKind === 'gif' ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.src} alt={item.alt} className='explore-print__img explore-print__img--contain' />
+          <img
+            src={item.src}
+            alt={item.alt}
+            className='explore-print__img explore-print__img--contain'
+          />
         ) : (
           <Image
             src={item.src}
@@ -80,7 +91,13 @@ function FigureMat({ item }: { item: ExploreGalleryItem }) {
 }
 
 /** Uniform grid of `FigureMat` cells (`detail.figures.*` entries). */
-function ExploreFigures({ items, omitCaptions }: { items: ExploreGalleryItem[] | undefined; omitCaptions?: boolean }) {
+function ExploreFigures({
+  items,
+  omitCaptions,
+}: {
+  items: ExploreGalleryItem[] | undefined;
+  omitCaptions?: boolean;
+}) {
   if (!items?.length) return null;
   const gridClass = 'explore-figures explore-figures--uniform';
   return (
@@ -91,7 +108,9 @@ function ExploreFigures({ items, omitCaptions }: { items: ExploreGalleryItem[] |
             <FigureMat item={item} />
             <span className='explore-print__lip' aria-hidden />
           </div>
-          {!omitCaptions && item.caption && <figcaption className='explore-figures__caption'>{item.caption}</figcaption>}
+          {!omitCaptions && item.caption && (
+            <figcaption className='explore-figures__caption'>{item.caption}</figcaption>
+          )}
         </figure>
       ))}
     </div>
@@ -105,7 +124,11 @@ function OverviewBanner({ item }: { item: ExploreGalleryItem }) {
       <div className='explore-overview-banner__mat'>
         {item.mediaKind === 'gif' ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.src} alt={item.alt} className='explore-overview-banner__img explore-overview-banner__img--gif' />
+          <img
+            src={item.src}
+            alt={item.alt}
+            className='explore-overview-banner__img explore-overview-banner__img--gif'
+          />
         ) : (
           <Image
             src={item.src}
@@ -186,13 +209,15 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
             </div>
             {!detail.demoLink && !detail.repoLink && detail.kind === 'project' && (
               <p className='explore-poster__links-hint'>
-                Add demo or repo URLs in projects-config to show link buttons.
+                Add demo or repo URLs in `data/config/projects.ts` to show link buttons.
               </p>
             )}
             {(detail.demoLink || detail.repoLink) && (
               <div className='explore-poster__actions' onClick={(e) => e.stopPropagation()}>
-                {detail.demoLink && <Link href={detail.demoLink} ariaLabel='Open live demo' />}
-                {detail.repoLink && <Octocat href={detail.repoLink} />}
+                {detail.demoLink && (
+                  <OutboundSpriteLink href={detail.demoLink} ariaLabel='Open live demo' />
+                )}
+                {detail.repoLink && <OutboundSpriteLink href={detail.repoLink} />}
               </div>
             )}
           </div>
@@ -242,7 +267,10 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
         </div>
 
         <section className='explore-gallery-section' aria-labelledby='explore-gallery-heading'>
-          <h2 id='explore-gallery-heading' className='explore-widget-title explore-widget-title--gallery'>
+          <h2
+            id='explore-gallery-heading'
+            className='explore-widget-title explore-widget-title--gallery'
+          >
             Gallery
           </h2>
           <div className='explore-gallery explore-gallery--mosaic explore-gallery--uniform-rows'>
@@ -262,7 +290,11 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
                     {item.src ? (
                       item.mediaKind === 'gif' ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.src} alt={item.alt} className='explore-print__img explore-print__img--contain' />
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          className='explore-print__img explore-print__img--contain'
+                        />
                       ) : (
                         <Image
                           src={item.src}
@@ -290,8 +322,14 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
         </section>
 
         {detail.youtube.length > 0 && (
-          <section className='explore-panel explore-video-section' aria-labelledby='explore-video-stack-heading'>
-            <h2 id='explore-video-stack-heading' className='explore-widget-title explore-widget-title--video'>
+          <section
+            className='explore-panel explore-video-section'
+            aria-labelledby='explore-video-stack-heading'
+          >
+            <h2
+              id='explore-video-stack-heading'
+              className='explore-widget-title explore-widget-title--video'
+            >
               Video
             </h2>
             <div className='explore-video-stack explore-video-stack--items'>

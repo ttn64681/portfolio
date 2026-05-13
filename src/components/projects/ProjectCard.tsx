@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from './Link';
-import Octocat from './Octocat';
 import ExploreButton from './ExploreButton';
+import OutboundSpriteLink from './OutboundSpriteLink';
 
 type ProjectCardMode = 'carousel' | 'flip';
 
@@ -83,8 +82,8 @@ export default function ProjectCard({
           {isActive && (
             <div className='project-card__actions' onClick={(e) => e.stopPropagation()}>
               <div className='project-card__actions-sprites'>
-                {link && <Link href={link} />}
-                {github && <Octocat href={github} />}
+                {link && <OutboundSpriteLink href={link} />}
+                {github && <OutboundSpriteLink href={github} />}
               </div>
               <ExploreButton
                 href={exploreSlug ? `/explore/${exploreSlug}` : undefined}
@@ -150,8 +149,8 @@ export default function ProjectCard({
             )}
             <div className='project-card__actions' onClick={(e) => e.stopPropagation()}>
               <div className='project-card__actions-sprites'>
-                {link && <Link href={link} />}
-                {github && <Octocat href={github} />}
+                {link && <OutboundSpriteLink href={link} />}
+                {github && <OutboundSpriteLink href={github} />}
               </div>
               <ExploreButton
                 href={exploreSlug ? `/explore/${exploreSlug}` : undefined}

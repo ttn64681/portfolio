@@ -4,8 +4,8 @@ import Image from 'next/image';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import { useEffect, useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
-import type { GalleryItem, GalleryLayoutPreset, GalleryTab } from '@/types/extras-gallery';
-import { isGroupedGalleryTab } from '@/types/extras-gallery';
+import type { GalleryItem, GalleryLayoutPreset, GalleryTab } from '@/types/extras/gallery';
+import { isGroupedGalleryTab } from '@/types/extras/gallery';
 
 /** Maps data layout presets + featured flag to grid cell BEM classes (`extras-gallery-cell--*`). */
 function cellClass(layout: GalleryLayoutPreset, featured?: boolean): string {

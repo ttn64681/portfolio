@@ -3,14 +3,14 @@
  * Keeps API, lib, and components type-safe without depending on SDK internals.
  */
 
-/** Portfolio document shape (data/portfolio.ts and vector-store). */
+/** Portfolio document shape (`data/config/portfolio.ts` and vector-store). */
 export type Document = {
   id: string;
   content: string;
   metadata?: Record<string, unknown>;
 };
 
-/** Result from vector similarity search (vector-store → route). */
+/** Result from vector similarity search (vector-store --> route). */
 export type SearchResult = {
   id: string;
   score: number;
@@ -41,7 +41,7 @@ export type ClientBlock =
 
 /**
  * Single row in the chat timeline (deterministic order).
- * - Order is fixed: intro → blocks (resume, fun_fact, error) per anchor → messages → loading → typing.
+ * - Order is fixed: intro --> blocks (resume, fun_fact, error) per anchor --> messages --> loading --> typing.
  * - new row types: add a new union variant with a `type` discriminant and handle it in
  *   buildChatTimeline + ChatTimeline so the timeline stays deterministic.
  */

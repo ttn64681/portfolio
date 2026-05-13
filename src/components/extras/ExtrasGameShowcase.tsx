@@ -2,10 +2,9 @@
 
 import Image from 'next/image';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
-import Link from '@/components/projects/Link';
-import Octocat from '@/components/projects/Octocat';
+import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
 import LazyYouTube from '@/components/explore/LazyYouTube';
-import type { ExtraGameEntry } from '@/types/extras-games';
+import type { ExtraGameEntry } from '@/types/extras/games';
 
 /** Reuses explore poster primitives (`explore-overview-block`, gallery mosaic, bullets) for one game entry. */
 
@@ -50,8 +49,8 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
           )}
           {(game.playUrl || game.repoUrl) && (
             <div className='extras-game__actions'>
-              {game.playUrl && <Link href={game.playUrl} ariaLabel={`Play ${game.title}`} />}
-              {game.repoUrl && <Octocat href={game.repoUrl} ariaLabel={`GitHub: ${game.title}`} />}
+              {game.playUrl && <OutboundSpriteLink href={game.playUrl} ariaLabel={`Play ${game.title}`} />}
+              {game.repoUrl && <OutboundSpriteLink href={game.repoUrl} ariaLabel={`GitHub: ${game.title}`} />}
             </div>
           )}
         </div>

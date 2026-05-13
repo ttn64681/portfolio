@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { HierarchyNavItem } from '@/components/nav/hierarchy-nav-types';
+import type { NavChip } from '@/types/nav';
 
 function isInternalHref(href: string) {
   return href.startsWith('/');
@@ -13,7 +13,7 @@ export default function HierarchyChipRow({
   ariaLabel,
   className,
 }: {
-  items: HierarchyNavItem[];
+  items: NavChip[];
   ariaLabel?: string;
   className?: string;
 }) {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { extrasConfig } from '@/data/extras-config';
+import { navStrip } from '@/data/extras/config';
 
-/** Homepage section linking into `/extras/*` rooms — tiles pick `extras-tile--${id}` styles from extras.css. */
+/** Homepage extras grid — rows are `ExtraItem` from `types/extras/config.ts` via `navStrip`. */
 
 export default function Extras() {
   return (
@@ -17,7 +17,7 @@ export default function Extras() {
           </p>
         </header>
         <div className='extras-section__grid'>
-          {extrasConfig.map((item) => (
+          {navStrip.map((item) => (
             <Link
               key={item.id}
               href={item.href}

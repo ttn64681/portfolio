@@ -18,8 +18,8 @@ Open to relocation (Prefers Atlanta or major Georgia cities)
 
 University of Georgia (UGA) — B.S. Computer Science
 Expected Graduation: May 2026
-Major GPA: 3.70 / 4.0
-Cumulative GPA: 3.27 / 4.0
+Major GPA: 3.76 / 4.0
+Cumulative GPA: 3.34 / 4.0
 Relevant Coursework: Data Structures, Algorithms, Software Engineering, Full-Stack Development, OOP, Data Science/ML, GenAI, Deep Learning, Computer Architecture, Computer Graphics, Systems Programming
 Certifications: Arch Ready Certification (UGA)
 
@@ -30,7 +30,7 @@ Frontend: React 19, Next.js (App Router), Tailwind CSS, Framer Motion, HTML5/CSS
 Backend: Spring Boot 3.5, Node.js, Next.js API Routes, Server Actions
 Database & Caching: PostgreSQL, MongoDB (Mongoose), Redis (Upstash), Caffeine Cache
 AI/ML: RAG (Retrieval-Augmented Generation), Google Gemini API, Vercel AI SDK, Vector Search, LLMs
-Design & Graphics: Aseprite (Working Knowledge - Animation/Pixel Art), Figma (Working Knowledge - Prototyping), VFX.js (GLSL Shaders), Blender, Photoshop, Garageband
+Design & Graphics: THREE.js, Aseprite (Working Knowledge - Animation/Pixel Art), Figma (Working Knowledge - Prototyping), VFX.js (GLSL Shaders), Blender, Photoshop, Garageband
 Engineering Practices: Agile/Scrum, Jira, Docker, Postman, Unix/Linux, REST/GraphQL, Dependency Injection
 
 === PROFESSIONAL EXPERIENCE — FREELANCE (Fall 2025 – Present)

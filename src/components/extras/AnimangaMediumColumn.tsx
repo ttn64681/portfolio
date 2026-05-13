@@ -1,7 +1,7 @@
 'use client';
 
 import AnimangaNowColumn from '@/components/extras/AnimangaNowColumn';
-import type { AnimangaFeedKind, AnimangaHero } from '@/types/extras-animanga';
+import type { AnimangaFeedKind, AnimangaHero } from '@/types/extras/animanga';
 
 /** Favorite picks filtered to the active medium (`kind` on each card). */
 function favorites(kind: AnimangaFeedKind, hero: AnimangaHero) {

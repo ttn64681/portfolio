@@ -1,33 +1,7 @@
-/**
- * Manual project configuration for UI display.
- * - Condensed bullet points (3 max)
- * - Tech stack badges
- * - Dates
- * - Any other display-specific info
- */
+// Carousel + `/explore/<id>` (id = slug). Order = Explore hub list. Card: title, summary, bullets, stack, dates,
+// link, github. Poster-only bits: optional `exploreDossier` (see `src/data/explore/dossier-defaults.ts`).
 
-export type ProjectConfig = {
-  /** Project ID matching the base name from portfolio.ts (e.g., "cinema", "coursehub") */
-  id: string;
-  /** Title */
-  title?: string;
-  /** One-line summary of what the app is and what you did */
-  summary?: string;
-  /** Role */
-  role?: string;
-  /** Optional colorful award or achievement badge */
-  award?: string;
-  /** Condensed bullet points (max 3) for flip cards and carousel expanded view */
-  bullets: string[];
-  /** Manual tech stack badges shown as bubbles at top of card */
-  techStack?: string[];
-  /** Project date range or completion date */
-  date?: string;
-  /** Optional project / demo URL for Link sprite button */
-  link?: string;
-  /** Optional GitHub repo URL for Octocat sprite button */
-  github?: string;
-};
+import type { ProjectConfig } from '@/types/projects';
 
 export const projectsConfig: ProjectConfig[] = [
   {
@@ -96,13 +70,55 @@ export const projectsConfig: ProjectConfig[] = [
     ],
     techStack: ['Godot 4', 'GDScript', 'Keyframes', 'Aseprite'],
     date: 'Sep 2025 - Present',
-    link: 'https://opuhlos.itch.io/tower-ascent'
+    link: 'https://opuhlos.itch.io/tower-ascent',
+  },
+  {
+    id: 'bill-cypher',
+    title: 'Bill Cipher',
+    role: 'Developer',
+    summary: 'Three.js scene / experiment — Bill Cipher themed (Mar 2026).',
+    bullets: [
+      'Three.js build — add your one-liners when ready.',
+      'Wire live demo + repo links on this row when URLs exist.',
+      'Optional exploreDossier.gallery / figures on this entry for poster media.',
+    ],
+    techStack: ['Three.js', 'WebGL'],
+    date: 'Mar 2026',
+    link: undefined,
+    github: undefined,
+  },
+  {
+    id: 'domain-expansion',
+    title: 'Domain Expansion',
+    role: 'Developer',
+    summary: 'Three.js project — domain expansion vibe (Apr 2026).',
+    bullets: [
+      'Three.js — replace with real feature bullets.',
+      'Add demo + GitHub on this row when you have them.',
+      'Drop captures under /public and list paths in exploreDossier.gallery.',
+    ],
+    techStack: ['Three.js', 'WebGL'],
+    date: 'Apr 2026',
+    link: undefined,
+    github: undefined,
+  },
+  {
+    id: 'bird-audio-classification',
+    title: 'Bird audio classification',
+    role: 'Research / ML',
+    summary: 'Transfer learning with HuBERT and AST transformer models (Apr 2026).',
+    bullets: [
+      'HuBERT + AST — tighten wording when paper / writeup is ready.',
+      'GitHub + video demo: fill link fields when published.',
+      'Poster gallery / figures: exploreDossier on this entry (merges over dossier-defaults).',
+    ],
+    techStack: ['Python', 'PyTorch', 'HuBERT', 'AST', 'Audio ML'],
+    date: 'Apr 2026',
+    link: undefined,
+    github: undefined,
   },
 ];
 
-/**
- * Helper to get config for a project by its base ID.
- */
-export function getProjectConfig(baseId: string): ProjectConfig | undefined {
-  return projectsConfig.find((config) => config.id === baseId);
+export function getProjectConfig(slug: string): ProjectConfig | undefined {
+  return projectsConfig.find((config) => config.id === slug);
 }

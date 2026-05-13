@@ -1,7 +1,7 @@
 'use client';
 
 import HierarchyChipRow from '@/components/nav/HierarchyChipRow';
-import { getExploreStripItems } from '@/data/explore-registry';
+import { getExploreStripItems } from '@/data/explore/registry';
 
 /** Horizontal chip nav under the hero — items follow `EXPLORE_ORDER`. */
 

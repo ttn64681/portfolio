@@ -1,6 +1,6 @@
 /**
  * Vector store: Redis-backed document embeddings, similarity search, init.
- * Content lives in code (portfolio.ts); embeddings + metadata in Redis.
+ * Content lives in code (`@/data/config/portfolio`); embeddings + metadata in Redis.
  */
 
 import type { Document } from '@/types/chat';

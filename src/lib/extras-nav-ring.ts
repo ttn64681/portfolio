@@ -1,12 +1,12 @@
-import { extrasGames } from '@/data/extras-games';
+import { gameEntries } from '@/data/extras/games';
 
 /**
  * Ordered URLs for extras prev/next (ExtrasHero keyboard + pager).
- * Games follow `extrasGames` array order; then music → gallery → animanga.
+ * Games follow `gameEntries` array order; then music --> gallery --> animanga.
  */
 export function getExtrasNavHrefSequence(): string[] {
   return [
-    ...extrasGames.map((g) => `/extras/games/${g.slug}`),
+    ...gameEntries.map((g) => `/extras/games/${g.slug}`),
     '/extras/music',
     '/extras/gallery',
     '/extras/animanga',

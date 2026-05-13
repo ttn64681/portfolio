@@ -1,16 +1,16 @@
-/**
- * Experience entry for the Experience section (full-width blocks).
- */
+import type { ExploreDossierInput } from '@/types/explore/dossier-input';
+
+// One row in `data/config/experience.ts`. Same object feeds the homepage (`Experience.tsx` --> `ExperienceBlock`)
+// and Explore (`/explore/[id]`, hub, merge). `exploreDossier` is optional poster overrides only — not a second copy
+// of title/bullets/stack; those stay on this type for both surfaces.
 
 export type ExperienceConfig = {
   id: string;
-  /** Company or organization name */
   title: string;
   role?: string;
   date?: string;
-  /** Short summary line */
   summary?: string;
-  /** Key points (displayed as list) */
   bullets?: string[];
   techStack?: string[];
+  exploreDossier?: ExploreDossierInput;
 };

@@ -1,10 +1,12 @@
 'use client';
 
-const LINKS = [
+import type { FooterNavLink } from '@/types/footer';
+
+const LINKS: FooterNavLink[] = [
   { label: 'GitHub', href: 'https://github.com/ttn64681', ariaLabel: 'GitHub profile' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/thai-tam-minh-nguyen', ariaLabel: 'LinkedIn profile' },
   { label: 'Contact me', href: '#contact', ariaLabel: 'Contact' },
-] as const;
+];
 
 export default function Footer() {
   return (

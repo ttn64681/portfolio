@@ -1,4 +1,4 @@
-/** Extras section: sneak peek categories. */
+/** Homepage extras strip + hub tiles (`extras-config.ts`). */
 
 export type ExtraCategory = 'games' | 'music' | 'gallery' | 'animanga';
 

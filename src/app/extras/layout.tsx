@@ -1,10 +1,10 @@
 import ExtrasFooterPagerClient from '@/components/nav/ExtrasFooterPagerClient';
 import type { ReactNode } from 'react';
 
-/** Shared extras shell: footer pager + `extras-platform` backdrop from CSS import in layout tree. */
+/** Wraps `/extras/*`: footer pager + `extras-shell` backdrop (see styles/extras/shell.css). */
 export default function ExtrasLayout({ children }: { children: ReactNode }) {
   return (
-    <div className='extras-platform'>
+    <div className='extras-shell'>
       {children}
       <ExtrasFooterPagerClient />
     </div>

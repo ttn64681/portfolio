@@ -1,20 +1,13 @@
-import type { ExploreAccent, ExploreKind } from '@/types/explore';
+import type { ExploreAccent } from '@/types/explore/accent';
+import type { ExploreKind } from '@/types/explore/kind';
+import type { ExploreVisualConfig } from '@/types/explore/visual-config';
 
-/**
- * Visual-only overrides merged in `buildExploreDetail`.
- * Tune `ACCENT_BY_SLUG` for palette class; optional hero images live in `HERO_BACKDROPS` below.
- */
-export type ExploreVisualConfig = {
-  heroBackdrop?: string;
-  heroBackdropPosition?: string;
-  heroOverlayOpacity?: number;
-  accent?: ExploreAccent;
-};
+// Hero backdrop + accent classes per slug. Mosaic gallery / figures = `exploreDossier` on the config row.
 
-/** Override accent per slug; defaults are aurora (projects) / forge (experiences). */
+// Optional accent override per slug. Otherwise projects --> aurora, experiences --> forge.
 export const ACCENT_BY_SLUG: Partial<Record<string, ExploreAccent>> = {};
 
-/** Optional per-slug backdrops — rest fall back to accent-only hero gradient. */
+// Hero image paths (public/). Slugs not listed keep gradient-only heroes.
 const HERO_BACKDROPS: Partial<Record<string, string>> = {
   cinema: '/pixel/webp/4 buildings.webp',
   'rag-portfolio': '/pixel/webp/tiles.webp',

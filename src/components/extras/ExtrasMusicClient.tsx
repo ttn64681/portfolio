@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
 import HierarchyChipRow from '@/components/nav/HierarchyChipRow';
-import type { MusicPlaylist, MusicRootCategory } from '@/types/extras-music';
+import type { MusicPlaylist, MusicRootCategory } from '@/types/extras/music';
 
 /**
- * Music room UI: `HierarchyNav` picks root → playlists; chips pick track; Howler powers local `src`, otherwise `embedHtml`.
+ * Music room UI: `HierarchyNav` picks root --> playlists; chips pick track; Howler powers local `src`, otherwise `embedHtml`.
  */
 
 type Selection = { playlistIndex: number; trackIndex: number };
@@ -242,8 +242,17 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
                   <p className='extras-music-player__hint'>Loading audio engine…</p>
                 ) : (
                   <>
-                    <div className='extras-music-player__transport' role='group' aria-label='Playback controls'>
-                      <button type='button' className='extras-music-player__play' aria-pressed={playing} onClick={togglePlay}>
+                    <div
+                      className='extras-music-player__transport'
+                      role='group'
+                      aria-label='Playback controls'
+                    >
+                      <button
+                        type='button'
+                        className='extras-music-player__play'
+                        aria-pressed={playing}
+                        onClick={togglePlay}
+                      >
                         {playing ? 'Pause' : 'Play'}
                       </button>
                       <div className='extras-music-player__progress'>
@@ -307,7 +316,8 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
 
             {!useLocal && !hasEmbedOnly && (
               <div className='extras-music-player__empty'>
-                Add src in extras-music (paths like /audio/track.mp3) under public/audio, or set embedHtml for a streaming embed.
+                Add src in extras-music (paths like /audio/track.mp3) under public/audio, or set
+                embedHtml for a streaming embed.
               </div>
             )}
           </div>
@@ -326,11 +336,16 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
                 ariaLabel='Tracks in playlist'
               />
             ) : (
-              <p className='extras-music-stack__empty'>Pick a category with playlists to load tracks.</p>
+              <p className='extras-music-stack__empty'>
+                Pick a category with playlists to load tracks.
+              </p>
             )}
           </section>
 
-          <aside className='extras-music-layout__about-panel' aria-labelledby='extras-music-about-track'>
+          <aside
+            className='extras-music-layout__about-panel'
+            aria-labelledby='extras-music-about-track'
+          >
             <h3 id='extras-music-about-track' className='extras-music-layout__h'>
               <span className='extras-panel-badge'>Notes</span>
               <span>About this track</span>
@@ -339,7 +354,7 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
               <p className='extras-music-about__track'>{track?.name ?? '—'}</p>
               <p className='extras-music-about__body'>
                 {track?.description?.trim() ||
-                  'Optional: set `description` on each track in extras-music.ts — it appears here when you select that track.'}
+                  'Optional: set `description` on each track in data/extras/music.ts — it appears here when you select that track.'}
               </p>
             </div>
           </aside>

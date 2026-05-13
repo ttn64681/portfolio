@@ -7,7 +7,7 @@ import {
   getAllExploreSlugs,
   getExploreOrderIndex,
   getNeighbors,
-} from '@/data/explore-registry';
+} from '@/data/explore/registry';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 

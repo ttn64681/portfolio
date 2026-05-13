@@ -1,10 +1,10 @@
 /*
  * Extras route styling (games dossiers, music, gallery, animanga).
- * shell = page backdrop + typography tokens; nav-chrome = in-page strips; games = dossier layout hooks;
- * sections = heavy UI (music player, gallery frames, animanga columns); motion = transitions.
+ * shell = layout backdrop + tokens; extras-nav = in-page strips; games = dossier hooks;
+ * sections = music/gallery/animanga UI; motion = transitions.
  */
 @import "./shell.css";
-@import "./nav-chrome.css";
+@import "./extras-nav.css";
 @import "./games.css";
 @import "./sections.css";
 @import "./motion.css";

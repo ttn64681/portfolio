@@ -2,7 +2,8 @@ import { useEffect, useState, useCallback } from 'react';
 import Typewriter from 'typewriter-effect';
 import { BREAKPOINTS } from '@/lib/breakpoints';
 import { useHeroMenuVisible } from '@/hooks/useHeroMenuVisible';
-import MenuOptions, { type MenuAction } from './MenuOptions';
+import type { MenuAction } from '@/types/menu';
+import MenuOptions from './MenuOptions';
 
 type MenuProps = {
   /** Called when user clicks Quit (so page can show Game Over overlay). */

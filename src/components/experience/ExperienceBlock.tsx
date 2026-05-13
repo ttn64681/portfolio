@@ -1,9 +1,9 @@
-import type { ExperienceConfig as ExpConfig } from '@/types/experience';
+import type { ExperienceConfig } from '@/types/experience';
 import ExploreButton from '@/components/projects/ExploreButton';
 
 // If holywatr, orange title, if acm, red title
 
-export default function ExperienceBlock({ exp }: { exp: ExpConfig }) {
+export default function ExperienceBlock({ exp }: { exp: ExperienceConfig }) {
   return (
     <article className='experience-block game-block'>
       <div className='experience-block__inner'>

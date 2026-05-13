@@ -1,5 +1,5 @@
 /**
- * Ordered chat timeline list (intro → messages + client blocks → loading → typing).
+ * Ordered chat timeline list (intro --> messages + client blocks --> loading --> typing).
  * All blocks (resume, fun_fact, error) follow the same rule: they are appended after a given
  * anchor (intro or a message id).
  */

@@ -3,18 +3,16 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import HierarchyChipRow from '@/components/nav/HierarchyChipRow';
-import type { HierarchyNavItem } from '@/components/nav/hierarchy-nav-types';
-
-export type { HierarchyNavItem };
+import type { NavChip } from '@/types/nav';
 
 function isInternalHref(href: string) {
   return href.startsWith('/');
 }
 
 type HierarchyNavProps = {
-  parents: (HierarchyNavItem & { hint?: string })[];
+  parents: (NavChip & { hint?: string })[];
   /** Secondary row chips (optional). */
-  subitems?: HierarchyNavItem[];
+  subitems?: NavChip[];
   ariaLabel?: string;
   /** Optional slot after rows */
   footer?: ReactNode;

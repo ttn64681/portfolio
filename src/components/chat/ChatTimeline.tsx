@@ -1,7 +1,7 @@
 'use client';
 
 import type { ChatTimelineRow } from '@/types/chat';
-import { INTRO_TEXT, getFriendlyErrorMessage } from '@/data/chat-config';
+import { INTRO_TEXT, getFriendlyErrorMessage } from '@/data/config/chat';
 import Message from './Message';
 import ResumeButton from './ResumeButton';
 

@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
-import AnimangaOutboundSprites from '@/components/extras/AnimangaOutboundSprites';
-import type { AnimangaFeedEntry, AnimangaFeedKind } from '@/types/extras-animanga';
+import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
+import type { AnimangaFeedEntry, AnimangaFeedKind } from '@/types/extras/animanga';
 
 /** Recent activity list + optional category chips; parent can own filtering via `mediaFilter`. */
 
@@ -67,7 +67,7 @@ export default function AnimangaFeedSection({
               <span className='extras-animanga-feed__sprite-wrap'>
                 {' '}
                 ·{' '}
-                <AnimangaOutboundSprites href={entry.href} ariaLabel={`External link: ${entry.title}`} />
+                <OutboundSpriteLink href={entry.href} ariaLabel={`External link: ${entry.title}`} />
               </span>
             )}
           </div>

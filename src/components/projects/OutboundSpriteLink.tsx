@@ -1,7 +1,7 @@
 'use client';
 
-import Link from '@/components/projects/Link';
-import Octocat from '@/components/projects/Octocat';
+import Link from './Link';
+import Octocat from './Octocat';
 
 function isGitHubUrl(href: string) {
   try {
@@ -12,13 +12,13 @@ function isGitHubUrl(href: string) {
   }
 }
 
-type AnimangaOutboundSpritesProps = {
+type OutboundSpriteLinkProps = {
   href: string;
-  ariaLabel: string;
+  ariaLabel?: string;
 };
 
-/** External URL rendered as homepage-style sprite controls (no glyph chrome). */
-export default function AnimangaOutboundSprites({ href, ariaLabel }: AnimangaOutboundSpritesProps) {
+/** External URL as pixel sprite: Octocat for GitHub hosts, link sprite otherwise. */
+export default function OutboundSpriteLink({ href, ariaLabel }: OutboundSpriteLinkProps) {
   if (isGitHubUrl(href)) {
     return <Octocat href={href} ariaLabel={ariaLabel} />;
   }

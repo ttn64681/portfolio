@@ -1,6 +1,6 @@
 'use client';
 
-import { experienceConfig } from '@/data/experience-config';
+import { experienceConfig } from '@/data/config/experience';
 import ExperienceBlock from './ExperienceBlock';
 
 export default function Experience() {

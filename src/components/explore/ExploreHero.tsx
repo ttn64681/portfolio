@@ -9,7 +9,7 @@ import type { ExploreAccent, ExploreKind } from '@/types/explore';
 
 /**
  * `/explore/[slug]` hero: backdrop + overlay + accent wash, pager, floating nav.
- * Keyboard ←/→ jump to prev/next slug unless focus is in a text field.
+ * Keyboard ←/--> jump to prev/next slug unless focus is in a text field.
  */
 
 export type ExploreHeroProps = {
@@ -29,7 +29,15 @@ export type ExploreHeroProps = {
 
 function IconChevronLeft() {
   return (
-    <svg width={18} height={18} viewBox='0 0 24 24' aria-hidden fill='none' stroke='currentColor' strokeWidth={2.25}>
+    <svg
+      width={18}
+      height={18}
+      viewBox='0 0 24 24'
+      aria-hidden
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={2.25}
+    >
       <path d='M15 6l-6 6 6 6' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
@@ -37,7 +45,15 @@ function IconChevronLeft() {
 
 function IconChevronRight() {
   return (
-    <svg width={18} height={18} viewBox='0 0 24 24' aria-hidden fill='none' stroke='currentColor' strokeWidth={2.25}>
+    <svg
+      width={18}
+      height={18}
+      viewBox='0 0 24 24'
+      aria-hidden
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={2.25}
+    >
       <path d='M9 6l6 6-6 6' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
@@ -107,11 +123,19 @@ export default function ExploreHero({
         <div className='explore-hero__accent-wash' aria-hidden />
 
         <div className='explore-hero__pager'>
-          <Link href={`/explore/${prevSlug}`} className='explore-hero__pager-link' aria-label='Previous showcase'>
+          <Link
+            href={`/explore/${prevSlug}`}
+            className='explore-hero__pager-link'
+            aria-label='Previous showcase'
+          >
             <IconChevronLeft />
             <span className='explore-hero__pager-txt'>Prev</span>
           </Link>
-          <Link href={`/explore/${nextSlug}`} className='explore-hero__pager-link' aria-label='Next showcase'>
+          <Link
+            href={`/explore/${nextSlug}`}
+            className='explore-hero__pager-link'
+            aria-label='Next showcase'
+          >
             <IconChevronRight />
             <span className='explore-hero__pager-txt'>Next</span>
           </Link>
@@ -122,12 +146,12 @@ export default function ExploreHero({
             <p className='explore-hero__eyebrow'>Explore showcase</p>
             <h1 className='explore-hero__title'>{title}</h1>
             {(role || date) && (
-              <p className='explore-hero__meta'>
-                {[role, date].filter(Boolean).join(' · ')}
-              </p>
+              <p className='explore-hero__meta'>{[role, date].filter(Boolean).join(' · ')}</p>
             )}
             <div className='explore-hero__badges'>
-              <span className='explore-hero__badge'>{kind === 'project' ? 'Project' : 'Experience'}</span>
+              <span className='explore-hero__badge'>
+                {kind === 'project' ? 'Project' : 'Experience'}
+              </span>
               <span className='explore-hero__index' aria-label={`Entry ${index} of ${total}`}>
                 {index} / {total}
               </span>

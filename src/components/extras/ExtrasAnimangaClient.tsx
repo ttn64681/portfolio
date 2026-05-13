@@ -3,10 +3,12 @@
 import { useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
 import AnimangaMediumColumn from '@/components/extras/AnimangaMediumColumn';
-import AnimangaFeedSection, { type AnimangaMediaFilter } from '@/components/extras/AnimangaFeedSection';
-import type { AnimangaFeedEntry, AnimangaFeedKind, AnimangaHero } from '@/types/extras-animanga';
+import AnimangaFeedSection, {
+  type AnimangaMediaFilter,
+} from '@/components/extras/AnimangaFeedSection';
+import type { AnimangaFeedEntry, AnimangaFeedKind, AnimangaHero } from '@/types/extras/animanga';
 
-/** Filter chips → stacked medium columns → chronological feed (feed respects same filter when passed down). */
+/** Filter chips --> stacked medium columns --> chronological feed (feed respects same filter when passed down). */
 
 export default function ExtrasAnimangaClient({
   hero,
@@ -19,10 +21,30 @@ export default function ExtrasAnimangaClient({
 
   const parents = useMemo(
     () => [
-      { id: 'all' as const, label: 'All', selected: filter === 'all', onSelect: () => setFilter('all') },
-      { id: 'anime' as const, label: 'Anime', selected: filter === 'anime', onSelect: () => setFilter('anime') },
-      { id: 'manga' as const, label: 'Manga', selected: filter === 'manga', onSelect: () => setFilter('manga') },
-      { id: 'game' as const, label: 'Games', selected: filter === 'game', onSelect: () => setFilter('game') },
+      {
+        id: 'all' as const,
+        label: 'All',
+        selected: filter === 'all',
+        onSelect: () => setFilter('all'),
+      },
+      {
+        id: 'anime' as const,
+        label: 'Anime',
+        selected: filter === 'anime',
+        onSelect: () => setFilter('anime'),
+      },
+      {
+        id: 'manga' as const,
+        label: 'Manga',
+        selected: filter === 'manga',
+        onSelect: () => setFilter('manga'),
+      },
+      {
+        id: 'game' as const,
+        label: 'Games',
+        selected: filter === 'game',
+        onSelect: () => setFilter('game'),
+      },
     ],
     [filter],
   );

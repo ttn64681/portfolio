@@ -1,4 +1,7 @@
-import type { ExtraGameEntry, GameHubCategory } from '@/types/extras-games';
+import type { ExtraGameEntry, GameHubCategory } from '@/types/extras/games';
+
+// /extras/games/<slug>. hubCategory = Clubs | Jams | Misc tab. Array order = that tab's list + extras prev/next ring.
+// playUrl / repoUrl optional. gallery[] and youtube[] for media. gifSrc on a contribution uses plain <img> (animated GIF).
 
 /** Category tabs on games hierarchy nav (`clubs` | `jams` | `misc`) — each game picks `hubCategory`. */
 export const GAME_HUB_ORDER: GameHubCategory[] = ['clubs', 'jams', 'misc'];
@@ -10,10 +13,12 @@ export const GAME_HUB_LABELS: Record<GameHubCategory, string> = {
 };
 
 export function gamesByHubCategory(category: GameHubCategory): ExtraGameEntry[] {
-  return extrasGames.filter((g) => (g.hubCategory ?? 'misc') === category);
+  return gameEntries.filter((g) => (g.hubCategory ?? 'misc') === category);
 }
 
-export const extrasGames: ExtraGameEntry[] = [
+/** All game dossiers under `/extras/games/[slug]` — order defines hub lists + prev/next ring. */
+export const gameEntries: ExtraGameEntry[] = [
+  // =============== TOWER ASCENT ===============
   {
     slug: 'tower-ascent',
     title: 'Tower Ascent',
@@ -23,7 +28,6 @@ export const extrasGames: ExtraGameEntry[] = [
     award: 'Club build — swap when you ship awards.',
     description:
       'A vertical slice of a larger vision: modular UI, turn-based exploration vibes, and handcrafted sprites. This page is a showcase layout — swap in GIFs, repo links, and production art when ready.',
-    themeVariant: 'rogue',
     playUrl: 'https://opuhlos.itch.io/tower-ascent',
     repoUrl: undefined,
     gallery: [
@@ -61,6 +65,62 @@ export const extrasGames: ExtraGameEntry[] = [
       'More automated test scenes for UI regressions.',
     ],
   },
+  // =============== BUNKER JUMPER ===============
+  {
+    slug: 'bunker-jumper',
+    title: 'Bunker Jumper',
+    deck: 'Godot — UI programming scenes only (Jan–May 2025).',
+    hubCategory: 'clubs',
+    stack: ['Godot', 'UI scenes', 'GDScript'],
+    description:
+      'Club build focused on UI-driven scenes in Godot. Add itch/build link, GIF captures, and stills when you ship assets.',
+    playUrl: undefined,
+    repoUrl: undefined,
+    gallery: [
+      { src: '/pixel/webp/tiles.webp', alt: 'Placeholder still', caption: 'Swap for gameplay still.' },
+    ],
+    youtube: [],
+    contributions: [
+      {
+        title: 'What you shipped',
+        body: 'Describe UI scene architecture and what you owned — replace this block.',
+        assetSrc: '/pixel/webp/tiles.webp',
+        layout: 'panel',
+      },
+    ],
+    challenges: ['Scope UI-only gameplay vs full physics.'],
+    reflection: ['Document scene tree early for handoff.'],
+  },
+  // =============== SPINDRIVE ===============
+  {
+    slug: 'spindrive',
+    title: 'Spindrive',
+    deck: 'Godot ECS game (Jan 2026 – present).',
+    hubCategory: 'clubs',
+    stack: ['Godot', 'ECS', 'GDScript'],
+    description:
+      'ECS-driven Godot project — add storefront / demo link, repo, GIFs, and trailer when ready.',
+    playUrl: undefined,
+    repoUrl: undefined,
+    gallery: [
+      { src: '/pixel/webp/link-walk.webp', alt: 'Placeholder', caption: 'Replace with in-engine shots.' },
+    ],
+    youtube: [
+      {
+        videoId: 'M7lc1UVf-VE',
+        title: 'Video demo placeholder — swap YouTube ID',
+      },
+    ],
+    contributions: [
+      {
+        title: 'ECS + gameplay',
+        body: 'Note systems you built (movement, combat, meta) — edit this.',
+        layout: 'float-media',
+      },
+    ],
+    challenges: ['ECS iteration speed vs jam deadlines.'],
+    reflection: ['Prototype one vertical slice before wide systems.'],
+  },
   {
     slug: 'arcade-lab',
     title: 'Arcade Lab (placeholder)',
@@ -68,8 +128,7 @@ export const extrasGames: ExtraGameEntry[] = [
     hubCategory: 'jams',
     stack: ['Prototype-first loops', 'Placeholder art pass'],
     description:
-      'Use this entry as a template: duplicate the object in `extras-games.ts`, change `themeVariant`, and ship unique art.',
-    themeVariant: 'jam',
+      'Use this entry as a template: duplicate an object in this file, set hubCategory, and fill gallery/youtube.',
     playUrl: undefined,
     repoUrl: 'https://github.com/ttn64681/portfolio',
     contributions: [
@@ -85,23 +144,23 @@ export const extrasGames: ExtraGameEntry[] = [
 ];
 
 export function getExtraGameSlugs(): string[] {
-  return extrasGames.map((g) => g.slug);
+  return gameEntries.map((g) => g.slug);
 }
 
 export function getExtraGameBySlug(slug: string): ExtraGameEntry | undefined {
-  return extrasGames.find((g) => g.slug === slug);
+  return gameEntries.find((g) => g.slug === slug);
 }
 
 export function getFirstGameHref(): string {
-  const slug = extrasGames[0]?.slug;
+  const slug = gameEntries[0]?.slug;
   return slug ? `/extras/games/${slug}` : '/explore';
 }
 
 export function getGameOrderIndex(slug: string): number {
-  const i = extrasGames.findIndex((g) => g.slug === slug);
+  const i = gameEntries.findIndex((g) => g.slug === slug);
   return i >= 0 ? i : 0;
 }
 
 export function getGameOrderTotal(): number {
-  return extrasGames.length;
+  return gameEntries.length;
 }

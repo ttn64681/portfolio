@@ -6,7 +6,7 @@ import { buildChatTimeline, type ErrorBlock } from '@/lib/chat-timeline';
 import { useBorderPulse } from '@/hooks/useBorderPulse';
 import { useMobile } from '@/hooks/useMobile';
 import { parseChatError } from '@/lib/chat-error';
-import { FUN_FACTS, pickRandom } from '@/data/chat-config';
+import { FUN_FACTS, pickRandom } from '@/data/config/chat';
 import type { ClientBlock } from '@/types/chat';
 import ResumePopup from './ResumePopup';
 import ChatTimeline from './ChatTimeline';
