@@ -34,5 +34,5 @@ export const DIALOGUE_OPTIONS: DialogueOption[] = [
 export const IDLE_TEXTS: string[] = [
   'Ask me something above, or scroll down to talk to my twin for the full lore - and my contact info.',
   'Curious about projects, tech stack, or game jams? Pick a prompt or jump to Chat to ask my AI.',
-  'Want details on \'Holywatr\', \'JJK Domain Expansion Exhibit\', or this site? Head to the chat section below.',
+  "Want details on 'Holywatr', 'JJK Domain Expansion Exhibit', or this site? Head to the chat section below.",
 ];

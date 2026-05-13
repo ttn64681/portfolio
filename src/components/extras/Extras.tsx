@@ -12,8 +12,7 @@ export default function Extras() {
             <h2 className='section-badge section-badge--extras'>Extras</h2>
           </div>
           <p className='extras-section__subtitle'>
-            Side quests — games, music, gallery, and animanga. Each opens its own themed room on the extras
-            platform.
+            Side quests — games, music, gallery, and ani/manga/manhwa/games I like.
           </p>
         </header>
         <div className='extras-section__grid'>

@@ -99,8 +99,7 @@ export async function searchSimilarDocuments(
   for (let attempt = 0; attempt < 2; attempt++) {
     let docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
 
-    const missingOrStale =
-      docIds.length === 0 || (await needsReembedding(documents));
+    const missingOrStale = docIds.length === 0 || (await needsReembedding(documents));
 
     if (missingOrStale && documents.length > 0) {
       await initializePortfolioData(documents);

@@ -1,9 +1,6 @@
 import { experienceConfig } from '@/data/config/experience';
 import { getProjectConfig, projectsConfig } from '@/data/config/projects';
-import {
-  EXPLORE_OVERVIEW_FALLBACK,
-  mergeExploreDossier,
-} from '@/data/explore/dossier-defaults';
+import { EXPLORE_OVERVIEW_FALLBACK, mergeExploreDossier } from '@/data/explore/dossier-defaults';
 import { getExploreVisualConfig } from '@/data/explore/visual-overrides';
 import type { ExploreDetail, ExploreKind } from '@/types/explore';
 import type { ExploreMergedEntry, ExploreOrderEntry } from '@/types/explore/registry-types';
@@ -63,7 +60,7 @@ export function getExploreStripItems(): { slug: string; title: string; kind: Exp
     const entry = getExploreEntry(e.slug);
     const title =
       entry?.kind === 'project'
-        ? entry.title ?? e.slug
+        ? (entry.title ?? e.slug)
         : entry && entry.kind === 'experience'
           ? entry.title
           : e.slug;
@@ -77,10 +74,7 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
 
   const dossier = mergeExploreDossier(entry.exploreDossier);
 
-  const title =
-    entry.kind === 'project'
-      ? entry.title ?? entry.id
-      : entry.title;
+  const title = entry.kind === 'project' ? (entry.title ?? entry.id) : entry.title;
 
   const stack =
     entry.techStack && entry.techStack.length > 0 ? [...entry.techStack] : ['— add stack —'];

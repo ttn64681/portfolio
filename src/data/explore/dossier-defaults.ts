@@ -44,7 +44,13 @@ export const DEFAULT_EXPLORE_GALLERY: ExploreDetail['gallery'] = [
 ];
 
 export const DEFAULT_EXPLORE_FIGURES: NonNullable<ExploreDetail['figures']> = {
-  overview: [{ alt: 'Overview figure', src: '/pixel/webp/bubble-me.webp', caption: 'Pair imagery with the story.' }],
+  overview: [
+    {
+      alt: 'Overview figure',
+      src: '/pixel/webp/bubble-me.webp',
+      caption: 'Pair imagery with the story.',
+    },
+  ],
   features: [{ alt: 'Feature highlight', src: '/pixel/webp/octocat-float.webp' }],
   implementation: [{ alt: 'Implementation note', src: '/pixel/webp/pfp-me.webp' }],
 };

@@ -61,7 +61,7 @@ export const galleryTabs: GalleryTab[] = [
           },
         ],
       },
-    ], // 
+    ], //
   },
   {
     id: 'photography',
