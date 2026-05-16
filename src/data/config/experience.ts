@@ -1,5 +1,5 @@
 // Homepage strip + `/explore/<id>`. Listed after every project on Explore. Same poster rules as projects —
-// optional `exploreDossier`, defaults in `src/data/explore/dossier-defaults.ts`.
+// optional `exploreDossier` (only set fields you want on the poster; samples in dossier-defaults.ts).
 
 import type { ExperienceConfig } from '@/types/experience';
 

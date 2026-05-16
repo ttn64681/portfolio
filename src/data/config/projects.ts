@@ -110,7 +110,7 @@ export const projectsConfig: ProjectConfig[] = [
     bullets: [
       'HuBERT + AST — tighten wording when paper / writeup is ready.',
       'GitHub + video demo: fill link fields when published.',
-      'Poster gallery / figures: exploreDossier on this entry (merges over dossier-defaults).',
+      'Poster gallery / figures: set exploreDossier on this entry when ready.',
     ],
     techStack: ['Python', 'PyTorch', 'HuBERT', 'AST', 'Audio ML'],
     date: 'Apr 2026',

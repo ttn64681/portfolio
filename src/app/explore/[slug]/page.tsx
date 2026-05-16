@@ -1,6 +1,7 @@
 import ExploreHero from '@/components/explore/ExploreHero';
 import ExplorePoster from '@/components/explore/ExplorePoster';
 import ExploreShowcaseStrip from '@/components/explore/ExploreShowcaseStrip';
+import { EXPLORE_OVERVIEW_FALLBACK } from '@/data/explore/dossier-defaults';
 import {
   EXPLORE_ORDER,
   buildExploreDetail,
@@ -27,9 +28,13 @@ export async function generateMetadata({
   if (!detail) {
     return { title: 'Not found' };
   }
+  const description =
+    detail.summary?.trim() ||
+    detail.overview?.trim() ||
+    EXPLORE_OVERVIEW_FALLBACK.slice(0, 160);
   return {
     title: `${detail.title} · Explore`,
-    description: detail.summary ?? detail.overview.slice(0, 160),
+    description: description.slice(0, 160),
   };
 }
 

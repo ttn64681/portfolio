@@ -1,18 +1,15 @@
-import type { ExploreDetail } from '@/types/explore';
 import type { ExploreDossierInput } from '@/types/explore/dossier-input';
+import type {
+  ExploreFigureSection,
+  ExploreGalleryItem,
+  ExploreYoutubeItem,
+} from '@/types/explore/poster-media';
 
-// Fill-ins for the Explore poster when `exploreDossier` on a row doesn’t set that piece yet.
-//
-// Where you edit:
-// • New project --> `src/data/config/projects.ts`: push `{ id: 'my-slug', ... }`. Route is `/explore/my-slug`.
-// • New job/club line --> `src/data/config/experience.ts` the same way (ids run after all projects on Explore).
-// • Real poster copy/media for one slug --> same row, add `exploreDossier: { ... }`. Any field you set replaces
-//   the matching default below for that slug only. `figures` merges by section; everything else is all-or-nothing.
-// • Less filler everywhere --> shorten the DEFAULT_* arrays / gallery here. More filler for one page only --> use
-//   `exploreDossier` on that row instead.
-//
-// Clearing placeholders for good: once every slug has `exploreDossier` covering what you care about, you can gut
-// these defaults or leave a tiny neutral line — new slugs you add later would fall back to that until you fill them.
+/**
+ * When `true`, `mergeExploreDossier` fills any omitted dossier field with `DEFAULT_*` samples.
+ * When `false` (default), only fields you set on the row are returned — poster hides empty sections.
+ */
+export const EXPLORE_USE_PLACEHOLDERS = false;
 
 export const DEFAULT_EXPLORE_FEATURES = [
   'Shipped responsive layouts with pixel-aware spacing tokens shared across breakpoints.',
@@ -34,7 +31,7 @@ export const DEFAULT_EXPLORE_REFLECTION = [
   'More snapshot coverage around layout primitives before scaling card variants.',
 ];
 
-export const DEFAULT_EXPLORE_GALLERY: ExploreDetail['gallery'] = [
+export const DEFAULT_EXPLORE_GALLERY: ExploreGalleryItem[] = [
   { alt: 'Screenshot slot 1', caption: 'Replace with capture or mockup.' },
   { alt: 'Screenshot slot 2', src: '/pixel/webp/link-walk.webp' },
   { alt: 'Environment tile reference', src: '/pixel/webp/tiles.webp' },
@@ -43,7 +40,9 @@ export const DEFAULT_EXPLORE_GALLERY: ExploreDetail['gallery'] = [
   { alt: 'Screenshot slot 6' },
 ];
 
-export const DEFAULT_EXPLORE_FIGURES: NonNullable<ExploreDetail['figures']> = {
+export const DEFAULT_EXPLORE_FIGURES: Partial<
+  Record<ExploreFigureSection, ExploreGalleryItem[]>
+> = {
   overview: [
     {
       alt: 'Overview figure',
@@ -55,23 +54,49 @@ export const DEFAULT_EXPLORE_FIGURES: NonNullable<ExploreDetail['figures']> = {
   implementation: [{ alt: 'Implementation note', src: '/pixel/webp/pfp-me.webp' }],
 };
 
-export const DEFAULT_EXPLORE_YOUTUBE: ExploreDetail['youtube'] = [
+export const DEFAULT_EXPLORE_YOUTUBE: ExploreYoutubeItem[] = [
   { title: 'Walkthrough / trailer (optional)', videoId: undefined },
 ];
 
+/** Fallback description hint only (e.g. metadata); not injected into the poster body unless placeholders are on. */
 export const EXPLORE_OVERVIEW_FALLBACK =
   'Add summary/bullets on this row, or set exploreDossier.overview, when you’re ready to replace this line.';
 
-export function mergeExploreDossier(overrides?: ExploreDossierInput): {
-  features: string[];
-  implementation: string[];
-  challenges: string[];
-  reflection: string[];
-  gallery: ExploreDetail['gallery'];
-  youtube: ExploreDetail['youtube'];
-  figures: NonNullable<ExploreDetail['figures']>;
-} {
+export type MergedExploreDossier = {
+  overview?: string;
+  features?: string[];
+  implementation?: string[];
+  challenges?: string[];
+  reflection?: string[];
+  gallery?: ExploreGalleryItem[];
+  youtube?: ExploreYoutubeItem[];
+  figures?: Partial<Record<ExploreFigureSection, ExploreGalleryItem[]>>;
+};
+
+/**
+ * Resolves dossier fields for `buildExploreDetail`.
+ * With placeholders off, only keys present on `overrides` are returned (figures are not deep-merged with defaults).
+ * With placeholders on, omitted keys get `DEFAULT_*` copy and figures merge per section.
+ */
+export function mergeExploreDossier(
+  overrides?: ExploreDossierInput,
+  usePlaceholders: boolean = EXPLORE_USE_PLACEHOLDERS,
+): MergedExploreDossier {
+  if (!usePlaceholders) {
+    return {
+      overview: overrides?.overview,
+      features: overrides?.features,
+      implementation: overrides?.implementation,
+      challenges: overrides?.challenges,
+      reflection: overrides?.reflection,
+      gallery: overrides?.gallery,
+      youtube: overrides?.youtube,
+      figures: overrides?.figures,
+    };
+  }
+
   return {
+    overview: overrides?.overview,
     features: overrides?.features ?? DEFAULT_EXPLORE_FEATURES,
     implementation: overrides?.implementation ?? DEFAULT_EXPLORE_IMPLEMENTATION,
     challenges: overrides?.challenges ?? DEFAULT_EXPLORE_CHALLENGES,

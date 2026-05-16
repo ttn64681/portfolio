@@ -16,8 +16,8 @@ import LazyYouTube from './LazyYouTube';
 /**
  * `/explore/[slug]` body below `ExploreHero`.
  *
- * Flow: overview band --> floated widgets (`explore-float-grid`) --> mosaic gallery --> optional videos.
- * Root applies slug accent via `explore-float-root--accent-*` (see poster.css).
+ * Renders optional bands when merged dossier content exists (bullets and/or figures per section) — see
+ * `buildExploreDetail` + `EXPLORE_USE_PLACEHOLDERS`. Root accent: `explore-float-root--accent-*` (poster.css).
  */
 
 type ExplorePosterProps = {
@@ -25,6 +25,15 @@ type ExplorePosterProps = {
   prevHref: string;
   nextHref: string;
 };
+
+type WidgetSection = 'features' | 'implementation' | 'challenges' | 'reflection';
+
+/** Section renders when it has bullet lines and/or figure tiles for that key. */
+function posterSectionHasContent(detail: ExploreDetail, section: WidgetSection): boolean {
+  const lines = detail[section];
+  const figures = detail.figures?.[section];
+  return (lines?.length ?? 0) > 0 || (figures?.length ?? 0) > 0;
+}
 
 /** Bullet list used in Features / Implementation / etc. — styled as boxed chips (shared with game dossier). */
 function PosterBullets({ lines }: { lines: string[] }) {
@@ -160,7 +169,7 @@ function SectionWithFigures({
   sectionKey: ExploreFigureSection;
   heading: string;
   headingClass: string;
-  children: ReactNode;
+  children?: ReactNode;
   figures?: ExploreDetail['figures'];
 }) {
   const figureItems = figures?.[sectionKey];
@@ -188,140 +197,188 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
   const acc = detail.accent ?? 'aurora';
   const k = detail.kind;
   const bannerItem = detail.figures?.overview?.[0];
+  const hasOverviewBanner = Boolean(bannerItem?.src);
+  const hasOverviewFigures = (detail.figures?.overview?.length ?? 0) > 0;
+  const hasOverviewCopy = Boolean(detail.overview?.trim());
+  const hasStack = detail.stack.length > 0;
+  const showOverviewSection =
+    hasOverviewCopy ||
+    Boolean(detail.award) ||
+    Boolean(detail.demoLink || detail.repoLink) ||
+    hasStack ||
+    hasOverviewBanner ||
+    hasOverviewFigures;
+
+  const showFloatGrid =
+    posterSectionHasContent(detail, 'features') ||
+    posterSectionHasContent(detail, 'implementation') ||
+    posterSectionHasContent(detail, 'challenges') ||
+    posterSectionHasContent(detail, 'reflection');
 
   return (
     <div className={`explore-float-root explore-float-root--accent-${acc}`}>
       <div className='explore-page__inner explore-float-root__inner'>
-        <section className='explore-overview-block' aria-labelledby='explore-overview-heading'>
-          <div className='explore-overview-panel explore-widget-shell'>
-            <h2 id='explore-overview-heading' className='explore-overview-panel__title'>
-              Overview
+        {showOverviewSection && (
+          <section className='explore-overview-block' aria-labelledby='explore-overview-heading'>
+            <div className='explore-overview-panel explore-widget-shell'>
+              <h2 id='explore-overview-heading' className='explore-overview-panel__title'>
+                Overview
+              </h2>
+              {hasOverviewCopy && (
+                <>
+                  <p className='explore-poster__label explore-poster__label--muted'>At a glance</p>
+                  <p className='explore-poster__overview'>{detail.overview}</p>
+                </>
+              )}
+              {detail.award && <div className='project-card__award'>{detail.award}</div>}
+              {hasStack && (
+                <div className='explore-stack explore-stack--in-overview'>
+                  {detail.stack.map((item) => (
+                    <span key={item} className='explore-stack__pill'>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {!detail.demoLink && !detail.repoLink && detail.kind === 'project' && (
+                <p className='explore-poster__links-hint'>
+                  Add demo or repo URLs in `data/config/projects.ts` to show link buttons.
+                </p>
+              )}
+              {(detail.demoLink || detail.repoLink) && (
+                <div className='explore-poster__actions' onClick={(e) => e.stopPropagation()}>
+                  {detail.demoLink && (
+                    <OutboundSpriteLink href={detail.demoLink} ariaLabel='Open live demo' />
+                  )}
+                  {detail.repoLink && <OutboundSpriteLink href={detail.repoLink} />}
+                </div>
+              )}
+            </div>
+            {bannerItem && <OverviewBanner item={bannerItem} />}
+            {!hasOverviewBanner && hasOverviewFigures && (
+              <ExploreFigures items={detail.figures?.overview} />
+            )}
+          </section>
+        )}
+
+        {showFloatGrid && (
+          <div className='explore-float-grid'>
+            {posterSectionHasContent(detail, 'features') && (
+              <SectionWithFigures
+                sectionId='explore-features-heading'
+                sectionKey='features'
+                heading='Features'
+                headingClass={widgetTitleClass(k, 'features')}
+                figures={detail.figures}
+              >
+                {detail.features && detail.features.length > 0 && (
+                  <PosterBullets lines={detail.features} />
+                )}
+              </SectionWithFigures>
+            )}
+
+            {posterSectionHasContent(detail, 'implementation') && (
+              <SectionWithFigures
+                sectionId='explore-impl-heading'
+                sectionKey='implementation'
+                heading='Implementation'
+                headingClass={widgetTitleClass(k, 'implementation')}
+                figures={detail.figures}
+              >
+                {detail.implementation && detail.implementation.length > 0 && (
+                  <PosterBullets lines={detail.implementation} />
+                )}
+              </SectionWithFigures>
+            )}
+
+            {posterSectionHasContent(detail, 'challenges') && (
+              <SectionWithFigures
+                sectionId='explore-challenges-heading'
+                sectionKey='challenges'
+                heading='Challenges'
+                headingClass={widgetTitleClass(k, 'challenges')}
+                figures={detail.figures}
+              >
+                {detail.challenges && detail.challenges.length > 0 && (
+                  <PosterBullets lines={detail.challenges} />
+                )}
+              </SectionWithFigures>
+            )}
+
+            {posterSectionHasContent(detail, 'reflection') && (
+              <SectionWithFigures
+                sectionId='explore-reflect-heading'
+                sectionKey='reflection'
+                heading='Reflection'
+                headingClass={widgetTitleClass(k, 'reflection')}
+                figures={detail.figures}
+              >
+                {detail.reflection && detail.reflection.length > 0 && (
+                  <PosterBullets lines={detail.reflection} />
+                )}
+              </SectionWithFigures>
+            )}
+          </div>
+        )}
+
+        {detail.gallery && detail.gallery.length > 0 && (
+          <section className='explore-gallery-section' aria-labelledby='explore-gallery-heading'>
+            <h2
+              id='explore-gallery-heading'
+              className='explore-widget-title explore-widget-title--gallery'
+            >
+              Gallery
             </h2>
-            <p className='explore-poster__label explore-poster__label--muted'>At a glance</p>
-            <p className='explore-poster__overview'>{detail.overview}</p>
-            {detail.award && <div className='project-card__award'>{detail.award}</div>}
-            <div className='explore-stack explore-stack--in-overview'>
-              {detail.stack.map((item) => (
-                <span key={item} className='explore-stack__pill'>
-                  {item}
-                </span>
+            <div className='explore-gallery explore-gallery--mosaic explore-gallery--uniform-rows'>
+              {detail.gallery.map((item, i) => (
+                <div
+                  key={`${item.alt}-${i}`}
+                  className='explore-slot explore-slot--mosaic explore-print explore-print--gallery explore-print--darkmat'
+                >
+                  <SourceMediaLink href={item.src} className='explore-gallery-slot-link'>
+                    <div
+                      className={
+                        item.src
+                          ? 'explore-print__mat explore-print__mat--slot explore-print__mat--media explore-print__mat--intrinsic'
+                          : 'explore-print__mat explore-print__mat--slot explore-print__mat--empty'
+                      }
+                    >
+                      {item.src ? (
+                        item.mediaKind === 'gif' ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            className='explore-print__img explore-print__img--contain'
+                          />
+                        ) : (
+                          <Image
+                            src={item.src}
+                            alt={item.alt}
+                            width={1920}
+                            height={1080}
+                            sizes='(max-width: 767px) 96vw, (max-width: 1023px) 45vw, 33vw'
+                            className='explore-print__img-natural'
+                          />
+                        )
+                      ) : (
+                        <>
+                          <div className='explore-print__placeholder'>
+                            <span className='explore-slot__label'>Screenshot placeholder</span>
+                          </div>
+                          {item.caption && <p className='explore-slot__caption'>{item.caption}</p>}
+                        </>
+                      )}
+                    </div>
+                  </SourceMediaLink>
+                  <span className='explore-print__lip' aria-hidden />
+                </div>
               ))}
             </div>
-            {!detail.demoLink && !detail.repoLink && detail.kind === 'project' && (
-              <p className='explore-poster__links-hint'>
-                Add demo or repo URLs in `data/config/projects.ts` to show link buttons.
-              </p>
-            )}
-            {(detail.demoLink || detail.repoLink) && (
-              <div className='explore-poster__actions' onClick={(e) => e.stopPropagation()}>
-                {detail.demoLink && (
-                  <OutboundSpriteLink href={detail.demoLink} ariaLabel='Open live demo' />
-                )}
-                {detail.repoLink && <OutboundSpriteLink href={detail.repoLink} />}
-              </div>
-            )}
-          </div>
-          {bannerItem && <OverviewBanner item={bannerItem} />}
-        </section>
+          </section>
+        )}
 
-        <div className='explore-float-grid'>
-          <SectionWithFigures
-            sectionId='explore-features-heading'
-            sectionKey='features'
-            heading='Features'
-            headingClass={widgetTitleClass(k, 'features')}
-            figures={detail.figures}
-          >
-            <PosterBullets lines={detail.features} />
-          </SectionWithFigures>
-
-          <SectionWithFigures
-            sectionId='explore-impl-heading'
-            sectionKey='implementation'
-            heading='Implementation'
-            headingClass={widgetTitleClass(k, 'implementation')}
-            figures={detail.figures}
-          >
-            <PosterBullets lines={detail.implementation} />
-          </SectionWithFigures>
-
-          <SectionWithFigures
-            sectionId='explore-challenges-heading'
-            sectionKey='challenges'
-            heading='Challenges'
-            headingClass={widgetTitleClass(k, 'challenges')}
-            figures={detail.figures}
-          >
-            <PosterBullets lines={detail.challenges} />
-          </SectionWithFigures>
-
-          <SectionWithFigures
-            sectionId='explore-reflect-heading'
-            sectionKey='reflection'
-            heading='Reflection'
-            headingClass={widgetTitleClass(k, 'reflection')}
-            figures={detail.figures}
-          >
-            <PosterBullets lines={detail.reflection} />
-          </SectionWithFigures>
-        </div>
-
-        <section className='explore-gallery-section' aria-labelledby='explore-gallery-heading'>
-          <h2
-            id='explore-gallery-heading'
-            className='explore-widget-title explore-widget-title--gallery'
-          >
-            Gallery
-          </h2>
-          <div className='explore-gallery explore-gallery--mosaic explore-gallery--uniform-rows'>
-            {detail.gallery.map((item, i) => (
-              <div
-                key={`${item.alt}-${i}`}
-                className='explore-slot explore-slot--mosaic explore-print explore-print--gallery explore-print--darkmat'
-              >
-                <SourceMediaLink href={item.src} className='explore-gallery-slot-link'>
-                  <div
-                    className={
-                      item.src
-                        ? 'explore-print__mat explore-print__mat--slot explore-print__mat--media explore-print__mat--intrinsic'
-                        : 'explore-print__mat explore-print__mat--slot explore-print__mat--empty'
-                    }
-                  >
-                    {item.src ? (
-                      item.mediaKind === 'gif' ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          className='explore-print__img explore-print__img--contain'
-                        />
-                      ) : (
-                        <Image
-                          src={item.src}
-                          alt={item.alt}
-                          width={1920}
-                          height={1080}
-                          sizes='(max-width: 767px) 96vw, (max-width: 1023px) 45vw, 33vw'
-                          className='explore-print__img-natural'
-                        />
-                      )
-                    ) : (
-                      <>
-                        <div className='explore-print__placeholder'>
-                          <span className='explore-slot__label'>Screenshot placeholder</span>
-                        </div>
-                        {item.caption && <p className='explore-slot__caption'>{item.caption}</p>}
-                      </>
-                    )}
-                  </div>
-                </SourceMediaLink>
-                <span className='explore-print__lip' aria-hidden />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {detail.youtube.length > 0 && (
+        {detail.youtube && detail.youtube.length > 0 && (
           <section
             className='explore-panel explore-video-section'
             aria-labelledby='explore-video-stack-heading'

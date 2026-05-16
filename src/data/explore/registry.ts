@@ -1,12 +1,16 @@
 import { experienceConfig } from '@/data/config/experience';
 import { getProjectConfig, projectsConfig } from '@/data/config/projects';
-import { EXPLORE_OVERVIEW_FALLBACK, mergeExploreDossier } from '@/data/explore/dossier-defaults';
+import {
+  EXPLORE_OVERVIEW_FALLBACK,
+  EXPLORE_USE_PLACEHOLDERS,
+  mergeExploreDossier,
+} from '@/data/explore/dossier-defaults';
 import { getExploreVisualConfig } from '@/data/explore/visual-overrides';
 import type { ExploreDetail, ExploreKind } from '@/types/explore';
 import type { ExploreMergedEntry, ExploreOrderEntry } from '@/types/explore/registry-types';
 
-// Hub order: all of `projects.ts` in array order, then all of `experience.ts`. Poster body merges each row’s
-// optional `exploreDossier` with `src/data/explore/dossier-defaults.ts`.
+// Hub order: all of `projects.ts` in array order, then all of `experience.ts`. Dossier merge + poster visibility
+// are driven by `EXPLORE_USE_PLACEHOLDERS` in `src/data/explore/dossier-defaults.ts`.
 
 export const EXPLORE_ORDER: ExploreOrderEntry[] = [
   ...projectsConfig.map((p) => ({ slug: p.id, kind: 'project' as const })),
@@ -72,14 +76,25 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
   const entry = getExploreEntry(slug);
   if (!entry) return null;
 
-  const dossier = mergeExploreDossier(entry.exploreDossier);
+  const dossier = mergeExploreDossier(entry.exploreDossier, EXPLORE_USE_PLACEHOLDERS);
 
   const title = entry.kind === 'project' ? (entry.title ?? entry.id) : entry.title;
 
   const stack =
-    entry.techStack && entry.techStack.length > 0 ? [...entry.techStack] : ['— add stack —'];
+    entry.techStack && entry.techStack.length > 0
+      ? [...entry.techStack]
+      : EXPLORE_USE_PLACEHOLDERS
+        ? ['— add stack —']
+        : [];
 
   const visual = getExploreVisualConfig(slug, entry.kind);
+
+  const overview = EXPLORE_USE_PLACEHOLDERS
+    ? (dossier.overview ??
+      entry.summary ??
+      entry.bullets?.[0] ??
+      EXPLORE_OVERVIEW_FALLBACK)
+    : dossier.overview;
 
   return {
     slug,
@@ -88,11 +103,7 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
     role: entry.role,
     date: entry.date,
     summary: entry.summary,
-    overview:
-      entry.exploreDossier?.overview ??
-      entry.summary ??
-      entry.bullets?.[0] ??
-      EXPLORE_OVERVIEW_FALLBACK,
+    overview,
     ...(entry.kind === 'project'
       ? {
           demoLink: entry.link,

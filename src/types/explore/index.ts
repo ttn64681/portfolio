@@ -1,4 +1,4 @@
-// Shapes for `/explore` (poster, hub, merge). Site copy and `buildExploreDetail` live under `src/data/explore/`.
+// Shapes for `/explore` (poster, hub). Detail rows come from `buildExploreDetail` (`src/data/explore/registry.ts`).
 
 export type { ExploreAccent } from './accent';
 export type { ExploreDossierInput } from './dossier-input';
@@ -22,17 +22,19 @@ export type ExploreDetail = {
   role?: string;
   date?: string;
   summary?: string;
-  overview: string;
+  /** Poster overview copy; omit `exploreDossier.overview` to hide the narrative block (meta may still use summary). */
+  overview?: string;
   demoLink?: string;
   repoLink?: string;
   award?: string;
+  /** Tech pills in the overview band; empty when the row has no `techStack`. */
   stack: string[];
-  features: string[];
-  implementation: string[];
-  challenges: string[];
-  reflection: string[];
-  gallery: ExploreGalleryItem[];
-  youtube: ExploreYoutubeItem[];
+  features?: string[];
+  implementation?: string[];
+  challenges?: string[];
+  reflection?: string[];
+  gallery?: ExploreGalleryItem[];
+  youtube?: ExploreYoutubeItem[];
   heroBackdrop?: string;
   heroBackdropPosition?: string;
   heroOverlayOpacity?: number;
