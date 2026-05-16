@@ -1,7 +1,3 @@
-=== EXECUTIVE SUMMARY
-
-Thai Nguyen is a senior Computer Science student at the University of Georgia (UGA) graduating in May 2026. He is a Woodstock, Georgia native and a versatile Software Engineer and Artist who bridges the gap between complex backend engineering and intentional UI/UX design. He has professional contract experience in e-commerce, leadership experience as an Executive Officer for UGA ACM, and a deep technical background in AI integration (RAG), game development, and systems programming. Thai is a "full-cycle" engineer, capable of architecting high-performance systems while personally crafting high-fidelity digital assets and animations.
-
 === CONTACT INFORMATION
 
 Name: Thai Nguyen
@@ -13,6 +9,11 @@ Location: Athens, Georgia
 LinkedIn: linkedin.com/in/thai-tam-minh-nguyen
 GitHub: github.com/ttn64681
 Open to relocation (Prefers Atlanta or major Georgia cities)
+
+=== EXECUTIVE SUMMARY
+
+Thai Nguyen is a senior Computer Science student at the University of Georgia (UGA) graduating in May 2026. He is a Woodstock, Georgia native and a versatile Software Engineer and Artist who bridges the gap between complex backend engineering and intentional UI/UX design. He has freelance web-dev experience in e-commerce, leadership experience as an Executive Officer for UGA ACM (CSIP) and Scrum Master, and a background in AI integration (RAG), Deep Learning & Neural Networks (Transfer-learning, Fine-tuning, Transformer models, CNNs), Machine Learning & Data Science (Analysis, Preprocessing, PCA/SVD, Model Training, Evaluation & Visualization), game development, and systems programming. Thai is a "full-cycle" engineer who has architected and delivered large app prototypes, working under various frameworks (SOLID/OOP/ECS/Signal-Bus), while also getting his hands dirty in Frontend, Backend, AI, 3D programming, GLSL, and more.
+
 
 === EDUCATION & ACADEMICS
 
@@ -29,106 +30,442 @@ Languages: Java, JavaScript, TypeScript, C, C++, Python, GDScript, SQL (PostgreS
 Frontend: React 19, Next.js (App Router), Tailwind CSS, Framer Motion, HTML5/CSS3
 Backend: Spring Boot 3.5, Node.js, Next.js API Routes, Server Actions
 Database & Caching: PostgreSQL, MongoDB (Mongoose), Redis (Upstash), Caffeine Cache
-AI/ML: RAG (Retrieval-Augmented Generation), Google Gemini API, Vercel AI SDK, Vector Search, LLMs
-Design & Graphics: THREE.js, Aseprite (Working Knowledge - Animation/Pixel Art), Figma (Working Knowledge - Prototyping), VFX.js (GLSL Shaders), Blender, Photoshop, Garageband
-Engineering Practices: Agile/Scrum, Jira, Docker, Postman, Unix/Linux, REST/GraphQL, Dependency Injection
+Deep Learning: Neural Networks, CNNs, Transformers, Fine-tuning/Transfer-learning, HuggingFace, Kaggle, RAG (Retrieval-Augmented Generation), Pytorch, Numpy, Pandas, Google Gemini API, Vercel AI SDK, Vector Search, LLMs
+ML/DataScience: Numpy, Pandas, Matplotlib, Seabourne, EDA, Preprocessing, Model Training (Unsupervised and Supervised), PDA/SVD
+Design & Graphics: THREE.js, GLSL Shaders, Aseprite (Working Knowledge - Animation/Pixel Art), Figma (Working Knowledge - Prototyping), VFX.js (GLSL), Blender, Photoshop (Working Knowledge - Creating Assets, Editing, Effects), Garageband / FL Studio
+Engineering Practices: Agile/Scrum, Jira, Docker, Postman, Unix/Linux, REST/GraphQL, Dependency Injection, SOLID, OOP, MVC, ECS, Signal-Bus, Composition, DRY, Design Patterns (Singleton, Decorator, Facade, Virtual Proxy)
 
 === PROFESSIONAL EXPERIENCE — FREELANCE (Fall 2025 – Present)
 
-Role: Full-Stack Developer (Contract)
+Role: Web Developer
 Client: Holywatr (Rock Band Brand Platform)
-Project Value: $2,000
-Key Achievements:
-- Engineered a multi-page brand platform using vanilla JS/CSS, integrating Shopify Storefront API and customized GraphQL queries for merchandise management.
-- Navigated VFX.js shader constraints to implement a "digital-horror" aesthetic featuring chromatic aberration and CRT distortion.
-- Developed creative UI workarounds, including custom ASCII art and Aseprite assets, to fill visual space and maintain theme consistency.
-- Optimized performance using requestAnimationFrame and CSS clamp() for mobile-responsive interactivity at 60fps.
-- Dev Site: https://playgroundlol.cfd
+Project Value: $2,000+
+Received Compensation: $500
+Stack: Vanilla JavaScript, CSS, HTML5, Shopify Storefront API, GraphQL
+Architecture: Client-side rendering, Custom Shopify Storefront integration
+Framework: VFX.js (GLSL Shaders), Custom UI/UX
+
+Resume Points:
+- Engineered a multi-page brand platform using vanilla JS/CSS, integrating Shopify Storefront API and customized existing GraphQL queries for merchandise management.
+- Navigated VFX.js shader constraints to implement a "digital-horror" aesthetic featuring chromatic aberration and CRT distortion. Z-fighting and Rendering issue handling. Matching elements to scroll at same speed as the fish-eye lens warp visual shader position. Managing both the shader visual and lining up the physical HTML hitbox under the shader element visual position.
+- Developed creative UI workarounds, including proposing idea of custom ASCII art and borders to fill visual space and maintain theme consistency, overall contributing to the “digital-horror” or “cathedral” look.
+
+Full Achievements:
+- Created the base template of the Home page and navbar
+- Created and implemented the Merch page with Shopify GraphQL integration (using existing Shopify API / GraphQL code, which I edited to change up the css and layout/style)
+- Created simple Contact page
+- Created the youtube mini player that slides in and out on home page
+- Overall improved organization and reduced duplicated code
+- Created Footer Component with better Klaviko integration (styling and functionality)
+- Overall strived to keep styling across all pages consistent
+- CSS Animations and transitions for elements on hover and click.
+- Implemented and created ASCII assets
+
+- Optimized space by compressing image files and assets
+- Optimized multi-device responsiveness with CSS breakpoints.
+- Structured the project properly with decoupled pages and styling and js files, along with proper robots.txt and meta tags to allow for proper SEO optimization and Google indexing/ranking/crawling.
+
+Reflection:
+- An exciting project that actually gets to be used by real fans. Pretty crazy.
+- Didn’t understand shaders much so could not figure out how to optimize it and reduce performance, which is a bottleneck. Shader’s were incredibly difficult to deal with, since we wanted to keep interactivity with the html elements. My first assumption was that shaders wouldn’t let you move the elements beneath the shader and it just takes a screenshot and warps it, but after taking Computer Graphics I know that’s not how animation frames work on the browser. However, the real struggle was that the visual shader warped the elements with a fish eye lens, which made it impossible for the user to actually press the buttons. The idea my partner (who recruited me for the project) and I came up with was to manually line up the buttons, possibly by somehow replicating the shader logic to see where the button would end up, but this was a seemingly impossible task that I spent all-nighters working on, but eventually we got it to be passable?
+- To deal with the performance bottleneck, I’d probably add automatic performance parameter changes that reduces the intensity of the shaders based on capability of the device. So like with my crappy laptop gpu the shaders would be on a “medium” tier intensity. Also with a better knowledge on shaders now I would probably be able to implement such a change.
+- However, at the end of the day my decision is never final and ultimately gets filtered by my partner who recruited me and the actual clientele. I experienced first hand how my ideas didn’t necessarily align with others, but given my position, I made sure to balance inserting my creative ideas while relinquishing the final say to the actual client/contractor.
+
+- Site: https://www.holywatr.com/
+
 
 === LEADERSHIP — UGA ACM (May 2025 – Present)
 
 Role: Executive Officer & CSIP Co-Chair (Computer Science Interview Prep)
-Impact:
-- Lead weekly technical workshops on Data Structures, Algorithms, and behavioral skills for 10+ students to improve career readiness.
-- Direct UI/UX redesigns in Figma for club branding, mascot assets, and digital presence to modernize the organization.
-- Manage recruitment event logistics, resulting in increased student engagement at university recruitment fairs.
+Resume Points:
+
+Full Achievements:
+- Hosted companies such as AWS and Google for QnA’s and Technical Workshops as the Head of Computer Science and Interview Prep division.
+- Lead weekly technical workshops/meetings on Data Structures, Algorithms, System Design, AI, and behavioral skills for 20+ students to improve career readiness and improve breadth of knowledge within the field.
+- Manage advice, ratings, and questions from attendees to directly iterate and curate future meetings.
+- Direct UI/UX redesigns in Figma for club branding, merchandise, mascot assets, and digital presence to modernize the organization.
+- Advising for Posters and Flyers and PR Graphics regarding visual hierarchy, flow, color contrast, and readability.
+- Designed stickers and a new mascot for merchandise resulting in increased student engagement at university recruitment fairs and club meetings.
+
+Reflection:
+- Very stressful and time-consuming, but also very rewarding whenever you’re able to teach new concepts to your attendees.
+- My first couple meetings were quite atrocious as I ended up going overtime and essentially cramming too many concepts in one meeting.
+- It took a lot of learning, practice and revisiting of technical topics to prepare for a CSIP meeting. One of my favorite benefits of this experience though is a great boost in my public speaking confidence and presentation skills.
+- When ideating and preparing for meetings, it made me think a lot about what I wish I could’ve learned and how I could help introduce a lot of important concepts to people who weren’t too familiar with them (like CI/CD, NoSQL vs SQL, Round Robin, Pareto Principle, etc.) or had never even heard of them.
+- In the beginning it was very rough given the 1 hour time constraint and also my own lack of knowledge, but it really pushed me into learning how to present a topic in an engaging way.
+- I also got to create a lot of fun jeopardies, which was my way of helping build holistic CS knowledge with attendees.
+- Helped give me access to a lot of cool connections and alumni and companies with a lot of valuable insight on work-life and job-seeking strategies.
+- Incredibly fun and fulfilling to be part of a bigger cause and an official engineering club in the university.
+- My only regret is that I couldn’t contribute more to driving engagement and creating workshops. I definitely had weeks where I questioned if I was really cut out to be an Exec when I was taking intensive courses while building a game on the side for Game Builders Club. Overall though.
+
 
 === MAJOR PROJECT — ACM CINEMA (E-BOOKING SYSTEM)
 
 Role: Scrum Master & Full-Stack Developer (Aug 2025 – Present)
-Architecture: Spring Boot 3.5 backend (PostgreSQL/JPA) with 80+ REST endpoints and 15 JPA entities.
-Technical Highlights:
-- Implemented stateless JWT authentication with Role-Based Access Control (RBAC) and BCrypt/AES encryption.
-- Applied Facade and Virtual Proxy design patterns to aggregate responses and lazy-load resources, reducing API payload by ~30-45%.
-- Integrated Caffeine caching (10-min TTL) and pagination to reduce database load and improve response times.
+Stack: Next.js 16/React 19/TypeScript, Spring Boot 3.5/Java 7, PostgreSQL (Neon), TanStack Query, Framer Motion, Spring Security, Caffeine Cache
+Architecture: Spring Boot 3.5 backend (PostgreSQL/JPA) with 80+ REST endpoints and 15 JPA entities. NeonDB for PostgreSQL on cloud, providing nice stuff like automatic backups and easy handling of owner credentials vs developer credentials and ability to create database branches)
+Framework: Object Oriented, SOLID Principles, MVC, Multi-layer, 4 Sprints & 9 Deliverables
+Resume Points:
+
+Full Achievements:
+- Designed and implemented a layered frontend/backend architecture (UI → hooks/contexts → API clients → controllers/services/repositories) to improve maintainability and feature velocity.
+- Implemented BCrypt/AES encryption (BCrypt for 1 way password encryption, AES for 2-way encryption/decryption for credit cards (which is not great, should’ve opted for SHA instead)).
+- Applied Facade and Virtual Proxy design patterns to aggregate responses and lazy-load movie data, reducing API payload by ~30-45%.
+- Built a reusable API client/facade layer in the frontend to standardize domain integrations (movies, auth, booking, promotions, payments, admin).
+- Implemented JWT-based authentication and role-based authorization (RBAC) across frontend and backend using Spring Security, custom JWT filters, and protected route logic.
+- Applied React performance patterns with useCallback, useMemo, useRef, and context composition, reducing unnecessary renders and stabilizing complex UI flows.
+- Integrated Caffeine caching (10-min TTL) and pagination to reduce database load and improve response times while preventing visual clutter.
+- Implemented server/client data strategies with pagination, caching, and controlled refetch behavior (TanStack Query + backend cache support).
+- Built reusable domain hooks (e.g., movies, search, seats, payments, orders, user) to separate business logic from presentation and keep pages lightweight.
+- Added polished UI/UX interactions using Framer Motion for animated promotional and background components while preserving app responsiveness.
 - Led 5-person Scrum team via Jira, improving sprint velocity by ~10% through structured ticket management.
+- Learning PostgreSQL and indexing database records for faster read access on sensible/commonly accessed record
+
+
+Reflection:
+- By far my hardest and BIGGEST and most AMBITIOUS project yet. For several reasons, from very strict and unclear requirements to just the sheer scope and amount of features needed for the project (AS WELL AS THE AMOUNT OF DOCUMENTATION). 
+- But the difficulty wasn’t just from creating class diagrams and user stories or managing a SCRUM team and Sprint Backlog, but it was also from the amount of new ideas I wanted to implement (like caching, DTO mapping, having a facade layer that abstracted frontend display logic from api endpoints and hook/business logic). This led to a lot of unfinished implementations and a sort of smorgasbord of conflicting strategies. In this way, it is still evident that this is NOT a production ready app, but an MVP. 
+- A lot of the workflow on my part utilized AI for skeleton code or for advice on improvements: I would often present ideas I had come up with or researched, like how I could optimize data fetching through pre-fetching or caching strategies, or I would provide a current snippet and ask what would be the “industry” way of refactoring this. Although useful for advice and ideas in many cases, this often led to a lot of premature optimizations, or it would lead to code that was inconsistent with the rest of the codebase. AuthN and AuthZ was an especially difficult system to implement, and at some points I fell victim to the trap of simply pasting and hoping for the best. This is obviously not ideal especially when you’re trying to debug.
+- Another note on flaws, but although I emphasized having clean and optimal code, one of my biggest regrets was not figuring out a better system for continuous testing. We scraped by through curl requests and Postman and print statements and such bruteforce tactics, but I think if we had spent time creating a better GitOps pipeline with solid testing, it would have saved a lot of “Oh shoot this thing I implemented a couple days ago was actually the reason this is no longer working” issues.
+- In my defense however, we had to self-learn basically everything, as our teacher never taught us how to implement such testing or optimizations or even how to create a backend. Web development is not even a pre-requisite for this class, which is honestly insane. 
+- Regardless, a great amount of effort and time was spent researching and learning the SpringBoot and React environment. I spent several allnighters working on this project, going above and beyond to implement features that weren’t required. I tried very hard to maintain a consistent structure for all of my teammates to follow, with Jira tickets and a Dev Guide. I saw first hand how hard it was to maintain an App that grew immensely over the course of several sprints, dealing with Legacy code and Refactorization. And yet, I also had a lot of fun learning new concepts like how to represent various entity relationships, how to utilize SpringData API, the various libraries and abstractions it provides, and best practices like only sending user intent from frontend requests instead of final business calculation values to the backend.
+- In the final demonstration, we received feedback (which we ended up fixing post-demo) and was deemed to have “one of the best projects” (mind you, our professor is incredibly strict, so we were cheesing).
+
+Overall points:
+- Implemented a real, advanced, multi-domain system with strong breadth and meaningful technical depth.
+
+Achievements:
+- End-to-end product integration.
+Hook/context architecture.
+Security foundations with JWT/Spring Security.
+Feature richness (booking + pricing + promotions + admin).
+Issues:
+- Security and lax server authority.
+- Client-supplied values (identity/amount context) could influence protected backend flows
+- Data/model inconsistencies and migration incorrectness.
+- Multiple Client/facade layers instead of a single facade.
+- client wrappers were facade-like but not a true unified facade, with duplicated request logic and inconsistent error semantics.
+- Immature test coverage and lack of reliability engineering.
+- Oversized frontend hooks (notably seat workflow orchestration) as possible complexity hotspots
+- Mixed caching strategy (manual cache + query cache + memoization overlap), increasing stale-data and invalidation complexity.
+
 - GitHub: https://github.com/ttn64681/Absolute-Cinema-Movies
-- Demo: https://youtu.be/92fEVh5wNyI
+- Demo: https://acm-movies.vercel.app/
+- Use Cases Checklist: https://docs.google.com/document/d/18sJVAZX-wxTSxqX8XqoKmbJgLsezMUtetB_Ji2ASs5g/edit?usp=sharing
+- Figma: ​​https://www.figma.com/community/file/1602290226089410310
+- Video: https://youtu.be/92fEVh5wNyI
+
 
 === MAJOR PROJECT — RAG-POWERED AI PORTFOLIO
 
 Role: Full-Stack Developer & Artist (June 2025 – Present)
+Stack: Next.js 15/React 19/TypeScript, Gemini 2.5 Flash, Upstash Redis, Vercel AI SDK, Tailwind CSS, Framer Motion
 Architecture: Next.js 15, Gemini 2.5 Flash, Upstash Redis, Vercel AI SDK.
-Technical Highlights:
-- Built a RAG chatbot grounded in portfolio-specific data using semantic vector search over vector embeddings.
-- Managed infrastructure costs/latency via SHA-256 version hashing for re-embeddings and query embedding caching (24h TTL).
-- Implemented IP-based rate limiting and streaming responses via Vercel Edge Runtime.
-- Designed hand-drawn pixel art assets in Aseprite and implemented smooth parallax motion using linear interpolation (lerp).
+Framework: React + Next file routing system + Vercel AI SDK
+Resume Points:
+
+Full Achievements:
+- Built a Next.js 15 + Vercel AI SDK RAG portfolio chatbot with Edge-streamed Gemini responses and custom chat UI orchestration. 
+- Engineered a Redis-backed RAG stack with Gemini embeddings, cosine similarity retrieval, context truncation, and automatic re-embedding via corpus hashing.
+- Implemented cost/perf controls including SHA-256 query embedding cache (24h TTL), request-size guards, message limits, and structured error handling.
+- Added Redis IP rate limiting with retry signaling and frontend-aware error code parsing for resilient UX.
+- Engineered the app as a typed, config-driven system so new projects/experience entries can be added quickly without rewriting page logic.
+- Built custom frontend hooks for polished interaction patterns (typing states, timeline orchestration, parallax layers, responsive state, visual feedback pulses).
+- Delivered a distinctive, game-inspired UI with hand-made pixel art and animation while keeping the experience fast and interactive.
+- Designed hand-drawn pixel art assets in Aseprite and implemented smooth parallax motion using linear interpolation.
+- Shipped cross-functional work blending backend engineering + AI integration + interactive frontend design + pixel-art production.
+
+Reflection: 
+- Seeing this website come to life- from Aseprite to Figma to Code- has been incredibly rewarding. I started working on the website back in Summer of 2025 and now its basically been a year at the time I’m writing this. So many influences are reflected in this project: from learning to use React in WebDev, how to create a robust backend in SWE, and learning how to utilize AI in Machine Learning and Deep Learning, to learning how to tween and linearly interpolate from Game Builders Club. 
+- Lot of effort into the visual presentation. Experimented with different colors for the UI, and still is a WIP. Really tried hard to make it seem fun, from the glasses toggling on and off if you click on my portrait, to the idle animation of my portrait, to the variations of idle dialogue I have, to the animated buttons I made for the Octocat logo and Link button.
+- Fun fact: I didn’t know there was actual an official pixel GitHub logo (Monocat), so I just made up one!
+- I think this was one of the first times I used RabbitMQ which is kind of goated. I remember using it afterwards for my SWE project a little bit because I liked it so much, but alas, I stopped after reaching the free-tier limit.
+- Although I used AI to automate a great deal of the boiler plate page code, CSS styling, type-proofing and error-handling, the website is still not perfect and requires a lot of attention and refinement in terms of performance, security, and durability.
+- I’m lowkey hoping that my website doesn’t hit a lot of traffic because I probably would be cooked.
+- Performance used to be incredibly bad due to the parallax + animated menu screen, but after compressing to webp, it improved to the point where my 2017 macbook can now run it without any significant lag. 
+
+- Demo: this site.
+- GitHub: https://github.com/ttn64681/portfolio
 
 === MAJOR PROJECT — COURSEHUB (Awarded “Best Class Project”)
 
 Role: Team Lead & Full-Stack Developer (Mar – May 2025)
-Achievements:
+Stack: Next.js 14/React 18/TypeScript, Next.js API Routes/Server Actions, MongoDB (Mongoose), Tailwind CSS, NextAuth, Gemini AI, YouTube Data API
+Architecture: Full-stack Next.js Application (App Router + Route Handlers), MongoDB/Mongoose Backend, RESTful APIs
+Architecture: 
+Framework: React + Next file routing system
+Resume Points:
+
+Full Achievements:
+- Architected and delivered a full-stack Next.js 14 application (App Router + Route Handlers) with React/TypeScript frontend and MongoDB/Mongoose backend.
 - Integrated Gemini AI and YouTube Data API to automate study plan generation, reducing manual creation time by ~90%.
 - Engineered 15+ RESTful endpoints and MongoDB schemas using Mongoose for complex post-course associations.
-- Implemented NextAuth.js v5 for secure user authentication and middleware-based route protection.
-- Live App: https://course-hub-git-finalpresentation-ttn64681s-projects.vercel.app/
+- Modeled relational content in MongoDB with Mongoose schemas and references (Course ↔ Post ↔ User), plus indexing for query performance and predictable sorting.
+- Developed end-to-end course discovery pipeline integrating Gemini API for course enrichment (description, topics, study plan, resources) with fallback model handling and quota-aware error messaging.
+- Built YouTube Data API integration that combines search and video-details endpoints to return richer metadata (duration, views, channel, thumbnails).
+- Designed and implemented modular React feature components (CourseSearch, Sidebar, Resources, Forum, Contribution flow) with route-driven UX and reusable UI patterns.
+- Created contribution and community workflows including resource posting, comments, likes/unlikes, and owner-based post deletion behavior.
+- Established a consistent Tailwind-based design language with shared color/typography tokens and responsive UI behavior across feature pages.
+- Managed Agile team via Kanban on Miroboard and owned project idea + Figma design
+
+Reflection:
+- My first web app project, and boy what a ride it was. I actually pulled an all-nighter right before presentation day in order to polish up UI, and ended up actually waking up too late, and by the time it was almost time to present, my teammates were calling me saying that they couldn’t run the project 😭But eventually I was able to resolve it and we had the best project within our class.
+- It was hard architecting this since I honestly didn’t know what I was doing. I’m thankful for my goated teammates who had actual webdev experience with authorization and API’s and app-development. But I tried incredibly hard to hold bi weekly meetings and have a structured Kanban board and to communicate and include all of my teammates. I designated roles based on people’s strengths, and by the end, I received one of my best compliments: that I was by-far their most put-together on-top-of-it leader (in school context).
+- Very rough, but I came up with the idea of having all database definitions in a single file that we can reference.
+- Our API route files were also very heavy, but it seemed to work.
+- Looking back, there are a lot of same issues regarding security and not so safe practices that were present in my recent ACM project too for Software Engineering.
+
+- Live App: https://course-hub-uga.vercel.app/
 - GitHub: https://github.com/ttn64681/Web-Dev-Group-Project
 - Demo: https://www.loom.com/share/04e8e8049bb446f3b017975b1e82d01e?sid=6928a038-d539-422c-9f3f-5fc7bf634940
 
+=== MAJOR PROJECT — Bird Audio Classification (Deep Learning-Final Partner Project, Spring 2026)
+
+Role: Ideator, Programmer
+Architecture: PyTorch
+Framework: PyTorch
+Stack: PyTorch, HuggingFace Trainer, NumPy, Pandas, HuBERT Base, AST, BirdCLEF+ 2021 Dataset
+Resume Points:
+
+Full Achievements:
+- Built 2 models (HuBERT Base & AST) for bird-audio classification via BirdCLEF+ 2021 dataset
+- Used transfer learning with pretrained audio backbones and replaced classification heads for 10 bird classes (common American birds, sorted via Excel)
+- Implemented basic training pipeline: preprocessed audio for model-ready inputs, trained via HuggingFace Trainer, and validation during training.
+- Added disk caching (save_to_disk / load_from_disk) so we didn’t have to rebuild datasets each run.
+- Implemented multiple metrics: accuracy, macro-F1, macro-precision, macro-recall.
+Added confusion matrix + class-level reports.
+- Measured inference timing and per-sample latency.
+- Estimated parameter counts and FLOPs/MACs for model-efficiency analysis.
+- Built demo inference flows for both models (pipeline-based user-facing inference).
+
+Reflection:
+- A big inspiration for this project came from a previous assignment where we had to use various checkpoints of BERT and train them for different downstream tasks (MRPC, SQuAD, SST-2). - - The idea I thought of was to see if I could apply BERT for an ecological issue and active area of research: Passive Acoustic Monitoring for Birds (birds are a great biodiversity indicator for ecological health). One google search was all it took to realize that there were specialized models specifically trained for these tasks… but nonetheless, I wanted to see if I could do this using base models, in which I found 2 to compare against each other: AST and HuBERT. 
+- My partner and I utilized our prior knowledge on training models via mini-batch and cross entropy loss and hyperparameter tuning to build this bird classifier using a kaggle dataset I found online. I specifically chose 10 common American birds for the ground truth labels, since we live in ‘murica. 
+- I say all this as if it was easy, but this did not go smoothly at all. Any mistake we ran into with our functions prior to training might not have revealed itself until an hour through the training process (this type of stuff happened multiple times).
+- Realistically, this is all very basic neural network training stuff, but this stuff is still hard for me to grasp, so I’m just glad I was able to get something that runs and works at all, especially given my school schedule at the time.
+- Also, we did not really implement any optimizations outside of hyperparameter tuning, so this definitely is nothing groundbreaking or worthy of publishing. The results we found though were still surprising and fun to see (check out the presentation if you’re curious).
+- For fun, I decided to have the inference demo include some “funny” (big airquotes here) print statements that narrated a short story, giving the model (AST or HuBERT) a persona. Kinda like 2 computers role-playing lowkey. You’ll just have to see the demo if you don’t know what I mean. Idk I just like doing stuff like this cause its funny, and arguably a more engaging way to present a demo like this than just immediately showing the classification result. 
+
+- GitHub: https://github.com/ttn64681/Bird-Audio-Classification/blob/main/README.md
+
+Domain Expansion Exhibit (Computer Graphics, Apr-May 2026) (Partner Final Project)
+Role: 3D Modeler, Designer, Programmer
+Stack: Three.js, GLSL Shaders, JavaScript, HTML5/CSS3
+Architecture: Real-time Interactive Exhibition Engine, Exponent-based Domain Scaling
+Framework: Three.js, PBR Shading
+Resume Points:
+
+Full Achievements:
+- Architected and implemented a real-time Three.js interactive exhibition engine featuring an infinite nested-world zoom system inspired by Powers of Ten (1977).
+- Designed the project’s core infinite rendering treadmill: exponent-based domain scaling + cyclic domain queue rotation for seamless, non-breaking zoom continuity.
+- Built the full runtime orchestrator in main.js, integrating scene lifecycle, render loop, mode switching (play/reverse/dev), UI bindings, and camera/control logic.
+- Engineered a custom opacity-mapping and painter-order pipeline for nested translucent geometry using renderOrder, depthWrite, alphaTest, and per-material opacity control.
+- Developed cinematic intro + seamless transition from intro to zoom-loop: custom fullscreen GLSL overlay, an additive sprite layer (png of gojo eyes and finger sign), and camera easing.
+- Integrated custom shader workflows, including 3D Perlin/gradient-noise sky shaders and onBeforeCompile shader injection for animated water/vertex displacement while preserving the material’s PBR shading behavior.
+- Built internal dev tooling with lil-gui for domain isolation, room scaling, shader/rim tuning, and runtime diagnostics visibility.
+- Led project structure modularization into domain factories, procedural generators, and shader modules to improve iteration speed and team parallelism.
+- Added scalable performance tiers (high/medium/low graphics settings) for real-time tuning and cross-device stability.
+
+Reflection:
+- I’m pretty proud of this idea I came up with. There were a lot of weird things with Z-indices that were clashing that I really didn’t understand, which is what led to me manually setting the Z-index and alphaTest and depthWrite at every frame, which probably isn’t the best way to do it? I’m not super familiar with Three.js though.
+- Performance is a huge issue with this project, and I’m very impressed with how other Three.js sites can run so smooth. I was able to identify a lot of possible issues with our current implementation though:
+- I updated too many material/render-state flags every frame that could’ve just been toggled on and off at certain checkpoints, causing unnecessary CPU/GPU state churn.
+- Didn’t enforce an instancing policy early; led to high draw-call growth from many individual meshes/groups instead of using InstancedMesh or BatchedMesh for repeated assets.
+- Probably some per-object material creation in generators that I overlooked
+- I didn’t handle any loading state/error handling/retry strategy for my model asset nor for any texture assets used.
+- Regardless, this was super fun since I essentially got to pour out my same passion for creativity and design and engaging experiences that I have with Game Design/Programming for something outside of an actual “game.” It’s part of the reason why I like Computer Graphics as a class since there’s a lot of overlap with graphics and games. This class is especially great since it rewards creativity, so I made sure to draw 120% of my potential for this one.
+
+- Demo: https://domain-expansion-exhibit.vercel.app/
+- GitHub: https://github.com/ttn64681/ThreeJS-Final-Project
+
+Bill Cypher Vaporwave Render (Computer Graphics, Spring 2026)
+Role: 
+Architecture: Three.js
+Framework: Three.js
+Stack: Three.js, GLSL, JavaScript, ES Modules
+Resume Points:
+
+Full Achievements:
+- Built a complete browser-based 3D experience in Three.js using ES modules and import maps, covering scene setup, camera, renderer, lighting, fog, animation loop, and post-processing scaffolding.
+- Implemented stylized rendering techniques including fat-line outlines, fog, emissive materials, and a post-processing stack (bloom/afterimage/RGB shift/gamma).
+- Created reusable scene architecture with hierarchical groups and shared geometry/material patterns for efficient transform control and asset reuse.
+- Created a scrolling dual-floor illusion via modulo-based positional wrap logic (camera.position.z = time % 2.0).
+- Developed custom texture/atlas workflows for floor displacement/metalness and glyph-ring UV slicing.
+
+Reflection:
+- This creation of mine was directly inspired by Maxime Heckel’s amazing blog/tutorial: https://blog.maximeheckel.com/posts/vaporwave-3d-scene-with-threejs/
+- This was super fun to make and do, but I do think I relied too heavily on the blog instead of trying to figure things out by myself. Well, I did have to figure things out by myself for everything past the vaporwave stuff (Bill Cypher, post processing, fat outlines, custom transparent textures, etc.)
+- Finishing this project made me think how much easier it was to create a 3D rendering in code vs in Blender. At least for a mesh as simple as Bill Cypher. If I had to create a human model in Three.js, I would be very miserable.
+- That being said, performance was still a big issue for my laptop, regardless of whether it ran well on desktop or not. Along with some other things I could’ve optimized better:
+- Used frame-dependent timing (time += 0.01) instead of delta-time, causing animation speed variance by hardware/frame rate <- nvm I fixed this
+- Constructed bill’s eyelashes as many tiny line objects instead of batching into one LineSegments geometry.
+
+- Demo: https://bill-cypher-vaporwave.vercel.app/
+- GitHub: https://github.com/ttn64681/ThreeJS-Creative
+
 === ADDITIONAL EXPERIENCE — GAME DEVELOPMENT & CLUBS
 
-Tower Ascent (UGA Game Builders, Fall 2025 – Present):
-- Programmer & Artist (Godot 4, Aseprite).
-- Engineered modular trading, inventory (Dependency Injection), and keyframe-driven UI systems.
-- Play: https://kuuoi.itch.io/tower-ascent
+Spindrive (UGA Game Builders, Spring 2026):
+Role: Programmer & Sound Programmer & SFX & Artist (Godot 4, Photoshop):
+Framework: ECS, 4 Checkpoints
+Stack: Godot 4, GDScript, Photoshop
+Architecture: Component-based/Node-based structure
+Resume Points:
+
+Full Achievements:
+- Engineered Menu Animation System with complex UI animations and theme changes.
+- Shipped main menu interaction and polish: controller/keyboard navigation (cycle forward/back), parallax effect with lerp, animated/scripted transitions, hover feedback on buttons (-> menu theme change, button hovering/scaling), fragment shader to display transparent pattern over another material and animate that pattern via tiling-scroll.
+- Built core audio in Godot: Sounds (preload catalog) + AudioManager (handles music fades, queues, loop rules, UI/game SFX, pause/resume behavior, and volume updates).
+- Built and iterated intro / title flow visuals and animations, integrating new menu/intro assets
+- Owned options menu overhaul: animated hub/subpanel flow, wired brightness and audio controls with live slider value readouts, and laid groundwork for gameplay and layout-controls sections.
+- Led ready menu design and implemented all logic from animating several transitions, character selection, in-game stat changes, per-player controller-presets, and ready-up sequencing.
+- Settings Logic, Sound System, Decoupling Data files
+- Helped inspire the game idea
+
+Reflection:
+- My final semester at GBC 😢
+- Also the hardest thing I’ve done at Godot: Animated UI. At first, coming from React, I was thinking that there were probably some convenient functions to allow simple stuff like hovering and scaling buttons. It turns out that this is 10x more complicated to do in Godot, since you have to manually keep track of the original base position/scales and the final position/scales when you hover over the buttons. However, I also have to do the same thing since I added parallax. 
+- Working in the ECS framework was difficult for me, and I would ruminate over whether I was implementing things in the “theoretically correct way.” Like, ensuring that all the UI files knew nothing about the existence of app.gd or video_manager or user_settings. I was asking questions like, is it wrong that I made the mutable Video and Audio settings a subclass under game_settings.gd when the file only contains constants? 
+- It’s also funny because in this environment our program/team co-lead hated Signal Busses, yet my previous GBC game was literally built around Signal Busses.
+
+Tower Ascent (UGA Game Builders, Fall 2025):
+Role: Programmer & Artist (Godot 4, Aseprite).
+Framework: Signal Bus system, 4 Checkpoints
+Stack: Godot 4, GDScript, Aseprite, DTOs
+Architecture: Modular UI Components
+Resume Points:
+
+Full Achievements:
+- Engineered modular trading, post-battle inventory, and keyframe-driven UI systems.
+- Designed and animated Intro Scene animation
+- Created exposition cutscene with keyframe-driven dialogue.
+- Refactored a monolithic UI script into modular components (HeroInfoDisplay, AbilityDisplay, ItemDisplay, DefaultViewDisplay) fed by a shared UIConfig file.
+- Implemented hero-to-hero trading: SignalBus-driven requests, TradeManager performs swaps, and an ItemsTransferData DTO is used to carry item + source inventory + index during drag-n-drop-style transfer.
+- Implemented mood-aware head portraits: portrait set depends on party size / deaths (e.g. ‘distraught’ / ‘alone’ variants)
+- Implemented character dialogue + specific permutations of dialogue based on mood (party size / deaths)
+
+Reflection: 
+- My second time actually programming for a game, and I learned a lot, from creating DTO’s to implementing an inventory/trading system and UI, to creating tweens that allow you to interpolate values for smooth animations (type-writer effect). 
+- I created a pretty killer intro-scene animatic via Godot Animation Player and custom-made/edited assets. I care too much about visuals to not do this type of stuff. I did the same thing with the game Spindrive as well, which also included a cinematic intro scene and cool animations/transitions/menu-designs.
+- I struggled mainly with how to handle signals to conform to the Signal Bus structure we were using.
+- Honestly, my ‘React’ style components were largely flawed since it required me having to pass every single Control Nodes and Callable Functions into a huge constructor in an arbitrary order, which is really not maintainable. Possibly a case of ‘over-engineering,’ but I still think the idea is cool.
+
+- Play: https://opuhlos.itch.io/tower-ascent
 
 Bulldog Planner (UGA DevDogs/GDG, Aug 2024 – May 2025):
-- Frontend Developer (React, TypeScript, Tailwind CSS).
+Role: Frontend Developer
+Stack: React, TypeScript, Tailwind CSS
+Architecture: Frontend Component-based
+Framework: React, Tailwind CSS
+
 - Developed responsive UI and filter logic for student schedule optimization.
 
+Reflection: 
+- Ngl I did barely anything since I was just learning React. I was tasked with bug fixing duty and the big theme I did was making the design of 2 pages, one of them being very hard for me since I had to plan for backend functionality. In the end my implementation ended up being refactored/reworked by someone else anyways. Still a valuable experience though.
+
+- GitHub: https://github.com/DevDogs-UGA/Optimal-Schedule-Builder
+
 Bunker Jumper (Spring 2025):
-- UI Programmer (Godot). Programmed UI elements and animations.
-- GitHub: https://github.com/Saidan816/bunker-jumper
+Role: UI Programmer
+Stack: Godot 
+Architecture:
+Framework: 
+
+- Programmed UI elements and animations.
+
+Reflection: 
+- First off, let me shout out the incredible team this game had. From the goated game leader @saidan-games to our goated programmers @nori-nori, this team was pretty cracked. My first time using Godot and learning how to do animations. I worked on quite a bit of animations and even made an enemy animation in Aseprite (albeit the enemy never got put in the game). I did some fairly cool stuff and provided some creative ideas, but definitely still lacking in both programming and animation skills at this point. I really tried to go all out for my next games I worked on (Tower Ascent, Spindrive).
+
 - Play: https://saidan-games.itch.io/bunker-jumper
 
 Dragon of the East (Boss Rush Jam 2025):
-- Music Composer (Garageband). Game developed in Godot.
+(Godot). Placed 169th/866 Overall.
+Role: Music Composer (Garageband)
+- Made 2 tracks.
+
+Reflection: 
+- 2 tracks for a pretty cool game. I’m very slow at making music, and it’s not my best work, but it’s not my worst I suppose.
+- Shout out to my boy @nori-nori
+
 - Play: https://origin-nori.itch.io/dragon-of-the-east
 
 Code for a Cause Charity Jam — Job Description (Feb – Mar 2025):
-- 3D Modeler & UI Designer (Unity, Blender, Photoshop). Placed 41st/278.
+- Placed 41st/278.
+Stack: Unity, Blender, GIMP
+Framework: Unity Engine
+
+- 3D Modeling, UV Unwrapping, Texturing, and Rigging. Menu Design and Thumbnail Design.
+
+Reflection:
+- The majority of progress was made in the final week, where I just stayed over at my friend Aiden’s (@kuuoi) house and grinded on Blender. I say ‘grinded’ but it was my first time learning Blender so it was an absolutely awful experience.
+- I learned how to 3D model a human, probably in a really inefficient way, and then how to UV unwrap the model and texture it, where I exported the unwrapping map and painted over it in GIMP which was probably one of the worst ways to do it. (There’s got to be an easier way to do this, right?)
+- Rigging the model was an absolute pain too. I struggled with this pretty badly, but it ended up seeming okay when we saw it animated in Unity.
+- Overall, grueling process but also fun to learn Blender. Too bad after that game jam I completely lost anything I learned during that week 🥲
+
 - Play: https://kuuoi.itch.io/jobdescription
 - Trailer: https://youtu.be/ccdSNrpOq_0?si=yLnxwGjgz2RLktqS
 
 A Forlorn Soul (Feb – Mar 2025):
 - Art/Animation (Aseprite), Music/SFX (Garageband), and Level Design (Unity). Placed 10th in Georgia.
 
+Reflection:
+- My first ever game jam. 
+- My first time ever doing pixel art too, and it shows 💀
+- My first time doing chiptune style music too, and to this day one of those tracks is still probably one of my favorites out of all of the music I’ve created.
+- Honestly really my first time doing music other than beats. I did piano tracks and one theme which was like an orchestral track (although not done very well, and sounds really tacky due to stock sounds, but I thought it fit the quality/aesthetic of the game).
+
+- Play: https://danghet.github.io/AForlornSoul-V.1.0/
+
+
 Laundry Day (UGA Game Builders, Fall 2024): 
-- Music and SFX composition for a visual novel game.
+Role: Music composer
+- Music composition for a RenPy visual novel game.
+- 3 tracks, although only 1 in game 🙁(Main Menu)
+
+Reflection:
+- My second ever game in Game Builders Club. No programming as I didn’t feel confident enough, so I worked on music for an end credits song which never got implemented, a scrapped background track, and the main menu theme. 
+
+- Play: https://glass-rain.itch.io/laundry-day
+
 
 To See (UGA Game Builders, Spring 2024): 
-- Music composition for a 3D storytelling game.
+- Music composition + SFX for a 3D storytelling game.
+- 2 tracks and quite a lot of sound effects
+
+Reflection:
+- My first ever time in Game Builders Club. Very fun but also quite disappointing since I could not find the discipline to work on more than 1 track (Don’t tell anyone, but I actually just reused a track I made previously and added some embellishments 😶)
+
+- Play: https://origin-nori.itch.io/to-see-demo
+
+
+Your Toast (UGA Game Builders 2-week game-jam) (Fall 2025)
+- Music + SFX
+
+Tram Game (UGA Game Builders 2-week game-jam) (Fall 2025)
+- SFX
+
 
 === MISCELLANEOUS PROJECTS
 
-Anime Info Translator (Personal Project):
-- GUI-based application using Jikan API and Google Translate API to fetch and translate anime data.
+HTML Canvas 2D Physics Simulation (2026):
+- Programmed various shapes and polygons bouncing and colliding via Axis Aligned Bounding Box checks + 2D velocity and acceleration changes.
+- Linear interpolation for visual collision color change effects + per-shape collision sound effects
+
+Anime Info Translator (Apr 2024):
+- JavaFX GUI-based application using Jikan API and Google Translate API to fetch and translate anime data.
+- GitHub: https://github.com/ttn64681/cs1302-api-app
 
 Multithreaded Diagonal-Sum Calculator (Nov – Dec 2024):
-- High-performance C application using POSIX threads to compute matrix sums.
-- Achieved 3.2x speedup on 12.7M elements through thread synchronization and dynamic memory management.
+- C application using POSIX threads to compute matrix sums with shell script to test on multiple data sizes.
+- Recorded a 3.2x speedup on 12.7M elements through thread synchronization and dynamic memory management.
+- GitHub: https://github.com/ttn64681/Multi-Threaded-Diagonal-Sums
+
+AutoE-Presser (Roblox Shell Script) (2025):
+- First time creating a script for out-of-school use.
+- Used for Grow-A-Garden to automatically spam e-key.
+- Sound indicators for when script is on/off.
+- GitHub: https://github.com/ttn64681/AutoEPress
 
 === DESIGN PHILOSOPHY & CAREER GOALS
 
-Thai is seeking roles in Software Engineering, AI Infrastructure, Cloud Engineering, and Full-Stack Development. He follows a "full-cycle" engineering philosophy, believing that high-performance backend systems must be paired with intuitive, high-fidelity UI/UX. He leverages his background in digital art (Aseprite, Blender, Garageband) to create unique, polish-focused user experiences.
+Thai is seeking roles in Software/App Development, Software Engineering, and Full-Stack Development, with an interest in learning Infrastructure, Cloud Engineering, and AI Infrastructure. Essentially, he is open and eager to learn new things along with advancing his existing knowledge. For many of his projects, he follows a "full-cycle" engineering philosophy, believing that high-performance backend systems must be paired with intuitive, high-fidelity UI/UX. He also places a high emphasis on optimization, clean & structured code, and performance. He loves to leverage his background in digital art and game-dev(Aseprite, Blender, Garageband) to create unique, polish-focused, and engaging user experiences (React, Framer Motion, Three.js, User-facing demonstrations).
