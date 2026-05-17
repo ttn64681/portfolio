@@ -166,11 +166,23 @@
       border-color 0.22s ease-out;
   }
 
-  .explore-hub-flip-tile:hover {
-    transform: scale(1.008);
-    filter: brightness(1.04);
-    z-index: 1;
-    border-color: rgba(255, 180, 150, 0.28);
+  .explore-hub-flip-tile--flip {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .explore-hub-flip-tile--flip.explore-hub-flip-tile--open {
+    /* Explicit height so descendants get a definite box; clip paint so wheel/scroll stay on the inner list */
+    height: min(58vh, 38rem);
+    min-height: min(58vh, 38rem);
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .explore-hub-flip-tile--flip.explore-hub-flip-tile--open {
+      height: min(54vh, 40rem);
+      min-height: min(54vh, 40rem);
+    }
   }
 
   .explore-hub-flip-tile--direct {
@@ -216,19 +228,34 @@
   }
 
   .explore-hub-flip {
-    height: 100%;
-    min-height: 38vh;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
     perspective: 1200px;
     box-sizing: border-box;
+  }
+
+  /* Collapsed (front showing): keep generous tap target */
+  .explore-hub-flip-tile--flip:not(.explore-hub-flip-tile--open) .explore-hub-flip {
+    min-height: 38vh;
   }
 
   .explore-hub-flip__inner {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 38vh;
+    min-height: 0;
     transform-style: preserve-3d;
     transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .explore-hub-flip-tile--flip:not(.explore-hub-flip-tile--open) .explore-hub-flip__inner {
+    min-height: 38vh;
+  }
+
+  .explore-hub-flip-tile--flip.explore-hub-flip-tile--open .explore-hub-flip__inner {
+    height: 100%;
+    min-height: 0;
   }
 
   .explore-hub-flip--open .explore-hub-flip__inner {
@@ -241,8 +268,9 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0.01px);
   }
 
   .explore-hub-flip__face--front {
@@ -266,13 +294,24 @@
     outline-offset: -4px;
   }
 
+  .explore-hub-flip--open .explore-hub-flip__face--front {
+    /* Behind the back face after rotateY — still intercepts wheel/pointer in some browsers */
+    pointer-events: none;
+  }
+
   .explore-hub-flip__face--back {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(0.05px);
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
     padding: 0.85rem 0.75rem 1rem;
     background: rgba(2, 10, 22, 0.92);
     border-left: 3px solid rgba(77, 238, 234, 0.35);
+  }
+
+  .explore-hub-flip--open .explore-hub-flip__face--back {
+    z-index: 1;
   }
 
   .explore-hub-flip:not(.explore-hub-flip--open) .explore-hub-flip__face--back {
@@ -322,12 +361,14 @@
   }
 
   .explore-hub-flip__close {
-    font-family: var(--font-pixel-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.35rem 0.55rem;
-    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.28);
     background: rgba(0, 0, 0, 0.35);
     color: rgba(241, 248, 255, 0.88);
@@ -339,13 +380,51 @@
     color: #b8fff5;
   }
 
+  .explore-hub-flip__list-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    position: relative;
+    z-index: 0;
+    overflow-x: hidden;
+    /* scroll: classic gutter + themed bar (avoids overlay scrollbar on the wrong edge) */
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 230, 210, 0.75) rgba(0, 0, 0, 0.45);
+    /* Promote own compositor layer so wheel targets this box inside 3D parents */
+    transform: translateZ(0);
+  }
+
+  .explore-hub-flip__list-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .explore-hub-flip__list-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 4px;
+    margin: 2px 0;
+  }
+
+  .explore-hub-flip__list-scroll::-webkit-scrollbar-thumb {
+    background: rgba(120, 230, 210, 0.55);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    background-clip: padding-box;
+  }
+
+  .explore-hub-flip__list-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 230, 210, 0.88);
+    background-clip: padding-box;
+  }
+
   .explore-hub-flip__list {
     list-style: none;
     margin: 0;
-    padding: 0;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
+    padding: 0 0.35rem 0 0;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -388,6 +467,7 @@
     padding: 0.5rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.25);
     background: rgba(0, 0, 0, 0.35);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
 
@@ -462,6 +542,7 @@
     color: inherit;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: rgba(8, 20, 40, 0.75);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
     transition:

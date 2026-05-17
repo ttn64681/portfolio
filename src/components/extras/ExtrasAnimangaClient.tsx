@@ -45,11 +45,18 @@ export default function ExtrasAnimangaClient({
         selected: filter === 'game',
         onSelect: () => setFilter('game'),
       },
+      {
+        id: 'music' as const,
+        label: 'Music',
+        selected: filter === 'music',
+        onSelect: () => setFilter('music'),
+      },
     ],
     [filter],
   );
 
-  const mediums: AnimangaFeedKind[] = filter === 'all' ? ['anime', 'manga', 'game'] : [filter];
+  const mediums: AnimangaFeedKind[] =
+    filter === 'all' ? ['anime', 'manga', 'game', 'music'] : [filter];
 
   return (
     <>

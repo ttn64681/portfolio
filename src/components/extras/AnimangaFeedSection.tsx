@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
+import AnimangaYoutubeEmbed from '@/components/extras/AnimangaYoutubeEmbed';
 import type { AnimangaFeedEntry, AnimangaFeedKind } from '@/types/extras/animanga';
 
 /** Recent activity list + optional category chips; parent can own filtering via `mediaFilter`. */
@@ -45,6 +46,7 @@ export default function AnimangaFeedSection({
     { id: 'anime', label: 'Anime', selected: filter === 'anime', onSelect: () => setInternalFilter('anime') },
     { id: 'manga', label: 'Manga', selected: filter === 'manga', onSelect: () => setInternalFilter('manga') },
     { id: 'game', label: 'Game', selected: filter === 'game', onSelect: () => setInternalFilter('game') },
+    { id: 'music', label: 'Music', selected: filter === 'music', onSelect: () => setInternalFilter('music') },
   ];
 
   return (
@@ -61,6 +63,15 @@ export default function AnimangaFeedSection({
           <h3 className='extras-animanga-feed__title'>{entry.title}</h3>
           {entry.rating != null && <AnimangaStars value={entry.rating} />}
           {entry.note && <p className='extras-animanga-feed__note'>{entry.note}</p>}
+          {entry.youtubeVideoId && (
+            <div className='extras-animanga-feed__embed-wrap'>
+              <AnimangaYoutubeEmbed
+                videoId={entry.youtubeVideoId}
+                title={entry.title}
+                className='extras-animanga-yt-embed extras-animanga-yt-embed--fill'
+              />
+            </div>
+          )}
           <div className='extras-animanga-feed__meta'>
             {entry.date}
             {entry.href && (

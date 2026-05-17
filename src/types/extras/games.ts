@@ -24,8 +24,9 @@ export type ExtraGameGalleryItem = {
 };
 
 export type ExtraGameYoutube = {
-  videoId: string;
-  title: string;
+  title?: string;
+  videoId?: string;
+  loomId?: string;
 };
 
 export type ExtraGameEntry = {

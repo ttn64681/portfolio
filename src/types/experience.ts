@@ -12,5 +12,8 @@ export type ExperienceConfig = {
   summary?: string;
   bullets?: string[];
   techStack?: string[];
+  /** Live site / demo (Explore overview actions). */
+  link?: string;
+  github?: string;
   exploreDossier?: ExploreDossierInput;
 };

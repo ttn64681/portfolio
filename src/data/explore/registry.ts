@@ -89,12 +89,13 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
 
   const visual = getExploreVisualConfig(slug, entry.kind);
 
-  const overview = EXPLORE_USE_PLACEHOLDERS
-    ? (dossier.overview ??
-      entry.summary ??
-      entry.bullets?.[0] ??
-      EXPLORE_OVERVIEW_FALLBACK)
-    : dossier.overview;
+  const overview =
+    dossier.overview ??
+    (EXPLORE_USE_PLACEHOLDERS
+      ? (entry.summary ?? entry.bullets?.[0] ?? EXPLORE_OVERVIEW_FALLBACK)
+      : entry.summary);
+
+  const award = entry.kind === 'project' ? entry.award : undefined;
 
   return {
     slug,
@@ -104,13 +105,9 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
     date: entry.date,
     summary: entry.summary,
     overview,
-    ...(entry.kind === 'project'
-      ? {
-          demoLink: entry.link,
-          repoLink: entry.github,
-          award: entry.award,
-        }
-      : {}),
+    demoLink: entry.link,
+    repoLink: entry.github,
+    ...(award ? { award } : {}),
     stack,
     features: dossier.features,
     implementation: dossier.implementation,

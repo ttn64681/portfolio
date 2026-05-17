@@ -4,18 +4,26 @@ import { useEffect, useRef, useState } from 'react';
 
 type LazyYouTubeProps = {
   videoId?: string;
+  /** Loom embed id from `loom.com/embed/<id>`. */
+  loomId?: string;
   title?: string;
   /** When false, renders embed only (use when an outer layout supplies the heading). */
   showHeading?: boolean;
 };
 
 /** Mounts the iframe only after the block scrolls near the viewport — saves bandwidth on long dossiers. */
-export default function LazyYouTube({ videoId, title, showHeading = true }: LazyYouTubeProps) {
+export default function LazyYouTube({
+  videoId,
+  loomId,
+  title,
+  showHeading = true,
+}: LazyYouTubeProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [mountIframe, setMountIframe] = useState(false);
+  const embedKey = videoId ?? loomId;
 
   useEffect(() => {
-    if (!videoId) return;
+    if (!embedKey) return;
     const el = containerRef.current;
     if (!el) return;
 
@@ -27,13 +35,13 @@ export default function LazyYouTube({ videoId, title, showHeading = true }: Lazy
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [videoId]);
+  }, [embedKey]);
 
-  if (!videoId) {
+  if (!embedKey) {
     const body = (
       <div ref={containerRef} className='explore-youtube explore-youtube--placeholder'>
         <div className='explore-youtube__frame'>
-          <p className='explore-youtube__placeholder-text'>No video ID yet — add one in detail data.</p>
+          <p className='explore-youtube__placeholder-text'>No video embed yet — add one in detail data.</p>
         </div>
         {title && <p className='explore-youtube__title'>{title}</p>}
       </div>
@@ -50,7 +58,11 @@ export default function LazyYouTube({ videoId, title, showHeading = true }: Lazy
     );
   }
 
-  const embedSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`;
+  const embedSrc = loomId
+    ? `https://www.loom.com/embed/${encodeURIComponent(loomId)}`
+    : `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId!)}`;
+
+  const defaultTitle = loomId ? 'Loom video' : 'YouTube video';
 
   const player = (
     <div ref={containerRef} className='explore-youtube'>
@@ -58,7 +70,7 @@ export default function LazyYouTube({ videoId, title, showHeading = true }: Lazy
         {mountIframe ? (
           <iframe
             src={embedSrc}
-            title={title || 'YouTube video'}
+            title={title || defaultTitle}
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
             allowFullScreen
             loading='lazy'

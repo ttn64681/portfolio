@@ -18,5 +18,8 @@ export type ExploreGalleryItem = {
 
 export type ExploreYoutubeItem = {
   title?: string;
+  /** YouTube watch / youtu.be id (not the full URL). */
   videoId?: string;
+  /** Loom embed id from share URL (`loom.com/embed/<id>`). */
+  loomId?: string;
 };

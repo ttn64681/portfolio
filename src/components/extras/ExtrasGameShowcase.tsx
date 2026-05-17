@@ -123,7 +123,13 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
           </h2>
           <div className='explore-video-stack explore-video-stack--items'>
             {game.youtube.map((y, i) => (
-              <LazyYouTube key={`${y.videoId}-${i}`} videoId={y.videoId} title={y.title} showHeading={false} />
+              <LazyYouTube
+                key={`${y.videoId ?? y.loomId ?? i}-${i}`}
+                videoId={y.videoId}
+                loomId={y.loomId}
+                title={y.title}
+                showHeading={false}
+              />
             ))}
           </div>
         </section>

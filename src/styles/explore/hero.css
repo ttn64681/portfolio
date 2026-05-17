@@ -14,8 +14,8 @@
     padding: 0.45rem 0.65rem;
     background: rgba(0, 12, 26, 0.82);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 
   .floating-route-nav__inner {

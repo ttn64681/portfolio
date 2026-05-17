@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
+import AnimangaYoutubeEmbed from '@/components/extras/AnimangaYoutubeEmbed';
 import { AnimangaStars } from '@/components/extras/AnimangaFeedSection';
 import type { AnimangaCurrent } from '@/types/extras/animanga';
 
@@ -26,13 +27,17 @@ export default function AnimangaNowColumn({
         <div className='extras-animanga-now__entries'>
           {items.map((item, i) => (
             <div key={`${item.title}-${i}`} className='extras-animanga-now__entry'>
-              {item.image && (
+              {item.youtubeVideoId ? (
+                <div className='extras-animanga-now__thumb'>
+                  <AnimangaYoutubeEmbed videoId={item.youtubeVideoId} title={item.title} />
+                </div>
+              ) : item.image ? (
                 <SourceMediaLink href={item.image} className='extras-animanga-thumb-hit'>
                   <div className='extras-animanga-now__thumb'>
                     <Image src={item.image} alt={item.title} fill className='object-contain' sizes='(max-width: 768px) 100vw, 200px' />
                   </div>
                 </SourceMediaLink>
-              )}
+              ) : null}
               <h3 className='extras-animanga-now__title'>{item.title}</h3>
               {showRating && item.rating != null && <AnimangaStars value={item.rating} />}
               {item.subtitle && <p className='extras-animanga-now__sub'>{item.subtitle}</p>}

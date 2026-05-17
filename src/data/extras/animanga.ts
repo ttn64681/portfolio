@@ -1,7 +1,7 @@
 import type { AnimangaFeedEntry, AnimangaHero } from '@/types/extras/animanga';
+import { requireYoutubeVideoId } from '@/lib/parse-media-url';
 
-// /extras/animanga — hero columns (currently watching / favorites / backlog) + feed list at bottom.
-// Feed rows are animangaFeed; hero slots are animangaHero. kinds: anime | manga | game for filtering.
+// /extras/animanga — hero columns + feed. kinds: anime | manga | game | music (music uses `youtubeVideoId` in thumb slot).
 
 export const animangaHero: AnimangaHero = {
   currentlyWatching: [
@@ -16,7 +16,7 @@ export const animangaHero: AnimangaHero = {
   currentlyReading: [
     {
       title: 'Ember Knight',
-      subtitle: 'I\'m caught up',
+      subtitle: "I'm caught up",
       image: '/pixel/webp/portrait.webp',
       href: undefined,
       rating: 4,
@@ -28,6 +28,14 @@ export const animangaHero: AnimangaHero = {
       subtitle: 'Instagram',
       image: '/pixel/webp/tiles.webp',
       href: undefined,
+    },
+  ],
+  currentlyListening: [
+    {
+      title: 'Placeholder — swap track title',
+      subtitle: 'YouTube Music embed slot (dummy)',
+      youtubeVideoId: requireYoutubeVideoId('https://www.youtube.com/watch?v=M7lc1UVf-VE'),
+      rating: 4,
     },
   ],
   currentFavorite: [
@@ -51,6 +59,13 @@ export const animangaHero: AnimangaHero = {
       image: '/pixel/webp/tiles.webp',
       kind: 'game',
     },
+    {
+      title: 'Placeholder favorite mix',
+      subtitle: 'Dummy rating + embed — replace me',
+      youtubeVideoId: requireYoutubeVideoId('https://www.youtube.com/watch?v=M7lc1UVf-VE'),
+      kind: 'music',
+      rating: 5,
+    },
   ],
   wantingToWatch: [
     {
@@ -69,8 +84,15 @@ export const animangaHero: AnimangaHero = {
   wantingToPlay: [
     {
       title: 'Deltarune',
-      subtitle: 'I\'m fr just a larper',
+      subtitle: "I'm fr just a larper",
       image: '/pixel/webp/link-walk.webp',
+    },
+  ],
+  wantingToListen: [
+    {
+      title: 'Placeholder — on repeat someday',
+      subtitle: 'TODO: real picks',
+      youtubeVideoId: requireYoutubeVideoId('https://youtu.be/jNQXAC9IVRw'),
     },
   ],
 };
@@ -97,5 +119,21 @@ export const animangaFeed: AnimangaFeedEntry[] = [
     note: 'low cortisol game :-) get to touch grass but not that gross irl grass',
     date: 'May 2026',
     rating: 5,
+  },
+  {
+    kind: 'music',
+    title: 'Placeholder log — album / mix (dummy)',
+    note: 'Swap title, note, stars, and `youtubeVideoId` when you curate this list.',
+    date: '2026',
+    rating: 3,
+    youtubeVideoId: requireYoutubeVideoId('https://www.youtube.com/watch?v=M7lc1UVf-VE'),
+  },
+  {
+    kind: 'music',
+    title: 'Another dummy listen',
+    note: 'Second template row — same container as anime/manga/game feed items.',
+    date: 'Jan 2026',
+    rating: 4,
+    youtubeVideoId: requireYoutubeVideoId('https://youtu.be/jNQXAC9IVRw'),
   },
 ];
