@@ -1,6 +1,8 @@
 /**
- * Vector store: Redis-backed document embeddings, similarity search, init.
- * Content lives in code (`@/data/config/portfolio`); embeddings + metadata in Redis.
+ * Similarity search over Redis-stored portfolio embeddings.
+ *
+ * Called from `/api/chat` with the user's message. Does not call Gemini for the LLM here —
+ * only for query embedding (cached) and optionally corpus sync if Redis is stale.
  */
 
 import type { Document } from '@/types/chat';
@@ -8,11 +10,8 @@ import type { SearchResult } from '@/types/chat';
 import { RAG_KEYS } from './constants';
 import { getConfig } from './config';
 import { getRedis } from './redis';
-import {
-  generatePortfolioHash,
-  batchEmbedDocuments,
-  getOrCreateQueryEmbedding,
-} from './embeddings';
+import { generatePortfolioHash, getOrCreateQueryEmbedding } from './embeddings';
+import { syncPortfolioEmbeddings } from './sync-portfolio-embeddings';
 
 function cosineSimilarity(a: number[], b: number[]): number {
   if (a.length !== b.length || a.length === 0) return 0;
@@ -48,7 +47,7 @@ function parseStoredEmbedding(raw: unknown): number[] | null {
   return nums.length === emb.length && nums.length > 0 ? nums : null;
 }
 
-/** Whether stored portfolio hash differs from current (needs re-embed). */
+/** True when `rag:portfolio:hash` in Redis ≠ hash of current `portfolioDocuments`. */
 export async function needsReembedding(documents: Document[]): Promise<boolean> {
   const redis = getRedis();
   const currentHash = await generatePortfolioHash(documents);
@@ -57,35 +56,9 @@ export async function needsReembedding(documents: Document[]): Promise<boolean> 
   return storedHash !== currentHash;
 }
 
-/** Initialize Redis with embeddings and hash. */
-export async function initializePortfolioData(documents: Document[]): Promise<void> {
-  if (documents.length === 0) return;
-
-  const embeddings = await batchEmbedDocuments(documents);
-  const newHash = await generatePortfolioHash(documents);
-  const redis = getRedis();
-
-  const docIds = Array.from(embeddings.keys());
-  const pipeline = redis.pipeline();
-
-  pipeline.del(RAG_KEYS.DOCUMENT_IDS);
-  if (docIds.length > 0) {
-    pipeline.sadd(RAG_KEYS.DOCUMENT_IDS, docIds[0], ...docIds.slice(1));
-  }
-  for (const [docId, values] of embeddings) {
-    pipeline.set(RAG_KEYS.EMBEDDING(docId), JSON.stringify({ embedding: values, docId }), {
-      ex: 60 * 60 * 24 * 30,
-    });
-  }
-  pipeline.set(RAG_KEYS.PORTFOLIO_HASH, newHash);
-
-  await pipeline.exec();
-}
-
 /**
- * Similarity search over Redis-stored embeddings.
- * Re-initializes if the id set is missing/stale, or if ids exist but no `rag:embedding:*`
- * values load (partial migration: hash matched, vectors missing).
+ * Returns top document ids by cosine similarity to the query.
+ * If Redis has no vectors or corpus hash mismatch → incremental sync, then retry once.
  */
 export async function searchSimilarDocuments(
   query: string,
@@ -99,28 +72,31 @@ export async function searchSimilarDocuments(
   for (let attempt = 0; attempt < 2; attempt++) {
     let docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
 
-    const missingOrStale = docIds.length === 0 || (await needsReembedding(documents));
+    const missingOrStale = docIds.length === 0 || 
+            (await needsReembedding(documents)); // If `rag:portfolio:hash` ≠ hash of curr `portfolioDocuments`
 
     if (missingOrStale && documents.length > 0) {
-      await initializePortfolioData(documents);
+      // Sync only changed docs when corpus hash or vectors are missing (incremental, batched).
+      await syncPortfolioEmbeddings(documents, { concurrency: 1 }); // concurrency: 1 = sequential
     }
 
     docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
     if (docIds.length === 0) return [];
 
-    const pipeline = redis.pipeline();
+    const pipeline = redis.pipeline(); // pipeline for multiple Redis operations
+    // Get all embeddings for the docs in the corpus
     for (const id of docIds) {
       pipeline.get(RAG_KEYS.EMBEDDING(id));
     }
-    const rawList = (await pipeline.exec()) as unknown[];
+    const rawList = (await pipeline.exec()) as unknown[]; // execute popeline
 
-    let loadable = 0;
+    let loadable = 0; // count of docs that can be loaded from Redis
     for (let i = 0; i < docIds.length; i++) {
       if (parseStoredEmbedding(rawList[i])) loadable++;
     }
 
     if (loadable === 0 && documents.length > 0 && attempt === 0) {
-      await initializePortfolioData(documents);
+      await syncPortfolioEmbeddings(documents, { concurrency: 1 });
       continue;
     }
     if (loadable === 0) return [];

@@ -2,6 +2,7 @@ import ExtrasGameShowcase from '@/components/extras/ExtrasGameShowcase';
 import ExtrasGamesHierarchyNav from '@/components/extras/ExtrasGamesHierarchyNav';
 import ExtrasHero from '@/components/extras/ExtrasHero';
 import { getExtraGameBySlug, getExtraGameSlugs } from '@/data/extras/games';
+import { createPageMetadata } from '@/lib/metadata';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -19,10 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const game = getExtraGameBySlug(slug);
   if (!game) return { title: 'Not found' };
-  return {
-    title: `${game.title} · Games · Extras`,
+  return createPageMetadata({
+    title: `${game.title} · Games`,
     description: game.deck,
-  };
+    path: `/extras/games/${slug}`,
+  });
 }
 
 /** SSR loads game config once and mounts dossier layout components. */

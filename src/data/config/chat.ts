@@ -14,26 +14,34 @@ export const DEFAULT_ERROR_MESSAGE =
 
 /** Persona-themed messages keyed by API error code. */
 export const ERROR_MESSAGE_BY_CODE: Record<string, string> = {
-  rate_limit: 'Please wait a bit - these free API limits are no joke! Try again in a minute or so.',
-  server_error: 'Something went wrong on my end. Try rephrasing or hit me up via the contact link!',
-  unavailable: "Search isn't available right now. Try again in a moment or use the contact link.",
+  rate_limit:
+    'Please wait a bit - these free API limits are no joke... Try again in a minute or so.',
+  server_error:
+    "I woke up from a revelatory dream where a mysterious voice whispered to me, \
+  '404: SERVER ERROR'. Try rephrasing or hit me up via my contacts.",
+  unavailable: "Sorry, I'm not available right now. Try again in a moment or use my contacts.",
   config_error:
-    "My brain (read: env vars) isn't wired up on this server yet - so I'm running in demo mode. Hit\
-    the contact link and I'll get back to you for real!",
+    "I woke up from a revelatory dream where a mysterious voice whispered to me, 'CONFIGURATION ERROR'. \
+    So unfortunately, I cannot answer you right now. Try again in a bit or use my contacts.",
   unauthorized:
-    "Looks like you're calling from somewhere my portfolio isn't allowed to chat with. Try opening\
-    this site from the right URL, or reach me via the contact link!",
+    "Looks like you're calling from an unauthorized domain. Try opening this site from the right URL, \
+    or reach me via my contacts.",
   payload_too_large:
-    'That message was a bit too long for my tiny buffer. Shorten it and try again!',
-  bad_request: "I didn't quite get that - maybe a typo or empty message? Try again or rephrase!",
+    'That message was a bit too long for my brain to keep track of. Shorten it and try again!',
+  bad_request: "I didn't quite get that - maybe a typo or empty message? Try again or rephrase.",
 };
 
 export const FUN_FACTS = [
-  'I hand-drew all the pixel art on this site in Aseprite - no asset packs!',
+  'All the pixel art on this site was hand-drawn in Aseprite by me.',
   "This portfolio runs on a 'zero-dollar' stack: Gemini free tier, Upstash Redis, and Vercel.",
   'My final project in Computer Graphics was based on Jujutsu Kaisen Domains. You should check it out\
   (beware performance issues).',
-  'Besides code I do pixel art, drums, and game jams. Boss Rush Jam 2025 - we shipped in a weekend.',
+  'Besides code I do pixel art, drums, and game jams.',
+  'It took me a whole week+ just to compile all my portfolio materials for the explore/extras pages.',
+  "If you're reading this, I currently have one more class to take (Networks) over the Summer :O",
+  'I was originally an Intended Electrical Engineer my freshman year. I only switched to CS the following Summer (2023)',
+  'I designed a new mascot + merch stickers for ACM at my University!',
+  'I worked on a website for Holywatr, one of my favorite new bands to come out of Atlanta. Pretty crazy, I know.',
 ] as const;
 
 export function pickRandom<T>(arr: readonly T[]): T {

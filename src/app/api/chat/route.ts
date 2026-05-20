@@ -137,14 +137,17 @@ export async function POST(request: Request) {
 
   let contextBlock: string;
   try {
-    // Search similar documents
+    // Search for top similar documents
+    // RAG: embed query → cosine search in Redis → top doc texts for system prompt.
+    // Corpus: portfolioDocuments (src/data/config/rag/). Vectors: Upstash via vector-store.ts.
+    // Run `npm run rag:sync` after editing corpus so production skips runtime embed.
     const similar = await searchSimilarDocuments(
       queryText.trim(),
       config.maxRagDocs,
       portfolioDocuments,
     );
     const contentById = new Map(portfolioDocuments.map((d) => [d.id, d.content]));
-    // Build context block
+    // Build context block (similar documents + their content)
     contextBlock = similar
       .map((r) => contentById.get(r.id))
       .filter(Boolean)

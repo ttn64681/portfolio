@@ -1,0 +1,26 @@
+/* Shared deferred-media placeholders (GIF hosts, embed skeletons). */
+
+@layer components {
+  .lazy-gif-host {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .lazy-media-skeleton {
+    background: linear-gradient(135deg, rgba(20, 40, 60, 0.8), rgba(5, 10, 20, 0.95));
+    animation: explore-pulse 1.4s ease-in-out infinite;
+  }
+
+  .explore-print__mat .lazy-media-skeleton,
+  .explore-print__mat--intrinsic .lazy-media-skeleton {
+    width: 100%;
+    min-height: 8rem;
+  }
+
+  .explore-overview-banner__mat .lazy-media-skeleton {
+    position: absolute;
+    inset: 0;
+    min-height: 12rem;
+  }
+}

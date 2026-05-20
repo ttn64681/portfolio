@@ -1,45 +1,39 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useNearViewport } from '@/hooks/useNearViewport';
 
 type LazyYouTubeProps = {
   videoId?: string;
   /** Loom embed id from `loom.com/embed/<id>`. */
   loomId?: string;
   title?: string;
-  /** When false, renders embed only (use when an outer layout supplies the heading). */
+  /** When false, renders embed only (outer layout supplies the heading). */
   showHeading?: boolean;
+  /** Root wrapper class (e.g. explore vs animanga sizing). */
+  className?: string;
+  skeletonClassName?: string;
 };
 
-/** Mounts the iframe only after the block scrolls near the viewport — saves bandwidth on long dossiers. */
+/** Mounts YouTube/Loom iframe only after the block scrolls near the viewport. */
 export default function LazyYouTube({
   videoId,
   loomId,
   title,
   showHeading = true,
+  className,
+  skeletonClassName,
 }: LazyYouTubeProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [mountIframe, setMountIframe] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mountIframe = useNearViewport(containerRef);
   const embedKey = videoId ?? loomId;
 
-  useEffect(() => {
-    if (!embedKey) return;
-    const el = containerRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setMountIframe(true);
-      },
-      { rootMargin: '100px', threshold: 0.01 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [embedKey]);
+  const rootClass = className ?? 'explore-youtube';
+  const skClass = skeletonClassName ?? 'explore-youtube__skeleton';
 
   if (!embedKey) {
     const body = (
-      <div ref={containerRef} className='explore-youtube explore-youtube--placeholder'>
+      <div ref={containerRef} className={`${rootClass} explore-youtube--placeholder`}>
         <div className='explore-youtube__frame'>
           <p className='explore-youtube__placeholder-text'>No video embed yet — add one in detail data.</p>
         </div>
@@ -60,12 +54,12 @@ export default function LazyYouTube({
 
   const embedSrc = loomId
     ? `https://www.loom.com/embed/${encodeURIComponent(loomId)}`
-    : `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId!)}`;
+    : `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId!)}?rel=0`;
 
   const defaultTitle = loomId ? 'Loom video' : 'YouTube video';
 
   const player = (
-    <div ref={containerRef} className='explore-youtube'>
+    <div ref={containerRef} className={rootClass}>
       <div className='explore-youtube__frame'>
         {mountIframe ? (
           <iframe
@@ -77,7 +71,7 @@ export default function LazyYouTube({
             referrerPolicy='strict-origin-when-cross-origin'
           />
         ) : (
-          <div className='explore-youtube__skeleton' aria-hidden />
+          <div className={skClass} aria-hidden />
         )}
       </div>
       {title && <p className='explore-youtube__title'>{title}</p>}

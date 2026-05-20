@@ -3,10 +3,10 @@
 import { useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
-import AnimangaYoutubeEmbed from '@/components/extras/AnimangaYoutubeEmbed';
+import LazyYouTube from '@/components/media/LazyYouTube';
 import type { AnimangaFeedEntry, AnimangaFeedKind } from '@/types/extras/animanga';
 
-/** Recent activity list + optional category chips; parent can own filtering via `mediaFilter`. */
+/** Recent activity list + category chips. Music logs are text-only; embeds live in hero “now” columns. */
 
 type FilterId = 'all' | AnimangaFeedKind;
 
@@ -63,12 +63,14 @@ export default function AnimangaFeedSection({
           <h3 className='extras-animanga-feed__title'>{entry.title}</h3>
           {entry.rating != null && <AnimangaStars value={entry.rating} />}
           {entry.note && <p className='extras-animanga-feed__note'>{entry.note}</p>}
-          {entry.youtubeVideoId && (
+          {entry.youtubeVideoId && entry.kind !== 'music' && (
             <div className='extras-animanga-feed__embed-wrap'>
-              <AnimangaYoutubeEmbed
+              <LazyYouTube
                 videoId={entry.youtubeVideoId}
                 title={entry.title}
+                showHeading={false}
                 className='extras-animanga-yt-embed extras-animanga-yt-embed--fill'
+                skeletonClassName='extras-animanga-yt-embed__skeleton'
               />
             </div>
           )}

@@ -2,7 +2,7 @@
   /*
    * Explore page shell + hub grid (`ExploreHubClient`).
    * `.explore-page` / `__inner`: max-width column + horizontal padding (dossier content stays inside this column).
-   * `.explore-hub--unified`: six tiles — flip panels for projects/experiences/games, direct links for music/gallery/animanga.
+   * `.explore-hub--unified`: six tiles — flip panels + direct links. Card sizing is breakpoint-specific (see block above `.explore-hub--unified`).
    */
   .explore-page {
     width: 100%;
@@ -31,6 +31,20 @@
     box-sizing: border-box;
   }
 
+  /* Hub index: 1-col scrolls; 2/3-col fills viewport */
+  .explore-page:has(.explore-hub--unified) {
+    min-height: 100svh;
+  }
+
+  @media (min-width: 768px) {
+    .explore-page:has(.explore-hub--unified) {
+      height: 100svh;
+      min-height: 100svh;
+      max-height: 100svh;
+      overflow: hidden;
+    }
+  }
+
   @media (min-width: 640px) {
     .explore-page__inner {
       padding-left: 1.5rem;
@@ -39,19 +53,12 @@
     }
   }
 
-  /* —— Hub: two full-viewport portals —— */
+  /* —— Hub grid shell —— */
   .explore-hub {
     display: grid;
-    grid-template-columns: 1fr;
-    min-height: 100dvh;
-    min-height: 100vh;
     position: relative;
-  }
-
-  @media (min-width: 768px) {
-    .explore-hub {
-      grid-template-columns: 1fr 1fr;
-    }
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .explore-hub__portal {
@@ -60,7 +67,6 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    min-height: 50dvh;
     padding: 2rem 1.5rem;
     text-decoration: none;
     color: var(--white-title);
@@ -74,8 +80,13 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  /* Legacy two-portal layout only; unified hub sets tile height via `--hub-tile-h` / `1fr` rows */
+  .explore-hub:not(.explore-hub--unified) .explore-hub__portal {
+    min-height: 50dvh;
+  }
+
   @media (min-width: 768px) {
-    .explore-hub__portal {
+    .explore-hub:not(.explore-hub--unified) .explore-hub__portal {
       min-height: 100dvh;
     }
   }
@@ -134,29 +145,38 @@
     color: rgba(241, 248, 255, 0.78);
   }
 
-  /* Unified hub: six tiles (3 flip + 3 direct) */
-  .explore-hub--unified {
-    grid-template-columns: 1fr;
-    grid-auto-rows: minmax(38vh, auto);
+  /*
+   * Unified hub (6 tiles). Home is absolutely overlaid — tiles use full viewport height.
+   * 1 col: tile height = svh/3 (same as one 2-col row); grid scrolls. 2/3 col: 1fr rows fill 100svh.
+   */
+  .explore-hub.explore-hub--unified {
+    --hub-tile-h: calc(100svh / 3);
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: var(--hub-tile-h);
+    align-content: start;
   }
 
   @media (min-width: 768px) {
-    .explore-hub--unified {
+    .explore-hub.explore-hub--unified {
+      height: 100svh;
+      min-height: 100svh;
+      max-height: 100svh;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-auto-rows: minmax(34vh, auto);
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: unset;
+      align-content: stretch;
     }
   }
 
   @media (min-width: 1100px) {
-    .explore-hub--unified {
+    .explore-hub.explore-hub--unified {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-auto-rows: minmax(32vh, auto);
+      grid-template-rows: repeat(2, minmax(0, 1fr));
     }
   }
 
   .explore-hub-flip-tile {
     position: relative;
-    min-height: 38vh;
     border: 1px solid rgba(255, 255, 255, 0.12);
     overflow: hidden;
     box-sizing: border-box;
@@ -169,19 +189,20 @@
   .explore-hub-flip-tile--flip {
     display: flex;
     flex-direction: column;
+    min-height: 0;
   }
 
-  .explore-hub-flip-tile--flip.explore-hub-flip-tile--open {
-    /* Explicit height so descendants get a definite box; clip paint so wheel/scroll stay on the inner list */
-    height: min(58vh, 38rem);
-    min-height: min(58vh, 38rem);
-    overflow: hidden;
+  .explore-hub--unified .explore-hub-flip-tile--flip,
+  .explore-hub--unified .explore-hub-flip-tile--direct {
+    min-height: var(--hub-tile-h);
+    height: var(--hub-tile-h);
   }
 
   @media (min-width: 768px) {
-    .explore-hub-flip-tile--flip.explore-hub-flip-tile--open {
-      height: min(54vh, 40rem);
-      min-height: min(54vh, 40rem);
+    .explore-hub--unified .explore-hub-flip-tile--flip,
+    .explore-hub--unified .explore-hub-flip-tile--direct {
+      height: 100%;
+      min-height: 0;
     }
   }
 
@@ -195,7 +216,6 @@
     text-decoration: none;
     color: var(--white-title);
     text-align: center;
-    min-height: 38vh;
     box-sizing: border-box;
   }
 
@@ -235,11 +255,6 @@
     box-sizing: border-box;
   }
 
-  /* Collapsed (front showing): keep generous tap target */
-  .explore-hub-flip-tile--flip:not(.explore-hub-flip-tile--open) .explore-hub-flip {
-    min-height: 38vh;
-  }
-
   .explore-hub-flip__inner {
     position: relative;
     width: 100%;
@@ -247,15 +262,6 @@
     min-height: 0;
     transform-style: preserve-3d;
     transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .explore-hub-flip-tile--flip:not(.explore-hub-flip-tile--open) .explore-hub-flip__inner {
-    min-height: 38vh;
-  }
-
-  .explore-hub-flip-tile--flip.explore-hub-flip-tile--open .explore-hub-flip__inner {
-    height: 100%;
-    min-height: 0;
   }
 
   .explore-hub-flip--open .explore-hub-flip__inner {
@@ -454,7 +460,8 @@
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 10;
+    pointer-events: auto;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;

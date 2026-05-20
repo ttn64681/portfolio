@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
-import AnimangaYoutubeEmbed from '@/components/extras/AnimangaYoutubeEmbed';
+import LazyYouTube from '@/components/media/LazyYouTube';
 import { AnimangaStars } from '@/components/extras/AnimangaFeedSection';
 import type { AnimangaCurrent } from '@/types/extras/animanga';
 
@@ -29,12 +29,25 @@ export default function AnimangaNowColumn({
             <div key={`${item.title}-${i}`} className='extras-animanga-now__entry'>
               {item.youtubeVideoId ? (
                 <div className='extras-animanga-now__thumb'>
-                  <AnimangaYoutubeEmbed videoId={item.youtubeVideoId} title={item.title} />
+                  <LazyYouTube
+                    videoId={item.youtubeVideoId}
+                    title={item.title}
+                    showHeading={false}
+                    className='extras-animanga-yt-embed'
+                    skeletonClassName='extras-animanga-yt-embed__skeleton'
+                  />
                 </div>
               ) : item.image ? (
                 <SourceMediaLink href={item.image} className='extras-animanga-thumb-hit'>
                   <div className='extras-animanga-now__thumb'>
-                    <Image src={item.image} alt={item.title} fill className='object-contain' sizes='(max-width: 768px) 100vw, 200px' />
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className='object-contain'
+                      sizes='(max-width: 768px) 100vw, 200px'
+                      loading='lazy'
+                    />
                   </div>
                 </SourceMediaLink>
               ) : null}

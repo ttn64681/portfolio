@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import ExploreGalleryAsset from '@/components/media/ExploreGalleryAsset';
+import LazyGif from '@/components/media/LazyGif';
+import LazyYouTube from '@/components/media/LazyYouTube';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
-import LazyYouTube from '@/components/explore/LazyYouTube';
 import type { ExtraGameEntry } from '@/types/extras/games';
 
 /** Reuses explore poster primitives (`explore-overview-block`, gallery mosaic, bullets) for one game entry. */
@@ -57,18 +59,12 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
         {bannerItem?.src && (
           <SourceMediaLink href={bannerItem.src} className='explore-overview-banner'>
             <div className='explore-overview-banner__mat'>
-              {bannerItem.mediaKind === 'gif' ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={bannerItem.src} alt={bannerItem.alt} className='explore-overview-banner__img explore-overview-banner__img--gif' />
-              ) : (
-                <Image
-                  src={bannerItem.src}
-                  alt={bannerItem.alt}
-                  fill
-                  sizes='100vw'
-                  className='explore-overview-banner__img object-cover'
-                />
-              )}
+              <ExploreGalleryAsset
+                src={bannerItem.src}
+                alt={bannerItem.alt}
+                mediaKind={bannerItem.mediaKind}
+                layout='banner'
+              />
             </div>
           </SourceMediaLink>
         )}
@@ -93,20 +89,14 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
                         : 'explore-print__mat explore-print__mat--slot explore-print__mat--empty'
                     }
                   >
-                    {item.src &&
-                      (item.mediaKind === 'gif' ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.src} alt={item.alt} className='explore-print__img explore-print__img--contain' />
-                      ) : (
-                        <Image
-                          src={item.src}
-                          alt={item.alt}
-                          width={1920}
-                          height={1080}
-                          sizes='(max-width: 767px) 96vw, (max-width: 1023px) 45vw, 33vw'
-                          className='explore-print__img-natural'
-                        />
-                      ))}
+                    {item.src && (
+                      <ExploreGalleryAsset
+                        src={item.src}
+                        alt={item.alt}
+                        mediaKind={item.mediaKind}
+                        layout='gallery'
+                      />
+                    )}
                   </div>
                 </SourceMediaLink>
                 <span className='explore-print__lip' aria-hidden />
@@ -153,6 +143,7 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
                         fill
                         className='bg-black object-contain'
                         sizes='(max-width: 768px) 100vw, 800px'
+                        loading='lazy'
                       />
                     </div>
                     {block.caption && <p className='extras-contrib__caption'>{block.caption}</p>}
@@ -163,8 +154,7 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
                 <SourceMediaLink href={block.gifSrc} className='extras-contrib__media-link'>
                   <div className='extras-contrib__media'>
                     <div className='relative aspect-video w-full max-h-[min(70vh,520px)] overflow-hidden bg-black'>
-                      {/* eslint-disable-next-line @next/next/no-img-element -- GIF animation preserved */}
-                      <img
+                      <LazyGif
                         src={block.gifSrc}
                         alt={block.caption || block.title || `GIF ${i + 1}`}
                         className='h-full w-full object-contain'

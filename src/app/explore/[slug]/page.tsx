@@ -9,12 +9,14 @@ import {
   getExploreOrderIndex,
   getNeighbors,
 } from '@/data/explore/registry';
+import { createPageMetadata } from '@/lib/metadata';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 /** Pre-render every slug from `EXPLORE_ORDER` for static export / fast navigations. */
 export function generateStaticParams() {
-  return getAllExploreSlugs().map((slug) => ({ slug }));
+  return getAllExploreSlugs()
+    .map((slug) => ({ slug }));
 }
 
 /** Open-graph style fields from merged dossier copy. */
@@ -28,15 +30,17 @@ export async function generateMetadata({
   if (!detail) {
     return { title: 'Not found' };
   }
+  // generate og:description from summary or overview
   const description =
     detail.summary?.trim() ||
     detail.overview?.trim() ||
     EXPLORE_OVERVIEW_FALLBACK.slice(0, 160);
-  return {
-    title: `${detail.title} · Explore`,
+  return createPageMetadata({
+    title: detail.title,
     description: description.slice(0, 160),
-  };
-}
+    path: `/explore/${slug}`,
+  });
+} // generateMetadata
 
 /** Hero + horizontal chip navigator + long-scroll poster (`ExplorePoster`). */
 export default async function ExploreSlugPage({

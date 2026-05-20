@@ -114,6 +114,7 @@ export default function ExtrasGalleryClient({ tabs }: { tabs: GalleryTab[] }) {
                     height={1000}
                     sizes='(max-width: 768px) 50vw, 25vw'
                     className='extras-gallery-frame__img'
+                    loading={activeTab.id === tabs[0]?.id && i < 2 ? undefined : 'lazy'}
                     priority={activeTab.id === tabs[0]?.id && i < 2}
                   />
                 </div>

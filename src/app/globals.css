@@ -13,6 +13,7 @@
 @import '../styles/section-badges.css';
 @import '../styles/game-over.css';
 @import '../styles/footer.css';
+@import '../styles/media.css';
 
 @theme inline {
   --color-blackground: var(--blackground);

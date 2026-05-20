@@ -187,6 +187,11 @@ export default function Chat() {
                     placeholder='Ask me anything...'
                     className='flex-1 bg-transparent outline-none text-xs sm:text-sm text-white-title placeholder:text-white-title/40 font-pixel-mono'
                     ref={inputRef}
+                    autoComplete='true'
+                    spellCheck={true}
+                    data-gramm='true'
+                    data-gramm_editor='true'
+                    data-enable-grammarly='true'
                   />
                   {/* Chat input buttons */}
                   <div className='flex items-center gap-2'>

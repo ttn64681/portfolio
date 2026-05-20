@@ -50,35 +50,31 @@ function HubFlipTile({
   gradientClass: string;
   children: React.ReactNode;
 }) {
-  const backRef = useRef<HTMLDivElement | null>(null);
   const listScrollRef = useRef<HTMLDivElement | null>(null);
 
+  /* Lenis + 3D flip: trap wheel only on the list scroller (page scrolls everywhere else) */
   useEffect(() => {
     if (!open) return;
-    const back = backRef.current;
-    const scroller = listScrollRef.current;
-    if (!back || !scroller) return;
+    const el = listScrollRef.current;
+    if (!el) return;
 
-    const onWheelCapture = (e: WheelEvent) => {
-      if (scroller.scrollHeight <= scroller.clientHeight + 1) return;
-
-      const { deltaY } = e;
-      const top = scroller.scrollTop;
-      const maxTop = scroller.scrollHeight - scroller.clientHeight;
-
-      if (deltaY < 0 && top <= 0) return;
-      if (deltaY > 0 && top >= maxTop) return;
-
-      scroller.scrollTop = Math.min(maxTop, Math.max(0, top + deltaY));
-      e.preventDefault();
+    const onWheel = (e: WheelEvent) => {
+      if (el.scrollHeight <= el.clientHeight + 1) return;
+      const max = el.scrollHeight - el.clientHeight;
+      const dy = e.deltaY;
+      if ((dy < 0 && el.scrollTop <= 0) || (dy > 0 && el.scrollTop >= max)) return;
+      e.preventDefault(); // prevent page scroll
+      el.scrollTop = Math.min(max, Math.max(0, el.scrollTop + dy)); // scroll the list by the delta (scroll amount)
     };
 
-    back.addEventListener('wheel', onWheelCapture, { passive: false, capture: true });
-    return () => back.removeEventListener('wheel', onWheelCapture, { capture: true });
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
   }, [open]);
 
   return (
-    <div className={`explore-hub-flip-tile explore-hub-flip-tile--flip ${open ? 'explore-hub-flip-tile--open' : ''} ${gradientClass}`}>
+    <div
+      className={`explore-hub-flip-tile explore-hub-flip-tile--flip ${open ? 'explore-hub-flip-tile--open' : ''} ${gradientClass}`}
+    >
       <div className={`explore-hub-flip ${open ? 'explore-hub-flip--open' : ''}`}>
         <div className='explore-hub-flip__inner'>
           <button
@@ -97,7 +93,6 @@ function HubFlipTile({
             <span className='explore-hub-flip__hint'>Tap to open list</span>
           </button>
           <div
-            ref={backRef}
             className='explore-hub-flip__face explore-hub-flip__face--back'
             id={`hub-flip-panel-${flipId}`}
             role='region'
@@ -106,11 +101,16 @@ function HubFlipTile({
           >
             <div className='explore-hub-flip__back-head'>
               <span className='explore-hub-flip__back-title'>{label}</span>
-              <button type='button' className='explore-hub-flip__close' onClick={onClose} aria-label='Close list'>
+              <button
+                type='button'
+                className='explore-hub-flip__close'
+                onClick={onClose}
+                aria-label='Close list'
+              >
                 <MdClose size={20} aria-hidden />
               </button>
             </div>
-            <div ref={listScrollRef} className='explore-hub-flip__list-scroll'>
+            <div ref={listScrollRef} className='explore-hub-flip__list-scroll' data-lenis-prevent>
               <ul className='explore-hub-flip__list'>{children}</ul>
             </div>
           </div>
@@ -135,7 +135,10 @@ function DirectPortal({
   gradientClass: string;
 }) {
   return (
-    <Link href={href} className={`explore-hub__portal explore-hub-flip-tile--direct ${gradientClass}`}>
+    <Link
+      href={href}
+      className={`explore-hub__portal explore-hub-flip-tile--direct ${gradientClass}`}
+    >
       <span className='explore-hub-flip__icon-wrap' aria-hidden>
         {icon}
       </span>
@@ -257,7 +260,7 @@ export default function ExploreHubClient() {
         icon={<MdTheaters className='explore-hub-flip__glyph' />}
       />
 
-      <Link href='/' className='explore-hub__home'>
+      <Link href='/' className='explore-hub__home fixed'>
         <MdHome className='explore-hub__home-icon' size={18} aria-hidden />
         Home
       </Link>

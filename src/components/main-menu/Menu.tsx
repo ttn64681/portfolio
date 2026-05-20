@@ -125,16 +125,18 @@ export default function Menu({ onQuit }: MenuProps) {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v1.3.2',
-                  'Programmer',
-                  'Software Engineer',
+                  'Portfolio v2.0.0',
+                  'Graduated!!! (Kinda)',
+                  'Deep Learning',
+                  'Software Developer',
                   'Web Developer',
-                  'Full Stack Dev',
-                  'UI/UX Designer',
+                  'Full Stack Apps',
+                  'UI/UX Design',
                   'Bad Artist',
                   'Bad Musician',
                   'Bad Gamer',
                   'Bad Photographer',
+                  'Burger Music Taste',
                 ],
                 autoStart: true,
                 loop: true,

@@ -1,3 +1,16 @@
+# thai.txt — master resume / RAG source / portfolio data config (section order matches src/data/config/rag/)
+#
+# INDEX (portfolio document id → section file)
+#   01-bio.ts              bio-summary, philosophy-design, bio-executive
+#   02-contact-education   contact-info, education-uga
+#   03-leadership-experience leadership-acm, exp-freelance-holywatr, exp-devdogs-bulldog-planner
+#   04-projects.ts         proj-cinema-*, proj-rag-*, proj-coursehub-*, proj-bird-audio, proj-domain-expansion, proj-bill-cypher
+#   05-games.ts            game-* (UGA Game Builders & jams only)
+#   06-skills.ts           skills-*
+#   07-hobbies-career.ts   hobbies-*, career-goals
+#
+# NOTE: Order has no particular significance other than for Thai's sanity (maintainability).
+
 === CONTACT INFORMATION
 
 Name: Thai Nguyen
@@ -125,6 +138,42 @@ Reflection:
 - It boosted my public speaking and presentation confidence a lot.
 - I had weeks where I questioned if I was really cut out to be an exec while juggling classes and side projects, but overall I’m glad I stuck with it.
 - Being part of ACM opened up genuinely valuable connections with alumni and industry speakers, and I’m grateful for that.
+
+=== EXPERIENCE — UGA DevDogs / Google Developer Group (Aug 2024 – May 2025)
+
+Project: Bulldog Planner (Optimal Schedule Builder)
+Role: Frontend Developer
+Stack: React, TypeScript, Tailwind CSS
+Architecture: Frontend component-based architecture integrated with backend-driven scheduling constraints
+Framework: React functional component workflow
+RAG id: exp-devdogs-bulldog-planner (category: experience — secondary to Holywatr/ACM)
+
+Resume Points:
+- Developed responsive UI and filtering logic for student schedule optimization workflows.
+- Contributed frontend bug fixes and page-level design implementation while ramping up in React.
+- Collaborated in iterative team environment where implementations were refined through subsequent rework.
+
+Features:
+- Responsive schedule-planning interface pages.
+- Filtering UX for optimization scenarios.
+- Visual redesign implementation on key pages.
+
+Implementation:
+- Built/updated React components with Tailwind styling.
+- Implemented filter behavior and bug-fix patches.
+- Coordinated changes with evolving backend expectations.
+
+Challenges:
+- Early React learning stage reduced implementation velocity and confidence.
+- Some contributions were later refactored by teammates.
+- Designing around backend functionality while still learning architecture was difficult.
+
+Reflection:
+- Ngl, I was still very early in React and didn’t contribute as much as I wanted.
+- I did bug-fix and page design work, and some of it got reworked later.
+- Still a valuable stage that gave me foundational reps for later full-stack work.
+
+GitHub: https://github.com/DevDogs-UGA/Optimal-Schedule-Builder
 
 === MAJOR PROJECT — ACM CINEMA (E-BOOKING SYSTEM)
 
@@ -506,41 +555,6 @@ Reflection:
 
 Play: https://opuhlos.itch.io/tower-ascent
 Video: https://youtu.be/DodlQDijPa4
-
----
-
-Project: Bulldog Planner (UGA DevDogs/GDG, Aug 2024 – May 2025)
-Role: Frontend Developer
-Stack: React, TypeScript, Tailwind CSS
-Architecture: Frontend component-based architecture integrated with backend-driven scheduling constraints
-Framework: React functional component workflow
-
-Resume Points:
-- Developed responsive UI and filtering logic for student schedule optimization workflows.
-- Contributed frontend bug fixes and page-level design implementation while ramping up in React.
-- Collaborated in iterative team environment where implementations were refined through subsequent rework.
-
-Features:
-- Responsive schedule-planning interface pages.
-- Filtering UX for optimization scenarios.
-- Visual redesign implementation on key pages.
-
-Implementation:
-- Built/updated React components with Tailwind styling.
-- Implemented filter behavior and bug-fix patches.
-- Coordinated changes with evolving backend expectations.
-
-Challenges:
-- Early React learning stage reduced implementation velocity and confidence.
-- Some contributions were later refactored by teammates.
-- Designing around backend functionality while still learning architecture was difficult.
-
-Reflection:
-- Ngl, I was still very early in React and didn’t contribute as much as I wanted.
-- I did bug-fix and page design work, and some of it got reworked later.
-- Still a valuable stage that gave me foundational reps for later full-stack work.
-
-GitHub: https://github.com/DevDogs-UGA/Optimal-Schedule-Builder
 
 ---
 

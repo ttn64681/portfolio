@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import type { ReactNode } from 'react';
 import type {
   ExploreDetail,
@@ -11,7 +10,8 @@ import type {
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import OutboundSpriteLink from '@/components/projects/OutboundSpriteLink';
 import RouteFooterPager from '@/components/nav/RouteFooterPager';
-import LazyYouTube from './LazyYouTube';
+import ExploreGalleryAsset from '@/components/media/ExploreGalleryAsset';
+import LazyYouTube from '@/components/media/LazyYouTube';
 
 /**
  * `/explore/[slug]` body below `ExploreHero`.
@@ -67,23 +67,12 @@ function FigureMat({ item }: { item: ExploreGalleryItem }) {
   const inner = (
     <div className={matClass}>
       {item.src ? (
-        item.mediaKind === 'gif' ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.src}
-            alt={item.alt}
-            className='explore-print__img explore-print__img--contain'
-          />
-        ) : (
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={1920}
-            height={1080}
-            sizes='(max-width: 899px) 100vw, (max-width: 1199px) 45vw, 520px'
-            className='explore-print__img-natural'
-          />
-        )
+        <ExploreGalleryAsset
+          src={item.src}
+          alt={item.alt}
+          mediaKind={item.mediaKind}
+          layout='figure'
+        />
       ) : (
         <div className='explore-print__placeholder'>
           <span className='explore-slot__label'>Asset slot</span>
@@ -131,23 +120,12 @@ function OverviewBanner({ item }: { item: ExploreGalleryItem }) {
   return (
     <SourceMediaLink href={item.src} className='explore-overview-banner'>
       <div className='explore-overview-banner__mat'>
-        {item.mediaKind === 'gif' ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.src}
-            alt={item.alt}
-            className='explore-overview-banner__img explore-overview-banner__img--gif'
-          />
-        ) : (
-          <Image
-            src={item.src}
-            alt={item.alt}
-            fill
-            sizes='100vw'
-            className='explore-overview-banner__img object-cover'
-            priority={false}
-          />
-        )}
+        <ExploreGalleryAsset
+          src={item.src}
+          alt={item.alt}
+          mediaKind={item.mediaKind}
+          layout='banner'
+        />
       </div>
     </SourceMediaLink>
   );
@@ -344,23 +322,12 @@ export default function ExplorePoster({ detail, prevHref, nextHref }: ExplorePos
                       }
                     >
                       {item.src ? (
-                        item.mediaKind === 'gif' ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={item.src}
-                            alt={item.alt}
-                            className='explore-print__img explore-print__img--contain'
-                          />
-                        ) : (
-                          <Image
-                            src={item.src}
-                            alt={item.alt}
-                            width={1920}
-                            height={1080}
-                            sizes='(max-width: 767px) 96vw, (max-width: 1023px) 45vw, 33vw'
-                            className='explore-print__img-natural'
-                          />
-                        )
+                        <ExploreGalleryAsset
+                          src={item.src}
+                          alt={item.alt}
+                          mediaKind={item.mediaKind}
+                          layout='gallery'
+                        />
                       ) : (
                         <>
                           <div className='explore-print__placeholder'>
