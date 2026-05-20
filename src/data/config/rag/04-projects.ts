@@ -5,7 +5,7 @@ export const projectDocuments = [
   // ACM Cinema
   toDocument(
     'proj-cinema-backend',
-    `ACM Cinema (Aug 2025 – Present): Thai architected the Spring Boot 3.5 + PostgreSQL (Neon) backend with 80+ REST endpoints, \
+    `ACM Cinema (Fall 2025): Thai architected the Spring Boot 3.5 + PostgreSQL (Neon) backend with 80+ REST endpoints, \
     15 JPA entities, Spring Security JWT/RBAC, BCrypt hashing, Caffeine cache (10 min TTL), pagination, and Facade / Virtual Proxy \
     patterns to cut payload weight ~30–45%.`,
     {
@@ -94,7 +94,7 @@ export const projectDocuments = [
   ),
   toDocument(
     'proj-coursehub-detail',
-    `CourseHub (Mar 2025 – May 2025): full-stack educational resource hub for UGA students. Thai was Team Lead and \
+    `CourseHub (Mar-May 2025): full-stack educational resource hub for UGA students. Thai was Team Lead and \
     Full-Stack Developer. It automates study planning and resource sharing. Tech: Google Gemini AI and YouTube Data API v3 \
     for auto-generated course success plans and study links. Data: 4 MongoDB schemas using Mongoose for post-course associations \
     and resource management. Auth: NextAuth.js v5 with middleware-based route protection and JWT session strategies. \
@@ -115,7 +115,7 @@ export const projectDocuments = [
   // Spring 2026 — ML & graphics
   toDocument(
     'proj-bird-audio',
-    `Bird Audio Classification (Spring 2026 deep learning final, partner project). Compared HuBERT Base vs AST on \
+    `Bird Audio Classification (April 2026 deep learning final, partner project). Compared HuBERT Base vs AST on \
     BirdCLEF+ for 10-class bird audio classification. Built PyTorch + HuggingFace Trainer pipeline with cached \
     datasets, macro-F1/precision/recall, confusion matrices, inference latency and FLOPs estimates, and demo inference. \
     GitHub: github.com/ttn64681/Bird-Audio-Classification`,
@@ -138,7 +138,7 @@ export const projectDocuments = [
   ),
   toDocument(
     'proj-bill-cypher',
-    `Bill Cipher Vaporwave Render (Computer Graphics, Spring 2026). Browser Three.js scene with fat-line outlines, \
+    `Bill Cipher Vaporwave Render (Computer Graphics, Feb 2026). Browser Three.js scene with fat-line outlines, \
     emissive/fog aesthetics, bloom/afterimage/RGB shift post stack, grouped scene architecture, and modulo floor-scroll \
     illusion. Demo: bill-cypher-vaporwave.vercel.app`,
     {

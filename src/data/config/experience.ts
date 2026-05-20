@@ -7,7 +7,7 @@ export const experienceConfig: ExperienceConfig[] = [
     id: 'holywatr',
     title: 'Holywatr',
     role: 'Web Developer',
-    date: 'Fall 2025 – Present',
+    date: 'Nov 2025 – Mar 2026',
     link: 'https://www.holywatr.com/',
     summary:
       'Vanilla JS + Shopify GraphQL brand platform for a rock band with shader-heavy “digital horror” presentation.',

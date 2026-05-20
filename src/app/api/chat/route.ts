@@ -1,5 +1,6 @@
 import { streamText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { getAllowedChatDomains, isAllowedChatRequest } from '@/lib/chat-auth';
 import { getConfig } from '@/lib/config';
 import { buildSystemPrompt } from '@/lib/chat-prompts';
 import { MAX_BODY_BYTES, MAX_MESSAGE_LENGTH, MAX_MESSAGES_FOR_LLM } from '@/lib/constants';
@@ -87,13 +88,11 @@ export async function POST(request: Request) {
     );
   }
 
-  // (Leave empty in env to disable)
+  // Leave ALLOWED_DOMAIN empty in env to disable this check.
   if (process.env.NODE_ENV === 'production') {
-    if (config.allowedDomain) {
-      const referer = request.headers.get('referer');
-      if (!referer || !referer.includes(config.allowedDomain)) {
-        return errorResponse('Unauthorized', 401, 'unauthorized');
-      }
+    const allowedDomains = getAllowedChatDomains(config.allowedDomain);
+    if (allowedDomains.length > 0 && !isAllowedChatRequest(request, allowedDomains)) {
+      return errorResponse('Unauthorized', 401, 'unauthorized');
     }
   }
 

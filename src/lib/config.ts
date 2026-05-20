@@ -32,6 +32,7 @@ export function getConfig() {
     redisToken: requireEnv('UPSTASH_REDIS_REST_TOKEN'),
     geminiModel: getEnv('GEMINI_MODEL')?.trim() || 'gemini-2.5-flash',
     embeddingModel: getEnv('GEMINI_EMBEDDING_MODEL')?.trim() || 'gemini-embedding-001',
+    /** Comma-separated hostnames; leave empty to disable production domain auth. */
     allowedDomain: getEnv('ALLOWED_DOMAIN')?.trim() || '',
     rateLimitMax: RATE_LIMIT_MAX_REQUESTS,
     rateLimitWindowSec: RATE_LIMIT_WINDOW_SEC,

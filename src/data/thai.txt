@@ -49,7 +49,7 @@ ML / Data Science: NumPy, Pandas, Matplotlib, Seaborn, EDA, preprocessing, super
 Design & Graphics: Three.js, GLSL shaders, VFX.js, Aseprite (working knowledge: pixel art/animation), Figma (working knowledge: prototyping), Blender, Photoshop (working knowledge: asset creation/editing/effects), GarageBand, FL Studio
 Engineering Practices: Agile/Scrum, Jira, Docker, Postman, Unix/Linux, REST/GraphQL, dependency injection, SOLID, OOP, MVC, ECS, signal-bus architecture, composition, DRY, design patterns (Singleton, Decorator, Facade, Virtual Proxy)
 
-=== PROFESSIONAL EXPERIENCE — FREELANCE (Fall 2025 – Present)
+=== PROFESSIONAL EXPERIENCE — FREELANCE (Nov 2025 – Mar 2026)
 
 Project: Holywatr (Rock Band Brand Platform)
 Role: Web Developer
@@ -100,7 +100,7 @@ Reflection:
 
 Site: https://www.holywatr.com/
 
-=== LEADERSHIP — UGA ACM (May 2025 – Present)
+=== LEADERSHIP — UGA ACM (May 2025 – May 2026)
 
 Organization: UGA ACM
 Role: Executive Officer & CSIP Co-Chair (Computer Science Interview Prep)
@@ -139,7 +139,7 @@ Reflection:
 - I had weeks where I questioned if I was really cut out to be an exec while juggling classes and side projects, but overall I’m glad I stuck with it.
 - Being part of ACM opened up genuinely valuable connections with alumni and industry speakers, and I’m grateful for that.
 
-=== EXPERIENCE — UGA DevDogs / Google Developer Group (Aug 2024 – May 2025)
+=== EXPERIENCE — UGA DevDogs / Google Developer Group (Spring 2025)
 
 Project: Bulldog Planner (Optimal Schedule Builder)
 Role: Frontend Developer
@@ -177,7 +177,7 @@ GitHub: https://github.com/DevDogs-UGA/Optimal-Schedule-Builder
 
 === MAJOR PROJECT — ACM CINEMA (E-BOOKING SYSTEM)
 
-Role: Scrum Master & Full-Stack Developer (Aug 2025 – Present)
+Role: Scrum Master & Full-Stack Developer (Fall 2025)
 Stack: Next.js 16, React 19, TypeScript, Spring Boot 3.5, Java, PostgreSQL (Neon), TanStack Query, Framer Motion, Spring Security, Caffeine Cache
 Architecture: Layered full-stack architecture (UI -> hooks/contexts -> API clients/facade -> controllers/services/repositories), 80+ REST endpoints, 15 JPA entities
 Framework: OOP, SOLID, MVC, multi-layer architecture, Scrum (4 sprints / 9 deliverables)
@@ -335,7 +335,7 @@ Video: https://www.loom.com/share/04e8e8049bb446f3b017975b1e82d01e?sid=6928a038-
 Embed: 
 https://www.loom.com/embed/04e8e8049bb446f3b017975b1e82d01e
 
-=== MAJOR PROJECT — Bird Audio Classification (Deep Learning Final Partner Project, Spring 2026)
+=== MAJOR PROJECT — Bird Audio Classification (Deep Learning Final Partner Project, April 2026)
 
 Role: Ideator, Programmer
 Stack: PyTorch, HuggingFace Trainer, NumPy, Pandas, HuBERT Base, AST, BirdCLEF+ 2021 Dataset
@@ -429,7 +429,7 @@ Demo: https://domain-expansion-exhibit.vercel.app/
 Video: https://youtu.be/1QTsEm6-OYw?si=Sq7jDCPqzY7cpnfg
 GitHub: https://github.com/ttn64681/ThreeJS-Final-Project
 
-=== MAJOR PROJECT — Bill Cypher Vaporwave Render (Computer Graphics, Spring 2026)
+=== MAJOR PROJECT — Bill Cypher Vaporwave Render (Computer Graphics, Feb 2026)
 
 Role: 3D Programmer / Technical Artist
 Stack: Three.js, GLSL, JavaScript, ES Modules
@@ -828,7 +828,7 @@ Reflection:
 
 === MISCELLANEOUS PROJECTS
 
-Project: HTML Canvas 2D Physics Simulation (2026)
+Project: HTML Canvas 2D Physics Simulation (Feb 2026)
 Role: Programmer
 Stack: JavaScript, HTML Canvas
 Architecture: Real-time update/render physics loop with AABB collision checks
