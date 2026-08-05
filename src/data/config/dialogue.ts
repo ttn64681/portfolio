@@ -17,7 +17,7 @@ export const DIALOGUE_OPTIONS: DialogueOption[] = [
     id: 'education',
     label: '> Education?',
     text: "I'm at the University of Georgia in Athens, finishing my B.S. in Computer Science in Aug 2026. \
-    My cumulative GPA is 3.34, and my major GPA is 3.76. I've taken data structures + algorithms, software \
+    My cumulative GPA is 3.37, and my major GPA is 3.78. I've taken data structures + algorithms, software \
     engineering, full-stack dev, AI/ML, data science, computer graphics, and systems programming.",
   },
   {
