@@ -26,7 +26,7 @@ export default function LazyGif({
     <div ref={hostRef} className='lazy-gif-host'>
       {active ? (
         // eslint-disable-next-line @next/next/no-img-element -- preserve GIF animation
-        <img src={src} alt={alt} className={className} loading='lazy' decoding='async' />
+        <img src={src} alt={alt} className={className} decoding='async' />
       ) : (
         <div className={className ? `${className} lazy-media-skeleton` : 'lazy-media-skeleton'} aria-hidden />
       )}

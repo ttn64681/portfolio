@@ -1,0 +1,43 @@
+# Shared lint / typecheck / format / build steps.
+# Parent workflow chooses runner (ubuntu-latest vs self-hosted).
+name: Quality Checks
+description: Run lint, typecheck, format check, and optionally production build
+
+inputs:
+  run-build:
+    description: Run `npm run build` (skip on staging deploy since Docker builds instead)
+    required: false
+    default: 'true'
+
+runs:
+  # for composite action, GitHub doesn't pick default shell, must specify
+  # (use bash since I only chose linux as runner OS)
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: npm
+
+    - name: Install Dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Lint
+      run: npm run lint
+      shell: bash
+
+    - name: Typecheck
+      run: npm run typecheck
+      shell: bash
+
+    - name: Format Check
+      run: npm run format:check
+      shell: bash
+
+    - name: Production Build
+      # conditional step
+      if: inputs.run-build == 'true'
+      run: npm run build
+      shell: bash

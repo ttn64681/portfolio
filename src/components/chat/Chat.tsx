@@ -8,6 +8,7 @@ import { useMobile } from '@/hooks/useMobile';
 import { parseChatError } from '@/lib/chat-error';
 import { FUN_FACTS, pickRandom } from '@/data/config/chat';
 import type { ClientBlock } from '@/types/chat';
+import { randomId } from '@/lib/random-id';
 import ResumePopup from './ResumePopup';
 import ChatTimeline from './ChatTimeline';
 
@@ -89,7 +90,8 @@ export default function Chat() {
   const addResumeBlock = useCallback(() => {
     setClientBlocks((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), type: 'resume_button', afterMessageId: lastMessageId },
+      // each block needs stable unique id for React keys and timeline ordering
+      { id: randomId(), type: 'resume_button', afterMessageId: lastMessageId },
     ]);
   }, [lastMessageId]);
 
@@ -97,7 +99,7 @@ export default function Chat() {
     setClientBlocks((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: randomId(),
         type: 'fun_fact',
         afterMessageId: lastMessageId,
         text: pickRandom(FUN_FACTS),
