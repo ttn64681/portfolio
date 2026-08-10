@@ -1,0 +1,33 @@
+# defines start of containers for Docker to manage
+services:
+  # internal name of service in docker net
+  portfolio-web:
+    # non-generic name of container
+    container_name: portfolio_stage
+    build: .
+    # map HOST PORT:CONTAINER PORT
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    # load env vars from file w/in same host/vm root dir
+    env_file:
+      - .env.staging
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+    logging:
+      # output logs in json format (default)
+      driver: "json-file"
+      # set max size and file count for logs
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      # docker engine polls w/ -f(ail) error code to check container health
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
