@@ -2,4 +2,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## About
 
-This is my personal website and portfolio for Computer Science related jobs. I strive to incorporate my passion for art, music, programming, and games into this project. All art and music is made by me. Deployed via Vercel, RAGbot via 
+Personal Portfolio w/ RAG app, deployed on Vercel, staged on local vm container via self-hosted GitHub Actions runner + Docker.
+
+[Link](https://thai-nguyen.vercel.app/)
