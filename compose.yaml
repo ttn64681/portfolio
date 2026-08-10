@@ -5,6 +5,7 @@ services:
     # non-generic name of container
     container_name: portfolio_stage
     build: .
+    network: host
     # map HOST PORT:CONTAINER PORT
     ports:
       - 3000:3000
