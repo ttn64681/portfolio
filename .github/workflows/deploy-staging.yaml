@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout Code
         # action to checkout code from repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Inject .env.staging Secrets
         run: |
@@ -21,7 +21,7 @@ jobs:
           echo "UPSTASH_REDIS_REST_TOKEN=${{ secrets.UPSTASH_REDIS_REST_TOKEN }}" >> .env.staging
           echo "GEMINI_MODEL=${{ secrets.GEMINI_MODEL }}" >> .env.staging
           echo "GEMINI_EMBEDDING_MODEL=${{ secrets.GEMINI_EMBEDDING_MODEL }}" >> .env.staging
-          echo "GOOGLE_GEMINI_API_KEY=${{ secrets.GOOGLE_GEMINI_API_KEY }}" >> .env.staging
+          echo "GOOGLE_GENERATIVE_AI_API_KEY=${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}" >> .env.staging
         
       - name: Build and Sin Up Docker Container
         run: docker compose up --build -d
