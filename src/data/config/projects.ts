@@ -65,7 +65,9 @@ export const projectsConfig: ProjectConfig[] = [
         'Still, I’m proud of the grind: tons of self-learning in Spring/React/Postgres, many all-nighters, and real leadership reps through Jira and project structure.',
         'We received strict demo feedback, fixed issues post-demo, and were told it was among the strongest projects in class. We were absolutely cheesing.',
       ],
-      youtube: [{ title: 'ACM Cinema demo', ...watchUrlToEmbedFields('https://youtu.be/92fEVh5wNyI') }],
+      youtube: [
+        { title: 'ACM Cinema demo', ...watchUrlToEmbedFields('https://youtu.be/92fEVh5wNyI') },
+      ],
     },
   },
   {
@@ -227,7 +229,12 @@ export const projectsConfig: ProjectConfig[] = [
         'Performance humbled me a lot and made me respect highly-optimized Three.js experiences way more.',
         'This was still one of my favorite projects because it let me apply game-design-level creativity to a non-game interactive piece, which is exactly why I enjoy graphics work.',
       ],
-      youtube: [{ title: 'Domain Expansion Exhibit', ...watchUrlToEmbedFields('https://youtu.be/1QTsEm6-OYw') }],
+      youtube: [
+        {
+          title: 'Domain Expansion Exhibit',
+          ...watchUrlToEmbedFields('https://youtu.be/1QTsEm6-OYw'),
+        },
+      ],
     },
   },
   {
@@ -272,7 +279,12 @@ export const projectsConfig: ProjectConfig[] = [
         'This project made me appreciate how fast code-based 3D iteration can feel versus Blender for simple stylized objects.',
         'Performance still wasn’t ideal on my laptop, but it taught me a lot about practical optimization opportunities.',
       ],
-      youtube: [{ title: 'Bill Cipher vaporwave scene', ...watchUrlToEmbedFields('https://youtu.be/7DVnOH0POBE') }],
+      youtube: [
+        {
+          title: 'Bill Cipher vaporwave scene',
+          ...watchUrlToEmbedFields('https://youtu.be/7DVnOH0POBE'),
+        },
+      ],
     },
   },
   {
@@ -413,10 +425,7 @@ export const projectsConfig: ProjectConfig[] = [
     exploreDossier: {
       overview:
         'Desktop utility from early coursework: search anime, inspect metadata, translate text for bilingual skim-reading.',
-      features: [
-        'Anime lookup and metadata display.',
-        'Translation workflow on fetched fields.',
-      ],
+      features: ['Anime lookup and metadata display.', 'Translation workflow on fetched fields.'],
       implementation: [
         'Wired JavaFX event handlers to API request pipeline.',
         'Parsed API responses and mapped data to UI.',
@@ -497,9 +506,7 @@ export const projectsConfig: ProjectConfig[] = [
         'Maintaining safe control over automation state.',
         'Ensuring clear feedback for active/inactive behavior.',
       ],
-      reflection: [
-        'Small script, but fun and practical—good personal scripting reps.',
-      ],
+      reflection: ['Small script, but fun and practical—good personal scripting reps.'],
     },
   },
 ];

@@ -40,5 +40,12 @@ export default function ExtrasGamesHierarchyNav({ currentSlug }: { currentSlug: 
     selected: g.slug === currentSlug,
   }));
 
-  return <HierarchyNav ariaLabel='Games categories' parents={parents} subitems={children} parentVariant='underline' />;
+  return (
+    <HierarchyNav
+      ariaLabel='Games categories'
+      parents={parents}
+      subitems={children}
+      parentVariant='underline'
+    />
+  );
 }

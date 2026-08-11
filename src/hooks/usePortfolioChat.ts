@@ -34,10 +34,7 @@ export function usePortfolioChat() {
     transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
 
-  const { errorCode, retryAfter } = useMemo(
-    () => parseChatError(error?.message),
-    [error?.message],
-  );
+  const { errorCode, retryAfter } = useMemo(() => parseChatError(error?.message), [error?.message]);
 
   const displayMessages: ChatMessageDisplay[] = useMemo(() => {
     return messages.map((m) => ({
@@ -86,7 +83,7 @@ export function usePortfolioChat() {
         setIsTypingFadeOut(false);
       }, 300);
     }, 800);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- omit isTyping to avoid typing bubble loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- omit isTyping to avoid typing bubble loop
   }, [input]);
 
   const handleSubmit = useCallback(

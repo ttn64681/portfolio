@@ -1,0 +1,20 @@
+name: General CI Checks
+
+# Runs on every push of any branch EXCEPT test branch.
+on:
+  push:
+    branches-ignore:
+      - test
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Quality Checks
+        uses: ./.github/actions/quality-checks
+        with:
+          run-build: 'true'

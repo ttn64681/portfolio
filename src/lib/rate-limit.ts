@@ -10,7 +10,7 @@ export class RateLimitError extends Error {
   constructor(
     message: string,
     public retryAfter: number,
-    public resetAt: number
+    public resetAt: number,
   ) {
     super(message);
     this.name = 'RateLimitError';

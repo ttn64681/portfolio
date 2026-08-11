@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Pixelify_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 import ReactLenis from 'lenis/react';
 import JsonLd from '@/components/seo/JsonLd';
@@ -7,11 +6,11 @@ import { createPageMetadata } from '@/lib/metadata';
 import { getSiteUrl, siteConfig } from '@/lib/site';
 import './globals.css';
 
-const pixelify = Pixelify_Sans({
-  variable: '--font-pixelify', // generates a CSS variable named --font-pixelify
-  subsets: ['latin'],
-  display: 'swap', // Shows fallback font until custom font loads
-  preload: true, // Preloads the font for better performance
+const pixelify = localFont({
+  variable: '--font-pixelify',
+  src: '../../public/fonts/PixelifySans-VariableFont_wght.ttf',
+  display: 'swap',
+  preload: true,
   fallback: ['Lato', 'sans-serif'],
 });
 
@@ -65,8 +64,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ // Readonly so can't mutate props
-  children: React.ReactNode; 
+}: Readonly<{
+  // Readonly so can't mutate props
+  children: React.ReactNode;
 }>) {
   return (
     <html lang='en'>

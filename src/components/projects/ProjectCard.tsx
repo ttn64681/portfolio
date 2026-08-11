@@ -98,7 +98,9 @@ export default function ProjectCard({
 
   // Flip (mobile / tablet): preserve-3d faces + visibility:hidden on obscured face when flipped
   return (
-    <article className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}>
+    <article
+      className={`project-card project-card--flip game-block ${isFlipped ? 'project-card--flipped' : ''}`}
+    >
       <div
         role='button'
         tabIndex={0}

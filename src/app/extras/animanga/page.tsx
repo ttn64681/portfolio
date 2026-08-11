@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Hobbies log · Extras',
-  description: "Anime, manga, games, and music Thai Nguyen is keeping up with.",
+  description: 'Anime, manga, games, and music Thai Nguyen is keeping up with.',
   path: '/extras/animanga',
 });
 

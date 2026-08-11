@@ -1,0 +1,49 @@
+name: Deploy Staging Environment
+
+# events
+on:
+  push:
+    branches:
+      - test
+
+# jobs that execute on self-hosted runner on local machine
+jobs:
+  deploy:
+    # I chose linux as self-hosted runner OS
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        # action to checkout code from repo
+        uses: actions/checkout@v4
+
+      - name: Run Quality Checks
+        # custom modular action >:)
+        uses: ./.github/actions/quality-checks
+        with:
+          run-build: 'false'
+
+      # Write .env.staging for Docker Compose (separate runtime env in container)
+      - name: Write .env.staging for Docker
+        run: |
+          echo "UPSTASH_REDIS_REST_URL=${{ secrets.UPSTASH_REDIS_REST_URL }}" >> .env.staging
+          echo "UPSTASH_REDIS_REST_TOKEN=${{ secrets.UPSTASH_REDIS_REST_TOKEN }}" >> .env.staging
+          echo "GEMINI_MODEL=${{ secrets.GEMINI_MODEL }}" >> .env.staging
+          echo "GEMINI_EMBEDDING_MODEL=${{ secrets.GEMINI_EMBEDDING_MODEL }}" >> .env.staging
+          echo "GOOGLE_GENERATIVE_AI_API_KEY=${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}" >> .env.staging
+
+      # Runs in Actions step shell (reads process.env)
+      - name: Sync RAG Embeddings
+        # inject into process env vars (is forgotten next step)
+        env:
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
+          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
+          GEMINI_EMBEDDING_MODEL: ${{ secrets.GEMINI_EMBEDDING_MODEL }}
+        run: npm run rag:sync
+
+      - name: Build and Spin Up Docker Container
+        run: docker compose up --build -d
+
+      - name: Clean Up Old Images
+        run: docker image prune -f

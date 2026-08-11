@@ -12,8 +12,8 @@ export type NearViewportOptions = {
 };
 
 /**
- * True when `ref` is near the viewport. With `once`, the IntersectionObserver disconnects
- * after the first hit so long pages do not keep observers for off-screen tiles forever.
+ * True when `ref` is near viewport. With `once`, IntersectionObserver disconnects
+ * after first hit so long pages do not keep observers for off-screen tiles forever.
  */
 export function useNearViewport(
   ref: RefObject<Element | null>,
@@ -28,22 +28,48 @@ export function useNearViewport(
 
   useEffect(() => {
     if (!enabled || (once && near)) return;
-    const el = ref.current;
-    if (!el) return;
 
-    const obs = new IntersectionObserver( // params: callback function, options object
-      ([entry]) => { // entry: IntersectionObserverEntry object
-        if (!entry?.isIntersecting) return; // if not intersecting, return
-        setNear(true); // trigger re-render -> useNearViewport(true)
-        if (once) obs.disconnect();
-      },
-      { rootMargin, threshold },
-    ); // IntersectionObserver
-    obs.observe(el);
-    return () => obs.disconnect(); // clean up observer when component unmounts
-    }, // callback
-    [enabled, once, near, rootMargin, threshold, ref]
-  ); // useEffect
+    let obs: IntersectionObserver | undefined;
+    let raf = 0;
+    let cancelled = false;
+
+    const attach = () => {
+      if (cancelled) return;
+      const el = ref.current;
+      if (!el) return;
+
+      // Above-fold embeds can already be visible before IntersectionObserver fires
+      const marginPx = 120;
+      const rect = el.getBoundingClientRect();
+      // manually calculate if element is near viewport
+      if (rect.top < window.innerHeight + marginPx && rect.bottom > -marginPx) {
+        setNear(true);
+        if (once) return;
+      }
+
+      obs = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          setNear(true);
+          if (once) obs?.disconnect();
+        },
+        { rootMargin, threshold },
+      );
+      obs.observe(el);
+    };
+
+    attach();
+    // Ref may not be set on first effect tick; retry once on next frame.
+    if (!ref.current) {
+      raf = requestAnimationFrame(attach);
+    }
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(raf);
+      obs?.disconnect();
+    };
+  }, [enabled, once, near, rootMargin, threshold, ref]);
 
   return near;
 }

@@ -1,4 +1,4 @@
 /* Split so poster.css (large dossier + gallery) stays separate from hub + hero chrome. */
-@import "./hub.css";
-@import "./hero.css";
-@import "./poster.css";
+@import './hub.css';
+@import './hero.css';
+@import './poster.css';

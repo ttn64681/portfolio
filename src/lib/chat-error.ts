@@ -25,8 +25,7 @@ export function parseChatError(message: string | undefined): ParsedChatError {
   try {
     const parsed = JSON.parse(message) as { code?: string; retryAfter?: number };
     const code = parsed?.code;
-    const valid =
-      typeof code === 'string' && (VALID_CODES as readonly string[]).includes(code);
+    const valid = typeof code === 'string' && (VALID_CODES as readonly string[]).includes(code);
     return {
       errorCode: valid ? (code as ChatErrorCode) : null,
       retryAfter: typeof parsed?.retryAfter === 'number' ? parsed.retryAfter : undefined,

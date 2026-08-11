@@ -63,7 +63,9 @@ export default function AnimangaNowColumn({
           ))}
         </div>
       ) : (
-        <p className='extras-animanga-now__empty'>Nothing listed yet — add picks in data/extras/animanga.ts.</p>
+        <p className='extras-animanga-now__empty'>
+          Nothing listed yet — add picks in data/extras/animanga.ts.
+        </p>
       )}
     </div>
   );

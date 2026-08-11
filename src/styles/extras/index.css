@@ -3,8 +3,8 @@
  * shell = layout backdrop + tokens; extras-nav = in-page strips; games = dossier hooks;
  * sections = music/gallery/animanga UI; motion = transitions.
  */
-@import "./shell.css";
-@import "./extras-nav.css";
-@import "./games.css";
-@import "./sections.css";
-@import "./motion.css";
+@import './shell.css';
+@import './extras-nav.css';
+@import './games.css';
+@import './sections.css';
+@import './motion.css';

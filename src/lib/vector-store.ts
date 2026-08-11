@@ -72,8 +72,7 @@ export async function searchSimilarDocuments(
   for (let attempt = 0; attempt < 2; attempt++) {
     let docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
 
-    const missingOrStale = docIds.length === 0 || 
-            (await needsReembedding(documents)); // If `rag:portfolio:hash` ≠ hash of curr `portfolioDocuments`
+    const missingOrStale = docIds.length === 0 || (await needsReembedding(documents)); // If `rag:portfolio:hash` ≠ hash of curr `portfolioDocuments`
 
     if (missingOrStale && documents.length > 0) {
       // Sync only changed docs when corpus hash or vectors are missing (incremental, batched).

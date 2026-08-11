@@ -42,11 +42,36 @@ export default function AnimangaFeedSection({
   }, [entries, filter]);
 
   const parents: { id: FilterId; label: string; selected: boolean; onSelect: () => void }[] = [
-    { id: 'all', label: 'All', selected: filter === 'all', onSelect: () => setInternalFilter('all') },
-    { id: 'anime', label: 'Anime', selected: filter === 'anime', onSelect: () => setInternalFilter('anime') },
-    { id: 'manga', label: 'Manga', selected: filter === 'manga', onSelect: () => setInternalFilter('manga') },
-    { id: 'game', label: 'Game', selected: filter === 'game', onSelect: () => setInternalFilter('game') },
-    { id: 'music', label: 'Music', selected: filter === 'music', onSelect: () => setInternalFilter('music') },
+    {
+      id: 'all',
+      label: 'All',
+      selected: filter === 'all',
+      onSelect: () => setInternalFilter('all'),
+    },
+    {
+      id: 'anime',
+      label: 'Anime',
+      selected: filter === 'anime',
+      onSelect: () => setInternalFilter('anime'),
+    },
+    {
+      id: 'manga',
+      label: 'Manga',
+      selected: filter === 'manga',
+      onSelect: () => setInternalFilter('manga'),
+    },
+    {
+      id: 'game',
+      label: 'Game',
+      selected: filter === 'game',
+      onSelect: () => setInternalFilter('game'),
+    },
+    {
+      id: 'music',
+      label: 'Music',
+      selected: filter === 'music',
+      onSelect: () => setInternalFilter('music'),
+    },
   ];
 
   return (

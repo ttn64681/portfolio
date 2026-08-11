@@ -13,7 +13,12 @@ type ExploreGalleryAssetProps = {
 };
 
 /** Shared still/GIF renderer for explore posters and game dossiers. */
-export default function ExploreGalleryAsset({ src, alt, mediaKind, layout }: ExploreGalleryAssetProps) {
+export default function ExploreGalleryAsset({
+  src,
+  alt,
+  mediaKind,
+  layout,
+}: ExploreGalleryAssetProps) {
   if (mediaKind === 'gif') {
     const gifClass =
       layout === 'banner'

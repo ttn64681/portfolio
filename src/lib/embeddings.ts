@@ -7,7 +7,12 @@
  */
 
 import type { Document } from '@/types/chat';
-import { RAG_EMBED_CONCURRENCY, RAG_EMBED_MAX_RETRIES, RAG_KEYS, QUERY_EMBEDDING_TTL_SEC } from './constants';
+import {
+  RAG_EMBED_CONCURRENCY,
+  RAG_EMBED_MAX_RETRIES,
+  RAG_KEYS,
+  QUERY_EMBEDDING_TTL_SEC,
+} from './constants';
 import { getConfig } from './config';
 import { getRedis } from './redis';
 
@@ -141,9 +146,9 @@ export async function batchEmbedDocuments(
     options.onProgress?.(done, documents.length, doc.id);
   };
 
-  // 
+  //
   for (let i = 0; i < documents.length; i += concurrency) {
-    const wave = documents.slice(i, i + concurrency); 
+    const wave = documents.slice(i, i + concurrency);
     await Promise.all(wave.map(embedOne));
   }
 

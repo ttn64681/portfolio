@@ -12,12 +12,7 @@ type LazyGifProps = {
 };
 
 /** Defers GIF `src` until near viewport; uses native lazy/async decoding once loaded. */
-export default function LazyGif({
-  src,
-  alt,
-  className,
-  deferUntilVisible = true,
-}: LazyGifProps) {
+export default function LazyGif({ src, alt, className, deferUntilVisible = true }: LazyGifProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const near = useNearViewport(hostRef, { enabled: deferUntilVisible });
   const active = !deferUntilVisible || near;
@@ -26,9 +21,12 @@ export default function LazyGif({
     <div ref={hostRef} className='lazy-gif-host'>
       {active ? (
         // eslint-disable-next-line @next/next/no-img-element -- preserve GIF animation
-        <img src={src} alt={alt} className={className} loading='lazy' decoding='async' />
+        <img src={src} alt={alt} className={className} decoding='async' />
       ) : (
-        <div className={className ? `${className} lazy-media-skeleton` : 'lazy-media-skeleton'} aria-hidden />
+        <div
+          className={className ? `${className} lazy-media-skeleton` : 'lazy-media-skeleton'}
+          aria-hidden
+        />
       )}
     </div>
   );
