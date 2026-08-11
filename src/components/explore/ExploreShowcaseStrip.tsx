@@ -15,7 +15,10 @@ export default function ExploreShowcaseStrip({ currentSlug }: { currentSlug: str
   }));
 
   return (
-    <nav className='hierarchy-nav hierarchy-nav--below-hero explore-showcase-strip' aria-label='All showcases'>
+    <nav
+      className='hierarchy-nav hierarchy-nav--below-hero explore-showcase-strip'
+      aria-label='All showcases'
+    >
       <HierarchyChipRow items={chips} />
     </nav>
   );

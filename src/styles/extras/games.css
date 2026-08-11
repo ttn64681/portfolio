@@ -52,7 +52,12 @@
 
   .extras-game__description {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 0.9rem;
     line-height: 1.55;
     color: rgba(241, 248, 255, 0.9);
@@ -155,5 +160,4 @@
     outline: 2px solid rgba(61, 217, 160, 0.75);
     outline-offset: 2px;
   }
-
 }

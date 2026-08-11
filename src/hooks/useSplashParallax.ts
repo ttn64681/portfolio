@@ -46,8 +46,8 @@ export function useSplashParallax() {
     let rafId = 0; // Non-zero while full-motion RAF loop is scheduled.
 
     function stopAnimationLoop() {
-      if (rafId !== 0) { 
-        cancelAnimationFrame(rafId); 
+      if (rafId !== 0) {
+        cancelAnimationFrame(rafId);
         rafId = 0;
       }
     }
@@ -59,18 +59,14 @@ export function useSplashParallax() {
       const relX = useMouseParallax
         ? (currentMouseX - screenCenterX) / screenCenterX // // if mouse at center (500,500), then relX = 0 (center)
         : 0;
-      const relY = useMouseParallax
-        ? (currentMouseY - screenCenterY) / screenCenterY
-        : 0;
+      const relY = useMouseParallax ? (currentMouseY - screenCenterY) / screenCenterY : 0;
       const isTabletOrSmaller = window.innerWidth <= BREAKPOINTS.mobile;
 
       // Update transforms for each cached layer
       for (const { config, el } of layerEntries) {
         const { maxX, maxY, scale, scrollYMult } = config;
-        const mouseXOffset =
-          useMouseParallax && !isTabletOrSmaller ? relX * maxX : 0;
-        const mouseYOffset =
-          useMouseParallax && !isTabletOrSmaller ? relY * maxY : 0;
+        const mouseXOffset = useMouseParallax && !isTabletOrSmaller ? relX * maxX : 0;
+        const mouseYOffset = useMouseParallax && !isTabletOrSmaller ? relY * maxY : 0;
         el.style.transform = `
           translateX(calc(-50% - ${mouseXOffset}px))
           translateY(${scrollY * scrollYMult - mouseYOffset}px)

@@ -91,8 +91,9 @@ export async function syncPortfolioEmbeddings(
     }); // returns map of docId to embedding
     const redis = getRedis();
     const pipeline = redis.pipeline();
-    for (const [docId, values] of embeddings) { // set each embedding in Redis 
-      pipeline.set(RAG_KEYS.EMBEDDING(docId), JSON.stringify({ embedding: values, docId }), { 
+    for (const [docId, values] of embeddings) {
+      // set each embedding in Redis
+      pipeline.set(RAG_KEYS.EMBEDDING(docId), JSON.stringify({ embedding: values, docId }), {
         ex: EMBEDDING_TTL_SEC,
       }); // set the embedding in Redis with a 30-day TTL
     }

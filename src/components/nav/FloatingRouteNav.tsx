@@ -30,21 +30,52 @@ export default function FloatingRouteNav({ mode }: { mode: FloatingRouteNavMode 
   const pathname = usePathname() ?? '';
 
   const extrasLinks: { room: ExtrasRoom; href: string; label: string; icon: ReactNode }[] = [
-    { room: 'games', href: getFirstGameHref(), label: 'Games', icon: <MdSportsEsports {...navIconProps} /> },
-    { room: 'music', href: '/extras/music', label: 'Music', icon: <MdGraphicEq {...navIconProps} /> },
-    { room: 'gallery', href: '/extras/gallery', label: 'Gallery', icon: <MdCollections {...navIconProps} /> },
-    { room: 'animanga', href: '/extras/animanga', label: 'Animanga', icon: <MdTheaters {...navIconProps} /> },
+    {
+      room: 'games',
+      href: getFirstGameHref(),
+      label: 'Games',
+      icon: <MdSportsEsports {...navIconProps} />,
+    },
+    {
+      room: 'music',
+      href: '/extras/music',
+      label: 'Music',
+      icon: <MdGraphicEq {...navIconProps} />,
+    },
+    {
+      room: 'gallery',
+      href: '/extras/gallery',
+      label: 'Gallery',
+      icon: <MdCollections {...navIconProps} />,
+    },
+    {
+      room: 'animanga',
+      href: '/extras/animanga',
+      label: 'Animanga',
+      icon: <MdTheaters {...navIconProps} />,
+    },
   ];
 
   return (
-    <nav className='floating-route-nav' aria-label={mode === 'explore' ? 'Explore navigation' : 'Extras navigation'}>
+    <nav
+      className='floating-route-nav'
+      aria-label={mode === 'explore' ? 'Explore navigation' : 'Extras navigation'}
+    >
       <div className='floating-route-nav__inner'>
         <div className='floating-route-nav__slot floating-route-nav__slot--left'>
-          <Link href='/explore' className='floating-route-nav__pill floating-route-nav__pill--ghost' aria-label='Unified hub'>
+          <Link
+            href='/explore'
+            className='floating-route-nav__pill floating-route-nav__pill--ghost'
+            aria-label='Unified hub'
+          >
             <MdWindow {...navIconProps} />
             <span className='floating-route-nav__txt'>Hub</span>
           </Link>
-          <Link href='/' className='floating-route-nav__pill floating-route-nav__pill--ghost' aria-label='Site home'>
+          <Link
+            href='/'
+            className='floating-route-nav__pill floating-route-nav__pill--ghost'
+            aria-label='Site home'
+          >
             <MdHome {...navIconProps} />
             <span className='floating-route-nav__txt'>Home</span>
           </Link>
@@ -52,15 +83,27 @@ export default function FloatingRouteNav({ mode }: { mode: FloatingRouteNavMode 
         <div className='floating-route-nav__slot floating-route-nav__slot--right'>
           {mode === 'explore' ? (
             <>
-              <Link href='/explore?focus=projects' className='floating-route-nav__pill floating-route-nav__pill--ghost' aria-label='Projects'>
+              <Link
+                href='/explore?focus=projects'
+                className='floating-route-nav__pill floating-route-nav__pill--ghost'
+                aria-label='Projects'
+              >
                 <MdRocketLaunch {...navIconProps} />
                 <span className='floating-route-nav__txt'>Projects</span>
               </Link>
-              <Link href='/explore?focus=experiences' className='floating-route-nav__pill floating-route-nav__pill--ghost' aria-label='Experiences'>
+              <Link
+                href='/explore?focus=experiences'
+                className='floating-route-nav__pill floating-route-nav__pill--ghost'
+                aria-label='Experiences'
+              >
                 <MdGroups {...navIconProps} />
                 <span className='floating-route-nav__txt'>Experiences</span>
               </Link>
-              <Link href='/explore?focus=games' className='floating-route-nav__pill floating-route-nav__pill--ghost' aria-label='Games'>
+              <Link
+                href='/explore?focus=games'
+                className='floating-route-nav__pill floating-route-nav__pill--ghost'
+                aria-label='Games'
+              >
                 <MdSportsEsports {...navIconProps} />
                 <span className='floating-route-nav__txt'>Games</span>
               </Link>

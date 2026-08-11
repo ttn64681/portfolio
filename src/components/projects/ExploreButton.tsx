@@ -13,7 +13,10 @@ export default function ExploreButton({
 }: ExploreButtonProps) {
   const content = (
     <>
-      Explore <span aria-hidden className='project-card__explore-btn__arrow'>→</span>
+      Explore{' '}
+      <span aria-hidden className='project-card__explore-btn__arrow'>
+        →
+      </span>
     </>
   );
 

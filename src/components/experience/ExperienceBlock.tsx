@@ -38,10 +38,7 @@ export default function ExperienceBlock({ exp }: { exp: ExperienceConfig }) {
           </div>
         )}
         <div className='experience-block__footer'>
-          <ExploreButton
-            href={`/explore/${exp.id}`}
-            ariaLabel={`Explore ${exp.title} showcase`}
-          />
+          <ExploreButton href={`/explore/${exp.id}`} ariaLabel={`Explore ${exp.title} showcase`} />
         </div>
       </div>
     </article>

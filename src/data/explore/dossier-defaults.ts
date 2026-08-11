@@ -40,19 +40,18 @@ export const DEFAULT_EXPLORE_GALLERY: ExploreGalleryItem[] = [
   { alt: 'Screenshot slot 6' },
 ];
 
-export const DEFAULT_EXPLORE_FIGURES: Partial<
-  Record<ExploreFigureSection, ExploreGalleryItem[]>
-> = {
-  overview: [
-    {
-      alt: 'Overview figure',
-      src: '/pixel/webp/bubble-me.webp',
-      caption: 'Pair imagery with the story.',
-    },
-  ],
-  features: [{ alt: 'Feature highlight', src: '/pixel/webp/octocat-float.webp' }],
-  implementation: [{ alt: 'Implementation note', src: '/pixel/webp/pfp-me.webp' }],
-};
+export const DEFAULT_EXPLORE_FIGURES: Partial<Record<ExploreFigureSection, ExploreGalleryItem[]>> =
+  {
+    overview: [
+      {
+        alt: 'Overview figure',
+        src: '/pixel/webp/bubble-me.webp',
+        caption: 'Pair imagery with the story.',
+      },
+    ],
+    features: [{ alt: 'Feature highlight', src: '/pixel/webp/octocat-float.webp' }],
+    implementation: [{ alt: 'Implementation note', src: '/pixel/webp/pfp-me.webp' }],
+  };
 
 export const DEFAULT_EXPLORE_YOUTUBE: ExploreYoutubeItem[] = [
   { title: 'Walkthrough / trailer (optional)', videoId: undefined },

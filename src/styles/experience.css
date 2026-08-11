@@ -52,7 +52,9 @@
     background: #021728;
     border: 1px solid rgba(77, 189, 255, 0.3);
     border-left: 4px solid rgba(77, 189, 255, 0.4);
-    transition: border-color 0.2s ease-out, background 0.2s ease-out;
+    transition:
+      border-color 0.2s ease-out,
+      background 0.2s ease-out;
   }
 
   .experience-block:hover .experience-block__inner {
@@ -107,7 +109,12 @@
   }
 
   .experience-block__summary {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 0.95rem;
     line-height: 1.55;
     color: rgba(241, 248, 255, 0.92);
@@ -125,7 +132,12 @@
   }
 
   .experience-block__bullet {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 0.875rem;
     line-height: 1.5;
     color: rgba(241, 248, 255, 0.9);
@@ -161,7 +173,9 @@
     letter-spacing: 0.08em;
     color: var(--white-title);
     font-weight: 600;
-    transition: border-color 0.2s ease-out, background 0.2s ease-out;
+    transition:
+      border-color 0.2s ease-out,
+      background 0.2s ease-out;
   }
 
   .experience-block__inner:hover .experience-block__tag {

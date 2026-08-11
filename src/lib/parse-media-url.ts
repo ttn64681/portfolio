@@ -6,8 +6,7 @@
 const YT_ID = /^[a-zA-Z0-9_-]{11}$/;
 /** Loom uses 32-char hex in URLs; some tools show dashed UUID — accept both. */
 const LOOM_HEX32 = /^[0-9a-f]{32}$/i;
-const LOOM_UUID =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const LOOM_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function isLoomIdSegment(id: string): boolean {
   return LOOM_UUID.test(id) || LOOM_HEX32.test(id);

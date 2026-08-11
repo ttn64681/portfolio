@@ -35,7 +35,9 @@ export default function LazyYouTube({
     const body = (
       <div ref={containerRef} className={`${rootClass} explore-youtube--placeholder`}>
         <div className='explore-youtube__frame'>
-          <p className='explore-youtube__placeholder-text'>No video embed yet — add one in detail data.</p>
+          <p className='explore-youtube__placeholder-text'>
+            No video embed yet — add one in detail data.
+          </p>
         </div>
         {title && <p className='explore-youtube__title'>{title}</p>}
       </div>

@@ -14,11 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ExtrasGalleryPage() {
   return (
     <>
-      <ExtrasHero
-        title='Framed gallery'
-        deck='Some of my art and photos.'
-        room='gallery'
-      />
+      <ExtrasHero title='Framed gallery' deck='Some of my art and photos.' room='gallery' />
       <div className='extras-shell__inner extras-page-shell extras-route extras-route--gallery'>
         <div className='extras-page-shell__main extras-gallery-page-body'>
           <ExtrasGalleryClient tabs={galleryTabs} />

@@ -9,7 +9,13 @@ function favorites(kind: AnimangaFeedKind, hero: AnimangaHero) {
 }
 
 /** Per-medium column: anime / manga / games / music — three `AnimangaNowColumn` stacks. */
-export default function AnimangaMediumColumn({ medium, hero }: { medium: AnimangaFeedKind; hero: AnimangaHero }) {
+export default function AnimangaMediumColumn({
+  medium,
+  hero,
+}: {
+  medium: AnimangaFeedKind;
+  hero: AnimangaHero;
+}) {
   const showRating = medium !== 'game';
 
   const heading =
@@ -60,7 +66,11 @@ export default function AnimangaMediumColumn({ medium, hero }: { medium: Animang
       <h3 className='extras-animanga-medium__title'>{heading}</h3>
       <div className='extras-animanga-medium__sections'>
         <AnimangaNowColumn label={currentLabel} items={currentItems} showRating={showRating} />
-        <AnimangaNowColumn label='Favorite' items={favorites(medium, hero)} showRating={showRating} />
+        <AnimangaNowColumn
+          label='Favorite'
+          items={favorites(medium, hero)}
+          showRating={showRating}
+        />
         <AnimangaNowColumn label={wantLabel} items={wantItems} showRating={showRating} />
       </div>
     </section>

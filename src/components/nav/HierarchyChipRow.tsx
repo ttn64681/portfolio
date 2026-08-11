@@ -17,7 +17,9 @@ export default function HierarchyChipRow({
   ariaLabel?: string;
   className?: string;
 }) {
-  const rowClass = ['hierarchy-nav__children', 'hierarchy-nav__children--chip-toolbar', className].filter(Boolean).join(' ');
+  const rowClass = ['hierarchy-nav__children', 'hierarchy-nav__children--chip-toolbar', className]
+    .filter(Boolean)
+    .join(' ');
   return (
     <div className={rowClass} role='tablist' aria-label={ariaLabel}>
       {items.map((c) =>

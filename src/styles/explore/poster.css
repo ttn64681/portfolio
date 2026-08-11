@@ -61,7 +61,9 @@
       grid-column: span 12;
     }
 
-    .explore-float-card:not(.explore-float-card--wide):not(.explore-section-widget .explore-float-card) {
+    .explore-float-card:not(.explore-float-card--wide):not(
+        .explore-section-widget .explore-float-card
+      ) {
       grid-column: span 6;
     }
 
@@ -130,7 +132,9 @@
   }
 
   .explore-float-card--lift {
-    transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+    transition:
+      transform 0.2s ease-out,
+      border-color 0.2s ease-out;
   }
 
   @media (hover: hover) {
@@ -414,7 +418,12 @@
   .explore-poster__overview,
   .explore-poster__links-hint {
     margin: 0.5rem 0 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 0.9rem;
     line-height: 1.55;
     color: rgba(241, 248, 255, 0.92);

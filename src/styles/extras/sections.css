@@ -927,7 +927,12 @@
   .extras-animanga-yt-embed__skeleton {
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, rgba(20, 40, 60, 0.5) 0%, rgba(10, 22, 40, 0.8) 50%, rgba(20, 40, 60, 0.5) 100%);
+    background: linear-gradient(
+      120deg,
+      rgba(20, 40, 60, 0.5) 0%,
+      rgba(10, 22, 40, 0.8) 50%,
+      rgba(20, 40, 60, 0.5) 100%
+    );
     background-size: 200% 100%;
     animation: extras-animanga-yt-shimmer 1.2s ease-in-out infinite;
   }

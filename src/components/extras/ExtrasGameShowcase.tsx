@@ -32,7 +32,10 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
 
   return (
     <article className='extras-game extras-game--unified'>
-      <section className='explore-overview-block' aria-labelledby={`extras-game-overview-${game.slug}`}>
+      <section
+        className='explore-overview-block'
+        aria-labelledby={`extras-game-overview-${game.slug}`}
+      >
         <div className='extras-game-float explore-widget-shell'>
           <h2 id={`extras-game-overview-${game.slug}`} className='extras-game-float__h'>
             Overview
@@ -51,8 +54,12 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
           )}
           {(game.playUrl || game.repoUrl) && (
             <div className='extras-game__actions'>
-              {game.playUrl && <OutboundSpriteLink href={game.playUrl} ariaLabel={`Play ${game.title}`} />}
-              {game.repoUrl && <OutboundSpriteLink href={game.repoUrl} ariaLabel={`GitHub: ${game.title}`} />}
+              {game.playUrl && (
+                <OutboundSpriteLink href={game.playUrl} ariaLabel={`Play ${game.title}`} />
+              )}
+              {game.repoUrl && (
+                <OutboundSpriteLink href={game.repoUrl} ariaLabel={`GitHub: ${game.title}`} />
+              )}
             </div>
           )}
         </div>
@@ -71,8 +78,14 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
       </section>
 
       {galleryRest.length > 0 && (
-        <section className='extras-game-float explore-gallery-section' aria-labelledby={`extras-game-gallery-${game.slug}`}>
-          <h2 id={`extras-game-gallery-${game.slug}`} className='explore-widget-title explore-widget-title--gallery'>
+        <section
+          className='extras-game-float explore-gallery-section'
+          aria-labelledby={`extras-game-gallery-${game.slug}`}
+        >
+          <h2
+            id={`extras-game-gallery-${game.slug}`}
+            className='explore-widget-title explore-widget-title--gallery'
+          >
             Gallery
           </h2>
           <div className='explore-gallery explore-gallery--mosaic explore-gallery--uniform-rows'>
@@ -107,8 +120,14 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
       )}
 
       {game.youtube && game.youtube.length > 0 && (
-        <section className='extras-game-float explore-widget-shell' aria-labelledby={`extras-game-video-${game.slug}`}>
-          <h2 id={`extras-game-video-${game.slug}`} className='explore-widget-title explore-widget-title--video'>
+        <section
+          className='extras-game-float explore-widget-shell'
+          aria-labelledby={`extras-game-video-${game.slug}`}
+        >
+          <h2
+            id={`extras-game-video-${game.slug}`}
+            className='explore-widget-title explore-widget-title--video'
+          >
             Video
           </h2>
           <div className='explore-video-stack explore-video-stack--items'>

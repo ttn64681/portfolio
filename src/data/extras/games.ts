@@ -26,7 +26,12 @@ export const gameEntries: ExtraGameEntry[] = [
       'Checkpoint-driven Godot project where I owned animated menus, options hubs, ready-flow orchestration, centralized audio, and shader-styled UI accents while the team shipped multiplayer racing fantasy.',
     playUrl: undefined,
     repoUrl: undefined,
-    youtube: [{ title: 'Spindrive showcase', videoId: requireYoutubeVideoId('https://youtu.be/er1VcgwKxXw') }],
+    youtube: [
+      {
+        title: 'Spindrive showcase',
+        videoId: requireYoutubeVideoId('https://youtu.be/er1VcgwKxXw'),
+      },
+    ],
     contributions: [
       {
         title: 'Menus, options & intro flow',
@@ -62,7 +67,12 @@ export const gameEntries: ExtraGameEntry[] = [
       'Roguelike-adjacent hero RPG polish: trade flows, modular UI panels, and intro/cutscene choreography built on a SignalBus + DTO backbone.',
     playUrl: 'https://opuhlos.itch.io/tower-ascent',
     repoUrl: undefined,
-    youtube: [{ title: 'Tower Ascent trailer / capture', videoId: requireYoutubeVideoId('https://youtu.be/DodlQDijPa4') }],
+    youtube: [
+      {
+        title: 'Tower Ascent trailer / capture',
+        videoId: requireYoutubeVideoId('https://youtu.be/DodlQDijPa4'),
+      },
+    ],
     contributions: [
       {
         title: 'Trading & modular UI',
@@ -261,7 +271,12 @@ export const gameEntries: ExtraGameEntry[] = [
     description:
       'Modeling, UVs, hand-painted textures, rigging, and promo/menu art for a charity-weekend title—most of the grind landed in the final push.',
     playUrl: 'https://kuuoi.itch.io/jobdescription',
-    youtube: [{ title: 'Job Description trailer', videoId: requireYoutubeVideoId('https://youtu.be/ccdSNrpOq_0') }],
+    youtube: [
+      {
+        title: 'Job Description trailer',
+        videoId: requireYoutubeVideoId('https://youtu.be/ccdSNrpOq_0'),
+      },
+    ],
     contributions: [
       {
         title: 'Character + promo art',

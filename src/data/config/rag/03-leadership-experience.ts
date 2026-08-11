@@ -23,7 +23,15 @@ export const leadershipExperienceDocuments = [
     Site: holywatr.com`,
     {
       title: 'Holywatr — Freelance Web Developer',
-      techStack: ['JavaScript', 'HTML5', 'CSS3', 'Shopify Storefront API', 'GraphQL', 'VFX.js', 'Klaviyo'],
+      techStack: [
+        'JavaScript',
+        'HTML5',
+        'CSS3',
+        'Shopify Storefront API',
+        'GraphQL',
+        'VFX.js',
+        'Klaviyo',
+      ],
       category: 'experience',
     },
   ),

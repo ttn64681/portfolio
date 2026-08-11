@@ -50,7 +50,9 @@
     letter-spacing: 0.14em;
     color: rgba(241, 248, 255, 0.7);
     text-decoration: none;
-    transition: color 0.2s ease-out, text-shadow 0.2s ease-out;
+    transition:
+      color 0.2s ease-out,
+      text-shadow 0.2s ease-out;
   }
 
   .site-footer__link:hover {

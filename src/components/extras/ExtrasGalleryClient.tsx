@@ -92,13 +92,22 @@ export default function ExtrasGalleryClient({ tabs }: { tabs: GalleryTab[] }) {
   return (
     <>
       <div className='extras-gallery-hierarchy'>
-        <HierarchyNav ariaLabel='Gallery categories' parents={parentItems} subitems={childItems} parentVariant='underline' />
+        <HierarchyNav
+          ariaLabel='Gallery categories'
+          parents={parentItems}
+          subitems={childItems}
+          parentVariant='underline'
+        />
       </div>
 
       <p id={REGION_LABEL_ID} className='sr-only'>
         {regionLabel}
       </p>
-      <div className='extras-gallery-grid extras-gallery-grid--uniform-rows' role='region' aria-labelledby={REGION_LABEL_ID}>
+      <div
+        className='extras-gallery-grid extras-gallery-grid--uniform-rows'
+        role='region'
+        aria-labelledby={REGION_LABEL_ID}
+      >
         {activeItems.map((item, i) => (
           <div
             key={`${item.src}-${i}`}
@@ -122,7 +131,9 @@ export default function ExtrasGalleryClient({ tabs }: { tabs: GalleryTab[] }) {
               <div className='extras-gallery-meta-sheet'>
                 {item.title && <div className='extras-gallery-meta-sheet__title'>{item.title}</div>}
                 {item.date && <div className='extras-gallery-meta-sheet__date'>{item.date}</div>}
-                {item.caption && <p className='extras-gallery-meta-sheet__caption'>{item.caption}</p>}
+                {item.caption && (
+                  <p className='extras-gallery-meta-sheet__caption'>{item.caption}</p>
+                )}
               </div>
             </div>
           </div>

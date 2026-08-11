@@ -12,9 +12,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: now, changeFrequency: 'monthly', priority: 1 },
     { url: `${siteUrl}/explore`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${siteUrl}/extras/gallery`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${siteUrl}/extras/animanga`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${siteUrl}/extras/music`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    {
+      url: `${siteUrl}/extras/gallery`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/extras/animanga`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${siteUrl}/extras/music`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
   const exploreRoutes: MetadataRoute.Sitemap = getAllExploreSlugs().map((slug) => ({
