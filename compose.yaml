@@ -26,7 +26,7 @@ services:
         max-file: "3"
     healthcheck:
       # docker engine polls w/ -f(ail) error code to check container health
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 3
