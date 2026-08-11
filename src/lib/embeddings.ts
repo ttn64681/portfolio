@@ -1,9 +1,8 @@
 /**
- * Gemini embedding API + hashing helpers.
+ * Gemini embed API + hashing helpers.
  *
- * Two embedding paths:
- * - **Corpus** (portfolio chunks): `batchEmbedDocuments` during `npm run rag:sync` or rare runtime sync.
- * - **Query** (user message): `getOrCreateQueryEmbedding` on each chat, with 24h Redis cache.
+ * Corpus path: batchEmbedDocuments (sync script / CI)
+ * Query path:  getOrCreateQueryEmbedding (each chat message, Redis-cached 24h)
  */
 
 import type { Document } from '@/types/chat';
@@ -30,10 +29,7 @@ export async function sha256(text: string): Promise<string> {
   return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-/**
- * Corpus-wide fingerprint: hash of every `id + content` (sorted by id).
- * If this differs from `rag:portfolio:hash` in Redis, something in portfolio.ts changed.
- */
+/** Fingerprint of the whole corpus; used to detect when rag:sync is needed. */
 export async function generatePortfolioHash(documents: Document[]): Promise<string> {
   const payload = documents
     .map((d) => `${d.id}\n${d.content}`)
@@ -41,6 +37,8 @@ export async function generatePortfolioHash(documents: Document[]): Promise<stri
     .join('\n---\n');
   return sha256(payload);
 }
+
+// --- Low-level Gemini embed call ---
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -58,6 +56,7 @@ function retryDelayMs(response: Response, attempt: number): number {
   return Math.min(12_000, 400 * 2 ** attempt);
 }
 
+// THIS IS WHERE EMBEDS ARE CREATED FROM GEMINI
 /** Single call to Gemini `embedContent` with retries on transient failures. */
 async function embedContentWithRetry(
   text: string,
@@ -96,10 +95,22 @@ async function embedContentWithRetry(
   }
 }
 
-/**
- * Embed the user's latest message. Checks Redis first (`rag:query:embedding:{hash}`).
- * Cheap on repeat questions; does not touch portfolio document vectors.
- */
+// --- Query embedding cache (chat) ---
+
+/** Parse cached query vector from Redis (raw JSON array). */
+function parseStoredQueryEmbedding(raw: unknown): number[] | null {
+  if (raw == null) return null;
+  try {
+    const arr = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    if (!Array.isArray(arr)) return null;
+    const nums = arr.filter((x): x is number => typeof x === 'number');
+    return nums.length === arr.length && nums.length > 0 ? nums : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Embed the user's latest message. Checks Redis first (`rag:query:embedding:{hash}`). */
 export async function getOrCreateQueryEmbedding(query: string): Promise<number[]> {
   const normalized = normalizeQuery(query);
   const queryHash = await sha256(normalized);
@@ -107,10 +118,8 @@ export async function getOrCreateQueryEmbedding(query: string): Promise<number[]
 
   const redis = getRedis();
   const cached = await redis.get(key);
-  if (cached != null) {
-    const arr = typeof cached === 'string' ? JSON.parse(cached) : cached;
-    if (Array.isArray(arr)) return arr as number[];
-  }
+  const cachedEmbedding = parseStoredQueryEmbedding(cached);
+  if (cachedEmbedding) return cachedEmbedding;
 
   const config = getConfig();
   const embedding = await embedContentWithRetry(
@@ -122,12 +131,15 @@ export async function getOrCreateQueryEmbedding(query: string): Promise<number[]
   return embedding;
 }
 
+// --- Corpus batch embed (sync) ---
+
 export type BatchEmbedOptions = {
   /** Parallel requests per wave (default `RAG_EMBED_CONCURRENCY`, usually 1). */
   concurrency?: number;
   onProgress?: (done: number, total: number, docId: string) => void;
 };
 
+// THIS CREATES THE EMBEDDINGS FOR ALL DOCS PROVIDED
 /** Embed many portfolio documents (used by sync). Sequential by default + per-doc retry. */
 export async function batchEmbedDocuments(
   documents: Document[],
@@ -140,13 +152,13 @@ export async function batchEmbedDocuments(
   let done = 0;
 
   const embedOne = async (doc: Document) => {
+    // THIS IS WHERE EMBEDS ARE CREATED FROM GEMINI 1 doc at a time
     const values = await embedContentWithRetry(doc.content, geminiApiKey, embeddingModel);
     results.set(doc.id, values);
     done += 1;
     options.onProgress?.(done, documents.length, doc.id);
   };
 
-  //
   for (let i = 0; i < documents.length; i += concurrency) {
     const wave = documents.slice(i, i + concurrency);
     await Promise.all(wave.map(embedOne));

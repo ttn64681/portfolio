@@ -1,8 +1,6 @@
 /**
- * Similarity search over Redis-stored portfolio embeddings.
- *
- * Called from `/api/chat` with the user's message. Does not call Gemini for the LLM here —
- * only for query embedding (cached) and optionally corpus sync if Redis is stale.
+ * Chat-time retrieval: embed the user's question, load corpus vectors from Redis,
+ * rank by cosine similarity, return top doc ids for the system prompt.
  */
 
 import type { Document } from '@/types/chat';
@@ -10,6 +8,7 @@ import type { SearchResult } from '@/types/chat';
 import { RAG_KEYS } from './constants';
 import { getConfig } from './config';
 import { getRedis } from './redis';
+import { parseStoredEmbedding } from './embedding-parse';
 import { generatePortfolioHash, getOrCreateQueryEmbedding } from './embeddings';
 import { syncPortfolioEmbeddings } from './sync-portfolio-embeddings';
 
@@ -27,27 +26,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
   return denom === 0 ? 0 : dot / denom;
 }
 
-function parseStoredEmbedding(raw: unknown): number[] | null {
-  if (raw == null) return null;
-  let parsed: { embedding?: unknown };
-  try {
-    if (typeof raw === 'string') {
-      parsed = JSON.parse(raw) as { embedding?: unknown };
-    } else if (typeof raw === 'object') {
-      parsed = raw as { embedding?: unknown };
-    } else {
-      return null;
-    }
-  } catch {
-    return null;
-  }
-  const emb = parsed.embedding;
-  if (!Array.isArray(emb)) return null;
-  const nums = emb.filter((x): x is number => typeof x === 'number');
-  return nums.length === emb.length && nums.length > 0 ? nums : null;
-}
-
-/** True when `rag:portfolio:hash` in Redis ≠ hash of current `portfolioDocuments`. */
+/** True when the corpus in Redis doesn't match the current portfolioDocuments. */
 export async function needsReembedding(documents: Document[]): Promise<boolean> {
   const redis = getRedis();
   const currentHash = await generatePortfolioHash(documents);
@@ -56,10 +35,6 @@ export async function needsReembedding(documents: Document[]): Promise<boolean> 
   return storedHash !== currentHash;
 }
 
-/**
- * Returns top document ids by cosine similarity to the query.
- * If Redis has no vectors or corpus hash mismatch → incremental sync, then retry once.
- */
 export async function searchSimilarDocuments(
   query: string,
   limit: number,
@@ -68,38 +43,38 @@ export async function searchSimilarDocuments(
   const config = getConfig();
   const redis = getRedis();
 
-  // Try twice to get document IDs
+  // Up to two passes: first may trigger a sync if Redis is empty or stale
   for (let attempt = 0; attempt < 2; attempt++) {
     let docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
 
-    const missingOrStale = docIds.length === 0 || (await needsReembedding(documents)); // If `rag:portfolio:hash` ≠ hash of curr `portfolioDocuments`
-
+    const missingOrStale = docIds.length === 0 || (await needsReembedding(documents));
     if (missingOrStale && documents.length > 0) {
-      // Sync only changed docs when corpus hash or vectors are missing (incremental, batched).
-      await syncPortfolioEmbeddings(documents, { concurrency: 1 }); // concurrency: 1 = sequential
+      await syncPortfolioEmbeddings(documents, { concurrency: 1 });
     }
 
     docIds = await redis.smembers(RAG_KEYS.DOCUMENT_IDS);
     if (docIds.length === 0) return [];
 
-    const pipeline = redis.pipeline(); // pipeline for multiple Redis operations
-    // Get all embeddings for the docs in the corpus
+    // Load all corpus vectors (one GET per doc; results line up with docIds by index)
+    const pipeline = redis.pipeline();
     for (const id of docIds) {
       pipeline.get(RAG_KEYS.EMBEDDING(id));
     }
-    const rawList = (await pipeline.exec()) as unknown[]; // execute popeline
+    const rawList = (await pipeline.exec()) as unknown[];
 
-    let loadable = 0; // count of docs that can be loaded from Redis
+    let loadable = 0;
     for (let i = 0; i < docIds.length; i++) {
       if (parseStoredEmbedding(rawList[i])) loadable++;
     }
 
+    // Hashes/metadata exist but no readable vectors — try sync once more
     if (loadable === 0 && documents.length > 0 && attempt === 0) {
       await syncPortfolioEmbeddings(documents, { concurrency: 1 });
       continue;
     }
     if (loadable === 0) return [];
 
+    // Embed the user's message (24h cache) and score every doc
     const queryEmbedding = await getOrCreateQueryEmbedding(query);
 
     const aboveThreshold: SearchResult[] = [];
@@ -120,6 +95,7 @@ export async function searchSimilarDocuments(
       return aboveThreshold.slice(0, limit);
     }
 
+    // Nothing cleared the threshold; return best matches anyway
     allScored.sort((a, b) => b.score - a.score);
     return allScored.slice(0, limit);
   }
