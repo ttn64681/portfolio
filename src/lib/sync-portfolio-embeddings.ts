@@ -42,7 +42,8 @@ async function findDocumentsToEmbed(documents: Document[], force: boolean): Prom
   for (let i = 0; i < documents.length; i++) {
     const hashRaw = stored[i * 2];
     const embRaw = stored[i * 2 + 1];
-    const storedStr = typeof hashRaw === 'string' ? hashRaw : hashRaw != null ? String(hashRaw) : null;
+    const storedStr =
+      typeof hashRaw === 'string' ? hashRaw : hashRaw != null ? String(hashRaw) : null;
     const hashMismatch = storedStr !== localHashes[i];
     const embeddingMissing = parseStoredEmbedding(embRaw) == null;
     if (hashMismatch || embeddingMissing) {

@@ -49,7 +49,8 @@ async function main() {
 
   const currentHash = await generatePortfolioHash(portfolioDocuments);
   const storedHash = await redis.get(RAG_KEYS.PORTFOLIO_HASH);
-  const storedStr = typeof storedHash === 'string' ? storedHash : storedHash != null ? String(storedHash) : null;
+  const storedStr =
+    typeof storedHash === 'string' ? storedHash : storedHash != null ? String(storedHash) : null;
   console.log('Portfolio hash match:', storedStr === currentHash);
 
   const unknownIds = docIds.filter((id) => !portfolioDocuments.some((d) => d.id === id));
