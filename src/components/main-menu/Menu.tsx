@@ -81,11 +81,11 @@ export default function Menu({ onQuit }: MenuProps) {
         <div className='flex flex-col text-center items-center justify-center lg:translate-y-[1.3rem] leading-snug pointer-events-auto'>
           <h1
             id='menu-title'
-            className='mx-6 text-white-title font-bold font-pixel-headline md:text-nowrap md:text-[4rem] text-[3rem] lg:text-[3.5rem] xl:text-[4.5vw] lg:translate-x-[10vw] leading-tight [word-spacing:0.2rem] [text-shadow:0_0_10px_rgba(100,170,3600,.3)] p-3'
+            className='mx-6 hover-1 text-white-title font-bold font-pixel-headline md:text-nowrap md:text-[4rem] text-[3rem] lg:text-[3.5rem] xl:text-[4.5vw] lg:translate-x-[10vw] leading-tight [word-spacing:0.2rem] [text-shadow:0_0_10px_rgba(100,170,3600,.3)] p-3'
           >
             THAI NGUYEN
           </h1>
-          <div className='relative lg:translate-x-[25vw]'>
+          <div className='relative hover-2 lg:translate-x-[25vw]'>
             {/* Echo effect - blurred duplicate text */}
             {echoActive && (
               <>
@@ -119,7 +119,7 @@ export default function Menu({ onQuit }: MenuProps) {
             </button>
           </div>
           <h3
-            className='text-blackground w-min lg:translate-x-[32vw] px-1 text-nowrap bg-white-title text-4xl font-bold font-pixel-retron mt-5 drop-shadow-xs drop-shadow-blue-100'
+            className='text-blackground hover-3 w-min lg:translate-x-[32vw] px-1 text-nowrap bg-white-title text-4xl font-bold font-pixel-retron mt-5 drop-shadow-xs drop-shadow-blue-100'
             style={{ fontSize: 'clamp(1.4rem, 2vw, 2rem)' }}
           >
             <Typewriter

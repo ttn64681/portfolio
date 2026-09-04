@@ -3,7 +3,7 @@
 import { useSplashParallax } from '@/hooks/useSplashParallax';
 
 type SplashProps = {
-  /** Rendered between water (bg2) and black (bg1) for correct z-ordering. */
+  /** Rendered b/w water (bg2) and black (bg1) for correct z-ordering. */
   children?: React.ReactNode;
 };
 
@@ -24,7 +24,7 @@ export default function Splash({ children }: SplashProps) {
       {children != null ? (
         <div className='absolute inset-0 z-[5] pointer-events-none'>{children}</div>
       ) : null}
-      <div id='bg1' className='sprite-layer-bg1' style={LAYER_STYLE} />
+      <div id='bg1' className='sprite-layer-bg1 lg:translate-y-0 translate-y-8' style={LAYER_STYLE} />
     </div>
   );
 }

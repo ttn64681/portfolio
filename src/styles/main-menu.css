@@ -22,6 +22,33 @@
   /* MAIN-MENU
   /* ****************************** */
 
+  /* Menu Title Hover Up-and-Down Animation */
+  @keyframes hover {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0.3rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .hover-1 {
+    animation: hover 2s ease-in-out infinite
+  }
+
+  .hover-2 {
+    animation: hover 2s ease-in-out infinite;
+    animation-delay: 0.35s;
+  }
+
+  .hover-3 {
+    animation: hover 2s ease-in-out infinite;
+    animation-delay: 0.7s;
+  }
+
   /*
     1. Start with the right side of the button hidden (clip-path: inset(0 100% 0 0))
     2. Show the button from the right side (clip-path: inset(0 0 0 0))

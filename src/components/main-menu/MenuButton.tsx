@@ -10,7 +10,7 @@ const BASE_CLASS =
   'text-white-title font-bold font-pixel-retron drop-shadow-xs drop-shadow-blue-100 hover:scale-105 active:scale-95 active:text-blackground active:bg-white-title bg-transparent hover:bg-[rgba(45,84,140,1)] transition-all duration-200 active:transition-none cursor-pointer';
 
 const SIZE_CLASS = {
-  sm: 'text-xl sm:text-2xl px-2 md:text-3xl hover:scale-105',
+  sm: 'text-xl sm:text-xl px-2 md:text-2xl hover:scale-105',
   lg: 'px-2 text-3xl xl:text-4xl hover:scale-106',
 };
 

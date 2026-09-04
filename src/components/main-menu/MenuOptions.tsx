@@ -33,6 +33,7 @@ export default function MenuOptions({
 
   return (
     <>
+      {/* Mobile */}
       <motion.div
         initial={{ translateY: isExiting ? 0 : 300 }}
         animate={{ translateY: isExiting ? 300 : 0 }}
@@ -43,7 +44,7 @@ export default function MenuOptions({
       >
         <div
           id='menu-buttons'
-          className='static flex flex-col items-center gap-2 md:gap-3 lg:gap-4 mt-8'
+          className='static flex flex-col items-center gap-1 md:gap-3 lg:gap-4 mt-8'
         >
           {MENU_ITEMS.map(({ action, label }) => (
             <MenuButton
@@ -56,7 +57,8 @@ export default function MenuOptions({
           ))}
         </div>
       </motion.div>
-
+      
+      {/* Desktop */}
       <motion.div
         className={`hidden lg:flex fixed top-1/2 lg:right-3.5 xl:right-[12vw] -translate-y-1/2 flex-col items-center gap-4 ${pointerClass}`}
         initial={{ translateX: isExiting ? 0 : 300 }}

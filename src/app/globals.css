@@ -76,3 +76,13 @@
     font-family: var(--font-pixel-headline);
   }
 }
+
+.mouse-trail-pixel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity, box-shadow;
+  pointer-events: none;
+  image-rendering: pixelated;
+}

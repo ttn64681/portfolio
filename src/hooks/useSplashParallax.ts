@@ -45,8 +45,9 @@ export function useSplashParallax() {
 
     let rafId = 0; // Non-zero while full-motion RAF loop is scheduled.
 
+    // Helper
     function stopAnimationLoop() {
-      if (rafId !== 0) {
+      if (rafId !== 0) { // rafId!=0 means anim frame is scheduled/pending
         cancelAnimationFrame(rafId);
         rafId = 0;
       }
@@ -76,7 +77,7 @@ export function useSplashParallax() {
     }
 
     // For handling reduced motion preference media query (Accessibility)
-    const mq = window.matchMedia(REDUCED_MOTION_QUERY);
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY); // set True if user has reduced motion preference
 
     // Reduced motion:
     // No RAF / no cursor tracking: scroll-only depth
@@ -128,6 +129,7 @@ export function useSplashParallax() {
       };
     }
 
+    // mq is True if user has reduced motion preference
     let teardownMode = mq.matches ? runReducedMotion() : runFullMotion();
 
     const onReducedMotionChange = () => {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import ReactLenis from 'lenis/react';
 import JsonLd from '@/components/seo/JsonLd';
+import MouseTrail from '@/components/tools/MouseTrail';
 import { createPageMetadata } from '@/lib/metadata';
 import { getSiteUrl, siteConfig } from '@/lib/site';
 import './globals.css';
@@ -74,6 +75,7 @@ export default function RootLayout({
         className={`${pixelify.variable} ${pixelMono.variable} ${pixelRetron.variable} ${pixelTerminal.variable} ${pixelHeadline.variable} antialiased`}
       >
         <JsonLd />
+        <MouseTrail />
         <ReactLenis root options={{ lerp: 0.4 }}>
           {children}
         </ReactLenis>
