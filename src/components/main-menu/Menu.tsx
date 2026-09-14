@@ -125,7 +125,7 @@ export default function Menu({ onQuit }: MenuProps) {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v2.0.0',
+                  'Portfolio v2.0.2',
                   'Graduated!!! (Kinda)',
                   'Deep Learning',
                   'Software Developer',
