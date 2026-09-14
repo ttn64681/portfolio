@@ -10,16 +10,16 @@ export const experienceConfig: ExperienceConfig[] = [
     date: 'Nov 2025 – Mar 2026',
     link: 'https://www.holywatr.com/',
     summary:
-      'Vanilla JS + Shopify GraphQL brand platform for a rock band with shader-heavy “digital horror” presentation.',
+      'Vanilla JS + Shopify GraphQL brand platform for an artist with 659K+ monthly listeners and shader-heavy “digital horror” presentation.',
     bullets: [
-      'Custom Storefront API integration with hand-tuned GraphQL for merch flows.',
+      'Multi-page brand site with Shopify Storefront GraphQL powering merch catalog flows.',
       'VFX.js GLSL stack (CRT, chromatic aberration, fish-eye) aligned to usable hit targets.',
-      'Hardened structure: page modules, compressed assets, responsive passes, SEO basics.',
+      'SEO via asset compression plus crawlability setup (Open Graph, sitemap.xml, robots.txt).',
     ],
     techStack: ['Vanilla JS', 'Shopify', 'GraphQL', 'VFX.js', '✚'],
     exploreDossier: {
       overview:
-        'Freelance engagement delivering Holywatr’s multi-page presence: home, merch powered by Shopify, and contact flows with Klaviyo polish. The creative bar was high—distortion had to feel cinematic without breaking click fidelity.',
+        'Freelance engagement delivering Holywatr’s multi-page presence for an artist with 659K+ monthly listeners: home, merch powered by Shopify, and contact flows with Klaviyo polish. The creative bar was high—distortion had to feel cinematic without breaking click fidelity.',
       features: [
         'Home template plus cohesive navigation.',
         'Merch views backed by Storefront GraphQL.',
@@ -57,30 +57,32 @@ export const experienceConfig: ExperienceConfig[] = [
   {
     id: 'acm',
     title: 'UGA ACM',
-    role: 'Executive Officer & CSIP Co-Chair',
-    date: 'May 2025 – Present',
+    role: 'Executive Officer, CSIP Chair',
+    date: 'May 2025 – May 2026',
     summary:
-      'Workshop program leader and brand steward for UGA ACM — DSA, system design, AI, and interview prep at scale.',
+      'Co-led technical/professional programming for a 300+ member org — interview prep workshops, industry partners, and brand refreshes.',
     bullets: [
-      'Ran weekly CSIP sessions (20+ students) spanning algorithms, system design, AI, and behavioral prep.',
-      'Hosted AWS, Google, and other industry rooms with Q&A and technical labs.',
-      'Drove mascot, merch, and flyer refreshes in Figma to sharpen recruiting and culture.',
+      'Co-led events for 300+ members with partners including Google, AWS, and Toyota.',
+      'Led weekly interview-prep workshops for 20+ students (DSA, system design, behavioral) and iterated from attendee feedback.',
+      'Directed UI/UX and branding refreshes in Figma for recruiting/club visibility and mentored incoming exec board.',
     ],
     techStack: ['Figma', 'Workshops', 'Mentorship', '✚'],
     exploreDossier: {
       overview:
-        'Leadership role balancing curriculum design for Computer Science Interview Prep with broader ACM branding and event operations. The through-line is tight feedback loops: plan, teach, measure attendee signal, refine.',
+        'Executive Officer and CSIP Chair for UGA ACM (May 2025 – May 2026), balancing Computer Science Interview Prep curriculum with branding and event operations for a 300+ member organization. Collaborated with Google, AWS, and Toyota. The through-line is tight feedback loops: plan, teach, measure attendee signal, refine.',
       features: [
-        'Weekly CSIP technical prep programming.',
-        'Company-hosted Q&A and hands-on workshop nights.',
+        'Weekly CSIP technical prep programming (DSA, system design, behavioral).',
+        'Company-hosted Q&A and hands-on workshop nights (Google, AWS, Toyota, and more).',
         'Interactive formats including technical Jeopardy.',
         'Brand modernization: mascot, stickers, flyers, merch concepts, digital assets.',
+        'Mentorship for incoming executive board members.',
       ],
       implementation: [
         'Built workshop agendas around high-value interview topics and under-taught practical concepts (e.g., CI/CD, SQL vs NoSQL tradeoffs, scheduling concepts, interview framing).',
         'Iterated pacing and topic scope using attendee feedback and meeting overrun analysis.',
         'Applied visual hierarchy/readability/contrast design guidance to posters/flyers and PR graphics.',
         'Coordinated recurring delivery cadence while balancing leadership duties with intensive coursework and external projects.',
+        'Mentored incoming exec board on operations and recruiting visibility.',
       ],
       challenges: [
         'Early workshops were overpacked and often ran overtime.',

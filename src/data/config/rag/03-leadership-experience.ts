@@ -4,23 +4,22 @@ import { toDocument } from './to-document';
 export const leadershipExperienceDocuments = [
   toDocument(
     'leadership-acm',
-    `May 2025 - May 2026: Thai serves as an Executive Officer and CSIP Co-Chair for UGA ACM (May 2025 – Present). He leads weekly technical \
-    workshops for 20+ students on DSA, system design, AI topics, and behavioral interview prep; hosts industry sessions \
-    with companies such as AWS and Google; and directs visual/brand refreshes in Figma (mascot, stickers, flyers, merch). \
-    He iterates workshop scope using attendee feedback and manages recruitment event logistics.`,
+    `May 2025 – May 2026: Thai served as Executive Officer and CSIP Chair for UGA ACM, a 300+ member organization. \
+    He co-led technical/professional events in collaboration with Google, AWS, and Toyota; led weekly interview-prep \
+    workshops for 20+ students (DSA, system design, behavioral) and iterated content from attendee feedback; directed \
+    UI/UX and branding refreshes in Figma for recruiting/club visibility; and mentored incoming executive board members.`,
     {
-      title: 'UGA ACM — Executive Officer & CSIP Co-Chair',
+      title: 'UGA ACM — Executive Officer & CSIP Chair',
       techStack: ['Figma', 'Workshop curriculum', 'Jira', 'Event operations'],
       category: 'leadership',
     },
   ),
   toDocument(
     'exp-freelance-holywatr',
-    `Nov 2025 – Mar 2026: contract Web Developer for Holywatr (rock band brand platform, $2k+ project value). Built a \
-    multi-page vanilla JS/CSS site with Shopify Storefront API + custom GraphQL for merch, Klaviyo contact flows, and a \
-    VFX.js shader layer (CRT distortion, chromatic aberration, fish-eye warp). Solved warped-visual vs clickable hitbox \
-    alignment, z-order/render-order issues, responsive breakpoints, asset compression, and basic SEO (meta, robots.txt). \
-    Site: holywatr.com`,
+    `Nov 2025 – Mar 2026: Freelance Web Developer for Holywatr — a multi-page brand platform (JS/CSS/HTML) for an artist \
+    with 659K+ monthly listeners. Integrated Shopify Storefront GraphQL queries to power merch catalog flows and storefront \
+    interactions. Optimized SEO via asset compression and crawlability setup (Open Graph, sitemap.xml, robots.txt). Also \
+    shipped a VFX.js shader layer (CRT, chromatic aberration, fish-eye) with usable hit targets. Site: holywatr.com`,
     {
       title: 'Holywatr — Freelance Web Developer',
       techStack: [

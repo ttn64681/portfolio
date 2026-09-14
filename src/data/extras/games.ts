@@ -17,6 +17,51 @@ export function gamesByHubCategory(category: GameHubCategory): ExtraGameEntry[] 
 /** All game dossiers under `/extras/games/[slug]` — order defines hub lists + prev/next ring. */
 export const gameEntries: ExtraGameEntry[] = [
   {
+    slug: 'as-the-seconds-pass',
+    title: 'As the Seconds Pass',
+    deck: 'Alberta Slow Jam #4 — UI programmer, artist & animator (June 2026). Placed 4/29 overall.',
+    hubCategory: 'jams',
+    award: '4th / 29 overall',
+    stack: ['Godot 4', 'GDScript', 'Photoshop', '✚'],
+    description:
+      'Clock/metronome-themed jam game where I owned menu UI with custom transitions, an intro animation, and UI sound effects wired through a Singleton App.gd driver.',
+    playUrl: 'https://rawsonb4.itch.io/as-the-seconds-pass',
+    repoUrl: undefined,
+    youtube: [
+      {
+        title: 'As the Seconds Pass capture',
+        videoId: requireYoutubeVideoId('https://youtu.be/LbxDHpFaT0M'),
+      },
+    ],
+    contributions: [
+      {
+        title: 'Main menu & clock UI',
+        body: 'Interactive main menu with a rotating clock hand that points to the selected button, plus hover tweens and transition animations.',
+        layout: 'panel',
+      },
+      {
+        title: 'Intro animation',
+        body: 'Designed and animated the intro scene tying clock/metronome themes into the visual identity.',
+        layout: 'panel',
+      },
+      {
+        title: 'UI sound effects',
+        body: 'Implemented SFX around a Singleton environment (App.gd as the global driver) for menu feedback.',
+        layout: 'panel',
+      },
+    ],
+    challenges: [
+      'Deciding whether SOLID principles were worth the overhead in a short game jam.',
+      'Time constraints while juggling real-life responsibilities.',
+      'Designs shifted as features were fleshed out mid-jam.',
+    ],
+    reflection: [
+      'I focused on UI programming and SFX wiring; under time pressure I reused sound variables rather than over-abstracting—and that was fine for a jam.',
+      'Proud of the intro animation and how the clock/metronome theme carried into the main menu.',
+      'Past game UI experience made animation timing and menu code much faster this time around.',
+    ],
+  },
+  {
     slug: 'spindrive',
     title: 'Spindrive',
     deck: 'UGA Game Builders — Godot 4 multiplayer setup, menus, audio, VFX UI (Spring 2026).',

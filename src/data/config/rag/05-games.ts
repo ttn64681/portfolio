@@ -3,6 +3,18 @@ import { toDocument } from './to-document';
 /** UGA Game Builders + jams (chronological-ish: recent club games first). */
 export const gameDocuments = [
   toDocument(
+    'game-as-the-seconds-pass',
+    `As the Seconds Pass (Alberta Slow Jam #4, June 2026): Thai was UI Programmer, Artist, and Animator (Godot 4, GDScript, Photoshop). \
+    Designed and implemented menu UI with custom transitions/animations; designed and animated the intro scene; wired UI sound effects \
+    through a Singleton App.gd driver; built an interactive main menu with a rotating clock hand that points to the selected button \
+    plus hover tweens. Placed 4th / 29 overall. Play: rawsonb4.itch.io/as-the-seconds-pass. Video: youtu.be/LbxDHpFaT0M`,
+    {
+      title: 'As the Seconds Pass (Alberta Slow Jam #4)',
+      techStack: ['Godot 4', 'GDScript', 'Photoshop'],
+      category: 'game',
+    },
+  ),
+  toDocument(
     'game-spindrive',
     `Spindrive (UGA Game Builders, Spring 2026): animated menu/options/ready flows with controller support, centralized AudioManager \
     (fades, loops, queues), shader-driven UI patterns, parallax menus, ECS-style composition across four checkpoints.`,

@@ -28,15 +28,23 @@ export const hobbiesCareerDocuments = [
   toDocument(
     'hobbies-dev-play',
     `Thai loves making games and building UI outside of coursework—it's both a hobby and a way to level up his skills. He also \
-    enjoys playing games and discovering new music friday in his free time.`,
+    enjoys playing games and discovering new music in his free time.`,
     { title: 'Game Dev & Side Projects', category: 'hobbies' },
   ),
   toDocument(
+    'hobbies-homelab',
+    `Thai hobbies include homelabbing: running Proxmox hypervisors and Ubuntu Linux servers/VMs, Dockerizing apps (including this \
+    portfolio's staging environment), and wiring self-hosted GitHub Actions CI/CD. He treats infra practice like a creative \
+    craft—networking, containers, and deploy pipelines are as interesting to him as game menus and shaders.`,
+    { title: 'Homelabbing Hobby', category: 'hobbies' },
+  ),
+  toDocument(
     'career-goals',
-    `Thai is seeking Software Engineering, Full-Stack, and App Development roles, with strong interest in Infrastructure, \
-    Cloud Engineering, and AI Infrastructure. His philosophy is full-cycle engineering: reliable, high-performance backends \
-    paired with intuitive, high-fidelity UI/UX. He emphasizes clean architecture, optimization, and maintainability while \
-    using art/game skills (Aseprite, Blender, GarageBand, Three.js) for polished user-facing experiences.`,
+    `Thai is actively looking for Software Engineering, Full-Stack, and Software Developer roles, with strong interest in \
+    Infrastructure, Cloud Engineering, and AI Infrastructure. His philosophy is full-cycle engineering: reliable, high-performance \
+    backends paired with intuitive, high-fidelity UI/UX. He emphasizes clean architecture, optimization, and maintainability while \
+    using art/game skills (Aseprite, Blender, GarageBand, Godot, Three.js) and homelab/DevOps practice (Docker, Actions, Linux/Proxmox) \
+    for polished, shippable experiences.`,
     { title: 'Career Goals & Philosophy', category: 'career' },
   ),
 ];

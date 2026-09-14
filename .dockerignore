@@ -1,0 +1,39 @@
+# Dependencies & build output (installed/generated inside the image)
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# VCS & local tooling (not needed in the image)
+.git
+.gitignore
+.vercel
+.github
+.cursor
+.vscode
+.idea
+
+# Env / secrets — never bake into the image (Compose injects .env.staging at runtime)
+.env*
+env*
+!.env.local.example
+scripts/env.sh
+set_env*
+
+# Docker / Compose definitions are not required inside the build context payload
+Dockerfile*
+compose.yaml
+compose.*.yaml
+docker-compose*
+
+# Docs, notes, and non-app assets
+*.md
+LICENSE*
+src/data/thai.txt
+
+# OS junk
+.DS_Store
+Thumbs.db

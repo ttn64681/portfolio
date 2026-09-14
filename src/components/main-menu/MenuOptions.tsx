@@ -57,7 +57,7 @@ export default function MenuOptions({
           ))}
         </div>
       </motion.div>
-      
+
       {/* Desktop */}
       <motion.div
         className={`hidden lg:flex fixed top-1/2 lg:right-3.5 xl:right-[12vw] -translate-y-1/2 flex-col items-center gap-4 ${pointerClass}`}

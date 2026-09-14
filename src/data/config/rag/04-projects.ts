@@ -5,9 +5,9 @@ export const projectDocuments = [
   // ACM Cinema
   toDocument(
     'proj-cinema-backend',
-    `ACM Cinema (Fall 2025): Thai architected the Spring Boot 3.5 + PostgreSQL (Neon) backend with 80+ REST endpoints, \
+    `ACM Cinema (Aug 2025 – Feb 2026): Thai architected the Spring Boot 3.5 + PostgreSQL (Neon) backend with 80+ REST endpoints, \
     15 JPA entities, Spring Security JWT/RBAC, BCrypt hashing, Caffeine cache (10 min TTL), pagination, and Facade / Virtual Proxy \
-    patterns to cut payload weight ~30–45%.`,
+    patterns to cut payload weight ~30–45%. Backend was containerized with Docker and deployed to Render.`,
     {
       title: 'ACM Cinema — Backend Architecture',
       techStack: [
@@ -15,6 +15,8 @@ export const projectDocuments = [
         'Java 17',
         'PostgreSQL',
         'Neon',
+        'Docker',
+        'Render',
         'Spring Security',
         'JWT',
         'Caffeine',
@@ -42,17 +44,20 @@ export const projectDocuments = [
   ),
   toDocument(
     'proj-cinema-detail',
-    `ACM Cinema is a multi-domain cinema booking platform (auth, movies, seats, promos, payments, orders, admin). Thai was Scrum Master \
-    and full-stack lead for a 5-person team across four Scrum sprints. JWT auth with custom filters, role-based gates, typed API client \
-    layer, and layered UI→hooks→API→services architecture. PostgreSQL on Neon with iterative schema/migration work (Flyway was attempted \
-    but not used in the final stack). Recognized among the strongest projects in the Software Engineering course. Demo: acm-movies.vercel.app`,
+    `ACM Movies / Cinema E-Booking (Aug 2025 – Feb 2026): multi-domain cinema booking platform. Thai was Scrum Master \
+    and full-stack lead for a 5-person Scrum/SWE team in Jira, improving sprint velocity by ~10% through refined user stories, \
+    system modeling, and standardized layered architecture. Architected Spring Boot + PostgreSQL with 80+ REST endpoints and \
+    15 JPA entities; containerized backend with Docker and deployed to Render. Reduced API payloads ~30–45% using DTO mapping, \
+    pagination, and facade/proxy patterns. Implemented JWT + Spring Security RBAC with BCrypt/AES-based sensitive data protection. \
+    Demo: acm-movies.vercel.app`,
     {
       title: 'ACM Cinema — Full-Stack Overview',
       techStack: [
         'Next.js 16',
         'Spring Boot 3.5',
         'PostgreSQL',
-        'Neon',
+        'Docker',
+        'Render',
         'TanStack Query',
         'Spring Security',
         'JWT',
@@ -64,10 +69,11 @@ export const projectDocuments = [
   // RAG portfolio (this site)
   toDocument(
     'proj-rag-portfolio-tech',
-    `Thai built this portfolio (June 2025 - Present) using a "zero-dollar" RAG architecture. It uses Upstash Redis as a vector \
-    store and Google's gemini-embedding-001 model for semantic search. To optimize costs, he implemented SHA-256 version hashing \
-    and query embedding caching. The chat interface uses the Vercel AI SDK to stream responses from the gemini-2.5-flash model via \
-    the Edge Runtime.`,
+    `RAG-AI Portfolio (Jun 2025 – Present): Thai built a RAG chat pipeline using Gemini embeddings, Upstash Redis for the \
+    vector store, and the Vercel AI SDK to stream responses grounded by cosine similarity and prompt engineering. He manages \
+    AI infrastructure costs via IP-based rate limiting, query embedding caching, and SHA-256 hashing. Production runs on Vercel; \
+    Dockerized staging deploys to a local Proxmox Ubuntu VM via a self-hosted GitHub Actions runner with lint/typecheck and \
+    RAG sync gates before docker compose up.`,
     {
       title: 'RAG-Powered AI Portfolio — Technical Architecture',
       techStack: [
@@ -75,8 +81,30 @@ export const projectDocuments = [
         'Gemini API',
         'Upstash Redis',
         'Vercel AI SDK',
-        'Edge Runtime',
+        'Docker',
+        'GitHub Actions',
+        'Proxmox',
         'TypeScript',
+      ],
+      category: 'project',
+    },
+  ),
+  toDocument(
+    'proj-rag-portfolio-homelab',
+    `For the RAG portfolio staging environment, Thai authored a multi-stage Dockerfile (Node alpine deps/builder/runner with \
+    Next.js standalone output) and Compose healthchecks/resource limits. The deploy-staging GitHub Actions workflow on a \
+    self-hosted Linux runner: checkout → quality checks → write .env.staging from secrets → npm run rag:sync → docker compose \
+    up --build -d → prune old images. He troubleshot Linux DNS host conflicts across vNICs, Windows NAT routing to the VM, \
+    and Docker port bindings so staging stayed reachable from the host network.`,
+    {
+      title: 'RAG Portfolio — Docker / CI/CD Homelab Staging',
+      techStack: [
+        'Docker',
+        'Docker Compose',
+        'GitHub Actions',
+        'Proxmox',
+        'Ubuntu',
+        'Linux networking',
       ],
       category: 'project',
     },
@@ -89,6 +117,18 @@ export const projectDocuments = [
     {
       title: 'RAG-Powered AI Portfolio - Art & Design',
       techStack: ['Aseprite', 'CSS', 'Framer Motion', 'Pixel Art'],
+      category: 'project',
+    },
+  ),
+  toDocument(
+    'proj-homelab',
+    `Homelab Staging Lab (2025 – Present): Thai runs Proxmox hypervisors and Ubuntu VMs as a hobby systems lab. He uses the \
+    lab to Dockerize and CI/CD-deploy this portfolio's staging environment with a self-hosted GitHub Actions runner, practice \
+    Linux networking (DNS, multi-vNIC, NAT), and keep container/image hygiene (compose limits, healthchecks, image prune). \
+    Homelabbing is both a skill-building hobby and a concrete project demonstrating Docker + Actions integration.`,
+    {
+      title: 'Homelab — Proxmox, Ubuntu, Docker, GitHub Actions',
+      techStack: ['Proxmox', 'Ubuntu', 'Linux', 'Docker', 'GitHub Actions', 'Bash'],
       category: 'project',
     },
   ),
@@ -138,9 +178,10 @@ export const projectDocuments = [
   // Spring 2026 — ML & graphics
   toDocument(
     'proj-bird-audio',
-    `Bird Audio Classification (April 2026 deep learning final, partner project). Compared HuBERT Base vs AST on \
-    BirdCLEF+ for 10-class bird audio classification. Built PyTorch + HuggingFace Trainer pipeline with cached \
-    datasets, macro-F1/precision/recall, confusion matrices, inference latency and FLOPs estimates, and demo inference. \
+    `Bird Audio Classification (Apr 2026 – Present, research project). Fine-tuned and evaluated AST + HuBERT transformer \
+    models with PyTorch/HuggingFace to classify 10 birds. Achieved 94%/91% accuracy on a large dataset (~5,000 samples) and \
+    85%/69% on a small dataset (~1,500 samples) by analyzing macro-F1 scores and confusion matrices. Further optimized accuracy \
+    by ~1–4% via data augmentation, L2 regularization, and learning rate scheduling. \
     GitHub: github.com/ttn64681/Bird-Audio-Classification`,
     {
       title: 'Bird Audio Classification (PyTorch / HuBERT / AST)',

@@ -47,7 +47,8 @@ export function useSplashParallax() {
 
     // Helper
     function stopAnimationLoop() {
-      if (rafId !== 0) { // rafId!=0 means anim frame is scheduled/pending
+      if (rafId !== 0) {
+        // rafId!=0 means anim frame is scheduled/pending
         cancelAnimationFrame(rafId);
         rafId = 0;
       }

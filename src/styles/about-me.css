@@ -190,6 +190,15 @@
     background-color: rgba(77, 189, 255, 0.8);
   }
 
+  .dialogue-text {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
+  }
+
   /* Firefox fallback - ensure scrollbar is visible */
   @-moz-document url-prefix() {
     .dialogue-panel-container > div > div {

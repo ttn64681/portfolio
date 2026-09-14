@@ -33,15 +33,16 @@ export const ERROR_MESSAGE_BY_CODE: Record<string, string> = {
 
 export const FUN_FACTS = [
   'All the pixel art on this site was hand-drawn in Aseprite by me.',
-  "This portfolio runs on a 'zero-dollar' stack: Gemini free tier, Upstash Redis, and Vercel.",
+  "This portfolio runs on a 'zero-dollar' stack: Gemini free tier, Upstash Redis, and Vercel — with Docker staging on my Proxmox homelab.",
   'My final project in Computer Graphics was based on Jujutsu Kaisen Domains. You should check it out\
   (beware performance issues).',
-  'Besides code I do pixel art, drums, and game jams.',
+  'Besides code I do pixel art, drums, game jams, and Linux/Proxmox homelabbing.',
   'It took me a whole week+ just to compile all my portfolio materials for the explore/extras pages.',
-  "If you're reading this, I currently have one more class to take (Networks) over the Summer :O",
+  'I graduated UGA with a B.S. in Computer Science in Aug 2026 (major GPA 3.78).',
   'I was originally an Intended Electrical Engineer my freshman year. I only switched to CS the following Summer (2023)',
   'I designed a new mascot + merch stickers for ACM at my University!',
   'I worked on a website for Holywatr, one of my favorite new bands to come out of Atlanta. Pretty crazy, I know.',
+  'As the Seconds Pass (Alberta Slow Jam #4) placed 4th out of 29 — I owned the menu UI and intro animation in Godot.',
 ] as const;
 
 export function pickRandom<T>(arr: readonly T[]): T {
