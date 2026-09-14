@@ -101,6 +101,14 @@ export const animangaHero: AnimangaHero = {
 
 export const animangaFeed: AnimangaFeedEntry[] = [
   {
+    kind: 'manga',
+    title: 'Skeleton Messenger',
+    note: 'Incredibly under-rated manhwa. Peak choreography, peak side-charcaters, peak peak.',
+    date: '2026',
+    href: undefined,
+    rating: 4,
+  },
+  {
     kind: 'anime',
     title: 'Re:Zero S4',
     note: 'The way he walks up the stairs is so aura-monster-coded.',
