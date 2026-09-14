@@ -126,9 +126,11 @@ export default function Menu({ onQuit }: MenuProps) {
               options={{
                 strings: [
                   'Portfolio v2.0.2',
-                  'Graduated!!! (Kinda)',
+                  'Graduated (August \'26)!!!',
                   'Deep Learning',
+                  'Subnetting :O',
                   'Software Developer',
+                  'Game Jammer',
                   'Web Developer',
                   'Full Stack Apps',
                   'UI/UX Design',
