@@ -24,8 +24,8 @@ export const animangaHero: AnimangaHero = {
   ],
   currentlyPlaying: [
     {
-      title: 'Nothing cuz I have no time',
-      subtitle: 'Instagram',
+      title: 'Undertale',
+      subtitle: "I'm technically watching my non-gamer girlfriend play it.",
       image: '/pixel/webp/tiles.webp',
       href: undefined,
       rating: 0,

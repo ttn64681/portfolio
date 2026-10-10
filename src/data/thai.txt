@@ -1,6 +1,6 @@
 # thai.txt — master resume / RAG source / portfolio data config (section order matches src/data/config/rag/)
 #
-# INDEX (portfolio document id → section file)
+# INDEX (portfolio document id -> section file)
 #   01-bio.ts              bio-summary, philosophy-design, bio-executive
 #   02-contact-education   contact-info, education-uga
 #   03-leadership-experience leadership-acm, exp-freelance-holywatr, exp-devdogs-bulldog-planner

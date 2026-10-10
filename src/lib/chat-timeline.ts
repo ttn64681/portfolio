@@ -2,6 +2,7 @@
  * Ordered chat timeline list (intro --> messages + client blocks --> loading --> typing).
  * All blocks (resume, fun_fact, error) follow the same rule: they are appended after a given
  * anchor (intro or a message id).
+ * Called by CHat.tsx
  */
 
 import type { ChatMessageDisplay, ChatTimelineRow, ClientBlock } from '@/types/chat';
@@ -22,6 +23,7 @@ export type BuildTimelineParams = {
   isTypingFadeOut: boolean;
 };
 
+// to help display messages in the correct order
 export function buildChatTimeline({
   displayMessages,
   clientBlocks,
@@ -31,20 +33,23 @@ export function buildChatTimeline({
   isTypingFadeOut,
 }: BuildTimelineParams): ChatTimelineRow[] {
   const rows: ChatTimelineRow[] = [];
-  const lastIsAssistant =
+  const lastIsAssistant = // boolean check if the last message is an assistant message (assistant message is the model's response)
     displayMessages.length > 0 && displayMessages[displayMessages.length - 1].role === 'assistant';
 
   rows.push({ type: 'intro' });
+  // add client blocks to the timeline
   clientBlocks
     .filter((b) => b.afterMessageId === 'intro')
     .forEach((b) => {
       if (b.type === 'resume_button') rows.push({ type: 'resume_button', id: b.id });
       else if (b.type === 'fun_fact') rows.push({ type: 'fun_fact', id: b.id, text: b.text });
     });
+  // add error block to the timeline
   if (errorBlock?.afterMessageId === 'intro') {
     rows.push({ type: 'error', errorCode: errorBlock.errorCode, message: errorBlock.message });
   }
 
+  // display messages to the timeline:
   displayMessages.forEach((msg, idx) => {
     const isLast = idx === displayMessages.length - 1;
     rows.push({

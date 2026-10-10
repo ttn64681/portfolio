@@ -32,6 +32,7 @@ function getClientIp(request: Request): string {
 
 /** Text from UI message `parts`, or string `content` if present. */
 function getMessageText(msg: { parts?: unknown[]; content?: unknown } | undefined): string {
+  // unknown[] - value is an array of unknown values
   if (!msg) return '';
   const parts = msg.parts;
   if (Array.isArray(parts)) {
@@ -71,13 +72,13 @@ export async function POST(request: Request) {
   }
   // console.log('request', request);
 
-  const contentLength = request.headers.get('content-length');
+  const contentLength = request.headers.get('content-length'); // string or null
   // console.log('contentLength', contentLength);
   if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
     return errorResponse('Payload too large', 413, 'payload_too_large');
   }
 
-  let config: ReturnType<typeof getConfig>;
+  let config: ReturnType<typeof getConfig>; // return type of a func
   try {
     config = getConfig();
   } catch {
@@ -137,7 +138,7 @@ export async function POST(request: Request) {
   let contextBlock: string;
   try {
     // Search for top similar documents
-    // RAG: embed query → cosine search in Redis → top doc texts for system prompt.
+    // RAG: embed query -> cosine search in Redis -> top doc texts for system prompt.
     // Corpus: portfolioDocuments (src/data/config/rag/). Vectors: Upstash via vector-store.ts.
     // Run `npm run rag:sync` after editing corpus so production skips runtime embed.
     const similar = await searchSimilarDocuments(

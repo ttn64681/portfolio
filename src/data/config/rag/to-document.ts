@@ -4,7 +4,7 @@ import type { Document } from '@/types/chat';
  * Builds one RAG document for the chat corpus.
  *
  * - `id` must stay stable: Redis stores vectors at `rag:embedding:{id}`. Renaming orphans old keys.
- * - Changing title, techStack, or content changes `documentContentHash` → that doc re-embeds on sync.
+ * - Changing title, techStack, or content changes `documentContentHash` -> that doc re-embeds on sync.
  * - Title + tech are prepended to `content` so embeddings match stack/role questions.
  */
 export function toDocument(

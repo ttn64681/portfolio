@@ -1,4 +1,4 @@
-import type { ExtraGameEntry, GameHubCategory } from '@/types/extras/games';
+import type { ExtraGameEntry, ExtraGameGalleryItem, GameHubCategory } from '@/types/extras/games';
 import { requireYoutubeVideoId } from '@/lib/parse-media-url';
 
 /** Category tabs on games hierarchy nav — each game sets `hubCategory`. */
@@ -14,6 +14,18 @@ export function gamesByHubCategory(category: GameHubCategory): ExtraGameEntry[] 
   return gameEntries.filter((g) => (g.hubCategory ?? 'misc') === category);
 }
 
+function gameSrc(slug: string, file: string): string {
+  return `/images/extras/games/${slug}/${encodeURIComponent(file)}`;
+}
+
+function gameStill(slug: string, file: string, alt: string): ExtraGameGalleryItem {
+  return { src: gameSrc(slug, file), alt, mediaKind: 'image' };
+}
+
+function gameGif(slug: string, file: string, alt: string): ExtraGameGalleryItem {
+  return { src: gameSrc(slug, file), alt, mediaKind: 'gif' };
+}
+
 /** All game dossiers under `/extras/games/[slug]` — order defines hub lists + prev/next ring. */
 export const gameEntries: ExtraGameEntry[] = [
   {
@@ -24,9 +36,10 @@ export const gameEntries: ExtraGameEntry[] = [
     award: '4th / 29 overall',
     stack: ['Godot 4', 'GDScript', 'Photoshop', '✚'],
     description:
-      'Clock/metronome-themed jam game where I owned menu UI with custom transitions, an intro animation, and UI sound effects wired through a Singleton App.gd driver.',
+      'Clock/metronome-themed game where I owned menu UI with custom transitions, an intro animation, and UI sound effects wired through a Singleton App.gd driver.',
     playUrl: 'https://rawsonb4.itch.io/as-the-seconds-pass',
     repoUrl: undefined,
+    gallery: [gameGif('as-the-seconds-pass', 'intro.gif', 'Intro animation')],
     youtube: [
       {
         title: 'As the Seconds Pass capture',
@@ -43,6 +56,7 @@ export const gameEntries: ExtraGameEntry[] = [
         title: 'Intro animation',
         body: 'Designed and animated the intro scene tying clock/metronome themes into the visual identity.',
         layout: 'panel',
+        gifSrc: gameSrc('as-the-seconds-pass', 'intro.gif'),
       },
       {
         title: 'UI sound effects',
@@ -71,6 +85,13 @@ export const gameEntries: ExtraGameEntry[] = [
       'Checkpoint-driven Godot project where I owned animated menus, options hubs, ready-flow orchestration, centralized audio, and shader-styled UI accents while the team shipped multiplayer racing fantasy.',
     playUrl: undefined,
     repoUrl: undefined,
+    gallery: [
+      gameStill('spindrive', 'hero_wallpaper.webp', 'Spindrive wallpaper'),
+      gameGif('spindrive', 'intro.gif', 'Intro / title flow'),
+      gameGif('spindrive', 'options.gif', 'Options menu animation'),
+      gameGif('spindrive', 'options_hubs.gif', 'Options hubs'),
+      gameStill('spindrive', 'mockup.webp', 'UI mockup'),
+    ],
     youtube: [
       {
         title: 'Spindrive showcase',
@@ -82,11 +103,13 @@ export const gameEntries: ExtraGameEntry[] = [
         title: 'Menus, options & intro flow',
         body: 'Built animated main menu, options with brightness/audio readouts, parallax/hover motion, and intro/title sequencing with controller + keyboard paths.',
         layout: 'panel',
+        gifSrc: gameSrc('spindrive', 'intro.gif'),
       },
       {
         title: 'Audio + ready system',
         body: 'Central AudioManager handled fades, loops, queues, pause/resume, and SFX routing; ready menu covered character select, stat edits, per-player controller presets, and lock-in sequencing.',
         layout: 'panel',
+        gifSrc: gameSrc('spindrive', 'options_hubs.gif'),
       },
     ],
     challenges: [
@@ -112,6 +135,15 @@ export const gameEntries: ExtraGameEntry[] = [
       'Roguelike-adjacent hero RPG polish: trade flows, modular UI panels, and intro/cutscene choreography built on a SignalBus + DTO backbone.',
     playUrl: 'https://opuhlos.itch.io/tower-ascent',
     repoUrl: undefined,
+    gallery: [
+      gameGif('tower-ascent', 'intro.gif', 'Cinematic intro'),
+      gameStill('tower-ascent', 'inventory-celine.webp', 'Inventory — Celine'),
+      gameStill('tower-ascent', 'inventory-leo.webp', 'Inventory — Leo'),
+      gameStill('tower-ascent', 'inventory-torin.webp', 'Inventory — Torin'),
+      gameStill('tower-ascent', 'inventory-ability.webp', 'Ability inventory'),
+      gameStill('tower-ascent', 'trade-no-items.webp', 'Trade UI empty state'),
+      gameGif('tower-ascent', 'plugwalk.gif', 'Plugwalk animation'),
+    ],
     youtube: [
       {
         title: 'Tower Ascent trailer / capture',
@@ -123,11 +155,13 @@ export const gameEntries: ExtraGameEntry[] = [
         title: 'Trading & modular UI',
         body: 'SignalBus + TradeManager with ItemsTransferData payloads for drag/drop-like semantics; split monolithic UI into display components fed by shared UIConfig.',
         layout: 'panel',
+        assetSrc: gameSrc('tower-ascent', 'trade-no-items.webp'),
       },
       {
         title: 'Cutscenes & mood',
         body: 'Keyframe/tween flows for dialogue, intro animatic beats, and portrait variants tied to party state.',
         layout: 'panel',
+        gifSrc: gameSrc('tower-ascent', 'intro.gif'),
       },
     ],
     challenges: [
@@ -153,16 +187,22 @@ export const gameEntries: ExtraGameEntry[] = [
       'First Godot shipping experience focused on HUD/menu animation plus early sprite experiments in a fast collaborative room.',
     playUrl: 'https://saidan-games.itch.io/bunker-jumper',
     repoUrl: undefined,
+    gallery: [
+      gameStill('bunker-jumper', 'hero_bg.png', 'Bunker Jumper backdrop'),
+      gameGif('bunker-jumper', 'menu.gif', 'Menu animation'),
+    ],
     contributions: [
       {
         title: 'Interface animation',
         body: 'Authored UI nodes, timing scripts, and tweened transitions that sell gameplay feedback.',
         layout: 'panel',
+        gifSrc: gameSrc('bunker-jumper', 'menu.gif'),
       },
       {
         title: 'Art experiments',
         body: 'Supporting Aseprite passes including enemy animation explorations—not all landed in the final cut.',
         layout: 'panel',
+        assetSrc: gameSrc('bunker-jumper', 'hero_bg.png'),
       },
     ],
     challenges: [
@@ -185,11 +225,16 @@ export const gameEntries: ExtraGameEntry[] = [
     description:
       'Introductory club project where I provided two tracks and environmental SFX while learning team production rhythms.',
     playUrl: 'https://origin-nori.itch.io/to-see-demo',
+    gallery: [
+      gameStill('to-see', 'hero_room.webp', 'Story room capture'),
+      gameGif('to-see', 'snap.gif', 'Gameplay snap'),
+    ],
     contributions: [
       {
         title: 'Score + sound',
         body: 'Delivered paired music cues plus SFX beds to reinforce story pacing and spatial tone.',
         layout: 'panel',
+        gifSrc: gameSrc('to-see', 'snap.gif'),
       },
     ],
     challenges: [
@@ -211,11 +256,13 @@ export const gameEntries: ExtraGameEntry[] = [
     description:
       'Composed menu, credits, and background-adjacent ideas for a narrative collaboration; only the main menu cue stayed in the final timeline.',
     playUrl: 'https://glass-rain.itch.io/laundry-day',
+    gallery: [gameStill('laundry-day', 'hero_scene.webp', 'Laundry Day scene')],
     contributions: [
       {
         title: 'Music integration',
         body: 'Exported GarageBand stems and coordinated with narrative beats so diegetic tone matched writing.',
         layout: 'panel',
+        assetSrc: gameSrc('laundry-day', 'hero_scene.webp'),
       },
     ],
     challenges: [
@@ -281,16 +328,26 @@ export const gameEntries: ExtraGameEntry[] = [
     title: 'A Forlorn Soul',
     deck: 'Jam entry — art, audio, and level support (Feb–Mar 2025). Placed 10th in Georgia.',
     hubCategory: 'jams',
-    award: '10th in Georgia (GMTK-adjacent cycle)',
+    award: '10th in Georgia',
     stack: ['Unity', 'Aseprite', 'GarageBand', '✚'],
     description:
-      'First major jam: pixel work, hybrid chiptune/orchestral cues, SFX, and Unity level assists for a moody boss-rush-adjacent concept.',
+      'First major jam: pixel work, hybrid chiptune/orchestral music/SFX, and Unity level assists for a boss-rush style game.',
     playUrl: 'https://danghet.github.io/AForlornSoul-V.1.0/',
+    gallery: [
+      gameStill('a-forlorn-soul', 'hub.webp', 'Hub screen'),
+      gameStill('a-forlorn-soul', 'main menu.webp', 'Main menu'),
+      gameStill('a-forlorn-soul', 'blue.webp', 'Blue character'),
+      gameStill('a-forlorn-soul', 'blue-boss.webp', 'Blue boss'),
+      gameStill('a-forlorn-soul', 'purple.webp', 'Purple character'),
+      gameStill('a-forlorn-soul', 'purple-boss.webp', 'Purple boss'),
+      gameStill('a-forlorn-soul', 'red.webp', 'Red character'),
+    ],
     contributions: [
       {
         title: 'Art + audio + design assist',
         body: 'Sprites/animation in Aseprite, soundtrack/SFX in GarageBand, plus level flow tuning inside Unity scenes.',
         layout: 'panel',
+        assetSrc: gameSrc('a-forlorn-soul', 'hub.webp'),
       },
     ],
     challenges: [

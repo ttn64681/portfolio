@@ -1,6 +1,6 @@
 import { toDocument } from './to-document';
 
-/** Professional identity + design philosophy (order: summary → philosophy → executive). */
+/** Professional identity + design philosophy (order: summary -> philosophy -> executive). */
 export const bioDocuments = [
   toDocument(
     'bio-summary',

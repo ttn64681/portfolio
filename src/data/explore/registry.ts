@@ -5,6 +5,7 @@ import {
   EXPLORE_USE_PLACEHOLDERS,
   mergeExploreDossier,
 } from '@/data/explore/dossier-defaults';
+import { getExploreMedia } from '@/data/explore/media-assets';
 import { getExploreVisualConfig } from '@/data/explore/visual-overrides';
 import type { ExploreDetail, ExploreKind } from '@/types/explore';
 import type { ExploreMergedEntry, ExploreOrderEntry } from '@/types/explore/registry-types';
@@ -77,6 +78,8 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
   if (!entry) return null;
 
   const dossier = mergeExploreDossier(entry.exploreDossier, EXPLORE_USE_PLACEHOLDERS);
+  // Folder-wired media from `media-assets.ts`; explicit `exploreDossier` gallery/figures win.
+  const folderMedia = getExploreMedia(slug);
 
   const title = entry.kind === 'project' ? (entry.title ?? entry.id) : entry.title;
 
@@ -113,12 +116,12 @@ export function buildExploreDetail(slug: string): ExploreDetail | null {
     implementation: dossier.implementation,
     challenges: dossier.challenges,
     reflection: dossier.reflection,
-    gallery: dossier.gallery,
+    gallery: dossier.gallery ?? folderMedia?.gallery,
     youtube: dossier.youtube,
     heroBackdrop: visual.heroBackdrop,
     heroBackdropPosition: visual.heroBackdropPosition,
     heroOverlayOpacity: visual.heroOverlayOpacity,
     accent: visual.accent,
-    figures: dossier.figures,
+    figures: dossier.figures ?? folderMedia?.figures,
   };
 }

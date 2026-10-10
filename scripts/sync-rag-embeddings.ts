@@ -3,7 +3,7 @@
  *
  * Usage: `npm run rag:sync` (needs UPSTASH_*, GEMINI_API_KEY, etc. in env)
  *
- * Flow: load portfolioDocuments → syncPortfolioEmbeddings (only changed docs call Gemini).
+ * Flow: load portfolioDocuments -> syncPortfolioEmbeddings (only changed docs call Gemini).
  * Does not affect query cache keys (`rag:query:embedding:*`).
  */
 

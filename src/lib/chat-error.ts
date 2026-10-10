@@ -11,9 +11,11 @@ const VALID_CODES = [
   'unauthorized',
   'payload_too_large',
   'bad_request',
-] as const;
+] as const; // as const makes the array readonly (tuple) and infers the type of the values
 
-export type ChatErrorCode = (typeof VALID_CODES)[number];
+export type ChatErrorCode = (typeof VALID_CODES)[number]; // union type of all vals in the array
+// typeof gets precise tuple structure of VALID_CODES
+// [number] is a type assertion that the value is one of the values in the array
 
 export type ParsedChatError = {
   errorCode: ChatErrorCode | null;

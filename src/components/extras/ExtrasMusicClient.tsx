@@ -216,8 +216,7 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
       <div className='extras-music-layout'>
         <section className='extras-music-layout__player' aria-labelledby='extras-music-playback'>
           <h3 id='extras-music-playback' className='extras-music-layout__h'>
-            <span className='extras-panel-badge'>Listen</span>
-            <span>Playback</span>
+            Player
           </h3>
           <div className='extras-music-player extras-music-player--panel'>
             <div className='extras-music-player__label'>
@@ -225,7 +224,7 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
               {playlist && track && (
                 <>
                   {' '}
-                  · {playlist.title} — {track.name}
+                  ◆ {playlist.title} — {track.name}
                 </>
               )}
             </div>
@@ -315,10 +314,11 @@ export default function ExtrasMusicClient({ roots }: { roots: MusicRootCategory[
             )}
 
             {!useLocal && !hasEmbedOnly && (
-              <div className='extras-music-player__empty'>
-                Add src in extras-music (paths like /audio/track.mp3) under public/audio, or set
-                embedHtml for a streaming embed.
-              </div>
+              <div className='extras-music-player__empty'>Will add this sometime soon!</div>
+              // <div className='extras-music-player__empty'>
+              //   Add src in extras-music (paths like /audio/track.mp3) under public/audio, or set
+              //   embedHtml for a streaming embed.
+              // </div>
             )}
           </div>
         </section>

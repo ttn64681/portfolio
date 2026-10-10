@@ -27,7 +27,7 @@ type ExtrasGameShowcaseProps = {
 };
 
 export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
-  const bannerItem = game.gallery?.[0];
+  // const bannerItem = game.gallery?.[0];
   const galleryRest = game.gallery?.slice(1) ?? [];
 
   return (
@@ -52,6 +52,7 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
               ))}
             </div>
           )}
+          {/* Sprite Links */}
           {(game.playUrl || game.repoUrl) && (
             <div className='extras-game__actions'>
               {game.playUrl && (
@@ -63,7 +64,8 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
             </div>
           )}
         </div>
-        {bannerItem?.src && (
+        {/* Below Overview */}
+        {/* {bannerItem?.src && (
           <SourceMediaLink href={bannerItem.src} className='explore-overview-banner'>
             <div className='explore-overview-banner__mat'>
               <ExploreGalleryAsset
@@ -74,7 +76,7 @@ export default function ExtrasGameShowcase({ game }: ExtrasGameShowcaseProps) {
               />
             </div>
           </SourceMediaLink>
-        )}
+        )} */}
       </section>
 
       {galleryRest.length > 0 && (

@@ -2,11 +2,11 @@
  * RAG + chat limits and Redis key names.
  *
  * End-to-end chat flow:
- * 1. User sends message → `/api/chat` (Edge).
- * 2. Embed the question (or read cached query vector) → `getOrCreateQueryEmbedding`.
- * 3. Compare query vector to every stored document vector (cosine similarity) → `searchSimilarDocuments`.
- * 4. If Redis is empty or corpus changed → `syncPortfolioEmbeddings` (incremental, batched).
- * 5. Top matching document *text* is injected into the Gemini system prompt → streamed reply.
+ * 1. User sends message -> `/api/chat` (Edge).
+ * 2. Embed the question (or read cached query vector) -> `getOrCreateQueryEmbedding`.
+ * 3. Compare query vector to every stored document vector (cosine similarity) -> `searchSimilarDocuments`.
+ * 4. If Redis is empty or corpus changed -> `syncPortfolioEmbeddings` (incremental, batched).
+ * 5. Top matching document *text* is injected into the Gemini system prompt -> streamed reply.
  *
  * Corpus text is in `src/data/config/rag/`. Vectors + hashes live in Upstash Redis.
  * Pre-warm Redis w/ `npm run rag:sync` so step 4 rarely runs in production.

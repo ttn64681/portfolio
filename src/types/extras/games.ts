@@ -7,7 +7,7 @@ export type GameContributionBlock = {
   body: string;
   /** Static art (WebP, PNG, etc.) — prefer `next/image`. */
   assetSrc?: string;
-  /** Animated GIF — rendered with `<img>` to preserve animation. */
+  /** Animated GIF — rendered w/ `<img>` to preserve animation. */
   gifSrc?: string;
   caption?: string;
   /** Optional layout modifier --> `.extras-contrib--panel` / `--float-media`. */

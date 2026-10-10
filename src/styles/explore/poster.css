@@ -234,39 +234,38 @@
 
   .explore-print {
     position: relative;
-    padding: 0.4rem 0.5rem 0.95rem;
-    background: linear-gradient(152deg, #faf6ef 0%, #e6ddd0 100%);
+    padding: 0;
+    background: #030810;
+    border: 1px solid rgba(77, 238, 234, 0.42);
     border-radius: 4px;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.65),
-      inset 0 0 0 1px rgba(40, 30, 20, 0.12),
-      0 8px 28px rgba(0, 0, 0, 0.4);
-    transform: rotate(-0.85deg);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+    transform: none;
     box-sizing: border-box;
     max-width: 100%;
+    overflow: hidden;
   }
 
   .explore-print--figure:nth-child(even),
   .explore-print--gallery:nth-child(even) {
-    transform: rotate(0.75deg);
+    transform: none;
   }
 
   .explore-print__mat {
     position: relative;
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    border-radius: 2px;
+    border-radius: 0;
     box-sizing: border-box;
   }
 
   .explore-print__mat--media {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    background: #030810;
+    border: none;
+    box-shadow: none;
   }
 
   .explore-print__mat--empty {
-    border: 2px dashed rgba(77, 238, 234, 0.42);
+    border: 1px solid rgba(77, 238, 234, 0.42);
     background: rgba(0, 12, 28, 0.25);
     min-height: 120px;
   }
@@ -299,7 +298,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.35rem;
+    padding: 0;
     box-sizing: border-box;
   }
 
@@ -330,8 +329,7 @@
   }
 
   .explore-print__lip {
-    display: block;
-    height: 0.35rem;
+    display: none;
   }
 
   .explore-gallery-section .explore-slot--mosaic {
@@ -353,8 +351,8 @@
     border: none;
     aspect-ratio: unset;
     background: transparent;
-    padding-bottom: 0;
-    transform: rotate(-0.55deg);
+    padding: 0;
+    transform: none;
     box-sizing: border-box;
   }
 
@@ -370,22 +368,23 @@
   }
 
   .explore-gallery-section .explore-slot.explore-print.explore-print--gallery {
-    background: rgba(0, 14, 32, 0.42);
-    border: 2px dashed rgba(77, 238, 234, 0.38);
-    border-radius: 12px;
-    box-shadow: none;
+    background: #030810;
+    border: 1px solid rgba(77, 238, 234, 0.42);
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     transform: none;
-    padding: 0.45rem;
+    padding: 0;
   }
 
   .explore-gallery-section .explore-print__mat--slot {
-    border-radius: 9px;
+    border-radius: 0;
   }
 
   .explore-gallery-section .explore-print__mat--media {
-    border: 1px dashed rgba(77, 238, 234, 0.32);
+    border: none;
     box-shadow: none;
-    background: rgba(0, 8, 20, 0.55);
+    background: #030810;
+    padding: 0;
   }
 
   .explore-figures__caption {
@@ -607,17 +606,17 @@
     position: relative;
     aspect-ratio: 16 / 10;
     min-height: 120px;
-    border: 2px dashed rgba(77, 238, 234, 0.4);
+    border: 1px solid rgba(77, 238, 234, 0.42);
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    padding: 0.5rem;
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .explore-slot--mosaic:has(.explore-print__mat--media) {

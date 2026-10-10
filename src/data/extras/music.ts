@@ -8,32 +8,30 @@ export const musicRoots: MusicRootCategory[] = [
     title: 'VGM',
     playlists: [
       {
-        id: 'tower-ascent',
-        title: 'Tower Ascent',
-        subtitle: 'Tension, loops, retro tone',
+        id: 'sandstorm',
+        title: 'Sandstorm',
+        subtitle: 'Tension, retro tone, motif-based',
         tracks: [
           {
-            name: 'Theme — add /audio/theme.mp3',
-            description:
-              'Lead motif and loop structure for exploration beats — swap copy when you ship real stems.',
+            name: 'Track 1 — add /audio/placeholder.mp3',
+            description: 'Lorem ipsum or something.',
             embedHtml: undefined,
           },
           {
-            name: 'Combat layer — add file',
-            description:
-              'Percussion-forward layer meant to sit under the main theme without muddying the melody.',
+            name: 'Track 2 — add /audio/placeholder.mp3',
+            description: 'Lorem ipsum or something.',
             embedHtml: undefined,
           },
         ],
       },
       {
         id: 'jam-loop',
-        title: 'Jam weekend sketch',
-        subtitle: 'Short loop placeholders',
+        title: 'A Forlorn Soul',
+        subtitle: 'First chiptune production, retro tone, boss fights',
         tracks: [
           {
-            name: 'Jam sketch 01 — add file or embed',
-            description: 'Weekend loop sketch — document BPM, key, and references here.',
+            name: 'Track 1 — add /audio/placeholder.mp3',
+            description: 'Lorem ipsum or something.',
             embedHtml: undefined,
           },
         ],
@@ -45,14 +43,13 @@ export const musicRoots: MusicRootCategory[] = [
     title: 'Beats',
     playlists: [
       {
-        id: 'lofi-draft',
-        title: 'Lo-fi draft lane',
-        subtitle: 'Draft renders',
+        id: 'placeholder',
+        title: 'Placeholder',
+        subtitle: 'Placeholder',
         tracks: [
           {
-            name: 'Beat sketch — add /audio/*.mp3',
-            description:
-              'Draft harmonic bed — describe vibe and arrangement intent for Future You.',
+            name: 'Track 1 — add /audio/placeholder.mp3',
+            description: 'Lorem ipsum or something.',
             embedHtml: undefined,
           },
         ],

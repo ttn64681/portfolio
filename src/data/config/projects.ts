@@ -83,7 +83,7 @@ export const projectsConfig: ProjectConfig[] = [
       'Deployed Dockerized staging on a Proxmox Ubuntu VM via CI/CD with a self-hosted GitHub Actions runner (lint/typecheck + RAG sync gates).',
       'Managed AI costs with IP rate limiting, query embedding caching, and SHA-256 hashing; troubleshot Linux DNS/vNIC, Windows NAT, and Docker port bindings.',
     ],
-    techStack: ['Next.js 15', 'Gemini', 'Docker', 'GitHub Actions', '✚'],
+    techStack: ['Next.js 15', 'Redis', 'Docker', 'Vercel AI SDK', 'Gemini', 'GitHub Actions', '✚'],
     date: 'Jun 2025 – Present',
     github: 'https://github.com/ttn64681/portfolio',
     exploreDossier: {
@@ -144,7 +144,8 @@ export const projectsConfig: ProjectConfig[] = [
     github: 'https://github.com/ttn64681/portfolio',
     exploreDossier: {
       overview:
-        'Personal homelab focused on realistic deploy practice: Proxmox hypervisors, Ubuntu guests, Docker Compose staging for the RAG portfolio, and a self-hosted GitHub Actions runner that mirrors production-minded CI/CD without leaving the free/hobby budget.',
+        'Personal homelab focused on deploy practice (prod/dev env): Proxmox hypervisors, Ubuntu guests, Docker Compose staging for the \
+        RAG portfolio, and a self-hosted GitHub Actions runner that mirrors production-minded CI/CD without leaving the free/hobby budget.',
       features: [
         'Proxmox-managed VMs for isolated staging.',
         'Multi-stage Dockerfile + Compose healthchecks/resource limits.',
@@ -163,9 +164,9 @@ export const projectsConfig: ProjectConfig[] = [
         'Keeping runner + secrets + Redis/Gemini credentials consistent across rebuilds.',
       ],
       reflection: [
-        'Homelabbing scratched the same itch as game jams—shipping something that actually runs under constraints.',
-        'I care about CI/CD because broken deploys waste more time than writing the feature.',
-        'This lab is how I practice Linux, containers, and infra without an employer cloud budget.',
+        'I wanted to apply my knowledge in Networking, so this seemed like a fun project to do.',
+        "CI/CD has been something I've always wanted to learn just because of how essential it is for robust, fast, secure, test-driven development.",
+        'This lab is essentially how I practiced Linux, containers, and infra without an employer cloud budget.',
       ],
     },
   },

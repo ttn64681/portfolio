@@ -148,6 +148,7 @@ export default function Chat() {
               <div className='text-[10px] sm:text-xs tracking-[0.28em] uppercase text-white-title/70 font-pixel-mono'>
                 Portfolio Chatbox
               </div>
+              {/* Chat state indicator */}
               <div className='hidden sm:flex items-center gap-2 text-[12px] text-white-title/50 font-pixel-mono'>
                 {isLoading ? (
                   <span className='inline-block h-[7px] w-[7px] rounded-full -top-[1px] bg-[#ffe44d] shadow-[0_0_12px_rgba(255,228,77,0.9)]' />
@@ -156,6 +157,7 @@ export default function Chat() {
                 ) : (
                   <span className='inline-block h-[7px] w-[7px] rounded-full -mt-[.05rem] bg-[#4dbdff] shadow-[0_0_12px_rgba(77,189,255,0.9)]' />
                 )}
+                {/* if error */}
                 <span>{isLoading ? 'Thinking…' : errorBlock ? 'Error' : 'RAG'}</span>
               </div>
             </div>
@@ -191,6 +193,7 @@ export default function Chat() {
                     ref={inputRef}
                     autoComplete='true'
                     spellCheck={true}
+                    // Help allow grammarly to work
                     data-gramm='true'
                     data-gramm_editor='true'
                     data-enable-grammarly='true'
@@ -234,6 +237,7 @@ export default function Chat() {
                         <polyline points='10 9 9 9 8 9' />
                       </svg>
                     </button>
+                    {/* Send button */}
                     <button
                       type='submit'
                       className='inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#4dbdff] to-[#4d8cff] px-4 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs md:text-sm font-semibold font-pixel-mono text-[#021728] shadow-[0_16px_40px_rgba(0,0,0,0.95)] hover:brightness-110 hover:scale-105 active:translate-y-px active:scale-100 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100'

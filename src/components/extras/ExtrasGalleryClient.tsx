@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import LazyGif from '@/components/media/LazyGif';
 import SourceMediaLink from '@/components/media/SourceMediaLink';
 import { useEffect, useMemo, useState } from 'react';
 import HierarchyNav from '@/components/nav/HierarchyNav';
@@ -12,6 +13,10 @@ function cellClass(layout: GalleryLayoutPreset, featured?: boolean): string {
   const parts = ['extras-gallery-cell', `extras-gallery-cell--${layout}`];
   if (featured || layout === 'wide') parts.push('extras-gallery-cell--span2');
   return parts.join(' ');
+}
+
+function isGifSrc(src: string): boolean {
+  return /\.gif$/i.test(src);
 }
 
 const REGION_LABEL_ID = 'extras-gallery-region-label';
@@ -116,16 +121,20 @@ export default function ExtrasGalleryClient({ tabs }: { tabs: GalleryTab[] }) {
             <div className='extras-gallery-print-shell'>
               <SourceMediaLink href={item.src} className='extras-gallery-frame-hit'>
                 <div className='extras-gallery-frame'>
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    width={1600}
-                    height={1000}
-                    sizes='(max-width: 768px) 50vw, 25vw'
-                    className='extras-gallery-frame__img'
-                    loading={activeTab.id === tabs[0]?.id && i < 2 ? undefined : 'lazy'}
-                    priority={activeTab.id === tabs[0]?.id && i < 2}
-                  />
+                  {isGifSrc(item.src) ? (
+                    <LazyGif src={item.src} alt={item.alt} className='extras-gallery-frame__img' />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={1600}
+                      height={1000}
+                      sizes='(max-width: 768px) 50vw, 25vw'
+                      className='extras-gallery-frame__img'
+                      loading={activeTab.id === tabs[0]?.id && i < 2 ? undefined : 'lazy'}
+                      priority={activeTab.id === tabs[0]?.id && i < 2}
+                    />
+                  )}
                 </div>
               </SourceMediaLink>
               <div className='extras-gallery-meta-sheet'>

@@ -118,6 +118,7 @@ export default function Menu({ onQuit }: MenuProps) {
               {startPressed ? '[ Back ]' : '[ Press Start ]'}
             </button>
           </div>
+          {/* Typewriter / Subtitles */}
           <h3
             className='text-blackground hover-3 w-min lg:translate-x-[32vw] px-1 text-nowrap bg-white-title text-4xl font-bold font-pixel-retron mt-5 drop-shadow-xs drop-shadow-blue-100'
             style={{ fontSize: 'clamp(1.4rem, 2vw, 2rem)' }}
@@ -125,8 +126,8 @@ export default function Menu({ onQuit }: MenuProps) {
             <Typewriter
               options={{
                 strings: [
-                  'Portfolio v2.0.2',
-                  'Graduated (August \'26)!!!',
+                  'Portfolio v2.1.0',
+                  "Graduated (August '26)!!!",
                   'Deep Learning',
                   'Subnetting :O',
                   'Software Developer',
